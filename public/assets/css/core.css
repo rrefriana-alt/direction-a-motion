@@ -107,7 +107,7 @@ body::after{
 /* section eyebrow */
 .eyebrow{
   font-family:var(--f-mono); font-size:var(--t-xs); letter-spacing:.18em;
-  text-transform:uppercase; color:var(--ink-faint);
+  text-transform:uppercase; color:var(--ink-mute);
   display:flex; align-items:center; gap:.7rem;
 }
 .eyebrow::before{
@@ -666,4 +666,5 @@ body.menu-open .menu__item a{transform:translateY(0)}
   .hscroll__track{transform:none!important}
   body::after{display:none}
 }
+
 
