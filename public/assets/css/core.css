@@ -1,5 +1,5 @@
-/* ==========================================================================
-   FUGO CREATIVE — Direction A "SIGNAL"
+﻿/* ==========================================================================
+   FUGO CREATIVE â€” Direction A "SIGNAL"
    Kinetic editorial / dark canvas / motion-forward
    Author: redesign concept 2026
    ========================================================================== */
@@ -34,7 +34,7 @@
   --f-body:    "Inter Tight","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   --f-mono:    "JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 
-  /* fluid scale — clamp(min, preferred, max) */
+  /* fluid scale â€” clamp(min, preferred, max) */
   --t-mega:  clamp(3.4rem, 13.2vw, 15rem);
   --t-xxl:   clamp(2.6rem, 7.4vw, 7rem);
   --t-xl:    clamp(2rem, 4.6vw, 4rem);
@@ -107,7 +107,7 @@ body::after{
 /* section eyebrow */
 .eyebrow{
   font-family:var(--f-mono); font-size:var(--t-xs); letter-spacing:.18em;
-  text-transform:uppercase; color:var(--ink-faint);
+  text-transform:uppercase; color:var(--ink-mute);
   display:flex; align-items:center; gap:.7rem;
 }
 .eyebrow::before{
@@ -128,7 +128,7 @@ body::after{
   font-family:var(--f-display); font-size:var(--t-lg);
   font-weight:700; line-height:1.06; letter-spacing:-.03em;
 }
-.lede{font-size:var(--t-md);color:var(--ink-mute);line-height:1.62;max-width:62ch}
+.lede{font-size:var(--t-md);color:var(--ink);line-height:1.62;max-width:62ch}
 .mono{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:.14em;text-transform:uppercase}
 .tint{background:var(--grad-signal);-webkit-background-clip:text;background-clip:text;color:transparent}
 .outline-txt{
@@ -473,7 +473,8 @@ body.menu-open .menu__item a{transform:translateY(0)}
 
 /* ---------- 14. WORK ----------------------------------------------------- */
 .hscroll{position:relative;height:320vh}
-.hscroll__vp{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden}
+.hscroll__vp{position:sticky;top:0;height:100svh;display:flex;align-items:center;overflow:hidden;scrollbar-width:none;-ms-overflow-style:none;}
+.hscroll__vp::-webkit-scrollbar{display:none;}
 .hscroll__track{display:flex;gap:clamp(1rem,2vw,2rem);padding-inline:var(--gut);will-change:transform}
 .wcard{
   flex:none; width:clamp(280px,42vw,620px); border-radius:var(--r-lg); overflow:hidden;
@@ -664,7 +665,10 @@ body.menu-open .menu__item a{transform:translateY(0)}
   .fade-up,.fade-in{opacity:1!important;transform:none!important}
   .reveal-line>span,.char{transform:none!important;opacity:1!important}
   .hscroll{height:auto}
-  .hscroll__vp{position:static;height:auto;overflow-x:auto;padding-block:2rem}
+  .hscroll__vp{position:static;height:auto;overflow-x:auto;padding-block:2rem;scrollbar-width:none;-ms-overflow-style:none;}
+  .hscroll__vp::-webkit-scrollbar{display:none;}
   .hscroll__track{transform:none!important}
   body::after{display:none}
 }
+
+
