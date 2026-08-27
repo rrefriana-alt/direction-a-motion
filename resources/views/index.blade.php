@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Fugo Creative — Create to Elevate | Creative Group, Indonesia</title>
+<title>Fugo Creative â€” Create to Elevate | Creative Group, Indonesia</title>
 <meta name="description" content="Indonesian creative group: design, production house, events, merchandise and AI agents. Bandung, Jakarta, Bali. Trusted by BRI, BCA, Mandiri, Daihatsu and Telkomsel.">
 <meta name="theme-color" content="#07080a">
-<meta property="og:title" content="Fugo Creative — Create to Elevate">
-<meta property="og:description" content="Design · Production House · Events · Merch. An Indonesian creative group since 2016.">
+<meta property="og:title" content="Fugo Creative â€” Create to Elevate">
+<meta property="og:description" content="Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://fugocreativegroup.com/">
 <meta property="og:type" content="website">
@@ -19,7 +19,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Fugo Creative — Create to Elevate | Creative Group, Indonesia">
+<meta name="twitter:title" content="Fugo Creative â€” Create to Elevate | Creative Group, Indonesia">
 <meta name="twitter:description" content="Indonesian creative group: design, production house, events, merchandise and AI agents. Bandung, Jakarta, Bali. Trusted by BRI, BCA, Mandiri, Daihatsu and Telkomsel.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
@@ -31,13 +31,13 @@
   "description":"Indonesian creative group: design, production house, events, merchandise and AI agents.",
   "sameAs":["https://instagram.com/fugocreative","https://id.linkedin.com/company/fugo-creativegroup"],
   "address":{"@@type":"PostalAddress","streetAddress":"Jl. Permata Taman Sari Raya No.21, Arcamanik","addressLocality":"Bandung","addressCountry":"ID"}},
- {"@@type":"LocalBusiness","name":"Fugo Creative — Bandung (HQ)","parentOrganization":{"@@id":"https://fugocreativegroup.com/#org"},
+ {"@@type":"LocalBusiness","name":"Fugo Creative â€” Bandung (HQ)","parentOrganization":{"@@id":"https://fugocreativegroup.com/#org"},
   "image":"https://fugocreativegroup.com/assets/img/og.png","telephone":"+62-821-2100-0680",
   "address":{"@@type":"PostalAddress","streetAddress":"Jl. Permata Taman Sari Raya No.21, Arcamanik","addressLocality":"Bandung","addressCountry":"ID"}},
- {"@@type":"LocalBusiness","name":"Fugo Creative — Jakarta","parentOrganization":{"@@id":"https://fugocreativegroup.com/#org"},
+ {"@@type":"LocalBusiness","name":"Fugo Creative â€” Jakarta","parentOrganization":{"@@id":"https://fugocreativegroup.com/#org"},
   "image":"https://fugocreativegroup.com/assets/img/og.png","telephone":"+62-821-2100-0680",
   "address":{"@@type":"PostalAddress","streetAddress":"Jl. Srengseng Sawah No.16, Jagakarsa","addressLocality":"Jakarta Selatan","addressCountry":"ID"}},
- {"@@type":"LocalBusiness","name":"Fugo Creative — Bali","parentOrganization":{"@@id":"https://fugocreativegroup.com/#org"},
+ {"@@type":"LocalBusiness","name":"Fugo Creative â€” Bali","parentOrganization":{"@@id":"https://fugocreativegroup.com/#org"},
   "image":"https://fugocreativegroup.com/assets/img/og.png","telephone":"+62-821-2100-0680",
   "address":{"@@type":"PostalAddress","streetAddress":"Jl. Tukad Melangit, Samplangan","addressLocality":"Gianyar, Bali","addressCountry":"ID"}}
 ]}
@@ -70,7 +70,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <!-- ============ NAV ============ -->
 <header class="nav">
   <div class="nav__in">
-    <a class="brand" href="/" aria-label="Fugo Creative — home">
+    <a class="brand" href="/" aria-label="Fugo Creative â€” home">
       <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/>
       </svg>
@@ -110,7 +110,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="menu__foot">
     <span>{{ $content['contact']['email'] ?? 'hello@fugocreativegroup.com' }}</span>
     <span>{{ $content['contact']['phone'] ?? '+62 821 2100 0680' }}</span>
-    <span>Bandung · Jakarta · Bali</span>
+    <span>Bandung Â· Jakarta Â· Bali</span>
   </div>
 </div>
 
@@ -122,8 +122,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="hero__glow" aria-hidden="true"></div>
 
   <div class="shell hero__in">
-    <p class="eyebrow fade-up" data-en="{{ $content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali' }}"
-       data-id="{{ $content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali' }}">{{ $content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali' }}</p>
+    <p class="eyebrow" data-en="{{ $content['home']['hero']['tagline'] ?? 'Creative group Â· Est. 2016 Â· Bandung / Jakarta / Bali' }}"
+       data-id="{{ $content['home']['hero']['tagline'] ?? 'Creative group Â· Est. 2016 Â· Bandung / Jakarta / Bali' }}">{{ $content['home']['hero']['tagline'] ?? 'Creative group Â· Est. 2016 Â· Bandung / Jakarta / Bali' }}</p>
 
     <h1 class="display h-mega hero__title">
       <span data-split data-en="Create to" data-id="Cipta untuk">Create to</span>
@@ -131,22 +131,22 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     </h1>
 
     <div class="hero__meta">
-      <p class="lede fade-up" data-delay="1"
-         data-en="{{ $content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.' }}"
-         data-id="{{ $content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.' }}">
-        {{ $content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.' }}</p>
+      <p class="lede" data-delay="1"
+         data-en="{{ $content['home']['hero']['description'] ?? 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.' }}"
+         data-id="{{ $content['home']['hero']['description'] ?? 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.' }}">
+        {{ $content['home']['hero']['description'] ?? 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.' }}</p>
 
-      <div class="hero__cta fade-up" data-delay="2">
+      <div class="hero__cta" data-delay="2">
         <a class="btn" href="/work" data-magnet=".3" data-cursor="View">
           <span data-en="See selected work" data-id="Lihat karya">See selected work</span>
-          <span class="ico" aria-hidden="true">↗</span>
+          <span class="ico" aria-hidden="true">â†—</span>
         </a>
         <a class="btn btn--ghost" href="/services"
            data-en="What we do" data-id="Layanan kami">What we do</a>
       </div>
     </div>
 
-    <div class="row between center mt-m fade-up" data-delay="3">
+    <div class="row between center mt-m" data-delay="3">
       <div class="scroll-cue">
         <span class="scroll-cue__line" aria-hidden="true"></span>
         <span class="mono" data-en="Scroll" data-id="Gulir">Scroll</span>
@@ -216,14 +216,14 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section manifesto">
   <div class="shell grid g-12">
     <div class="col-4">
-      <p class="eyebrow fade-up">01 — <span data-en="{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}" data-id="Manifesto">{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}</span></p>
+      <p class="eyebrow">01 â€” <span data-en="{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}" data-id="Manifesto">{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}</span></p>
     </div>
     <div class="col-8">
       <p data-en="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}"
          data-id="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}">{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}</p>
       <div class="row gap-m mt-l fade-up" data-delay="1">
         <a class="tlink green" href="/about" data-en="Read our story" data-id="Baca cerita kami">Read our story</a>
-        <span class="faint">·</span>
+        <span class="faint">Â·</span>
         <a class="tlink" href="/contact" data-en="Work with us" data-id="Bekerja dengan kami">Work with us</a>
       </div>
     </div>
@@ -260,13 +260,13 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="svc__grid">
 
       <div class="svc__sticky">
-        <p class="eyebrow fade-up">02 — <span data-en="Capabilities" data-id="Kapabilitas">Capabilities</span></p>
+        <p class="eyebrow">02 â€” <span data-en="Capabilities" data-id="Kapabilitas">Capabilities</span></p>
         <h2 class="display h-xxl mt-s fade-up" data-delay="1"
             data-en="Five studios,<br>one standard" data-id="Lima studio,<br>satu standar">Five studios,<br>one standard</h2>
         <p class="lede mt-s fade-up" data-delay="2"
-           data-en="Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax."
-           data-id="Brief satu tim dan dapatkan seluruh rantai — strategi, desain, film, panggung, dan produk fisik — tanpa biaya estafet antar-agensi.">
-          Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax.</p>
+           data-en="Brief one team and get the whole chain â€” strategy, design, film, stage and physical product â€” without the agency handoff tax."
+           data-id="Brief satu tim dan dapatkan seluruh rantai â€” strategi, desain, film, panggung, dan produk fisik â€” tanpa biaya estafet antar-agensi.">
+          Brief one team and get the whole chain â€” strategy, design, film, stage and physical product â€” without the agency handoff tax.</p>
 
         <ul class="svc__index" aria-hidden="true">
           <li class="svc__idx on"><span class="n">01</span><span class="t">Design</span></li>
@@ -296,9 +296,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           </div>
           <p class="card__num">01</p>
           <h3>Fugo Design</h3>
-          <p data-en="Brand systems, campaign POSM, corporate reporting and digital assets — built to survive the real world of print, LED and social."
-             data-id="Sistem brand, POSM kampanye, laporan korporat, dan aset digital — dibangun untuk bertahan di dunia nyata: cetak, LED, dan sosial.">
-            Brand systems, campaign POSM, corporate reporting and digital assets — built to survive the real world of print, LED and social.</p>
+          <p data-en="Brand systems, campaign POSM, corporate reporting and digital assets â€” built to survive the real world of print, LED and social."
+             data-id="Sistem brand, POSM kampanye, laporan korporat, dan aset digital â€” dibangun untuk bertahan di dunia nyata: cetak, LED, dan sosial.">
+            Brand systems, campaign POSM, corporate reporting and digital assets â€” built to survive the real world of print, LED and social.</p>
           <div class="card__tags">
             <span class="tag">Branding</span><span class="tag">POSM</span>
             <span class="tag">Annual Report</span><span class="tag">Packaging</span><span class="tag">Motion</span>
@@ -321,9 +321,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           </div>
           <p class="card__num">02</p>
           <h3>Production House</h3>
-          <p data-en="TVC, company profile, digital video and event documentation — scripting, shoot, grade and score handled in-house."
-             data-id="TVC, company profile, video digital, dan dokumentasi acara — naskah, syuting, grading, dan scoring dikerjakan in-house.">
-            TVC, company profile, digital video and event documentation — scripting, shoot, grade and score handled in-house.</p>
+          <p data-en="TVC, company profile, digital video and event documentation â€” scripting, shoot, grade and score handled in-house."
+             data-id="TVC, company profile, video digital, dan dokumentasi acara â€” naskah, syuting, grading, dan scoring dikerjakan in-house.">
+            TVC, company profile, digital video and event documentation â€” scripting, shoot, grade and score handled in-house.</p>
           <div class="card__tags">
             <span class="tag">TVC</span><span class="tag">Company Profile</span>
             <span class="tag">Social Video</span><span class="tag">Photography</span>
@@ -345,9 +345,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           </div>
           <p class="card__num">03</p>
           <h3>Event Organizer</h3>
-          <p data-en="Conferences, exhibitions, incentive trips and corporate gatherings — run end to end, from run-down to load-out."
-             data-id="Konferensi, pameran, incentive trip, dan gathering korporat — dijalankan end to end, dari rundown hingga load-out.">
-            Conferences, exhibitions, incentive trips and corporate gatherings — run end to end, from run-down to load-out.</p>
+          <p data-en="Conferences, exhibitions, incentive trips and corporate gatherings â€” run end to end, from run-down to load-out."
+             data-id="Konferensi, pameran, incentive trip, dan gathering korporat â€” dijalankan end to end, dari rundown hingga load-out.">
+            Conferences, exhibitions, incentive trips and corporate gatherings â€” run end to end, from run-down to load-out.</p>
           <div class="card__tags">
             <span class="tag">Conference</span><span class="tag">Exhibition</span>
             <span class="tag">Gathering</span><span class="tag">Team Building</span>
@@ -400,9 +400,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           </div>
           <p class="card__num">05</p>
           <h3>AI Agent</h3>
-          <p data-en="Custom AI agents and automations that take repetitive work off your team — briefed, built, and wired into the tools you already use."
-             data-id="AI agent dan otomasi khusus yang mengambil pekerjaan berulang dari tim Anda — dirancang, dibangun, dan terhubung ke tools yang sudah Anda pakai.">
-            Custom AI agents and automations that take repetitive work off your team — briefed, built, and wired into the tools you already use.</p>
+          <p data-en="Custom AI agents and automations that take repetitive work off your team â€” briefed, built, and wired into the tools you already use."
+             data-id="AI agent dan otomasi khusus yang mengambil pekerjaan berulang dari tim Anda â€” dirancang, dibangun, dan terhubung ke tools yang sudah Anda pakai.">
+            Custom AI agents and automations that take repetitive work off your team â€” briefed, built, and wired into the tools you already use.</p>
           <div class="card__tags">
             <span class="tag">Customer Agents</span><span class="tag">Workflow Automation</span>
             <span class="tag">Content Ops</span><span class="tag">Integrations</span>
@@ -419,12 +419,12 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-bottom:0">
   <div class="shell row between end gap-m">
     <div>
-      <p class="eyebrow fade-up">03 — <span data-en="Selected work" data-id="Karya pilihan">Selected work</span></p>
+      <p class="eyebrow">03 â€” <span data-en="Selected work" data-id="Karya pilihan">Selected work</span></p>
       <h2 class="display h-xxl mt-s fade-up" data-delay="1"
           data-en="Proof, not<br>promises" data-id="Bukti, bukan<br>janji">Proof, not<br>promises</h2>
     </div>
     <a class="tlink fade-up" data-delay="2" href="/work"
-       data-en="All projects →" data-id="Semua proyek →">All projects →</a>
+       data-en="All projects â†’" data-id="Semua proyek â†’">All projects â†’</a>
   </div>
 </section>
 
@@ -440,11 +440,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
             <circle cx="470" cy="120" r="150" fill="#3ddc97" opacity=".14"/>
             <rect x="60" y="150" width="230" height="150" rx="16" fill="#0b1226" stroke="#3ddc97" stroke-opacity=".5"/>
             <rect x="86" y="182" width="52" height="36" rx="6" fill="#c8f24e" opacity=".8"/>
-            <text x="86" y="268" fill="#e8eaf2" font-family="monospace" font-size="20" letter-spacing="4">•••• 8842</text>
+            <text x="86" y="268" fill="#e8eaf2" font-family="monospace" font-size="20" letter-spacing="4">â€¢â€¢â€¢â€¢ 8842</text>
           </svg>
         </div>
         <div class="wcard__body">
-          <div class="wcard__meta"><span>BRI</span><span>·</span><span>Production</span><span>·</span><span>2025</span></div>
+          <div class="wcard__meta"><span>BRI</span><span>Â·</span><span>Production</span><span>Â·</span><span>2025</span></div>
           <h3>BRI Debit Virtual TVC</h3>
           <p data-en="Concept, script, shoot and post for BRImo's virtual debit launch."
              data-id="Konsep, naskah, syuting, dan pasca-produksi untuk peluncuran debit virtual BRImo.">
@@ -465,7 +465,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           </svg>
         </div>
         <div class="wcard__body">
-          <div class="wcard__meta"><span>Daihatsu</span><span>·</span><span>Design</span><span>·</span><span>2024</span></div>
+          <div class="wcard__meta"><span>Daihatsu</span><span>Â·</span><span>Design</span><span>Â·</span><span>2024</span></div>
           <h3>Dealer Campaign System</h3>
           <p data-en="A nationwide POSM kit that 200+ dealers could deploy without a designer."
              data-id="Kit POSM nasional yang bisa dipakai 200+ dealer tanpa perlu desainer.">
@@ -485,7 +485,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           </svg>
         </div>
         <div class="wcard__body">
-          <div class="wcard__meta"><span>Kemenhub</span><span>·</span><span>Events</span><span>·</span><span>2024</span></div>
+          <div class="wcard__meta"><span>Kemenhub</span><span>Â·</span><span>Events</span><span>Â·</span><span>2024</span></div>
           <h3>National Transport Expo</h3>
           <p data-en="Three-day exhibition: stage, booth build, run-down and documentation."
              data-id="Pameran tiga hari: panggung, pembangunan booth, rundown, dan dokumentasi.">
@@ -505,7 +505,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           </svg>
         </div>
         <div class="wcard__body">
-          <div class="wcard__meta"><span>Telkomsel</span><span>·</span><span>Merch</span><span>·</span><span>2023</span></div>
+          <div class="wcard__meta"><span>Telkomsel</span><span>Â·</span><span>Merch</span><span>Â·</span><span>2023</span></div>
           <h3>Partner Welcome Kit</h3>
           <p data-en="12,000 kits: packaging design, sourcing, QC and nationwide fulfilment."
              data-id="12.000 kit: desain kemasan, sourcing, QC, dan distribusi nasional.">
@@ -525,7 +525,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           </svg>
         </div>
         <div class="wcard__body">
-          <div class="wcard__meta"><span>Bank Mandiri</span><span>·</span><span>Design</span><span>·</span><span>2023</span></div>
+          <div class="wcard__meta"><span>Bank Mandiri</span><span>Â·</span><span>Design</span><span>Â·</span><span>2023</span></div>
           <h3>Annual Report 2023</h3>
           <p data-en="240 pages of regulated reporting made genuinely readable."
              data-id="240 halaman laporan teregulasi yang benar-benar enak dibaca.">
@@ -541,7 +541,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <!-- ============ SECTORS ============ -->
 <section class="section">
   <div class="shell">
-    <p class="eyebrow fade-up">04 — <span data-en="Who we work with" data-id="Siapa yang kami layani">Who we work with</span></p>
+    <p class="eyebrow">04 â€” <span data-en="Who we work with" data-id="Siapa yang kami layani">Who we work with</span></p>
     <h2 class="display h-xl mt-s mb fade-up" data-delay="1" style="margin-bottom:2.5rem"
         data-en="Regulated, demanding,<br>high-visibility brands"
         data-id="Brand teregulasi, menuntut,<br>dan sangat terlihat">Regulated, demanding,<br>high-visibility brands</h2>
@@ -579,7 +579,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:0">
   <div class="shell grid g-12">
     <div class="col-4">
-      <p class="eyebrow fade-up">05 — <span data-en="How we work" data-id="Cara kami bekerja">How we work</span></p>
+      <p class="eyebrow">05 â€” <span data-en="How we work" data-id="Cara kami bekerja">How we work</span></p>
       <h2 class="display h-xl mt-s fade-up" data-delay="1"
           data-en="A short line<br>to remarkable" data-id="Garis pendek<br>menuju luar biasa">A short line<br>to remarkable</h2>
     </div>
@@ -598,9 +598,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <span class="step__n">02</span>
           <div class="step__b">
             <h3 data-en="Route options" data-id="Opsi jalur">Route options</h3>
-            <p data-en="Two or three genuinely different creative routes — costed, scheduled, and honest about trade-offs."
-               data-id="Dua atau tiga jalur kreatif yang benar-benar berbeda — lengkap dengan biaya, jadwal, dan trade-off yang jujur.">
-              Two or three genuinely different creative routes — costed, scheduled, and honest about trade-offs.</p>
+            <p data-en="Two or three genuinely different creative routes â€” costed, scheduled, and honest about trade-offs."
+               data-id="Dua atau tiga jalur kreatif yang benar-benar berbeda â€” lengkap dengan biaya, jadwal, dan trade-off yang jujur.">
+              Two or three genuinely different creative routes â€” costed, scheduled, and honest about trade-offs.</p>
           </div>
         </div>
         <div class="step fade-up" data-delay="2">
@@ -616,9 +616,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <span class="step__n">04</span>
           <div class="step__b">
             <h3 data-en="Land it" data-id="Daratkan">Land it</h3>
-            <p data-en="Delivery, on-site supervision and a full asset handover — files you can still use in three years."
-               data-id="Pengiriman, supervisi di lokasi, dan serah terima aset lengkap — file yang masih bisa dipakai tiga tahun lagi.">
-              Delivery, on-site supervision and a full asset handover — files you can still use in three years.</p>
+            <p data-en="Delivery, on-site supervision and a full asset handover â€” files you can still use in three years."
+               data-id="Pengiriman, supervisi di lokasi, dan serah terima aset lengkap â€” file yang masih bisa dipakai tiga tahun lagi.">
+              Delivery, on-site supervision and a full asset handover â€” files you can still use in three years.</p>
           </div>
         </div>
       </div>
@@ -631,10 +631,10 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="quote fade-up">
      <div>
-      <p class="eyebrow" style="margin-bottom:1.6rem">06 — <span data-en="From the founder" data-id="Dari pendiri">From the founder</span></p>
-      <blockquote data-en="&ldquo;To become a creative industry company with real, positive impact for every stakeholder — through solutions that are useful before they are beautiful.&rdquo;"
-                  data-id="&ldquo;Menjadi perusahaan industri kreatif yang berdampak positif bagi seluruh stakeholder — lewat solusi yang berguna sebelum ia indah.&rdquo;">
-        &ldquo;To become a creative industry company with real, positive impact for every stakeholder — through solutions that are useful before they are beautiful.&rdquo;</blockquote>
+      <p class="eyebrow" style="margin-bottom:1.6rem">06 â€” <span data-en="From the founder" data-id="Dari pendiri">From the founder</span></p>
+      <blockquote data-en="&ldquo;To become a creative industry company with real, positive impact for every stakeholder â€” through solutions that are useful before they are beautiful.&rdquo;"
+                  data-id="&ldquo;Menjadi perusahaan industri kreatif yang berdampak positif bagi seluruh stakeholder â€” lewat solusi yang berguna sebelum ia indah.&rdquo;">
+        &ldquo;To become a creative industry company with real, positive impact for every stakeholder â€” through solutions that are useful before they are beautiful.&rdquo;</blockquote>
       <div class="quote__by">
         <span class="avatar" aria-hidden="true">SL</span>
         <span><strong style="color:var(--ink)">Sona Lesmana</strong><br>
@@ -674,7 +674,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="/contact" data-magnet=".34" data-cursor="Go">
         <span data-en="Start a project" data-id="Mulai proyek">Start a project</span>
-        <span class="ico" aria-hidden="true">↗</span>
+        <span class="ico" aria-hidden="true">â†—</span>
       </a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>
     </div>
@@ -695,9 +695,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <span class="brand__txt">Fugo<span>Creative</span></span>
         </a>
         <p class="muted mt-m" style="max-width:34ch;font-size:.92rem"
-           data-en="PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016."
-           data-id="PT Fugo Creative Group — creative company yang menghadirkan solusi inovatif dan berdampak sejak 2016.">
-          PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016.</p>
+           data-en="PT Fugo Creative Group â€” a creative company delivering innovative, high-impact solutions since 2016."
+           data-id="PT Fugo Creative Group â€” creative company yang menghadirkan solusi inovatif dan berdampak sejak 2016.">
+          PT Fugo Creative Group â€” a creative company delivering innovative, high-impact solutions since 2016.</p>
       </div>
 
       <div>
@@ -723,7 +723,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
       <div>
         <h5 data-en="Studios" data-id="Studio">Studios</h5>
-        <address><strong style="color:var(--ink)">Bandung — HQ</strong><br>Jl. Permata Taman Sari Raya No.21, Arcamanik</address>
+        <address><strong style="color:var(--ink)">Bandung â€” HQ</strong><br>Jl. Permata Taman Sari Raya No.21, Arcamanik</address>
         <address><strong style="color:var(--ink)">Jakarta</strong><br>Jl. Srengseng Sawah No.16, Jagakarsa</address>
         <address><strong style="color:var(--ink)">Bali</strong><br>Jl. Tukad Melangit, Samplangan, Gianyar</address>
       </div>
@@ -732,15 +732,15 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <p class="display foot__word" aria-hidden="true">FUGO</p>
 
     <div class="foot__bot">
-      <span>© 2026 PT Fugo Creative Group</span>
-      <span data-en="Concept redesign — Direction A “Signal”" data-id="Konsep redesain — Direction A “Signal”">Concept redesign — Direction A “Signal”</span>
+      <span>Â© 2026 PT Fugo Creative Group</span>
+      <span data-en="Concept redesign â€” Direction A â€œSignalâ€" data-id="Konsep redesain â€” Direction A â€œSignalâ€">Concept redesign â€” Direction A â€œSignalâ€</span>
       <span><a href="tel:+6282121000680">+62 821 2100 0680</a></span>
     </div>
   </div>
 </footer>
 
-<!-- ── motion stack ─────────────────────────────────────────────────────────
-     GSAP 3.13+ (free, all plugins incl. SplitText) · Lenis · Three.js.
+<!-- â”€â”€ motion stack â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     GSAP 3.13+ (free, all plugins incl. SplitText) Â· Lenis Â· Three.js.
      Pinned to major ranges so the CDN always resolves a current build.
      motion.js degrades the whole page gracefully if any of these fail. -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
@@ -753,7 +753,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 </script>
 <script type="module" data-gl>
 /* ==========================================================================
-   FUGO CREATIVE — Direction A "SIGNAL"  ·  WebGL hero
+   FUGO CREATIVE â€” Direction A "SIGNAL"  Â·  WebGL hero
    Signals entering from off-screen. Nothing is drawn until a burst fires:
    two or three pulses cross in from the same edge, staircase inward on right
    angles, land on a pad and fade. The routes exist in memory but are never
@@ -780,7 +780,7 @@ function init(canvas) {
 
   /* ---- tuning ----------------------------------------------------------
      ROUTES       distinct paths available to choose from (never drawn)
-     MAX_LIVE     pulses alive at once — the ceiling on how busy it gets
+     MAX_LIVE     pulses alive at once â€” the ceiling on how busy it gets
      BURST        how many fire together
      BURST_RATE   bursts started per second
      SPEED        world units/sec; a long route takes proportionally longer,
@@ -975,7 +975,7 @@ function init(canvas) {
   });
 
   /* A resized window moves the edges, so idle routes are re-cut to the new
-     ones. Live routes are left alone and re-cut when they finish — mutating
+     ones. Live routes are left alone and re-cut when they finish â€” mutating
      geometry mid-flight would snap a pulse sideways. */
   const stale = new Set();
   function recut(i) {
@@ -1071,7 +1071,7 @@ function init(canvas) {
     uFade.value = Math.max(0, 1 - S.y / Math.max(1, innerHeight * 0.85));
     if (uFade.value <= 0.001) { renderer.clear(); return; }
 
-    // parallax — small enough to feel like depth, not movement
+    // parallax â€” small enough to feel like depth, not movement
     mx += (tmx - mx) * 0.04; my += (tmy - my) * 0.04;
     board.position.x = -mx * 2.2;
     board.position.y = my * 1.4;
@@ -1118,4 +1118,6 @@ function init(canvas) {
 </script>
 </body>
 </html>
+
+
 
