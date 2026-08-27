@@ -657,6 +657,10 @@ body.menu-open .menu__item a{transform:translateY(0)}
     animation-duration:.001ms!important;animation-iteration-count:1!important;
     transition-duration:.001ms!important;scroll-behavior:auto!important;
   }
+  .marquee__track, .marquee__row {
+    animation-duration: var(--spd, 34s) !important;
+    animation-iteration-count: infinite !important;
+  }
   .fade-up,.fade-in{opacity:1!important;transform:none!important}
   .reveal-line>span,.char{transform:none!important;opacity:1!important}
   .hscroll{height:auto}

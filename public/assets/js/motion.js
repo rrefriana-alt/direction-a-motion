@@ -564,7 +564,8 @@ function marquees({ gsap }) {
     addEventListener('resize', fill);
     document.fonts?.ready.then(fill);
 
-    if (RM) return;
+    // Always keep marquee running regardless of reduced motion setting
+    // if (RM) return;
 
     let last = performance.now();
     gsap.ticker.add(() => {
