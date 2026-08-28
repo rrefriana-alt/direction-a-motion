@@ -705,15 +705,10 @@ function pageTransitions({ gsap }) {
     if (a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     if (url.pathname === location.pathname && url.hash) return;   // in-page anchor
     if (url.href === location.href) return;
-    e.preventDefault();
+    
+    // User requested immediate redirect without outbound animation delay.
+    // Just set the flag so the next page knows to animate the curtain lifting.
     try { sessionStorage.setItem('fugo-nav', '1'); } catch {}
-    curtain.style.pointerEvents = 'auto';
-    // If navigation stalls, go anyway rather than sitting under a black panel.
-    const bail = setTimeout(() => { location.href = url.href; }, 1200);
-    gsap.fromTo(curtain,
-      { yPercent: 100 },
-      { yPercent: 0, duration: 0.6, ease: 'expo.inOut',
-        onComplete: () => { clearTimeout(bail); location.href = url.href; } });
   });
 
   // Back/forward out of bfcache must not restore a lowered curtain.

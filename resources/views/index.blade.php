@@ -215,10 +215,10 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <!-- — MANIFESTO — -->
 <section class="section manifesto">
   <div class="shell grid g-12">
-    <div class="col-4">
+    <div class="col-5">
       <p class="eyebrow">01 — <span data-en="{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}" data-id="Manifesto">{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}</span></p>
     </div>
-    <div class="col-8">
+    <div class="col-7">
       <p data-en="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}"
          data-id="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}">{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}</p>
       <div class="row gap-m mt-l fade-up" data-delay="1">
