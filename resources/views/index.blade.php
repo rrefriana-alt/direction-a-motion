@@ -139,7 +139,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <div class="hero__cta" data-delay="2">
         <a class="btn" href="/work" data-magnet=".3" data-cursor="View">
           <span data-en="See selected work" data-id="Lihat karya">See selected work</span>
-          <span class="ico" aria-hidden="true">â†—</span>
+          <span class="ico" aria-hidden="true">↗</span>
         </a>
         <a class="btn btn--ghost" href="/services"
            data-en="What we do" data-id="Layanan kami">What we do</a>
@@ -424,7 +424,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           data-en="Proof, not<br>promises" data-id="Bukti, bukan<br>janji">Proof, not<br>promises</h2>
     </div>
     <a class="tlink fade-up" data-delay="2" href="/work"
-       data-en="All projects â†’" data-id="Semua proyek â†’">All projects â†’</a>
+       data-en="All projects →" data-id="Semua proyek →">All projects →</a>
   </div>
 </section>
 
@@ -440,7 +440,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
             <circle cx="470" cy="120" r="150" fill="#3ddc97" opacity=".14"/>
             <rect x="60" y="150" width="230" height="150" rx="16" fill="#0b1226" stroke="#3ddc97" stroke-opacity=".5"/>
             <rect x="86" y="182" width="52" height="36" rx="6" fill="#c8f24e" opacity=".8"/>
-            <text x="86" y="268" fill="#e8eaf2" font-family="monospace" font-size="20" letter-spacing="4">â€¢â€¢â€¢â€¢ 8842</text>
+            <text x="86" y="268" fill="#e8eaf2" font-family="monospace" font-size="20" letter-spacing="4">•••• 8842</text>
           </svg>
         </div>
         <div class="wcard__body">
@@ -673,7 +673,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="/contact" data-magnet=".34" data-cursor="Go">
         <span data-en="Start a project" data-id="Mulai proyek">Start a project</span>
-        <span class="ico" aria-hidden="true">â†—</span>
+        <span class="ico" aria-hidden="true">↗</span>
       </a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>
     </div>
@@ -731,14 +731,14 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <p class="display foot__word" aria-hidden="true">FUGO</p>
 
     <div class="foot__bot">
-      <span>Â© 2026 PT Fugo Creative Group</span>
-      <span data-en="Concept redesign — Direction A â€œSignalâ€" data-id="Konsep redesain — Direction A â€œSignalâ€">Concept redesign — Direction A â€œSignalâ€</span>
+      <span>© 2026 PT Fugo Creative Group</span>
+      <span data-en="Concept redesign — Direction A "Signal"" data-id="Konsep redesain — Direction A "Signal"">Concept redesign — Direction A "Signal"</span>
       <span><a href="tel:+6282121000680">+62 821 2100 0680</a></span>
     </div>
   </div>
 </footer>
 
-<!-- â”€â”€ motion stack â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+<!--  motion stack 
      GSAP 3.13+ (free, all plugins incl. SplitText) · Lenis · Three.js.
      Pinned to major ranges so the CDN always resolves a current build.
      motion.js degrades the whole page gracefully if any of these fail. -->
