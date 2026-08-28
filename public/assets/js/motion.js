@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    FUGO CREATIVE — Direction A "SIGNAL"  ·  motion layer
    Lenis (smooth scroll) + GSAP (ScrollTrigger, SplitText) + Three.js hero.
 
@@ -190,7 +190,20 @@ function boot() {
 function preloader({ gsap, ST }) {
   const el = $('.loader');
   const hero = () => heroIntro({ gsap, ST });
-  if (!el) { document.body.classList.add('ready'); hero(); return; }
+
+  // Skip the preloader entirely if:
+  //   (a) OS has "reduce motion" / animations disabled (prefers-reduced-motion)
+  //   (b) User is returning to home from another page this session (nav-in curtain handles the transition)
+  const skipLoader = RM || (() => { try { return !!sessionStorage.getItem('fugo-home-seen'); } catch { return false; } })();
+  if (!el || skipLoader) {
+    if (el) el.style.display = 'none';
+    document.body.classList.add('ready');
+    hero();
+    return;
+  }
+
+  // Mark home as visited so future returns skip the preloader
+  try { sessionStorage.setItem('fugo-home-seen', '1'); } catch {}
 
   const num = $('.loader__num', el), bar = $('.loader__bar', el);
   const state = { p: 0 };
@@ -219,10 +232,10 @@ function preloader({ gsap, ST }) {
     if (bar) bar.style.width = state.p + '%';
     if (state.p < 100) return requestAnimationFrame(tick);
     tl.to(el, {
-      yPercent: -100, duration: RM ? 0.01 : 0.9, ease: 'expo.inOut',
+      yPercent: -100, duration: 0.9, ease: 'expo.inOut',
       onStart: () => { document.body.classList.add('ready'); clearTimeout(failsafe); },
       onComplete: () => { el.style.display = 'none'; ST.refresh(); },
-    }).add(hero, RM ? 0 : '-=0.55');
+    }).add(hero, '-=0.55');
   };
   requestAnimationFrame(tick);
 }

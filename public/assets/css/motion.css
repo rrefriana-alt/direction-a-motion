@@ -113,9 +113,29 @@ html.no-motion .wcard, html.no-motion .svc__panels .card { transform: none !impo
 
 /* ---- reduced motion ---------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .curtain { display: none; }
+  /* No page transitions, no curtain, no loader */
+  .curtain { display: none !important; }
+  .loader  { display: none !important; }
+
+  /* No fade-in / slide-up animations — everything shows immediately */
+  .fade-up,
+  .fade-in,
+  [data-reveal],
+  .hero__title .char,
+  .hero .reveal-line .tint,
+  .line { opacity: 1 !important; transform: none !important; animation: none !important; }
+
+  /* No WebGL canvas */
+  .hero__canvas { opacity: 0; pointer-events: none; }
+
+  /* No scroll-driven card skew */
   .wcard, .svc__panels .card { will-change: auto; transform: none !important; }
-  .hero__canvas { opacity: .5; }
+
+  /* No marquee motion */
+  .marquee__track { animation: none !important; }
+
+  /* Instant transitions on all interactive elements */
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
 /* ---- headlines use the masked line reveal, not the generic fade --------- */
