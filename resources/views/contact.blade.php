@@ -145,8 +145,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <div class="card fade-up" data-delay="1">
         <p class="card__num" data-en="Direct" data-id="Langsung">Direct</p>
         <h3 style="font-size:1.4rem">WhatsApp</h3>
-        <p><a class="tlink green" href="https://wa.me/{{ preg_replace('/[^0-9]/', — $content['contact']['phone'] — '6282121000680') — rel="noopener">{{ $content['contact']['phone'] — '+62 821 2100 0680' }}</a></p>
-        <p class="mt-m"><a class="tlink" href="mailto:{{ $content['contact']['email'] — 'hello@fugocreativegroup.com' — $content['contact']['email'] — 'hello@fugocreativegroup.com' }}</a></p>
+        <p><a class="tlink green" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $content['contact']['phone'] ?? '6282121000680') }}" rel="noopener">{{ $content['contact']['phone'] ?? '+62 821 2100 0680' }}</a></p>
+        <p class="mt-m"><a class="tlink" href="mailto:{{ $content['contact']['email'] ?? 'hello@fugocreativegroup.com' }}">{{ $content['contact']['email'] ?? 'hello@fugocreativegroup.com' }}</a></p>
         <div class="card__tags" style="margin-top:1.6rem">
           <span class="tag" data-en="Reply within 1 working day" data-id="Balasan dalam 1 hari kerja">Reply within 1 working day</span>
         </div>
@@ -155,7 +155,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <div class="card fade-up mt-m" data-delay="2">
         <p class="card__num" data-en="Studios" data-id="Studio">Studios</p>
         <address class="muted mt-s" style="font-style:normal;line-height:1.7">
-          <strong style="color:var(--ink)">Bandung — HQ</strong><br>{{ $content['contact']['address_bdg'] — 'Jl. Permata Taman Sari Raya No.21, Arcamanik' }}<br><br>
+          <strong style="color:var(--ink)">Bandung — HQ</strong><br>{{ $content['contact']['address_bdg'] ?? 'Jl. Permata Taman Sari Raya No.21, Arcamanik' }}<br><br>
           <strong style="color:var(--ink)">Jakarta</strong><br>Jl. Srengseng Sawah No.16, Jagakarsa<br><br>
           <strong style="color:var(--ink)">Bali</strong><br>Jl. Tukad Melangit, Samplangan, Gianyar
         </address>
@@ -218,6 +218,6 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') — defer></script>
+<script src="{{ asset('assets/js/motion.js') }}" defer></script>
 </body>
 </html>

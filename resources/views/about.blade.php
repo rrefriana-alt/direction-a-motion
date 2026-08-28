@@ -176,18 +176,18 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="quote fade-up">
       <div>
         <p class="eyebrow" style="margin-bottom:1.6rem" data-en="From the founder" data-id="Dari pendiri">From the founder</p>
-        <blockquote data-en="{{ $content['about']['founder']['quote'] — data-id="{{ $content['about']['founder']['quote'] }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
+        <blockquote data-en="{{ $content['about']['founder']['quote'] }}" data-id="{{ $content['about']['founder']['quote'] }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
         <div class="quote__by">
-            @if(isset($content['about']['founder']['image']) — $content['about']['founder']['image'])
-                <img src="{{ asset($content['about']['founder']['image']) — alt="{{ $content['about']['founder']['name'] — class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+            @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
+                <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
             @else
-          <img src="{{ asset('assets/img/Pa-Sona.jpg') — alt="Sona Lesmana" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+          <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
           @endif
-            <span><strong style="color:var(--ink)">{{ $content['about']['founder']['name'] }}</strong><br><span data-en="{{ $content['about']['founder']['title'] — data-id="{{ $content['about']['founder']['title'] — $content['about']['founder']['title'] }}</span></span></div>
+            <span><strong style="color:var(--ink)">{{ $content['about']['founder']['name'] }}</strong><br><span data-en="{{ $content['about']['founder']['title'] }}" data-id="{{ $content['about']['founder']['title'] ?? $content['about']['founder']['title'] }}</span></span></div>
       </div>
       <div class="quote__art" aria-hidden="true">
         <div class="quote__art" aria-hidden="true">
-    <img src="{{ asset('assets/img/Pa-Sona.jpg') — alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+    <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
       </div>
     </div>
   </div>
@@ -273,6 +273,6 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') — defer></script>
+<script src="{{ asset('assets/js/motion.js') }}" defer></script>
 </body>
 </html>

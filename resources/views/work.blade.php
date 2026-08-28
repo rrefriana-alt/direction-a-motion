@@ -247,6 +247,6 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') — defer></script>
+<script src="{{ asset('assets/js/motion.js') }}" defer></script>
 </body>
 </html>

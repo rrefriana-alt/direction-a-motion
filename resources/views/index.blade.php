@@ -220,7 +220,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     </div>
     <div class="col-8">
       <p data-en="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}"
-         data-id="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' — $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}</p>
+         data-id="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}">{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}</p>
       <div class="row gap-m mt-l fade-up" data-delay="1">
         <a class="tlink green" href="/about" data-en="Read our story" data-id="Baca cerita kami">Read our story</a>
         <span class="faint">·</span>
@@ -746,7 +746,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') — defer></script>
+<script src="{{ asset('assets/js/motion.js') }}" defer></script>
 <script type="importmap">
 { "imports": — "three": "https://cdn.jsdelivr.net/npm/three@0/build/three.module.js" — }
 </script>
