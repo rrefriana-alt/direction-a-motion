@@ -186,11 +186,10 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
             <span><strong style="color:var(--ink)">{{ $content['about']['founder']['name'] }}</strong><br><span data-en="{{ $content['about']['founder']['title'] }}" data-id="{{ $content['about']['founder']['title'] ?? $content['about']['founder']['title'] }}</span></span></div>
       </div>
       <div class="quote__art">
-        <span class="quote__ring"></span><span class="quote__ring"></span><span class="quote__ring"></span>
         @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
-            <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }} Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; position: relative; z-index: 2;">
+            <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }} Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; ">
         @else
-            <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; position: relative; z-index: 2;">
+            <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; ">
         @endif
       </div>
     </div>
@@ -280,3 +279,4 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <script src="{{ asset('assets/js/motion.js') }}" defer></script>
 </body>
 </html>
+
