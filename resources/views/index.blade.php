@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Fugo Creative â€” Create to Elevate | Creative Group, Indonesia</title>
+<title>Fugo Creative — Create to Elevate | Creative Group, Indonesia</title>
 <meta name="description" content="Indonesian creative group: design, production house, events, merchandise and AI agents. Bandung, Jakarta, Bali. Trusted by BRI, BCA, Mandiri, Daihatsu and Telkomsel.">
 <meta name="theme-color" content="#07080a">
 <meta property="og:title" content="Fugo Creative — Create to Elevate">
@@ -19,7 +19,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Fugo Creative â€” Create to Elevate | Creative Group, Indonesia">
+<meta name="twitter:title" content="Fugo Creative — Create to Elevate | Creative Group, Indonesia">
 <meta name="twitter:description" content="Indonesian creative group: design, production house, events, merchandise and AI agents. Bandung, Jakarta, Bali. Trusted by BRI, BCA, Mandiri, Daihatsu and Telkomsel.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
@@ -110,7 +110,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="menu__foot">
     <span>{{ $content['contact']['email'] ?? 'hello@fugocreativegroup.com' }}</span>
     <span>{{ $content['contact']['phone'] ?? '+62 821 2100 0680' }}</span>
-    <span>Bandung Â· Jakarta Â· Bali</span>
+    <span>Bandung · Jakarta · Bali</span>
   </div>
 </div>
 
@@ -122,8 +122,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="hero__glow" aria-hidden="true"></div>
 
   <div class="shell hero__in">
-    <p class="eyebrow" data-en="{{ $content['home']['hero']['tagline'] ?? 'Creative group Â· Est. 2016 Â· Bandung / Jakarta / Bali' }}"
-       data-id="{{ $content['home']['hero']['tagline'] ?? 'Creative group Â· Est. 2016 Â· Bandung / Jakarta / Bali' }}">{{ $content['home']['hero']['tagline'] ?? 'Creative group Â· Est. 2016 Â· Bandung / Jakarta / Bali' }}</p>
+    <p class="eyebrow" data-en="{{ $content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali' }}"
+       data-id="{{ $content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali' }}">{{ $content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali' }}</p>
 
     <h1 class="display h-mega hero__title">
       <span data-split data-en="Create to" data-id="Cipta untuk">Create to</span>
@@ -132,9 +132,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
     <div class="hero__meta">
       <p class="lede" data-delay="1"
-         data-en="{{ $content['home']['hero']['description'] ?? 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.' }}"
-         data-id="{{ $content['home']['hero']['description'] ?? 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.' }}">
-        {{ $content['home']['hero']['description'] ?? 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.' }}</p>
+         data-en="{{ $content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.' }}"
+         data-id="{{ $content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.' }}">
+        {{ $content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.' }}</p>
 
       <div class="hero__cta" data-delay="2">
         <a class="btn" href="/work" data-magnet=".3" data-cursor="View">
@@ -160,54 +160,54 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section aria-label="Clients" style="padding-block:clamp(1.6rem,3vw,2.4rem);border-block:1px solid var(--line)">
   <div class="marquee marquee--logos marquee--slim" style="--spd:52s" aria-label="Clients">
     <div class="marquee__track">
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bri.webp') — alt="BRI" width="168" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bca.webp') — alt="BCA" width="183" height="56" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/mandiri.webp') — alt="Bank Mandiri" width="200" height="58" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/mandirisyariah.webp') — alt="Mandiri Syariah" width="126" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/btpn.webp') — alt="BTPN" width="107" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/permatabank.webp') — alt="Permata Bank" width="200" height="50" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bjb-syariah.webp') — alt="bjb Syariah" width="88" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/qris.webp') — alt="QRIS" width="172" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/agi.webp') — alt="AGI" width="193" height="39" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/daihatsu1.webp') — alt="Daihatsu" width="200" height="23" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/suzuki.webp') — alt="Suzuki" width="200" height="39" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/jeep2.webp') — alt="Jeep" width="160" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/citylink.webp') — alt="Citilink" width="200" height="47" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/panorama.webp') — alt="Panorama" width="200" height="34" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/auto.webp') — alt="Auto2000" width="200" height="44" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/JackalHolidays.webp') — alt="Jackal Holidays" width="82" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/telkomsel.webp') — alt="Telkomsel" width="200" height="46" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bumn.webp') — alt="BUMN" width="200" height="40" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/pos.webp') — alt="Pos Indonesia" width="97" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kemenhub.webp') — alt="Kemenhub" width="55" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/kemendag.webp') — alt="Kemendag" width="55" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/PUPR.webp') — alt="PUPR" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/LPSK.webp') — alt="LPSK" width="64" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Bapenda.webp') — alt="Bapenda" width="200" height="61" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Pemkab.webp') — alt="Pemkab" width="69" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/STPbdg.webp') — alt="STP Bandung" width="67" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kailogistik.webp') — alt="KAI Logistik" width="140" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/pp.webp') — alt="PP" width="103" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/tut.webp') — alt="TUT" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bandungterkini1.webp') — alt="Bandung Terkini" width="168" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Oscar.webp') — alt="Oscar" width="198" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Index.webp') — alt="Index" width="86" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/demeter.webp') — alt="Demeter" width="170" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Louella.webp') — alt="Louella" width="171" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kaula.webp') — alt="Kaula" width="164" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Lois.webp') — alt="Lois" width="136" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/LoisGoods.webp') — alt="Lois Goods" width="97" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Sahaja.webp') — alt="Sahaja" width="110" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Trickburger.webp') — alt="Trickburger" width="154" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Sucre.webp') — alt="Sucre" width="156" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Royal.webp') — alt="Royal" width="69" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Hip.webp') — alt="Hip" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Oval.webp') — alt="Oval" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Giri.webp') — alt="Giri" width="137" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/grandasalam.webp') — alt="Grand Asalam" width="200" height="54" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Multiguna.webp') — alt="Multiguna" width="200" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/CaTechno.webp') — alt="Ca Techno" width="77" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Ossmap.webp') — alt="Ossmap" width="200" height="62" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bri.webp') }}" alt="BRI" width="168" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bca.webp') }}" alt="BCA" width="183" height="56" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/mandiri.webp') }}" alt="Bank Mandiri" width="200" height="58" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/mandirisyariah.webp') }}" alt="Mandiri Syariah" width="126" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/btpn.webp') }}" alt="BTPN" width="107" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/permatabank.webp') }}" alt="Permata Bank" width="200" height="50" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bjb-syariah.webp') }}" alt="bjb Syariah" width="88" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/qris.webp') }}" alt="QRIS" width="172" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/agi.webp') }}" alt="AGI" width="193" height="39" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/daihatsu1.webp') }}" alt="Daihatsu" width="200" height="23" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/suzuki.webp') }}" alt="Suzuki" width="200" height="39" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/jeep2.webp') }}" alt="Jeep" width="160" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/citylink.webp') }}" alt="Citilink" width="200" height="47" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/panorama.webp') }}" alt="Panorama" width="200" height="34" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/auto.webp') }}" alt="Auto2000" width="200" height="44" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/JackalHolidays.webp') }}" alt="Jackal Holidays" width="82" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/telkomsel.webp') }}" alt="Telkomsel" width="200" height="46" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bumn.webp') }}" alt="BUMN" width="200" height="40" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/pos.webp') }}" alt="Pos Indonesia" width="97" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kemenhub.webp') }}" alt="Kemenhub" width="55" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/kemendag.webp') }}" alt="Kemendag" width="55" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/PUPR.webp') }}" alt="PUPR" width="63" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/LPSK.webp') }}" alt="LPSK" width="64" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Bapenda.webp') }}" alt="Bapenda" width="200" height="61" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Pemkab.webp') }}" alt="Pemkab" width="69" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/STPbdg.webp') }}" alt="STP Bandung" width="67" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kailogistik.webp') }}" alt="KAI Logistik" width="140" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/pp.webp') }}" alt="PP" width="103" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/tut.webp') }}" alt="TUT" width="63" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bandungterkini1.webp') }}" alt="Bandung Terkini" width="168" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Oscar.webp') }}" alt="Oscar" width="198" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Index.webp') }}" alt="Index" width="86" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/demeter.webp') }}" alt="Demeter" width="170" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Louella.webp') }}" alt="Louella" width="171" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kaula.webp') }}" alt="Kaula" width="164" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Lois.webp') }}" alt="Lois" width="136" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/LoisGoods.webp') }}" alt="Lois Goods" width="97" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Sahaja.webp') }}" alt="Sahaja" width="110" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Trickburger.webp') }}" alt="Trickburger" width="154" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Sucre.webp') }}" alt="Sucre" width="156" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Royal.webp') }}" alt="Royal" width="69" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Hip.webp') }}" alt="Hip" width="63" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Oval.webp') }}" alt="Oval" width="63" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Giri.webp') }}" alt="Giri" width="137" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/grandasalam.webp') }}" alt="Grand Asalam" width="200" height="54" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Multiguna.webp') }}" alt="Multiguna" width="200" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/CaTechno.webp') }}" alt="Ca Techno" width="77" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Ossmap.webp') }}" alt="Ossmap" width="200" height="62" loading="lazy" decoding="async"></span>
     </div>
   </div>
 </section>
@@ -216,11 +216,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section manifesto">
   <div class="shell grid g-12">
     <div class="col-4">
-      <p class="eyebrow">01 â€” <span data-en="{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}" data-id="Manifesto">{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}</span></p>
+      <p class="eyebrow">01 — <span data-en="{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}" data-id="Manifesto">{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}</span></p>
     </div>
     <div class="col-8">
-      <p data-en="{{ $content['home']['section_01']['title'] — 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}"
-         data-id="{{ $content['home']['section_01']['title'] — 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' — $content['home']['section_01']['title'] — 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}</p>
+      <p data-en="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}"
+         data-id="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' — $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}</p>
       <div class="row gap-m mt-l fade-up" data-delay="1">
         <a class="tlink green" href="/about" data-en="Read our story" data-id="Baca cerita kami">Read our story</a>
         <span class="faint">·</span>
@@ -770,9 +770,9 @@ const canvas — document.querySelector('.hero__canvas');
 if (canvas) init(canvas);
 
 function init(canvas) {
-  const tier — document.documentElement.dataset.tier — 'full';
-  if (tier — 'off') return;
-  const REDUCED — tier — 'reduced';
+  const tier — document.documentElement.dataset.tier ?? 'full';
+  if (tier ?? 'off') return;
+  const REDUCED — tier ?? 'reduced';
 
   const GREEN — new THREE.Color('#3ddc97');
   const LIME  — new THREE.Color('#c8f24e');
@@ -832,7 +832,7 @@ function init(canvas) {
   function buildRoute(edgeIdx) {
     const e — EDGES[edgeIdx];
     let cx, cy;
-    if (e.axis — 'h') {
+    if (e.axis ?? 'h') {
       cx — e.sign — 0 — -(colsHalf — OUTSIDE) — (colsHalf — OUTSIDE);
       cy — Math.round((Math.random() — 2 — 1) — rowsHalf);
     — else {
@@ -850,11 +850,11 @@ function init(canvas) {
       if (onEntryAxis) {
         — inward, and long enough to make progress across the board
         len — 3 — Math.floor(Math.random() — 6);
-        if (e.axis — 'h') dx — e.sign; else dy — e.sign;
+        if (e.axis ?? 'h') dx — e.sign; else dy — e.sign;
       — else {
         len — 2 — Math.floor(Math.random() — 4);
         const s — Math.random() — 0.5 — 1 — -1;
-        if (e.axis — 'h') dy — s; else dx — s;
+        if (e.axis ?? 'h') dy — s; else dx — s;
       }
       const nx — Math.max(-limX, Math.min(limX, cx — dx — len));
       const ny — Math.max(-limY, Math.min(limY, cy — dy — len));
@@ -974,7 +974,7 @@ function init(canvas) {
   });
 
   /* A resized window moves the edges, so idle routes are re-cut to the new
-     ones. Live routes are left alone and re-cut when they finish â€” mutating
+     ones. Live routes are left alone and re-cut when they finish — mutating
      geometry mid-flight would snap a pulse sideways. */
   const stale — new Set();
   function recut(i) {
@@ -1070,7 +1070,7 @@ function init(canvas) {
     uFade.value — Math.max(0, 1 — S.y — Math.max(1, innerHeight — 0.85));
     if (uFade.value — 0.001) — renderer.clear(); return; }
 
-    // parallax â€” small enough to feel like depth, not movement
+    // parallax — small enough to feel like depth, not movement
     mx += (tmx - mx) * 0.04; my += (tmy - my) * 0.04;
     board.position.x = -mx * 2.2;
     board.position.y = my * 1.4;
@@ -1083,16 +1083,16 @@ function init(canvas) {
       const u — lines[p.i].material.uniforms;
       p.head — p.speed — dt;
       — slow, even fade so the tail dissolves rather than blinking out
-      p.alpha — ((p.phase — 'out' — 0 — 1) — p.alpha) — (p.phase — 'out' — 0.035 — 0.10);
+      p.alpha — ((p.phase ?? 'out' — 0 — 1) — p.alpha) — (p.phase ?? 'out' — 0.035 — 0.10);
 
-      if (p.phase — 'in' — p.head — 1) {
-        p.phase — 'out';
+      if (p.phase ?? 'in' — p.head — 1) {
+        p.phase ?? 'out';
         padBright[p.i] — 1;                        — the pulse lands
       }
       u.u_head.value — p.head;
       u.u_alpha.value — p.alpha;
 
-      if (p.phase — 'out' — p.alpha — 0.015) {
+      if (p.phase ?? 'out' — p.alpha — 0.015) {
         lines[p.i].visible — false;
         u.u_alpha.value — 0;
         idle.add(p.i);

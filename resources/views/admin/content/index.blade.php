@@ -28,7 +28,7 @@
                     <h5 class="card-title fw-bold text-primary mb-3">Hero Section</h5>
                     <div class="mb-3">
                         <label class="form-label form-label-modern">Tagline</label>
-                        <input type="text" name="home_hero_tagline" class="form-control form-control-modern" value="{{ old('home_hero_tagline', $settings['home_hero_tagline'] ?? 'Creative group Â· Est. 2016 Â· Bandung / Jakarta / Bali') }}">
+                        <input type="text" name="home_hero_tagline" class="form-control form-control-modern" value="{{ old('home_hero_tagline', $settings['home_hero_tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali') }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label form-label-modern">Title (Use new lines for breaks)</label>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label form-label-modern">Description</label>
-                        <textarea name="home_hero_desc" class="form-control form-control-modern" rows="2">{{ old('home_hero_desc', $settings['home_hero_desc'] ?? 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.') }}</textarea>
+                        <textarea name="home_hero_desc" class="form-control form-control-modern" rows="2">{{ old('home_hero_desc', $settings['home_hero_desc'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.') }}</textarea>
                     </div>
                 </div>
             </div>
