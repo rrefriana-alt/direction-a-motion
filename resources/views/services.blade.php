@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Services — Fugo Creative | Design, Film, Events, Merch, AI</title>
+<title>Services — Fugo Creative — Design, Film, Events, Merch, AI</title>
 <meta name="description" content="Five specialist divisions under one roof: Design, Production House, Event Organizer, Merch Production and AI Agent. Brief one team, skip the agency handoff tax.">
 <meta name="theme-color" content="#07080a">
 <link rel="canonical" href="https://fugocreativegroup.com/services.html">
@@ -11,14 +11,14 @@
 <meta property="og:site_name" content="Fugo Creative">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="id_ID">
-<meta property="og:title" content="Services — Fugo Creative | Design, Film, Events, Merch, AI">
+<meta property="og:title" content="Services — Fugo Creative — Design, Film, Events, Merch, AI">
 <meta property="og:description" content="Five specialist divisions under one roof: Design, Production House, Event Organizer, Merch Production and AI Agent. Brief one team, skip the agency handoff tax.">
 <meta property="og:url" content="https://fugocreativegroup.com/services.html">
 <meta property="og:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Services — Fugo Creative | Design, Film, Events, Merch, AI">
+<meta name="twitter:title" content="Services — Fugo Creative — Design, Film, Events, Merch, AI">
 <meta name="twitter:description" content="Five specialist divisions under one roof: Design, Production House, Event Organizer, Merch Production and AI Agent. Brief one team, skip the agency handoff tax.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
@@ -93,7 +93,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="/contact" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
-    <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung · Jakarta · Bali</span>
+    <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
   </div>
 </div>
 <main>
@@ -152,7 +152,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <dl class="stack">
             
             <div style="padding-block:1rem;border-top:1px solid var(--line)">
-              <dt class="h-lg" style="font-size:1.05rem">Commercial & TVC</dt>
+              <dt class="h-lg" style="font-size:1.05rem">Commercial — TVC</dt>
               <dd class="muted" style="font-size:.92rem;margin-top:.35rem">Concept, script, casting, shoot, post-production</dd>
             </div>
             <div style="padding-block:1rem;border-top:1px solid var(--line)">
@@ -183,7 +183,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <dl class="stack">
             
             <div style="padding-block:1rem;border-top:1px solid var(--line)">
-              <dt class="h-lg" style="font-size:1.05rem">Meeting & Conference</dt>
+              <dt class="h-lg" style="font-size:1.05rem">Meeting — Conference</dt>
               <dd class="muted" style="font-size:.92rem;margin-top:.35rem">Training, workshop, staff meeting, industry conference</dd>
             </div>
             <div style="padding-block:1rem;border-top:1px solid var(--line)">
@@ -226,7 +226,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
               <dd class="muted" style="font-size:.92rem;margin-top:.35rem">Curated boxes with packaging design and fulfilment</dd>
             </div>
             <div style="padding-block:1rem;border-top:1px solid var(--line)">
-              <dt class="h-lg" style="font-size:1.05rem">Sourcing & QC</dt>
+              <dt class="h-lg" style="font-size:1.05rem">Sourcing — QC</dt>
               <dd class="muted" style="font-size:.92rem;margin-top:.35rem">Material selection, sampling, quality control, delivery</dd>
             </div>
           </dl>
@@ -338,14 +338,14 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     </div>
   </div>
 </footer>
-<!-- ── motion stack ────────────────────────────────────────────────
-     GSAP 3.13+ (free, all plugins incl. SplitText) · Lenis.
+<!-- — motion stack ────────────────────────────────────────────────
+     GSAP 3.13+ (free, all plugins incl. SplitText) — Lenis.
      Three.js is index-only — the WebGL hero does not exist on inner pages.
      motion.js degrades the whole page gracefully if any of these fail. -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') }}" defer></script>
+<script src="{{ asset('assets/js/motion.js') — defer></script>
 </body>
 </html>

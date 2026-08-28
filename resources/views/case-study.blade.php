@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>BRI Debit Virtual TVC — Case Study | Fugo Creative</title>
+<title>BRI Debit Virtual TVC — Case Study — Fugo Creative</title>
 <meta name="description" content="How Fugo produced the BRImo virtual debit launch TVC — concept, script, casting, shoot and post handled in-house on a six-week turnaround across three cities.">
 <meta name="theme-color" content="#07080a">
 <link rel="canonical" href="https://fugocreativegroup.com/case-study.html">
@@ -11,14 +11,14 @@
 <meta property="og:site_name" content="Fugo Creative">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="id_ID">
-<meta property="og:title" content="BRI Debit Virtual TVC — Case Study | Fugo Creative">
+<meta property="og:title" content="BRI Debit Virtual TVC — Case Study — Fugo Creative">
 <meta property="og:description" content="How Fugo produced the BRImo virtual debit launch TVC — concept, script, casting, shoot and post handled in-house on a six-week turnaround across three cities.">
 <meta property="og:url" content="https://fugocreativegroup.com/case-study.html">
 <meta property="og:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="BRI Debit Virtual TVC — Case Study | Fugo Creative">
+<meta name="twitter:title" content="BRI Debit Virtual TVC — Case Study — Fugo Creative">
 <meta name="twitter:description" content="How Fugo produced the BRImo virtual debit launch TVC — concept, script, casting, shoot and post handled in-house on a six-week turnaround across three cities.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
@@ -93,7 +93,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="/contact" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
-    <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung · Jakarta · Bali</span>
+    <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
   </div>
 </div>
 <main>
@@ -105,7 +105,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <h1 class="display h-xxl mt-s fade-up" data-delay="1">BRI Debit<br>Virtual TVC</h1>
     <div class="row gap-l mt-m fade-up" data-delay="2">
       <div><p class="mono faint" data-en="Client" data-id="Klien">Client</p><p class="mt-s">Bank Rakyat Indonesia</p></div>
-      <div><p class="mono faint" data-en="Scope" data-id="Lingkup">Scope</p><p class="mt-s">Concept · Script · Production · Post</p></div>
+      <div><p class="mono faint" data-en="Scope" data-id="Lingkup">Scope</p><p class="mt-s">Concept — Script — Production — Post</p></div>
       <div><p class="mono faint" data-en="Year" data-id="Tahun">Year</p><p class="mt-s">2025</p></div>
       <div><p class="mono faint" data-en="Division" data-id="Divisi">Division</p><p class="mt-s">Production House</p></div>
     </div>
@@ -167,7 +167,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:0">
   <div class="shell row between center gap-m">
     <a class="tlink" href="/work" data-en="← All work" data-id="← Semua karya">← All work</a>
-    <a class="tlink green" href="/work" data-en="Next project →" data-id="Proyek berikutnya →">Next project →</a>
+    <a class="tlink green" href="/work" data-en="Next project — data-id="Proyek berikutnya →">Next project →</a>
   </div>
 </section>
 <section class="section cta">
@@ -221,14 +221,14 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     </div>
   </div>
 </footer>
-<!-- ── motion stack ────────────────────────────────────────────────
-     GSAP 3.13+ (free, all plugins incl. SplitText) · Lenis.
+<!-- — motion stack ────────────────────────────────────────────────
+     GSAP 3.13+ (free, all plugins incl. SplitText) — Lenis.
      Three.js is index-only — the WebGL hero does not exist on inner pages.
      motion.js degrades the whole page gracefully if any of these fail. -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') }}" defer></script>
+<script src="{{ asset('assets/js/motion.js') — defer></script>
 </body>
 </html>

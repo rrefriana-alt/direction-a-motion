@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Selected Work — Fugo Creative | Campaigns, Film, Events</title>
+<title>Selected Work — Fugo Creative — Campaigns, Film, Events</title>
 <meta name="description" content="Campaign, film, event and merchandise work for BRI, Daihatsu, Kemenhub, Telkomsel and Bank Mandiri — produced in-house across Bandung, Jakarta and Bali.">
 <meta name="theme-color" content="#07080a">
 <link rel="canonical" href="https://fugocreativegroup.com/work.html">
@@ -11,14 +11,14 @@
 <meta property="og:site_name" content="Fugo Creative">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="id_ID">
-<meta property="og:title" content="Selected Work — Fugo Creative | Campaigns, Film, Events">
+<meta property="og:title" content="Selected Work — Fugo Creative — Campaigns, Film, Events">
 <meta property="og:description" content="Campaign, film, event and merchandise work for BRI, Daihatsu, Kemenhub, Telkomsel and Bank Mandiri — produced in-house across Bandung, Jakarta and Bali.">
 <meta property="og:url" content="https://fugocreativegroup.com/work.html">
 <meta property="og:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Selected Work — Fugo Creative | Campaigns, Film, Events">
+<meta name="twitter:title" content="Selected Work — Fugo Creative — Campaigns, Film, Events">
 <meta name="twitter:description" content="Campaign, film, event and merchandise work for BRI, Daihatsu, Kemenhub, Telkomsel and Bank Mandiri — produced in-house across Bandung, Jakarta and Bali.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
@@ -93,7 +93,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="/contact" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
-    <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung · Jakarta · Bali</span>
+    <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
   </div>
 </div>
 <main>
@@ -120,61 +120,61 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <a class="wrow fade-up" href="/case-study" data-cat="Production" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%230e3c8c&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">001</span>
         <span class="wrow__t">BRI Debit Virtual TVC</span>
-        <span class="wrow__c">Bank Rakyat Indonesia · Production</span>
+        <span class="wrow__c">Bank Rakyat Indonesia — Production</span>
         <span class="wrow__y">2025</span>
       </a>
       <a class="wrow fade-up" href="/case-study" data-cat="Design" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%231a1f2b&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">002</span>
         <span class="wrow__t">Dealer Campaign System</span>
-        <span class="wrow__c">Daihatsu · Design</span>
+        <span class="wrow__c">Daihatsu — Design</span>
         <span class="wrow__y">2024</span>
       </a>
       <a class="wrow fade-up" href="/case-study" data-cat="Events" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%23123&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">003</span>
         <span class="wrow__t">National Transport Expo</span>
-        <span class="wrow__c">Kemenhub · Events</span>
+        <span class="wrow__c">Kemenhub — Events</span>
         <span class="wrow__y">2024</span>
       </a>
       <a class="wrow fade-up" href="/case-study" data-cat="Merch" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%235a1414&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">004</span>
         <span class="wrow__t">Partner Welcome Kit</span>
-        <span class="wrow__c">Telkomsel · Merch</span>
+        <span class="wrow__c">Telkomsel — Merch</span>
         <span class="wrow__y">2023</span>
       </a>
       <a class="wrow fade-up" href="/case-study" data-cat="Design" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%230a2f4a&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">005</span>
         <span class="wrow__t">Annual Report 2023</span>
-        <span class="wrow__c">Bank Mandiri · Design</span>
+        <span class="wrow__c">Bank Mandiri — Design</span>
         <span class="wrow__y">2023</span>
       </a>
       <a class="wrow fade-up" href="/case-study" data-cat="Merch" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%230f3d2e&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">006</span>
         <span class="wrow__t">Cabin Crew Uniform Line</span>
-        <span class="wrow__c">Citilink · Merch</span>
+        <span class="wrow__c">Citilink — Merch</span>
         <span class="wrow__y">2023</span>
       </a>
       <a class="wrow fade-up" href="/case-study" data-cat="Production" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%232a1a4a&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">007</span>
         <span class="wrow__t">Ramadan Brand Film</span>
-        <span class="wrow__c">bjb Syariah · Production</span>
+        <span class="wrow__c">bjb Syariah — Production</span>
         <span class="wrow__y">2025</span>
       </a>
       <a class="wrow fade-up" href="/case-study" data-cat="Events" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%233a2410&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">008</span>
         <span class="wrow__t">Sales Kickoff Gathering</span>
-        <span class="wrow__c">BTPN · Events</span>
+        <span class="wrow__c">BTPN — Events</span>
         <span class="wrow__y">2024</span>
       </a>
       <a class="wrow fade-up" href="/case-study" data-cat="Production" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%23141b2e&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">009</span>
         <span class="wrow__t">Product Launch Coverage</span>
-        <span class="wrow__c">Suzuki · Production</span>
+        <span class="wrow__c">Suzuki — Production</span>
         <span class="wrow__y">2024</span>
       </a>
       <a class="wrow fade-up" href="/case-study" data-cat="Design" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%23123a1e&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
         <span class="wrow__n">010</span>
         <span class="wrow__t">Brand Identity Refresh</span>
-        <span class="wrow__c">Nutrigoat · Design</span>
+        <span class="wrow__c">Nutrigoat — Design</span>
         <span class="wrow__y">2025</span>
       </a>
     </div>
@@ -239,14 +239,14 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
     </div>
   </div>
 </footer>
-<!-- ── motion stack ────────────────────────────────────────────────
-     GSAP 3.13+ (free, all plugins incl. SplitText) · Lenis.
+<!-- — motion stack ────────────────────────────────────────────────
+     GSAP 3.13+ (free, all plugins incl. SplitText) — Lenis.
      Three.js is index-only — the WebGL hero does not exist on inner pages.
      motion.js degrades the whole page gracefully if any of these fail. -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') }}" defer></script>
+<script src="{{ asset('assets/js/motion.js') — defer></script>
 </body>
 </html>
