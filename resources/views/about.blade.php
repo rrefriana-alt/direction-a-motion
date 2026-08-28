@@ -166,6 +166,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <span class="step__n">2026</span>
           <div class="step__b"><p class="muted" style="padding-top:.4rem" data-en="Artificial Intelligence division launched — agents and automation as the fifth studio." data-id="Divisi Artificial Intelligence diluncurkan — agent dan otomasi sebagai studio kelima.">Artificial Intelligence division launched — agents and automation as the fifth studio.</p></div>
         </div>
+        </div>
       </div>
     </div>
   </div>
@@ -179,9 +180,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         <blockquote data-en="{{ $content['about']['founder']['quote'] }}" data-id="{{ $content['about']['founder']['quote'] }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
         <div class="quote__by">
           @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
-              <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+            <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           @else
-              <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+            <img src="/assets/img/Pa-Sona.jpg" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           @endif
           <span><strong style="color:var(--ink)">{{ $content['about']['founder']['name'] }}</strong><br>
             <span data-en="{{ $content['about']['founder']['title'] }}" data-id="{{ $content['about']['founder']['title'] }}">{{ $content['about']['founder']['title'] }}</span></span>
@@ -189,9 +190,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       </div>
       <div class="quote__art">
         @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
-            <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }} Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+          <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
         @else
-            <img src="/assets/img/Pa-Sona.jpg" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+          <img src="/assets/img/Pa-Sona.jpg" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
         @endif
       </div>
     </div>
@@ -281,5 +282,4 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <script src="{{ asset('assets/js/motion.js') }}" defer></script>
 </body>
 </html>
-
 
