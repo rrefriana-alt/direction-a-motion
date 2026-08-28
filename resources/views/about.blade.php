@@ -177,7 +177,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <div>
         <p class="eyebrow" style="margin-bottom:1.6rem" data-en="From the founder" data-id="Dari pendiri">From the founder</p>
         <blockquote data-en="{{ $content['about']['founder']['quote'] }}" data-id="{{ $content['about']['founder']['quote'] }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
-        <div class="quote__by">
+                <div class="quote__by">
             @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
                 <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
             @else
@@ -185,9 +185,13 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           @endif
             <span><strong style="color:var(--ink)">{{ $content['about']['founder']['name'] }}</strong><br><span data-en="{{ $content['about']['founder']['title'] }}" data-id="{{ $content['about']['founder']['title'] ?? $content['about']['founder']['title'] }}</span></span></div>
       </div>
-      <div class="quote__art" aria-hidden="true">
-        <div class="quote__art" aria-hidden="true">
-    <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+      <div class="quote__art">
+        <span class="quote__ring"></span><span class="quote__ring"></span><span class="quote__ring"></span>
+        @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
+            <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }} Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; position: relative; z-index: 2;">
+        @else
+            <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; position: relative; z-index: 2;">
+        @endif
       </div>
     </div>
   </div>
