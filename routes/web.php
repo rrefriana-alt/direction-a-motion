@@ -73,7 +73,8 @@ Route::get('/services', function () {
 })->name('services');
 Route::get('/about', function () { return view('about'); })->name('about');
 Route::get('/contact', function () { return view('contact'); })->name('contact');
-Route::get('/case-study/{id}', function ($id) {
+Route::get('/case-study', function () { return view('case-study'); })->name('case-study.static');
+Route::get('/case-study/project/{id}', function ($id) {
     $project = Project::findOrFail($id);
     return view('case-study', compact('project'));
 })->name('case-study');

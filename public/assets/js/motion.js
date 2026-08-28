@@ -1,14 +1,14 @@
 ﻿/* ==========================================================================
-   FUGO CREATIVE â€” Direction A "SIGNAL"  Â·  motion layer
+   FUGO CREATIVE — Direction A "SIGNAL"  ·  motion layer
    Lenis (smooth scroll) + GSAP (ScrollTrigger, SplitText) + Three.js hero.
 
-   Architecture â€” one rAF for the whole page:
+   Architecture — one rAF for the whole page:
      Lenis  â†’  gsap.ticker  â†’  ScrollTrigger.update()  â†’  WebGL hero
    Two animation loops are what make sites like this stutter, so there is
    exactly one, and Lenis is the thing that owns scroll position.
 
    Every library is optional. If a CDN fails, `degrade()` reveals all content
-   and the page stays usable â€” a broken hero is never worth a blank site.
+   and the page stays usable — a broken hero is never worth a blank site.
    ========================================================================== */
 (() => {
 'use strict';
@@ -20,7 +20,7 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 const html = document.documentElement;
 
 /* ---------------------------------------------------------- device tier --- */
-/* Decided before anything that depends on it â€” retrofitting fallbacks is how
+/* Decided before anything that depends on it — retrofitting fallbacks is how
    "we'll optimise later" turns into "we cut the WebGL".                      */
 const TIER = (() => {
   if (RM) return 'off';
@@ -38,7 +38,7 @@ const TIER = (() => {
 })();
 html.dataset.tier = TIER;
 
-/* Shared scroll state â€” the WebGL module reads this instead of touching the
+/* Shared scroll state — the WebGL module reads this instead of touching the
    DOM or starting its own listener.                                          */
 const SCROLL = window.__fugoScroll = { y: 0, velocity: 0, progress: 0, tier: TIER };
 
@@ -131,7 +131,7 @@ function boot() {
   if (window.Lenis && !RM) {
     lenis = new Lenis({
       duration: 1.05,
-      // expo-out: quick start, long settle â€” matches --e-out in core.css
+      // expo-out: quick start, long settle — matches --e-out in core.css
       easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       // Native momentum feels better on phones and saves battery.
@@ -200,7 +200,7 @@ function preloader({ gsap, ST }) {
     new Promise(r => (document.readyState === 'complete' ? r() : addEventListener('load', r, { once: true }))),
   ]).then(() => { ready = true; });
 
-  // A preloader that fails to lift hides the entire site â€” the single worst
+  // A preloader that fails to lift hides the entire site — the single worst
   // failure this page can have. It gets a hard deadline regardless of what
   // the animation is doing.
   const failsafe = setTimeout(() => {
@@ -260,7 +260,7 @@ function heroIntro({ gsap, ST }) {
 
   $$('.hero .fade-up, .hero .reveal-line').forEach(e => e.classList.add('is-in'));
 
-  // Hero exit â€” the title lifts and dims as the next section takes over.
+  // Hero exit — the title lifts and dims as the next section takes over.
   ScrollTrigger.create({
     trigger: '.hero',
     start: 'top top',
@@ -282,7 +282,7 @@ function heroIntro({ gsap, ST }) {
 }
 
 /* Splits every [data-split] element and returns the characters. Safe to call
-   repeatedly â€” revertSplits() has already put the elements back to plain text
+   repeatedly — revertSplits() has already put the elements back to plain text
    before the new copy was written. */
 function splitHeroTargets() {
   const chars = [];
@@ -335,7 +335,7 @@ function reveals({ gsap, ST }) {
     }));
   }
 
-  // Masked line reveal â€” the workhorse effect the original build lacked.
+  // Masked line reveal — the workhorse effect the original build lacked.
   const splitHead = (h, animate) => {
     if (h.hasAttribute('data-split-done')) return;
     h.setAttribute('data-split-done', '');
@@ -358,7 +358,7 @@ function reveals({ gsap, ST }) {
   heads.forEach(h => splitHead(h, true));
 
   // i18n has already reverted the split and written the new copy by the time
-  // this fires, so all that is left is to rebuild the masks â€” silently,
+  // this fires, so all that is left is to rebuild the masks — silently,
   // because the reveal has already been seen.
   document.addEventListener('langchange', () => {
     heads.forEach(h => { h.classList.add('is-in', 'is-split-head'); splitHead(h, false); });
@@ -462,7 +462,7 @@ function horizontalWork({ gsap, ST }) {
 
   // Lenis leaves touch scrolling native (it feels better and saves battery),
   // so on touch devices ScrollTrigger is nudged from the native scroll event
-  // as well â€” otherwise the row can lag a frame behind the finger.
+  // as well — otherwise the row can lag a frame behind the finger.
   if (matchMedia('(pointer: coarse)').matches) {
     addEventListener('scroll', () => ST.update(), { passive: true });
   }
@@ -580,7 +580,7 @@ function marquees({ gsap }) {
       boost += (want - boost) * 0.06;
       const pause = hover ? 0.12 : 1;                    // hover slows, not stops
 
-      // px/second, not px/frame â€” otherwise a 120Hz screen runs it twice as fast
+      // px/second, not px/frame — otherwise a 120Hz screen runs it twice as fast
       x -= dir * (trackW / spd) * (1 + boost) * pause * dt;
       x %= trackW;
       if (x > 0) x -= trackW;
