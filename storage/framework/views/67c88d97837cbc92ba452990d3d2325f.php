@@ -636,15 +636,13 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
                    data-id="&ldquo;Menjadi perusahaan industri kreatif yang berdampak positif bagi seluruh stakeholder — lewat solusi yang berguna sebelum ia indah.&rdquo;">
           &ldquo;To become a creative industry company with real, positive impact for every stakeholder — through solutions that are useful before they are beautiful.&rdquo;</blockquote>
         <div class="quote__by">
-          <!-- UBAH SRC DI SINI -->
           <img src="/assets/img/Pa-Sona.jpg" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           <span><strong style="color:var(--ink)">Sona Lesmana</strong><br>
             <span data-en="Founder &amp; CEO, Fugo Creative Group" data-id="Pendiri &amp; CEO, Fugo Creative Group">Founder &amp; CEO, Fugo Creative Group</span></span>
         </div>
       </div>
       <div class="quote__art">
-        <!-- UBAH SRC DI SINI -->
-        <img src="/assets/img/Pa-Sona.jpg" alt="Founder Quote Image" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;">
+        <img src="/assets/img/Pa-Sona.jpg" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
       </div>
     </div>
   </div>

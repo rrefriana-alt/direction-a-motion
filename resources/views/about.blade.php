@@ -181,13 +181,13 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
             @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
                 <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
             @else
-          <img src="{{ asset('assets/img/Pa Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+          <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
           @endif
             <span><strong style="color:var(--ink)">{{ $content['about']['founder']['name'] }}</strong><br><span data-en="{{ $content['about']['founder']['title'] }}" data-id="{{ $content['about']['founder']['title'] }}">{{ $content['about']['founder']['title'] }}</span></span></div>
       </div>
       <div class="quote__art" aria-hidden="true">
         <div class="quote__art" aria-hidden="true">
-    <img src="{{ asset('assets/img/Pa Sona.jpg') }}" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+    <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
       </div>
     </div>
   </div>
@@ -197,13 +197,23 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <p class="eyebrow fade-up" data-en="Studios" data-id="Studio">Studios</p>
     <h2 class="display h-xl mt-s fade-up" data-delay="1" data-en="Three cities" data-id="Tiga kota">Three cities</h2>
-    <div class="sectors mt-l fade-up" data-delay="2">
-      <div class="sector"><h4>Bandung — HQ</h4><p class="muted" style="font-size:.92rem">Jl. Permata Taman Sari Raya No.21, Arcamanik</p></div>
-      <div class="sector"><h4>Jakarta</h4><p class="muted" style="font-size:.92rem">Jl. Srengseng Sawah No.16, Jagakarsa</p></div>
-      <div class="sector"><h4>Bali</h4><p class="muted" style="font-size:.92rem">Jl. Tukad Melangit, Samplangan, Gianyar</p></div>
+    <div class="fade-up" data-delay="2" style="display: flex; width: 100%; margin-top: 2.5rem; border: 1px solid rgba(255,255,255,.15); border-radius: 16px; overflow: hidden;">
+      <div style="flex: 1; padding: 2rem 2.5rem; border-right: 1px solid rgba(255,255,255,.15); box-sizing: border-box;">
+        <h4 style="margin: 0 0 0.8rem 0; font-size: 1.1rem; font-weight: 700; color: #fff;">Bandung — HQ</h4>
+        <p class="muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4; opacity: 0.7;">Jl. Permata Taman Sari Raya No.21, Arcamanik</p>
+      </div>
+      <div style="flex: 1; padding: 2rem 2.5rem; border-right: 1px solid rgba(255,255,255,.15); box-sizing: border-box;">
+        <h4 style="margin: 0 0 0.8rem 0; font-size: 1.1rem; font-weight: 700; color: #fff;">Jakarta</h4>
+        <p class="muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4; opacity: 0.7;">Jl. Srengseng Sawah No.16, Jagakarsa</p>
+      </div>
+      <div style="flex: 1; padding: 2rem 2.5rem; box-sizing: border-box;">
+        <h4 style="margin: 0 0 0.8rem 0; font-size: 1.1rem; font-weight: 700; color: #fff;">Bali</h4>
+        <p class="muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4; opacity: 0.7;">Jl. Tukad Melangit, Samplangan, Gianyar</p>
+      </div>
     </div>
   </div>
 </section>
+
 <section class="section cta">
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
