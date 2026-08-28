@@ -175,18 +175,24 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="quote fade-up">
       <div>
-        <p class="eyebrow" style="margin-bottom:1.6rem">06 &mdash; <span data-en="From the founder" data-id="Dari pendiri">From the founder</span></p>
-        <blockquote data-en="&ldquo;To become a creative industry company with real, positive impact for every stakeholder &mdash; through solutions that are useful before they are beautiful.&rdquo;"
-                   data-id="&ldquo;Menjadi perusahaan industri kreatif yang berdampak positif bagi seluruh stakeholder &mdash; lewat solusi yang berguna sebelum ia indah.&rdquo;">
-          &ldquo;To become a creative industry company with real, positive impact for every stakeholder &mdash; through solutions that are useful before they are beautiful.&rdquo;</blockquote>
+        <p class="eyebrow" style="margin-bottom:1.6rem" data-en="From the founder" data-id="Dari pendiri">From the founder</p>
+        <blockquote data-en="{{ $content['about']['founder']['quote'] }}" data-id="{{ $content['about']['founder']['quote'] }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
         <div class="quote__by">
-          <img src="/assets/img/Pa-Sona.jpg" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-          <span><strong style="color:var(--ink)">Sona Lesmana</strong><br>
-            <span data-en="Founder &amp; CEO, Fugo Creative Group" data-id="Pendiri &amp; CEO, Fugo Creative Group">Founder &amp; CEO, Fugo Creative Group</span></span>
+          @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
+              <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+          @else
+              <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+          @endif
+          <span><strong style="color:var(--ink)">{{ $content['about']['founder']['name'] }}</strong><br>
+            <span data-en="{{ $content['about']['founder']['title'] }}" data-id="{{ $content['about']['founder']['title'] }}">{{ $content['about']['founder']['title'] }}</span></span>
         </div>
       </div>
       <div class="quote__art">
-        <img src="/assets/img/Pa-Sona.jpg" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
+            <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }} Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        @else
+            <img src="/assets/img/Pa-Sona.jpg" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        @endif
       </div>
     </div>
   </div>
