@@ -22,31 +22,31 @@
 <meta name="twitter:description" content="PT Fugo Creative Group started in 2016 printing merchandise in Bandung. Nine years on: five divisions, three cities, 65+ clients across finance, government and lifestyle.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
-{"@@context":"https://schema.org","@@graph":[
- {"@@type":"Organization","@@id":"https://fugocreativegroup.com/#org",
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","@id":"https://fugocreativegroup.com/#org",
   "name":"PT Fugo Creative Group","alternateName":"Fugo Creative",
   "url":"https://fugocreativegroup.com/","logo":"https://fugocreativegroup.com/assets/img/og.png",
   "email":"hello@fugocreativegroup.com","telephone":"+62-821-2100-0680","foundingDate":"2016",
   "description":"Indonesian creative group: design, production house, events, merchandise and AI agents.",
   "sameAs":["https://instagram.com/fugocreative","https://id.linkedin.com/company/fugo-creativegroup"],
-  "address":{"@@type":"PostalAddress","streetAddress":"Jl. Permata Taman Sari Raya No.21, Arcamanik","addressLocality":"Bandung","addressCountry":"ID"}},
- {"@@type":"LocalBusiness","name":"Fugo Creative — Bandung (HQ)","parentOrganization":{"@@id":"https://fugocreativegroup.com/#org"},
+  "address":{"@type":"PostalAddress","streetAddress":"Jl. Permata Taman Sari Raya No.21, Arcamanik","addressLocality":"Bandung","addressCountry":"ID"}},
+ {"@type":"LocalBusiness","name":"Fugo Creative — Bandung (HQ)","parentOrganization":{"@id":"https://fugocreativegroup.com/#org"},
   "image":"https://fugocreativegroup.com/assets/img/og.png","telephone":"+62-821-2100-0680",
-  "address":{"@@type":"PostalAddress","streetAddress":"Jl. Permata Taman Sari Raya No.21, Arcamanik","addressLocality":"Bandung","addressCountry":"ID"}},
- {"@@type":"LocalBusiness","name":"Fugo Creative — Jakarta","parentOrganization":{"@@id":"https://fugocreativegroup.com/#org"},
+  "address":{"@type":"PostalAddress","streetAddress":"Jl. Permata Taman Sari Raya No.21, Arcamanik","addressLocality":"Bandung","addressCountry":"ID"}},
+ {"@type":"LocalBusiness","name":"Fugo Creative — Jakarta","parentOrganization":{"@id":"https://fugocreativegroup.com/#org"},
   "image":"https://fugocreativegroup.com/assets/img/og.png","telephone":"+62-821-2100-0680",
-  "address":{"@@type":"PostalAddress","streetAddress":"Jl. Srengseng Sawah No.16, Jagakarsa","addressLocality":"Jakarta Selatan","addressCountry":"ID"}},
- {"@@type":"LocalBusiness","name":"Fugo Creative — Bali","parentOrganization":{"@@id":"https://fugocreativegroup.com/#org"},
+  "address":{"@type":"PostalAddress","streetAddress":"Jl. Srengseng Sawah No.16, Jagakarsa","addressLocality":"Jakarta Selatan","addressCountry":"ID"}},
+ {"@type":"LocalBusiness","name":"Fugo Creative — Bali","parentOrganization":{"@id":"https://fugocreativegroup.com/#org"},
   "image":"https://fugocreativegroup.com/assets/img/og.png","telephone":"+62-821-2100-0680",
-  "address":{"@@type":"PostalAddress","streetAddress":"Jl. Tukad Melangit, Samplangan","addressLocality":"Gianyar, Bali","addressCountry":"ID"}}
+  "address":{"@type":"PostalAddress","streetAddress":"Jl. Tukad Melangit, Samplangan","addressLocality":"Gianyar, Bali","addressCountry":"ID"}}
 ]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('assets/css/core.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/motion.css') }}">
-<link rel="apple-touch-icon" href="{{ asset('assets/img/apple-touch-icon.png') }}">
+<link rel="stylesheet" href="<?php echo e(asset('assets/css/core.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('assets/css/motion.css')); ?>">
+<link rel="apple-touch-icon" href="<?php echo e(asset('assets/img/apple-touch-icon.png')); ?>">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080a'/%3E%3Cpath d='M11 8h13l-3 5H8zM8 15h11l-3 5H5zM5 22h9l-3 5H2z' fill='%233ddc97'/%3E%3C/svg%3E">
 <script>/* set before first paint: only pages arrived at via a curtain
    transition start covered, so a failed script can never black out the site */
@@ -176,18 +176,18 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="quote fade-up">
       <div>
         <p class="eyebrow" style="margin-bottom:1.6rem" data-en="From the founder" data-id="Dari pendiri">From the founder</p>
-        <blockquote data-en="{{ $content['about']['founder']['quote'] }}" data-id="{{ $content['about']['founder']['quote'] }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
+        <blockquote data-en="<?php echo e($content['about']['founder']['quote']); ?>" data-id="<?php echo e($content['about']['founder']['quote']); ?>">&ldquo;<?php echo e($content['about']['founder']['quote']); ?>&rdquo;</blockquote>
         <div class="quote__by">
-            @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
-                <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
-            @else
-          <img src="{{ asset('assets/img/Pa Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
-          @endif
-            <span><strong style="color:var(--ink)">{{ $content['about']['founder']['name'] }}</strong><br><span data-en="{{ $content['about']['founder']['title'] }}" data-id="{{ $content['about']['founder']['title'] }}">{{ $content['about']['founder']['title'] }}</span></span></div>
+            <?php if(isset($content['about']['founder']['image']) && $content['about']['founder']['image']): ?>
+                <img src="<?php echo e(asset($content['about']['founder']['image'])); ?>" alt="<?php echo e($content['about']['founder']['name']); ?>" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+            <?php else: ?>
+          <img src="<?php echo e(asset('assets/img/Pa Sona.jpg')); ?>" alt="Sona Lesmana" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+          <?php endif; ?>
+            <span><strong style="color:var(--ink)"><?php echo e($content['about']['founder']['name']); ?></strong><br><span data-en="<?php echo e($content['about']['founder']['title']); ?>" data-id="<?php echo e($content['about']['founder']['title']); ?>"><?php echo e($content['about']['founder']['title']); ?></span></span></div>
       </div>
       <div class="quote__art" aria-hidden="true">
         <div class="quote__art" aria-hidden="true">
-    <img src="{{ asset('assets/img/Pa Sona.jpg') }}" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+    <img src="<?php echo e(asset('assets/img/Pa Sona.jpg')); ?>" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
       </div>
     </div>
   </div>
@@ -263,6 +263,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') }}" defer></script>
+<script src="<?php echo e(asset('assets/js/motion.js')); ?>" defer></script>
 </body>
 </html>
+<?php /**PATH D:\Fugo Creative\direction-a-motion\resources\views/about.blade.php ENDPATH**/ ?>
