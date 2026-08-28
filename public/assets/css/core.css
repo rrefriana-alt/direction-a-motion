@@ -108,7 +108,7 @@ body::after{
 .eyebrow{
   font-family:var(--f-mono); font-size:var(--t-xs); letter-spacing:.18em;
   text-transform:uppercase; color:var(--ink-mute);
-  display:flex; align-items:center; gap:.7rem;
+  display:flex; align-items:center; gap:.7rem; white-space:nowrap;
 }
 .eyebrow::before{
   content:""; width:26px; height:1px; background:var(--green); flex:none;
