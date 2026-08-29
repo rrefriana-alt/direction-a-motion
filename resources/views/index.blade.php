@@ -746,7 +746,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') }}" defer></script>
+<script src="{{ asset('assets/js/motion.js') }}?v={{ time() }}" defer></script>
 <script type="importmap">
 { "imports": — "three": "https://cdn.jsdelivr.net/npm/three@0/build/three.module.js" — }
 </script>
