@@ -60,18 +60,18 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <div class="prog" aria-hidden="true"></div>
 <header class="nav is-solid">
   <div class="nav__in">
-    <a class="brand" href="/" aria-label="Fugo Creative — home">
+    <a class="brand" href="{{ url('') }}" aria-label="Fugo Creative — home">
       <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
         <path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/>
       </svg>
       <span class="brand__txt">Fugo<span>Creative</span></span>
     </a>
     <nav class="nav__links" aria-label="Primary">
-      <a class="nav__link" href="/" data-en="Home" data-id="Beranda">Home</a>
-      <a class="nav__link" href="/work" data-en="Work" data-id="Karya">Work</a>
-      <a class="nav__link is-active" href="/services" data-en="Services" data-id="Layanan">Services</a>
-      <a class="nav__link" href="/about" data-en="Studio" data-id="Studio">Studio</a>
-      <a class="nav__link" href="/contact" data-en="Contact" data-id="Kontak">Contact</a>
+      <a class="nav__link" href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a>
+      <a class="nav__link" href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a>
+      <a class="nav__link is-active" href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a>
+      <a class="nav__link" href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a>
+      <a class="nav__link" href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a>
     </nav>
     <div class="nav__side">
       <div class="lang" data-lang="en" role="group" aria-label="Language">
@@ -79,18 +79,18 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         <button class="lang__btn is-on" data-lang="en" aria-label="English">EN</button>
         <button class="lang__btn" data-lang="id" aria-label="Bahasa Indonesia">ID</button>
       </div>
-      <a class="btn btn--green btn--sm" href="/contact" data-magnet=".28" data-en="Start a project" data-id="Mulai proyek">Start a project</a>
+      <a class="btn btn--green btn--sm" href="{{ url('contact') }}" data-magnet=".28" data-en="Start a project" data-id="Mulai proyek">Start a project</a>
       <button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
     </div>
   </div>
 </header>
 <div class="menu" id="menu">
   <ul class="menu__list">
-    <li class="menu__item"><a href="/" data-en="Home" data-id="Beranda">Home</a></li>
-    <li class="menu__item"><a href="/work" data-en="Work" data-id="Karya">Work</a></li>
-    <li class="menu__item"><a href="/services" data-en="Services" data-id="Layanan">Services</a></li>
-    <li class="menu__item"><a href="/about" data-en="Studio" data-id="Studio">Studio</a></li>
-    <li class="menu__item"><a href="/contact" data-en="Contact" data-id="Kontak">Contact</a></li>
+    <li class="menu__item"><a href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a></li>
+    <li class="menu__item"><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li>
+    <li class="menu__item"><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li>
+    <li class="menu__item"><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li>
+    <li class="menu__item"><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
     <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
@@ -101,7 +101,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="phead">
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
-    <p class="crumb fade-up"><a href="/">Fugo</a> <span>/</span> <span data-en="Services" data-id="Layanan">Services</span></p>
+    <p class="crumb fade-up"><a href="{{ url('') }}">Fugo</a> <span>/</span> <span data-en="Services" data-id="Layanan">Services</span></p>
     <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="Five studios,&lt;br&gt;one invoice" data-id="Lima studio,&lt;br&gt;satu invoice">Five studios,<br>one invoice</h1>
     <p class="lede mt-m fade-up" data-delay="2" data-en="Most agencies subcontract at least half of this. We do not — which is why the schedule holds and the brand stays consistent across every touchpoint." data-id="Kebanyakan agensi mensubkontrakkan setengahnya. Kami tidak — karena itu jadwal terjaga dan brand tetap konsisten di setiap titik sentuh.">Most agencies subcontract at least half of this. We do not — which is why the schedule holds and the brand stays consistent across every touchpoint.</p>
   </div>
@@ -115,7 +115,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p class="card__num">01</p>
           <h3 data-en="Fugo Design" data-id="Desain">Fugo Design</h3>
           <p data-en="Brand systems, campaign POSM, corporate reporting and digital assets — built to survive print, LED and social." data-id="Sistem brand, POSM kampanye, laporan korporat, dan aset digital — dibangun untuk bertahan di cetak, LED, dan sosial.">Brand systems, campaign POSM, corporate reporting and digital assets — built to survive print, LED and social.</p>
-          <a class="btn btn--ghost mt-m" href="/contact" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
+          <a class="btn btn--ghost mt-m" href="{{ url('contact') }}" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
         </div>
         <div class="col-7">
           <dl class="stack">
@@ -146,7 +146,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p class="card__num">02</p>
           <h3 data-en="Production House" data-id="Production House">Production House</h3>
           <p data-en="TVC, company profile, digital video and event documentation — scripting, shoot, grade and score in-house." data-id="TVC, company profile, video digital, dan dokumentasi acara — naskah, syuting, grading, dan scoring in-house.">TVC, company profile, digital video and event documentation — scripting, shoot, grade and score in-house.</p>
-          <a class="btn btn--ghost mt-m" href="/contact" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
+          <a class="btn btn--ghost mt-m" href="{{ url('contact') }}" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
         </div>
         <div class="col-7">
           <dl class="stack">
@@ -177,7 +177,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p class="card__num">03</p>
           <h3 data-en="Event Organizer" data-id="Event Organizer">Event Organizer</h3>
           <p data-en="Conferences, exhibitions, incentive trips and corporate gatherings — run end to end." data-id="Konferensi, pameran, incentive trip, dan gathering korporat — dijalankan end to end.">Conferences, exhibitions, incentive trips and corporate gatherings — run end to end.</p>
-          <a class="btn btn--ghost mt-m" href="/contact" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
+          <a class="btn btn--ghost mt-m" href="{{ url('contact') }}" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
         </div>
         <div class="col-7">
           <dl class="stack">
@@ -208,7 +208,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p class="card__num">04</p>
           <h3 data-en="Merch Production" data-id="Merch Production">Merch Production</h3>
           <p data-en="Souvenirs, uniforms and welcome kits produced at scale with materials we can stand behind." data-id="Souvenir, seragam, dan welcome kit diproduksi dalam skala besar dengan material yang bisa kami pertanggungjawabkan.">Souvenirs, uniforms and welcome kits produced at scale with materials we can stand behind.</p>
-          <a class="btn btn--ghost mt-m" href="/contact" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
+          <a class="btn btn--ghost mt-m" href="{{ url('contact') }}" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
         </div>
         <div class="col-7">
           <dl class="stack">
@@ -239,7 +239,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p class="card__num">05</p>
           <h3 data-en="AI Agent" data-id="AI Agent">AI Agent</h3>
           <p data-en="Custom AI agents and automations that take repetitive work off your team — briefed, built, and wired into the tools you already use." data-id="AI agent dan otomasi khusus yang mengambil pekerjaan berulang dari tim Anda — dirancang, dibangun, dan terhubung ke tools yang sudah Anda pakai.">Custom AI agents and automations that take repetitive work off your team — briefed, built, and wired into the tools you already use.</p>
-          <a class="btn btn--ghost mt-m" href="/contact" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
+          <a class="btn btn--ghost mt-m" href="{{ url('contact') }}" data-en="Brief this team" data-id="Brief tim ini">Brief this team</a>
         </div>
         <div class="col-7">
           <dl class="stack">
@@ -293,7 +293,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <p class="eyebrow is-plain fade-up" style="justify-content:center" data-en="Available for Q4 2026 projects" data-id="Tersedia untuk proyek Q4 2026">Available for Q4 2026 projects</p>
     <h2 class="display cta__big mt-s fade-up" data-delay="1" data-en="Let's build&lt;br&gt;something" data-id="Ayo bangun&lt;br&gt;sesuatu">Let's build<br>something</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
-      <a class="btn btn--green" href="/contact" data-magnet=".34" data-cursor="Go"><span data-en="Start a project" data-id="Mulai proyek">Start a project</span><span class="ico" aria-hidden="true">↗</span></a>
+      <a class="btn btn--green" href="{{ url('contact') }}" data-magnet=".34" data-cursor="Go"><span data-en="Start a project" data-id="Mulai proyek">Start a project</span><span class="ico" aria-hidden="true">↗</span></a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>
     </div>
   </div>
@@ -304,7 +304,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="foot__top">
       <div>
-        <a class="brand" href="/">
+        <a class="brand" href="{{ url('') }}">
           <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/></svg>
           <span class="brand__txt">Fugo<span>Creative</span></span>
         </a>
@@ -312,7 +312,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       </div>
       <div>
         <h5 data-en="Navigate" data-id="Navigasi">Navigate</h5>
-        <ul><li><a href="/work" data-en="Work" data-id="Karya">Work</a></li><li><a href="/services" data-en="Services" data-id="Layanan">Services</a></li><li><a href="/about" data-en="Studio" data-id="Studio">Studio</a></li><li><a href="/contact" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="/contact" data-en="Careers" data-id="Karier">Careers</a></li></ul>
+        <ul><li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li><li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li><li><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li><li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li></ul>
       </div>
       <div>
         <h5 data-en="Follow" data-id="Ikuti">Follow</h5>
