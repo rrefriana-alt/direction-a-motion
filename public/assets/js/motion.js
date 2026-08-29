@@ -255,29 +255,16 @@ function heroIntro({ gsap, ST }) {
     return;
   }
 
-  /* set + to rather than from: `to` guarantees the resting state is written,
-     so a tween that is interrupted or never plays cannot leave the headline
-     parked off-screen. */
   gsap.set(chars, { yPercent: 118 });
   gsap.set('.hero .reveal-line .tint', { yPercent: 112 });
 
-  // Pre-set these elements to their start state via gsap.set (not fromTo)
-  // so GSAP owns opacity from start. We intentionally skip clearProps so
-  // GSAP keeps inline opacity:1 at the end instead of handing back to CSS.
-  gsap.set('.hero .eyebrow', { y: 18, opacity: 0 });
-  gsap.set(['.hero__meta > *', '.hero .row.between'], { y: 26, opacity: 0 });
-
   tl.to(chars, { yPercent: 0, duration: 1.05, stagger: { each: 0.022, from: 'start' } }, 0)
     .to('.hero .reveal-line .tint', { yPercent: 0, duration: 1.15 }, 0.18)
-    .from('.hero__canvas', { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0)
-    .to('.hero .eyebrow', { y: 0, opacity: 1, duration: 0.8 }, 0.15)
-    .to('.hero__meta > *', { y: 0, opacity: 1, duration: 0.9, stagger: 0.09 }, 0.42)
-    .to('.hero .row.between', { y: 0, opacity: 1, duration: 0.8 }, 0.62);
+    .from('.hero__canvas', { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0);
 
-  // Whatever happens to the timeline, the headline and meta text end up readable.
+  // Whatever happens to the timeline, the headline ends up readable.
   gsap.delayedCall(3.2, () => {
     gsap.set([chars, '.hero .reveal-line .tint'], { yPercent: 0, opacity: 1 });
-    gsap.set(['.hero .eyebrow', '.hero__meta > *', '.hero .row.between'], { opacity: 1, y: 0 });
   });
 
   $$('.hero .fade-up, .hero .reveal-line').forEach(e => e.classList.add('is-in'));
