@@ -2,9 +2,16 @@
     RewriteEngine On
     RewriteBase /public/direction-a-motion/
 
-    # Stop jika URL sudah dimulai "public/" - cegah infinite loop
+    # Stop if already in public/ - prevents loop when serving static files
     RewriteRule ^public/ - [L]
 
-    # Arahkan SEMUA request (termasuk root "/") ke folder public/
-    RewriteRule ^(.*)$ public/$1 [L]
+    # Serve static files (CSS, JS, images) from the public/ subfolder
+    RewriteRule ^(assets|_build\.js|_inline-gl\.js|hero-preview\.png|sitemap\.xml)(.*)$ public/$1$2 [L]
+
+    # For actual files (like our index.php), stop and serve directly
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # Route all other requests to our proxy index.php
+    RewriteRule ^ index.php [L]
 </IfModule>
