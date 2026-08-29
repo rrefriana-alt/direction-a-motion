@@ -261,12 +261,18 @@ function heroIntro({ gsap, ST }) {
   gsap.set(chars, { yPercent: 118 });
   gsap.set('.hero .reveal-line .tint', { yPercent: 112 });
 
+  // Pre-set these elements to their start state via gsap.set (not fromTo)
+  // so GSAP owns opacity from start. We intentionally skip clearProps so
+  // GSAP keeps inline opacity:1 at the end instead of handing back to CSS.
+  gsap.set('.hero .eyebrow', { y: 18, opacity: 0 });
+  gsap.set(['.hero__meta > *', '.hero .row.between'], { y: 26, opacity: 0 });
+
   tl.to(chars, { yPercent: 0, duration: 1.05, stagger: { each: 0.022, from: 'start' } }, 0)
     .to('.hero .reveal-line .tint', { yPercent: 0, duration: 1.15 }, 0.18)
     .from('.hero__canvas', { opacity: 0, duration: 1.6, ease: 'power2.out' }, 0)
-    .fromTo('.hero .eyebrow', { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, clearProps: 'opacity,y' }, 0.15)
-    .fromTo('.hero__meta > *', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, stagger: 0.09, clearProps: 'opacity,y' }, 0.42)
-    .fromTo('.hero .row.between', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, clearProps: 'opacity,y' }, 0.62);
+    .to('.hero .eyebrow', { y: 0, opacity: 1, duration: 0.8 }, 0.15)
+    .to('.hero__meta > *', { y: 0, opacity: 1, duration: 0.9, stagger: 0.09 }, 0.42)
+    .to('.hero .row.between', { y: 0, opacity: 1, duration: 0.8 }, 0.62);
 
   // Whatever happens to the timeline, the headline and meta text end up readable.
   gsap.delayedCall(3.2, () => {
