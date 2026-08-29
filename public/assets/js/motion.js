@@ -268,8 +268,11 @@ function heroIntro({ gsap, ST }) {
     .fromTo('.hero__meta > *', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, stagger: 0.09, clearProps: 'opacity,y' }, 0.42)
     .fromTo('.hero .row.between', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, clearProps: 'opacity,y' }, 0.62);
 
-  // Whatever happens to the timeline, the headline ends up readable.
-  gsap.delayedCall(3.2, () => gsap.set([chars, '.hero .reveal-line .tint'], { yPercent: 0, opacity: 1 }));
+  // Whatever happens to the timeline, the headline and meta text end up readable.
+  gsap.delayedCall(3.2, () => {
+    gsap.set([chars, '.hero .reveal-line .tint'], { yPercent: 0, opacity: 1 });
+    gsap.set(['.hero .eyebrow', '.hero__meta > *', '.hero .row.between'], { opacity: 1, y: 0 });
+  });
 
   $$('.hero .fade-up, .hero .reveal-line').forEach(e => e.classList.add('is-in'));
 
