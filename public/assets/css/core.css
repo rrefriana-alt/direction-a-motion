@@ -214,8 +214,8 @@ body.cur-label .cursor-label{opacity:1;transform:translate(-50%,-50%) scale(1)}
   width:100%; max-width:var(--max); margin-inline:auto; padding-inline:var(--gut);
   display:flex; align-items:center; justify-content:space-between; gap:1.5rem;
 }
-.brand{display:flex;align-items:center;gap:.62rem;flex:none}
-.brand__mark{width:30px;height:30px;flex:none}
+.brand{display:flex;align-items:center;flex:none}
+.brand__mark{height:32px;width:auto;display:block;flex:none}
 .brand__txt{
   font-family:var(--f-display); font-weight:800; font-size:.82rem;
   line-height:.96; letter-spacing:.02em; text-transform:uppercase;
@@ -403,8 +403,8 @@ body.menu-open .menu__item a{transform:translateY(0)}
 .manifesto .w.hl.on{color:var(--green)}
 
 /* ---------- 12. STATS ---------------------------------------------------- */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
-.stat{padding:2.2rem 1.4rem 2.2rem 0;border-right:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);padding-top:2rem}
+.stat{padding:2.2rem 1.4rem;border-right:1px solid var(--line)}
 .stat:last-child{border-right:0}
 .stat__n{
   font-family:var(--f-display); font-weight:800; letter-spacing:-.045em;

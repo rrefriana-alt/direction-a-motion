@@ -44,10 +44,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('assets/css/core.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/motion.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/core.css') }}?v={{ filemtime(public_path('assets/css/core.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/css/motion.css') }}?v={{ filemtime(public_path('assets/css/motion.css')) }}">
 <link rel="apple-touch-icon" href="{{ asset('assets/img/apple-touch-icon.png') }}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080a'/%3E%3Cpath d='M11 8h13l-3 5H8zM8 15h11l-3 5H5zM5 22h9l-3 5H2z' fill='%233ddc97'/%3E%3C/svg%3E">
+<link rel="icon" href="{{ asset('assets/img/apple-touch-icon.png') }}" type="image/png">
 <script>/* set before first paint: only pages arrived at via a curtain
    transition start covered, so a failed script can never black out the site */
 try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.add('nav-in');sessionStorage.removeItem('fugo-nav');}}catch(e){}</script>

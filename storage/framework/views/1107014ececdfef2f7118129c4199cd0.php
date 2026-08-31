@@ -1,183 +1,164 @@
+﻿
 <?php $__env->startSection('title', 'Dashboard'); ?>
 <?php $__env->startSection('page-title', 'Dashboard'); ?>
-
 <?php $__env->startSection('content'); ?>
-    <?php if(session('success')): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="bi bi-check-circle me-1"></i> <?php echo e(session('success')); ?>
 
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+<div class="d-flex align-center justify-between mb-4">
+    <div>
+        <h1 style="font-size:1.4rem;font-weight:800;color:var(--tx-primary);letter-spacing:-.02em;">
+            Welcome back, <?php echo e(explode(' ', Auth::user()->name ?? 'Admin')[0]); ?> 👋
+        </h1>
+        <p style="font-size:.82rem;color:var(--tx-secondary);margin-top:.25rem;">
+            Here's what's happening with your website today.
+        </p>
+    </div>
+    <a href="<?php echo e(route('home')); ?>" target="_blank" class="btn btn-ghost btn-sm" style="display:flex;">
+        <i class="bi bi-arrow-up-right-circle"></i> View Website
+    </a>
+</div>
+
+
+<div class="grid cols-5 g-3 mb-4">
+    <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(59,130,246,.12);color:#3b82f6;">
+            <i class="bi bi-collection-fill"></i>
         </div>
-    <?php endif; ?>
+        <div>
+            <div class="stat-value"><?php echo e($projects_count ?? 0); ?></div>
+            <div class="stat-label">Projects</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(61,220,151,.12);color:var(--accent);">
+            <i class="bi bi-layers-fill"></i>
+        </div>
+        <div>
+            <div class="stat-value"><?php echo e($services_count ?? 0); ?></div>
+            <div class="stat-label">Services</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(245,158,11,.12);color:#f59e0b;">
+            <i class="bi bi-chat-dots-fill"></i>
+        </div>
+        <div>
+            <div class="stat-value"><?php echo e($messages_count ?? 0); ?></div>
+            <div class="stat-label">New Messages</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(139,92,246,.12);color:#8b5cf6;">
+            <i class="bi bi-person-badge-fill"></i>
+        </div>
+        <div>
+            <div class="stat-value"><?php echo e($careers_count ?? 0); ?></div>
+            <div class="stat-label">Open Positions</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(239,68,68,.12);color:#ef4444;">
+            <i class="bi bi-newspaper"></i>
+        </div>
+        <div>
+            <div class="stat-value"><?php echo e($news_count ?? 0); ?></div>
+            <div class="stat-label">Articles</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="grid g-4" style="grid-template-columns:1fr 360px;">
+
     
-    <?php if(session('error')): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="bi bi-exclamation-triangle me-1"></i> <?php echo e(session('error')); ?>
-
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title"><i class="bi bi-layout-text-sidebar-reverse"></i> Page Section Manager</div>
+            <span style="font-size:.72rem;color:var(--tx-muted);">Click a page to manage its content</span>
         </div>
-    <?php endif; ?>
-
-    
-    <div class="row g-3 mb-4">
-        <div class="col-6 col-md-4 col-xl">
-            <div class="stat-card">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="stat-icon bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
-                        <i class="bi bi-folder2-open fs-5"></i>
-                    </div>
-                    <div>
-                        <div class="stat-value fs-4 fw-bold"><?php echo e($projects_count ?? 0); ?></div>
-                        <div class="stat-label text-muted">Projects</div>
-                    </div>
+        <div style="padding:1rem;">
+            <?php
+            $pages = [
+                ['key'=>'home',     'icon'=>'bi-house-fill',       'label'=>'Home Page',     'desc'=>'Hero, Manifesto, Services overview, CTA sections', 'color'=>'rgba(61,220,151,.12)', 'tcolor'=>'#3ddc97'],
+                ['key'=>'work',     'icon'=>'bi-folder2-open',     'label'=>'Work Page',     'desc'=>'Page header and filter labels',                      'color'=>'rgba(59,130,246,.12)', 'tcolor'=>'#3b82f6'],
+                ['key'=>'services', 'icon'=>'bi-layers-fill',      'label'=>'Services Page', 'desc'=>'Page header and service category descriptions',      'color'=>'rgba(139,92,246,.12)', 'tcolor'=>'#8b5cf6'],
+                ['key'=>'about',    'icon'=>'bi-people-fill',      'label'=>'About / Studio','desc'=>'Hero, founder quote, values, stats',                  'color'=>'rgba(245,158,11,.12)', 'tcolor'=>'#f59e0b'],
+                ['key'=>'contact',  'icon'=>'bi-envelope-fill',    'label'=>'Contact Page',  'desc'=>'Header, email, phone, address info',                 'color'=>'rgba(239,68,68,.12)',  'tcolor'=>'#ef4444'],
+            ];
+            ?>
+            <?php $__currentLoopData = $pages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <a href="<?php echo e(route('admin.content')); ?>?page=<?php echo e($p['key']); ?>" style="display:flex;align-items:center;gap:1rem;padding:.9rem 1rem;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);margin-bottom:.6rem;transition:all .2s;text-decoration:none;"
+               onmouseover="this.style.background='var(--bg-card-hover)';this.style.borderColor='var(--border-hover)'"
+               onmouseout="this.style.background='var(--bg-card)';this.style.borderColor='var(--border)'">
+                <div style="width:40px;height:40px;border-radius:10px;background:<?php echo e($p['color']); ?>;color:<?php echo e($p['tcolor']); ?>;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">
+                    <i class="bi <?php echo e($p['icon']); ?>"></i>
                 </div>
-            </div>
-        </div>
-        
-        <div class="col-6 col-md-4 col-xl">
-            <div class="stat-card">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="stat-icon bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="background-color: rgba(111, 66, 193, 0.1); color: #6f42c1; width: 44px; height: 44px;">
-                        <i class="bi bi-layers fs-5"></i>
-                    </div>
-                    <div>
-                        <div class="stat-value fs-4 fw-bold"><?php echo e($services_count ?? 0); ?></div>
-                        <div class="stat-label text-muted">Services</div>
-                    </div>
+                <div style="flex:1;min-width:0;">
+                    <div style="font-size:.85rem;font-weight:700;color:var(--tx-primary);"><?php echo e($p['label']); ?></div>
+                    <div style="font-size:.73rem;color:var(--tx-muted);margin-top:.1rem;"><?php echo e($p['desc']); ?></div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="col-6 col-md-4 col-xl">
-            <div class="stat-card">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="stat-icon bg-warning bg-opacity-10 text-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
-                        <i class="bi bi-chat-dots fs-5"></i>
-                    </div>
-                    <div>
-                        <div class="stat-value fs-4 fw-bold"><?php echo e($messages_count ?? 0); ?></div>
-                        <div class="stat-label text-muted">Messages</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-6 col-md-6 col-xl">
-            <div class="stat-card">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="stat-icon bg-success bg-opacity-10 text-success rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
-                        <i class="bi bi-briefcase fs-5"></i>
-                    </div>
-                    <div>
-                        <div class="stat-value fs-4 fw-bold"><?php echo e($careers_count ?? 0); ?></div>
-                        <div class="stat-label text-muted">Careers</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-6 col-md-6 col-xl">
-            <div class="stat-card">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="stat-icon bg-danger bg-opacity-10 text-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
-                        <i class="bi bi-newspaper fs-5"></i>
-                    </div>
-                    <div>
-                        <div class="stat-value fs-4 fw-bold"><?php echo e($news_count ?? 0); ?></div>
-                        <div class="stat-label text-muted">News</div>
-                    </div>
-                </div>
-            </div>
+                <i class="bi bi-chevron-right" style="color:var(--tx-muted);font-size:.8rem;"></i>
+            </a>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
 
-    <div class="row g-4">
+    
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+
         
-        <div class="col-lg-8">
-            <div class="card card-modern h-100 border-0 shadow-sm">
-                <div class="card-header bg-white border-bottom-0 pt-4 pb-0 px-4">
-                    <h5 class="mb-0 fw-bold">Quick Actions</h5>
-                </div>
-                <div class="card-body p-4">
-                    <div class="row g-3">
-                        <div class="col-sm-6 col-md-3">
-                            <a href="<?php echo e(route('admin.projects.create')); ?>" class="btn btn-outline-secondary w-100 h-100 d-flex flex-column align-items-center justify-content-center p-3 gap-2 border-1 rounded-3 text-decoration-none">
-                                <i class="bi bi-folder-plus fs-3 text-primary"></i>
-                                <span>Add Project</span>
-                            </a>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <a href="<?php echo e(route('admin.news.create')); ?>" class="btn btn-outline-secondary w-100 h-100 d-flex flex-column align-items-center justify-content-center p-3 gap-2 border-1 rounded-3 text-decoration-none">
-                                <i class="bi bi-journal-plus fs-3 text-danger"></i>
-                                <span>Write Article</span>
-                            </a>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <a href="<?php echo e(route('admin.content')); ?>" class="btn btn-outline-secondary w-100 h-100 d-flex flex-column align-items-center justify-content-center p-3 gap-2 border-1 rounded-3 text-decoration-none">
-                                <i class="bi bi-pencil-square fs-3" style="color: #6f42c1;"></i>
-                                <span>Edit Content</span>
-                            </a>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <a href="<?php echo e(route('admin.messages.index')); ?>" class="btn btn-outline-secondary w-100 h-100 d-flex flex-column align-items-center justify-content-center p-3 gap-2 border-1 rounded-3 text-decoration-none">
-                                <i class="bi bi-envelope-open fs-3 text-warning"></i>
-                                <span>View Messages</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><i class="bi bi-lightning-fill"></i> Quick Actions</div>
+            </div>
+            <div style="padding:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
+                <a href="<?php echo e(route('admin.projects.create')); ?>" style="display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:.85rem .5rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);color:var(--tx-secondary);font-size:.75rem;font-weight:600;text-decoration:none;transition:all .2s;text-align:center;"
+                   onmouseover="this.style.background='var(--bg-card-hover)';this.style.color='var(--tx-primary)'"
+                   onmouseout="this.style.background='var(--bg-card)';this.style.color='var(--tx-secondary)'">
+                    <i class="bi bi-folder-plus" style="font-size:1.3rem;color:#3b82f6;"></i>New Project
+                </a>
+                <a href="<?php echo e(route('admin.news.create')); ?>" style="display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:.85rem .5rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);color:var(--tx-secondary);font-size:.75rem;font-weight:600;text-decoration:none;transition:all .2s;text-align:center;"
+                   onmouseover="this.style.background='var(--bg-card-hover)';this.style.color='var(--tx-primary)'"
+                   onmouseout="this.style.background='var(--bg-card)';this.style.color='var(--tx-secondary)'">
+                    <i class="bi bi-journal-plus" style="font-size:1.3rem;color:#8b5cf6;"></i>New Article
+                </a>
+                <a href="<?php echo e(route('admin.services.create')); ?>" style="display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:.85rem .5rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);color:var(--tx-secondary);font-size:.75rem;font-weight:600;text-decoration:none;transition:all .2s;text-align:center;"
+                   onmouseover="this.style.background='var(--bg-card-hover)';this.style.color='var(--tx-primary)'"
+                   onmouseout="this.style.background='var(--bg-card)';this.style.color='var(--tx-secondary)'">
+                    <i class="bi bi-plus-circle" style="font-size:1.3rem;color:var(--accent);"></i>Add Service
+                </a>
+                <a href="<?php echo e(route('admin.messages.index')); ?>" style="display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:.85rem .5rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);color:var(--tx-secondary);font-size:.75rem;font-weight:600;text-decoration:none;transition:all .2s;text-align:center;"
+                   onmouseover="this.style.background='var(--bg-card-hover)';this.style.color='var(--tx-primary)'"
+                   onmouseout="this.style.background='var(--bg-card)';this.style.color='var(--tx-secondary)'">
+                    <i class="bi bi-inbox" style="font-size:1.3rem;color:#f59e0b;"></i>Messages
+                </a>
             </div>
         </div>
 
         
-        <div class="col-lg-4">
-            
-            <div class="card card-modern border-0 shadow-sm mb-4">
-                <div class="card-header bg-white border-bottom-0 pt-4 pb-0 px-4">
-                    <h5 class="mb-0 fw-bold">Admin Navigation</h5>
-                </div>
-                <div class="card-body p-4">
-                    <div class="list-group list-group-flush border-0">
-                        <a href="<?php echo e(route('admin.services.index')); ?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center px-0 border-bottom py-3">
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="bi bi-layers text-secondary"></i> Services
-                            </div>
-                            <i class="bi bi-chevron-right text-muted small"></i>
-                        </a>
-                        <a href="<?php echo e(route('admin.users.index')); ?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center px-0 border-bottom py-3">
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="bi bi-people text-secondary"></i> Users
-                            </div>
-                            <i class="bi bi-chevron-right text-muted small"></i>
-                        </a>
-                        <a href="<?php echo e(route('admin.careers.index')); ?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center px-0 border-bottom py-3">
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="bi bi-briefcase text-secondary"></i> Careers
-                            </div>
-                            <i class="bi bi-chevron-right text-muted small"></i>
-                        </a>
-                    </div>
-                </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"><i class="bi bi-cpu"></i> System</div>
             </div>
-
-            
-            <div class="card card-modern border-0 shadow-sm mt-4">
-                <div class="card-body p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted small">PHP Version</span>
-                        <span class="fw-semibold small"><?php echo e(phpversion()); ?></span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <span class="text-muted small">Laravel Version</span>
-                        <span class="fw-semibold small"><?php echo e(app()->version()); ?></span>
-                    </div>
-                    <a href="<?php echo e(url('/')); ?>" target="_blank" class="btn btn-light w-100 text-primary bg-primary bg-opacity-10 border-0 shadow-none d-flex justify-content-center align-items-center gap-2">
-                        <i class="bi bi-box-arrow-up-right"></i> Back to Website
-                    </a>
+            <div style="padding:1rem;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--border);">
+                    <span style="font-size:.76rem;color:var(--tx-muted);">PHP Version</span>
+                    <span class="badge badge-muted"><?php echo e(phpversion()); ?></span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--border);">
+                    <span style="font-size:.76rem;color:var(--tx-muted);">Laravel Version</span>
+                    <span class="badge badge-muted"><?php echo e(app()->version()); ?></span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;">
+                    <span style="font-size:.76rem;color:var(--tx-muted);">Environment</span>
+                    <span class="badge badge-success"><?php echo e(app()->environment()); ?></span>
                 </div>
             </div>
         </div>
+
     </div>
+</div>
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('admin.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Reyhan\Fugo Creative\direction-a-motion(git)\direction-a-motion\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>

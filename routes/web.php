@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -24,9 +24,9 @@ View::composer('*', function ($view) {
         $content = [
             'home' => [
                 'hero' => [
-                    'tagline' => $settings['home_hero_tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali',
+                    'tagline' => $settings['home_hero_tagline'] ?? 'Creative group Â· Est. 2016 Â· Bandung / Jakarta / Bali',
                     'title' => $settings['home_hero_title'] ?? "Create\nto\nElevate",
-                    'description' => $settings['home_hero_desc'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.'
+                    'description' => $settings['home_hero_desc'] ?? 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.'
                 ],
                 'section_01' => [
                     'subtitle' => $settings['home_s1_subtitle'] ?? 'MANIFESTO',
@@ -62,7 +62,7 @@ View::composer('*', function ($view) {
 });
 
 // Frontend
-Route::get('/', function () { return view('index'); })->name('home');
+Route::get('/', function () { $projects = \App\Models\Project::latest()->take(5)->get(); $categories = \App\Models\ServiceCategory::with('items')->take(5)->get(); return view('index', compact('projects', 'categories')); })->name('home');
 Route::get('/work', function () {
     $projects = Project::latest()->get();
     return view('work', compact('projects'));

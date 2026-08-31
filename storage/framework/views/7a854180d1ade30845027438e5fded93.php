@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Studio — Fugo Creative | Indonesian Creative Group Since 2016</title>
+<title>Studio — Fugo Creative — Indonesian Creative Group Since 2016</title>
 <meta name="description" content="PT Fugo Creative Group started in 2016 printing merchandise in Bandung. Nine years on: five divisions, three cities, 65+ clients across finance, government and lifestyle.">
 <meta name="theme-color" content="#07080a">
 <link rel="canonical" href="https://fugocreativegroup.com/about.html">
@@ -11,14 +11,14 @@
 <meta property="og:site_name" content="Fugo Creative">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="id_ID">
-<meta property="og:title" content="Studio — Fugo Creative | Indonesian Creative Group Since 2016">
+<meta property="og:title" content="Studio — Fugo Creative — Indonesian Creative Group Since 2016">
 <meta property="og:description" content="PT Fugo Creative Group started in 2016 printing merchandise in Bandung. Nine years on: five divisions, three cities, 65+ clients across finance, government and lifestyle.">
 <meta property="og:url" content="https://fugocreativegroup.com/about.html">
 <meta property="og:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Studio — Fugo Creative | Indonesian Creative Group Since 2016">
+<meta name="twitter:title" content="Studio — Fugo Creative — Indonesian Creative Group Since 2016">
 <meta name="twitter:description" content="PT Fugo Creative Group started in 2016 printing merchandise in Bandung. Nine years on: five divisions, three cities, 65+ clients across finance, government and lifestyle.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
@@ -93,7 +93,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="/contact" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
-    <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung · Jakarta · Bali</span>
+    <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
   </div>
 </div>
 <main>
@@ -166,6 +166,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <span class="step__n">2026</span>
           <div class="step__b"><p class="muted" style="padding-top:.4rem" data-en="Artificial Intelligence division launched — agents and automation as the fifth studio." data-id="Divisi Artificial Intelligence diluncurkan — agent dan otomasi sebagai studio kelima.">Artificial Intelligence division launched — agents and automation as the fifth studio.</p></div>
         </div>
+        </div>
       </div>
     </div>
   </div>
@@ -178,16 +179,21 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         <p class="eyebrow" style="margin-bottom:1.6rem" data-en="From the founder" data-id="Dari pendiri">From the founder</p>
         <blockquote data-en="<?php echo e($content['about']['founder']['quote']); ?>" data-id="<?php echo e($content['about']['founder']['quote']); ?>">&ldquo;<?php echo e($content['about']['founder']['quote']); ?>&rdquo;</blockquote>
         <div class="quote__by">
-            <?php if(isset($content['about']['founder']['image']) && $content['about']['founder']['image']): ?>
-                <img src="<?php echo e(asset($content['about']['founder']['image'])); ?>" alt="<?php echo e($content['about']['founder']['name']); ?>" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
-            <?php else: ?>
-          <img src="<?php echo e(asset('assets/img/Pa-Sona.jpg')); ?>" alt="Sona Lesmana" class="avatar" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+          <?php if(isset($content['about']['founder']['image']) && $content['about']['founder']['image']): ?>
+            <img src="<?php echo e(asset($content['about']['founder']['image'])); ?>" alt="<?php echo e($content['about']['founder']['name']); ?>" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+          <?php else: ?>
+            <img src="/assets/img/Pa-Sona.jpg" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           <?php endif; ?>
-            <span><strong style="color:var(--ink)"><?php echo e($content['about']['founder']['name']); ?></strong><br><span data-en="<?php echo e($content['about']['founder']['title']); ?>" data-id="<?php echo e($content['about']['founder']['title']); ?>"><?php echo e($content['about']['founder']['title']); ?></span></span></div>
+          <span><strong style="color:var(--ink)"><?php echo e($content['about']['founder']['name']); ?></strong><br>
+            <span data-en="<?php echo e($content['about']['founder']['title']); ?>" data-id="<?php echo e($content['about']['founder']['title']); ?>"><?php echo e($content['about']['founder']['title']); ?></span></span>
+        </div>
       </div>
-      <div class="quote__art" aria-hidden="true">
-        <div class="quote__art" aria-hidden="true">
-    <img src="<?php echo e(asset('assets/img/Pa-Sona.jpg')); ?>" alt="Sona Lesmana Large" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+      <div class="quote__art">
+        <?php if(isset($content['about']['founder']['image']) && $content['about']['founder']['image']): ?>
+          <img src="<?php echo e(asset($content['about']['founder']['image'])); ?>" alt="<?php echo e($content['about']['founder']['name']); ?>" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        <?php else: ?>
+          <img src="/assets/img/Pa-Sona.jpg" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -265,8 +271,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     </div>
   </div>
 </footer>
-<!-- ── motion stack ────────────────────────────────────────────────
-     GSAP 3.13+ (free, all plugins incl. SplitText) · Lenis.
+<!-- — motion stack ────────────────────────────────────────────────
+     GSAP 3.13+ (free, all plugins incl. SplitText) — Lenis.
      Three.js is index-only — the WebGL hero does not exist on inner pages.
      motion.js degrades the whole page gracefully if any of these fail. -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
@@ -276,4 +282,5 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <script src="<?php echo e(asset('assets/js/motion.js')); ?>" defer></script>
 </body>
 </html>
+
 <?php /**PATH D:\Reyhan\Fugo Creative\direction-a-motion(git)\direction-a-motion\resources\views/about.blade.php ENDPATH**/ ?>

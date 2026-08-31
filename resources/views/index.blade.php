@@ -45,10 +45,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('assets/css/core.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/motion.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/core.css') }}?v={{ filemtime(public_path('assets/css/core.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/css/motion.css') }}?v={{ filemtime(public_path('assets/css/motion.css')) }}">
 <link rel="apple-touch-icon" href="{{ asset('assets/img/apple-touch-icon.png') }}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080a'/%3E%3Cpath d='M11 8h13l-3 5H8zM8 15h11l-3 5H5zM5 22h9l-3 5H2z' fill='%233ddc97'/%3E%3C/svg%3E">
+<link rel="icon" href="{{ asset('assets/img/apple-touch-icon.png') }}" type="image/png">
 <script>/* set before first paint: only pages arrived at via a curtain
    transition start covered, so a failed script can never black out the site */
 try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.add('nav-in');sessionStorage.removeItem('fugo-nav');}}catch(e){}</script>
@@ -71,10 +71,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <header class="nav">
   <div class="nav__in">
     <a class="brand" href="{{ url('') }}" aria-label="Fugo Creative — home">
-      <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/>
-      </svg>
-      <span class="brand__txt">Fugo<span>Creative</span></span>
+      <img class="brand__mark" src="{{ asset('assets/img/logo-full.webp') }}" alt="Fugo Creative">
     </a>
 
     <nav class="nav__links" aria-label="Primary">
@@ -269,11 +266,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax.</p>
 
         <ul class="svc__index" aria-hidden="true">
-          <li class="svc__idx on"><span class="n">01</span><span class="t">Design</span></li>
-          <li class="svc__idx"><span class="n">02</span><span class="t">Production House</span></li>
-          <li class="svc__idx"><span class="n">03</span><span class="t">Event Organizer</span></li>
-          <li class="svc__idx"><span class="n">04</span><span class="t">Merch Production</span></li>
-          <li class="svc__idx"><span class="n">05</span><span class="t">AI Agent</span></li>
+          @if(isset($categories) && count($categories) > 0)
+              @foreach($categories as $index => $cat)
+              <li class="svc__idx {{ $index === 0 ? 'on' : '' }}"><span class="n">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span><span class="t">{{ $cat->name }}</span></li>
+              @endforeach
+          @endif
         </ul>
 
         <a class="btn btn--ghost mt-l" href="{{ url('services') }}" data-magnet=".25"
@@ -281,10 +278,16 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       </div>
 
       <div class="svc__panels">
-
-        <article class="card fade-up" data-cursor="Design">
-          <div class="card__art">
-            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+          @if(isset($categories) && count($categories) > 0)
+              @foreach($categories as $index => $cat)
+              <article class="card fade-up" data-cursor="{{ $cat->name }}">
+                <div class="card__art">
+                  @if($cat->image)
+                      <img src="{{ $cat->image }}" style="width:100%;height:100%;object-fit:cover;">
+                  @else
+                      @switch($index)
+                          @case(0)
+                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
               <defs><linearGradient id="ga1" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="#3ddc97" stop-opacity=".9"/><stop offset="1" stop-color="#c8f24e" stop-opacity=".25"/></linearGradient></defs>
               <rect width="400" height="240" fill="#0d0f13"/>
@@ -293,21 +296,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
               <rect x="196" y="54" width="132" height="132" rx="10" fill="none" stroke="#3ddc97" stroke-width="1.5"/>
               <path d="M196 186 328 54" stroke="#c8f24e" stroke-width="1.5"/>
             </svg>
-          </div>
-          <p class="card__num">01</p>
-          <h3>Fugo Design</h3>
-          <p data-en="Brand systems, campaign POSM, corporate reporting and digital assets — built to survive the real world of print, LED and social."
-             data-id="Sistem brand, POSM kampanye, laporan korporat, dan aset digital — dibangun untuk bertahan di dunia nyata: cetak, LED, dan sosial.">
-            Brand systems, campaign POSM, corporate reporting and digital assets — built to survive the real world of print, LED and social.</p>
-          <div class="card__tags">
-            <span class="tag">Branding</span><span class="tag">POSM</span>
-            <span class="tag">Annual Report</span><span class="tag">Packaging</span><span class="tag">Motion</span>
-          </div>
-        </article>
-
-        <article class="card fade-up" data-cursor="Film">
-          <div class="card__art">
-            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+                              @break
+                          @case(1)
+                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
               <rect width="400" height="240" fill="#0d0f13"/>
               <g fill="#23272f"><rect x="0" y="16" width="400" height="14"/><rect x="0" y="210" width="400" height="14"/></g>
               <g fill="#07080a"><rect x="14" y="19" width="20" height="8" rx="2"/><rect x="54" y="19" width="20" height="8" rx="2"/><rect x="94" y="19" width="20" height="8" rx="2"/><rect x="134" y="19" width="20" height="8" rx="2"/><rect x="174" y="19" width="20" height="8" rx="2"/><rect x="214" y="19" width="20" height="8" rx="2"/><rect x="254" y="19" width="20" height="8" rx="2"/><rect x="294" y="19" width="20" height="8" rx="2"/><rect x="334" y="19" width="20" height="8" rx="2"/>
@@ -318,21 +309,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
               <path d="M107 108l22 12-22 12z" fill="#3ddc97"/>
               <path d="M226 160c30-56 60-56 90 0" stroke="#c8f24e" stroke-width="2" fill="none"/>
             </svg>
-          </div>
-          <p class="card__num">02</p>
-          <h3>Production House</h3>
-          <p data-en="TVC, company profile, digital video and event documentation — scripting, shoot, grade and score handled in-house."
-             data-id="TVC, company profile, video digital, dan dokumentasi acara — naskah, syuting, grading, dan scoring dikerjakan in-house.">
-            TVC, company profile, digital video and event documentation — scripting, shoot, grade and score handled in-house.</p>
-          <div class="card__tags">
-            <span class="tag">TVC</span><span class="tag">Company Profile</span>
-            <span class="tag">Social Video</span><span class="tag">Photography</span>
-          </div>
-        </article>
-
-        <article class="card fade-up" data-cursor="Events">
-          <div class="card__art">
-            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+                              @break
+                          @case(2)
+                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
               <defs><radialGradient id="gb1" cx=".5" cy="0" r="1">
                 <stop offset="0" stop-color="#3ddc97" stop-opacity=".55"/><stop offset="1" stop-color="#3ddc97" stop-opacity="0"/></radialGradient></defs>
               <rect width="400" height="240" fill="#0d0f13"/>
@@ -342,21 +321,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
               <g fill="#3ddc97"><circle cx="110" cy="200" r="5"/><circle cx="150" cy="206" r="5"/><circle cx="190" cy="198" r="5"/><circle cx="230" cy="207" r="5"/><circle cx="270" cy="199" r="5"/></g>
               <rect x="150" y="60" width="100" height="60" rx="6" fill="none" stroke="#c8f24e" stroke-width="1.5"/>
             </svg>
-          </div>
-          <p class="card__num">03</p>
-          <h3>Event Organizer</h3>
-          <p data-en="Conferences, exhibitions, incentive trips and corporate gatherings — run end to end, from run-down to load-out."
-             data-id="Konferensi, pameran, incentive trip, dan gathering korporat — dijalankan end to end, dari rundown hingga load-out.">
-            Conferences, exhibitions, incentive trips and corporate gatherings — run end to end, from run-down to load-out.</p>
-          <div class="card__tags">
-            <span class="tag">Conference</span><span class="tag">Exhibition</span>
-            <span class="tag">Gathering</span><span class="tag">Team Building</span>
-          </div>
-        </article>
-
-        <article class="card fade-up" data-cursor="Merch">
-          <div class="card__art">
-            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+                              @break
+                          @case(3)
+                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
               <rect width="400" height="240" fill="#0d0f13"/>
               <g stroke="#23272f" fill="none">
                 <rect x="30" y="50" width="100" height="140" rx="10"/>
@@ -369,24 +336,12 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
               <path d="M300 100h40v20h-40zM300 130h40v30h-40z" fill="#23272f"/>
               <rect x="300" y="100" width="40" height="20" fill="#3ddc97" opacity=".5"/>
             </svg>
-          </div>
-          <p class="card__num">04</p>
-          <h3>Merch Production</h3>
-          <p data-en="Souvenirs, uniforms and welcome kits produced at scale with materials we can actually stand behind."
-             data-id="Souvenir, seragam, dan welcome kit diproduksi dalam skala besar dengan material yang benar-benar bisa kami pertanggungjawabkan.">
-            Souvenirs, uniforms and welcome kits produced at scale with materials we can actually stand behind.</p>
-          <div class="card__tags">
-            <span class="tag">Souvenir</span><span class="tag">Uniform</span>
-            <span class="tag">Welcome Kit</span><span class="tag">Sourcing</span>
-          </div>
-        </article>
-
-        <article class="card fade-up" data-cursor="AI Agent">
-          <div class="card__art">
-            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+                              @break
+                          @case(4)
+                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
               <rect width="400" height="240" fill="#0d0f13"/>
               <g stroke="#23272f"><path d="M0 60h400M0 180h400M100 0v240M300 0v240"/></g>
-              — orthogonal agent graph, echoing the hero's routing -->
+              <!-- orthogonal agent graph, echoing the hero's routing -->
               <g stroke="#3ddc97" stroke-width="1.5" fill="none">
                 <path d="M60 120h60v-60h80"/>
                 <path d="M60 120h60v60h80"/>
@@ -397,22 +352,26 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
               <g fill="#c8f24e"><rect x="170" y="116" width="8" height="8"/><rect x="196" y="116" width="8" height="8"/><rect x="222" y="116" width="8" height="8"/></g>
               <g fill="#3ddc97"><rect x="54" y="114" width="12" height="12"/><rect x="274" y="54" width="12" height="12"/><rect x="274" y="174" width="12" height="12"/><rect x="334" y="114" width="12" height="12"/></g>
             </svg>
-          </div>
-          <p class="card__num">05</p>
-          <h3>AI Agent</h3>
-          <p data-en="Custom AI agents and automations that take repetitive work off your team — briefed, built, and wired into the tools you already use."
-             data-id="AI agent dan otomasi khusus yang mengambil pekerjaan berulang dari tim Anda — dirancang, dibangun, dan terhubung ke tools yang sudah Anda pakai.">
-            Custom AI agents and automations that take repetitive work off your team — briefed, built, and wired into the tools you already use.</p>
-          <div class="card__tags">
-            <span class="tag">Customer Agents</span><span class="tag">Workflow Automation</span>
-            <span class="tag">Content Ops</span><span class="tag">Integrations</span>
-          </div>
-        </article>
-
-
+                              @break
+                          @default
+                              <div style="width:100%;height:100%;background:#0d0f13;display:flex;align-items:center;justify-content:center;color:#3ddc97;font-size:2rem;"><i class="bi bi-image"></i></div>
+                      @endswitch
+                  @endif
+                </div>
+                <p class="card__num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</p>
+                <h3>{{ $cat->name }}</h3>
+                <p>{{ $cat->description }}</p>
+                <div class="card__tags">
+                  @foreach($cat->items as $item)
+                      <span class="tag">{{ $item->title }}</span>
+                  @endforeach
+                </div>
+              </article>
+              @endforeach
+          @endif
+        </div>
       </div>
     </div>
-  </div>
 </section>
 
 <!-- — SELECTED WORK (horizontal) — -->
@@ -431,109 +390,30 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <div class="hscroll">
   <div class="hscroll__vp">
     <div class="hscroll__track">
-
-      <article class="wcard" data-cursor="Case study">
-        <div class="wcard__art">
-          <svg viewBox="0 0 620 440" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-            <defs><linearGradient id="w1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0e3c8c"/><stop offset="1" stop-color="#07080a"/></linearGradient></defs>
-            <rect width="620" height="440" fill="url(#w1)"/>
-            <circle cx="470" cy="120" r="150" fill="#3ddc97" opacity=".14"/>
-            <rect x="60" y="150" width="230" height="150" rx="16" fill="#0b1226" stroke="#3ddc97" stroke-opacity=".5"/>
-            <rect x="86" y="182" width="52" height="36" rx="6" fill="#c8f24e" opacity=".8"/>
-            <text x="86" y="268" fill="#e8eaf2" font-family="monospace" font-size="20" letter-spacing="4">•••• 8842</text>
-          </svg>
-        </div>
-        <div class="wcard__body">
-          <div class="wcard__meta"><span>BRI</span><span>·</span><span>Production</span><span>·</span><span>2025</span></div>
-          <h3>BRI Debit Virtual TVC</h3>
-          <p data-en="Concept, script, shoot and post for BRImo's virtual debit launch."
-             data-id="Konsep, naskah, syuting, dan pasca-produksi untuk peluncuran debit virtual BRImo.">
-            Concept, script, shoot and post for BRImo's virtual debit launch.</p>
-          <a class="tlink green mt-s" href="{{ url('case-study') }}" data-en="Read case study" data-id="Baca studi kasus">Read case study</a>
-        </div>
-      </article>
-
-      <article class="wcard" data-cursor="View">
-        <div class="wcard__art">
-          <svg viewBox="0 0 620 440" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-            <rect width="620" height="440" fill="#101418"/>
-            <path d="M0 320c120-80 220 40 340-30s180-90 280-30v180H0z" fill="#3ddc97" opacity=".18"/>
-            <rect x="70" y="90" width="200" height="120" rx="12" fill="#181d24"/>
-            <rect x="300" y="90" width="250" height="260" rx="12" fill="#181d24"/>
-            <circle cx="170" cy="150" r="34" fill="none" stroke="#c8f24e" stroke-width="2"/>
-            <path d="M330 300h190M330 330h120" stroke="#3ddc97" stroke-width="3"/>
-          </svg>
-        </div>
-        <div class="wcard__body">
-          <div class="wcard__meta"><span>Daihatsu</span><span>·</span><span>Design</span><span>·</span><span>2024</span></div>
-          <h3>Dealer Campaign System</h3>
-          <p data-en="A nationwide POSM kit that 200+ dealers could deploy without a designer."
-             data-id="Kit POSM nasional yang bisa dipakai 200+ dealer tanpa perlu desainer.">
-            A nationwide POSM kit that 200+ dealers could deploy without a designer.</p>
-          <a class="tlink green mt-s" href="{{ url('work') }}" data-en="View project" data-id="Lihat proyek">View project</a>
-        </div>
-      </article>
-
-      <article class="wcard" data-cursor="View">
-        <div class="wcard__art">
-          <svg viewBox="0 0 620 440" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-            <defs><radialGradient id="w3" cx=".5" cy=".2" r=".9"><stop offset="0" stop-color="#c8f24e" stop-opacity=".5"/><stop offset="1" stop-color="#0a0c10" stop-opacity="0"/></radialGradient></defs>
-            <rect width="620" height="440" fill="#0a0c10"/>
-            <rect width="620" height="440" fill="url(#w3)"/>
-            <rect x="70" y="300" width="480" height="12" rx="6" fill="#23272f"/>
-            <g fill="#3ddc97"><rect x="110" y="200" width="70" height="100" rx="6"/><rect x="200" y="160" width="70" height="140" rx="6" opacity=".7"/><rect x="290" y="230" width="70" height="70" rx="6" opacity=".5"/><rect x="380" y="180" width="70" height="120" rx="6" opacity=".35"/></g>
-          </svg>
-        </div>
-        <div class="wcard__body">
-          <div class="wcard__meta"><span>Kemenhub</span><span>·</span><span>Events</span><span>·</span><span>2024</span></div>
-          <h3>National Transport Expo</h3>
-          <p data-en="Three-day exhibition: stage, booth build, run-down and documentation."
-             data-id="Pameran tiga hari: panggung, pembangunan booth, rundown, dan dokumentasi.">
-            Three-day exhibition: stage, booth build, run-down and documentation.</p>
-          <a class="tlink green mt-s" href="{{ url('work') }}" data-en="View project" data-id="Lihat proyek">View project</a>
-        </div>
-      </article>
-
-      <article class="wcard" data-cursor="View">
-        <div class="wcard__art">
-          <svg viewBox="0 0 620 440" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-            <rect width="620" height="440" fill="#0f1216"/>
-            <g stroke="#23272f"><path d="M0 110h620M0 220h620M0 330h620M155 0v440M310 0v440M465 0v440"/></g>
-            <circle cx="232" cy="165" r="62" fill="#3ddc97" opacity=".8"/>
-            <rect x="350" y="250" width="130" height="130" rx="65" fill="#c8f24e" opacity=".55"/>
-            <path d="M80 380l70-120 70 120z" fill="#4b5cff" opacity=".5"/>
-          </svg>
-        </div>
-        <div class="wcard__body">
-          <div class="wcard__meta"><span>Telkomsel</span><span>·</span><span>Merch</span><span>·</span><span>2023</span></div>
-          <h3>Partner Welcome Kit</h3>
-          <p data-en="12,000 kits: packaging design, sourcing, QC and nationwide fulfilment."
-             data-id="12.000 kit: desain kemasan, sourcing, QC, dan distribusi nasional.">
-            12,000 kits: packaging design, sourcing, QC and nationwide fulfilment.</p>
-          <a class="tlink green mt-s" href="{{ url('work') }}" data-en="View project" data-id="Lihat proyek">View project</a>
-        </div>
-      </article>
-
-      <article class="wcard" data-cursor="View">
-        <div class="wcard__art">
-          <svg viewBox="0 0 620 440" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-            <defs><linearGradient id="w5" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3ddc97" stop-opacity=".45"/><stop offset="1" stop-color="#4b5cff" stop-opacity=".35"/></linearGradient></defs>
-            <rect width="620" height="440" fill="#0b0d11"/>
-            <path d="M0 440C160 300 200 140 360 90s200 40 260 0v350z" fill="url(#w5)"/>
-            <rect x="60" y="60" width="180" height="240" rx="14" fill="#12161c" stroke="#23272f"/>
-            <path d="M92 250h116M92 220h80M92 190h116" stroke="#3ddc97" stroke-width="3"/>
-          </svg>
-        </div>
-        <div class="wcard__body">
-          <div class="wcard__meta"><span>Bank Mandiri</span><span>·</span><span>Design</span><span>·</span><span>2023</span></div>
-          <h3>Annual Report 2023</h3>
-          <p data-en="240 pages of regulated reporting made genuinely readable."
-             data-id="240 halaman laporan teregulasi yang benar-benar enak dibaca.">
-            240 pages of regulated reporting made genuinely readable.</p>
-          <a class="tlink green mt-s" href="{{ url('work') }}" data-en="View project" data-id="Lihat proyek">View project</a>
-        </div>
-      </article>
-
+      @if(isset($projects) && count($projects) > 0)
+          @foreach($projects as $proj)
+          <article class="wcard" data-cursor="Case study">
+            <div class="wcard__art">
+                @if($proj->hero_image)
+                    <img src="{{ $proj->hero_image }}" style="width:100%;height:100%;object-fit:cover;">
+                @else
+                    <svg viewBox="0 0 620 440" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+                        <defs><linearGradient id="w1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0e3c8c"/><stop offset="1" stop-color="#07080a"/></linearGradient></defs>
+                        <rect width="620" height="440" fill="url(#w1)"/>
+                        <circle cx="470" cy="120" r="150" fill="#3ddc97" opacity=".14"/>
+                        <rect x="60" y="150" width="230" height="150" rx="16" fill="#0b1226" stroke="#3ddc97" stroke-opacity=".5"/>
+                    </svg>
+                @endif
+            </div>
+            <div class="wcard__body">
+              <div class="wcard__meta"><span>{{ $proj->client ?? 'Client' }}</span><span>&bull;</span><span>{{ $proj->category ?? 'Category' }}</span><span>&bull;</span><span>{{ $proj->year ?? 'Year' }}</span></div>
+              <h3>{{ $proj->title }}</h3>
+              <p>{{ $proj->challenge ?? $proj->description ?? '' }}</p>
+              <a class="tlink green mt-s" href="{{ route('case-study', $proj->id) }}">Read case study</a>
+            </div>
+          </article>
+          @endforeach
+      @endif
     </div>
   </div>
 </div>

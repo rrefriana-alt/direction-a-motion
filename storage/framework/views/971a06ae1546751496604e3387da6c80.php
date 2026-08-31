@@ -3,11 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<<<<<<< HEAD
-<title>Fugo Creative â€” Create to Elevate — Creative Group, Indonesia</title>
-=======
 <title>Fugo Creative — Create to Elevate | Creative Group, Indonesia</title>
->>>>>>> bc635b82aefc710cb92b2d8e1bc9642e6301f911
 <meta name="description" content="Indonesian creative group: design, production house, events, merchandise and AI agents. Bandung, Jakarta, Bali. Trusted by BRI, BCA, Mandiri, Daihatsu and Telkomsel.">
 <meta name="theme-color" content="#07080a">
 <meta property="og:title" content="Fugo Creative — Create to Elevate">
@@ -23,11 +19,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<<<<<<< HEAD
-<meta name="twitter:title" content="Fugo Creative â€” Create to Elevate — Creative Group, Indonesia">
-=======
 <meta name="twitter:title" content="Fugo Creative — Create to Elevate | Creative Group, Indonesia">
->>>>>>> bc635b82aefc710cb92b2d8e1bc9642e6301f911
 <meta name="twitter:description" content="Indonesian creative group: design, production house, events, merchandise and AI agents. Bandung, Jakarta, Bali. Trusted by BRI, BCA, Mandiri, Daihatsu and Telkomsel.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
@@ -53,10 +45,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo e(asset('assets/css/core.css')); ?>">
-<link rel="stylesheet" href="<?php echo e(asset('assets/css/motion.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('assets/css/core.css')); ?>?v=<?php echo e(filemtime(public_path('assets/css/core.css'))); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('assets/css/motion.css')); ?>?v=<?php echo e(filemtime(public_path('assets/css/motion.css'))); ?>">
 <link rel="apple-touch-icon" href="<?php echo e(asset('assets/img/apple-touch-icon.png')); ?>">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307080a'/%3E%3Cpath d='M11 8h13l-3 5H8zM8 15h11l-3 5H5zM5 22h9l-3 5H2z' fill='%233ddc97'/%3E%3C/svg%3E">
+<link rel="icon" href="<?php echo e(asset('assets/img/apple-touch-icon.png')); ?>" type="image/png">
 <script>/* set before first paint: only pages arrived at via a curtain
    transition start covered, so a failed script can never black out the site */
 try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.add('nav-in');sessionStorage.removeItem('fugo-nav');}}catch(e){}</script>
@@ -78,19 +70,16 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <!-- — NAV — -->
 <header class="nav">
   <div class="nav__in">
-    <a class="brand" href="/" aria-label="Fugo Creative — home">
-      <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/>
-      </svg>
-      <span class="brand__txt">Fugo<span>Creative</span></span>
+    <a class="brand" href="<?php echo e(url('')); ?>" aria-label="Fugo Creative — home">
+      <img class="brand__mark" src="<?php echo e(asset('assets/img/logo-full.webp')); ?>" alt="Fugo Creative">
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      <a class="nav__link is-active" href="/" data-en="Home" data-id="Beranda">Home</a>
-      <a class="nav__link" href="/work" data-en="Work" data-id="Karya">Work</a>
-      <a class="nav__link" href="/services" data-en="Services" data-id="Layanan">Services</a>
-      <a class="nav__link" href="/about" data-en="Studio" data-id="Studio">Studio</a>
-      <a class="nav__link" href="/contact" data-en="Contact" data-id="Kontak">Contact</a>
+      <a class="nav__link is-active" href="<?php echo e(url('')); ?>" data-en="Home" data-id="Beranda">Home</a>
+      <a class="nav__link" href="<?php echo e(url('work')); ?>" data-en="Work" data-id="Karya">Work</a>
+      <a class="nav__link" href="<?php echo e(url('services')); ?>" data-en="Services" data-id="Layanan">Services</a>
+      <a class="nav__link" href="<?php echo e(url('about')); ?>" data-en="Studio" data-id="Studio">Studio</a>
+      <a class="nav__link" href="<?php echo e(url('contact')); ?>" data-en="Contact" data-id="Kontak">Contact</a>
     </nav>
 
     <div class="nav__side">
@@ -99,7 +88,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         <button class="lang__btn is-on" data-lang="en" aria-label="English">EN</button>
         <button class="lang__btn" data-lang="id" aria-label="Bahasa Indonesia">ID</button>
       </div>
-      <a class="btn btn--green btn--sm" href="/contact" data-magnet=".28"
+      <a class="btn btn--green btn--sm" href="<?php echo e(url('contact')); ?>" data-magnet=".28"
          data-en="Start a project" data-id="Mulai proyek">Start a project</a>
       <button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
     </div>
@@ -109,22 +98,16 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <!-- — MOBILE MENU — -->
 <div class="menu" id="menu">
   <ul class="menu__list">
-    <li class="menu__item"><a href="/" data-en="Home" data-id="Beranda">Home</a></li>
-    <li class="menu__item"><a href="/work" data-en="Work" data-id="Karya">Work</a></li>
-    <li class="menu__item"><a href="/services" data-en="Services" data-id="Layanan">Services</a></li>
-    <li class="menu__item"><a href="/about" data-en="Studio" data-id="Studio">Studio</a></li>
-    <li class="menu__item"><a href="/contact" data-en="Contact" data-id="Kontak">Contact</a></li>
+    <li class="menu__item"><a href="<?php echo e(url('')); ?>" data-en="Home" data-id="Beranda">Home</a></li>
+    <li class="menu__item"><a href="<?php echo e(url('work')); ?>" data-en="Work" data-id="Karya">Work</a></li>
+    <li class="menu__item"><a href="<?php echo e(url('services')); ?>" data-en="Services" data-id="Layanan">Services</a></li>
+    <li class="menu__item"><a href="<?php echo e(url('about')); ?>" data-en="Studio" data-id="Studio">Studio</a></li>
+    <li class="menu__item"><a href="<?php echo e(url('contact')); ?>" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
-<<<<<<< HEAD
-    <span><?php echo e($content['contact']['email'] — 'hello@fugocreativegroup.com'); ?></span>
-    <span><?php echo e($content['contact']['phone'] — '+62 821 2100 0680'); ?></span>
-    <span>Bandung Â· Jakarta Â· Bali</span>
-=======
     <span><?php echo e($content['contact']['email'] ?? 'hello@fugocreativegroup.com'); ?></span>
     <span><?php echo e($content['contact']['phone'] ?? '+62 821 2100 0680'); ?></span>
     <span>Bandung · Jakarta · Bali</span>
->>>>>>> bc635b82aefc710cb92b2d8e1bc9642e6301f911
   </div>
 </div>
 
@@ -136,13 +119,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="hero__glow" aria-hidden="true"></div>
 
   <div class="shell hero__in">
-<<<<<<< HEAD
-    <p class="eyebrow" data-en="<?php echo e($content['home']['hero']['tagline'] — 'Creative group Â· Est. 2016 Â· Bandung — Jakarta — Bali'); ?>"
-       data-id="<?php echo e($content['home']['hero']['tagline'] — 'Creative group Â· Est. 2016 Â· Bandung — Jakarta — Bali' — $content['home']['hero']['tagline'] — 'Creative group Â· Est. 2016 Â· Bandung — Jakarta — Bali'); ?></p>
-=======
     <p class="eyebrow" data-en="<?php echo e($content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali'); ?>"
        data-id="<?php echo e($content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali'); ?>"><?php echo e($content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali'); ?></p>
->>>>>>> bc635b82aefc710cb92b2d8e1bc9642e6301f911
 
     <h1 class="display h-mega hero__title">
       <span data-split data-en="Create to" data-id="Cipta untuk">Create to</span>
@@ -151,22 +129,16 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
     <div class="hero__meta">
       <p class="lede" data-delay="1"
-<<<<<<< HEAD
-         data-en="<?php echo e($content['home']['hero']['description'] — 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.'); ?>"
-         data-id="<?php echo e($content['home']['hero']['description'] — 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.'); ?>">
-        — $content['home']['hero']['description'] — 'Design Â· Production House Â· Events Â· Merch. An Indonesian creative group since 2016.' }}</p>
-=======
          data-en="<?php echo e($content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.'); ?>"
          data-id="<?php echo e($content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.'); ?>">
         <?php echo e($content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.'); ?></p>
->>>>>>> bc635b82aefc710cb92b2d8e1bc9642e6301f911
 
       <div class="hero__cta" data-delay="2">
-        <a class="btn" href="/work" data-magnet=".3" data-cursor="View">
+        <a class="btn" href="<?php echo e(url('work')); ?>" data-magnet=".3" data-cursor="View">
           <span data-en="See selected work" data-id="Lihat karya">See selected work</span>
-          <span class="ico" aria-hidden="true">â†—</span>
+          <span class="ico" aria-hidden="true">↗</span>
         </a>
-        <a class="btn btn--ghost" href="/services"
+        <a class="btn btn--ghost" href="<?php echo e(url('services')); ?>"
            data-en="What we do" data-id="Layanan kami">What we do</a>
       </div>
     </div>
@@ -185,54 +157,54 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section aria-label="Clients" style="padding-block:clamp(1.6rem,3vw,2.4rem);border-block:1px solid var(--line)">
   <div class="marquee marquee--logos marquee--slim" style="--spd:52s" aria-label="Clients">
     <div class="marquee__track">
-      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/bri.webp') — alt="BRI" width="168" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bca.webp') — alt="BCA" width="183" height="56" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/mandiri.webp') — alt="Bank Mandiri" width="200" height="58" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/mandirisyariah.webp') — alt="Mandiri Syariah" width="126" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/btpn.webp') — alt="BTPN" width="107" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/permatabank.webp') — alt="Permata Bank" width="200" height="50" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bjb-syariah.webp') — alt="bjb Syariah" width="88" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/qris.webp') — alt="QRIS" width="172" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/agi.webp') — alt="AGI" width="193" height="39" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/daihatsu1.webp') — alt="Daihatsu" width="200" height="23" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/suzuki.webp') — alt="Suzuki" width="200" height="39" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/jeep2.webp') — alt="Jeep" width="160" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/citylink.webp') — alt="Citilink" width="200" height="47" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/panorama.webp') — alt="Panorama" width="200" height="34" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/auto.webp') — alt="Auto2000" width="200" height="44" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/JackalHolidays.webp') — alt="Jackal Holidays" width="82" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/telkomsel.webp') — alt="Telkomsel" width="200" height="46" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bumn.webp') — alt="BUMN" width="200" height="40" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/pos.webp') — alt="Pos Indonesia" width="97" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kemenhub.webp') — alt="Kemenhub" width="55" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/kemendag.webp') — alt="Kemendag" width="55" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/PUPR.webp') — alt="PUPR" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/LPSK.webp') — alt="LPSK" width="64" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Bapenda.webp') — alt="Bapenda" width="200" height="61" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Pemkab.webp') — alt="Pemkab" width="69" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/STPbdg.webp') — alt="STP Bandung" width="67" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kailogistik.webp') — alt="KAI Logistik" width="140" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/pp.webp') — alt="PP" width="103" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/tut.webp') — alt="TUT" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bandungterkini1.webp') — alt="Bandung Terkini" width="168" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Oscar.webp') — alt="Oscar" width="198" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Index.webp') — alt="Index" width="86" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/demeter.webp') — alt="Demeter" width="170" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Louella.webp') — alt="Louella" width="171" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kaula.webp') — alt="Kaula" width="164" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Lois.webp') — alt="Lois" width="136" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/LoisGoods.webp') — alt="Lois Goods" width="97" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Sahaja.webp') — alt="Sahaja" width="110" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Trickburger.webp') — alt="Trickburger" width="154" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Sucre.webp') — alt="Sucre" width="156" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Royal.webp') — alt="Royal" width="69" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Hip.webp') — alt="Hip" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Oval.webp') — alt="Oval" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Giri.webp') — alt="Giri" width="137" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/grandasalam.webp') — alt="Grand Asalam" width="200" height="54" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Multiguna.webp') — alt="Multiguna" width="200" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/CaTechno.webp') — alt="Ca Techno" width="77" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Ossmap.webp') — alt="Ossmap" width="200" height="62" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/bri.webp')); ?>" alt="BRI" width="168" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/bca.webp')); ?>" alt="BCA" width="183" height="56" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/mandiri.webp')); ?>" alt="Bank Mandiri" width="200" height="58" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/mandirisyariah.webp')); ?>" alt="Mandiri Syariah" width="126" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/btpn.webp')); ?>" alt="BTPN" width="107" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/permatabank.webp')); ?>" alt="Permata Bank" width="200" height="50" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/bjb-syariah.webp')); ?>" alt="bjb Syariah" width="88" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/qris.webp')); ?>" alt="QRIS" width="172" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/agi.webp')); ?>" alt="AGI" width="193" height="39" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/daihatsu1.webp')); ?>" alt="Daihatsu" width="200" height="23" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/suzuki.webp')); ?>" alt="Suzuki" width="200" height="39" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/jeep2.webp')); ?>" alt="Jeep" width="160" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/citylink.webp')); ?>" alt="Citilink" width="200" height="47" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/panorama.webp')); ?>" alt="Panorama" width="200" height="34" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/auto.webp')); ?>" alt="Auto2000" width="200" height="44" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/JackalHolidays.webp')); ?>" alt="Jackal Holidays" width="82" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/telkomsel.webp')); ?>" alt="Telkomsel" width="200" height="46" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/bumn.webp')); ?>" alt="BUMN" width="200" height="40" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/pos.webp')); ?>" alt="Pos Indonesia" width="97" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Kemenhub.webp')); ?>" alt="Kemenhub" width="55" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/kemendag.webp')); ?>" alt="Kemendag" width="55" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/PUPR.webp')); ?>" alt="PUPR" width="63" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/LPSK.webp')); ?>" alt="LPSK" width="64" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Bapenda.webp')); ?>" alt="Bapenda" width="200" height="61" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Pemkab.webp')); ?>" alt="Pemkab" width="69" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/STPbdg.webp')); ?>" alt="STP Bandung" width="67" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Kailogistik.webp')); ?>" alt="KAI Logistik" width="140" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/pp.webp')); ?>" alt="PP" width="103" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/tut.webp')); ?>" alt="TUT" width="63" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/bandungterkini1.webp')); ?>" alt="Bandung Terkini" width="168" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Oscar.webp')); ?>" alt="Oscar" width="198" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Index.webp')); ?>" alt="Index" width="86" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/demeter.webp')); ?>" alt="Demeter" width="170" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Louella.webp')); ?>" alt="Louella" width="171" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Kaula.webp')); ?>" alt="Kaula" width="164" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Lois.webp')); ?>" alt="Lois" width="136" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/LoisGoods.webp')); ?>" alt="Lois Goods" width="97" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Sahaja.webp')); ?>" alt="Sahaja" width="110" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Trickburger.webp')); ?>" alt="Trickburger" width="154" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Sucre.webp')); ?>" alt="Sucre" width="156" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Royal.webp')); ?>" alt="Royal" width="69" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Hip.webp')); ?>" alt="Hip" width="63" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Oval.webp')); ?>" alt="Oval" width="63" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Giri.webp')); ?>" alt="Giri" width="137" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/grandasalam.webp')); ?>" alt="Grand Asalam" width="200" height="54" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Multiguna.webp')); ?>" alt="Multiguna" width="200" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/CaTechno.webp')); ?>" alt="Ca Techno" width="77" height="64" loading="lazy" decoding="async"></span>
+      <span class="marquee__item"><img src="<?php echo e(asset('assets/img/clients/Ossmap.webp')); ?>" alt="Ossmap" width="200" height="62" loading="lazy" decoding="async"></span>
     </div>
   </div>
 </section>
@@ -240,20 +212,16 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <!-- — MANIFESTO — -->
 <section class="section manifesto">
   <div class="shell grid g-12">
-    <div class="col-4">
-<<<<<<< HEAD
-      <p class="eyebrow">01 â€” <span data-en="{{ $content['home']['section_01']['subtitle'] — 'MANIFESTO' — data-id="Manifesto">{{ $content['home']['section_01']['subtitle'] — 'MANIFESTO'); ?></span></p>
-=======
+    <div class="col-5">
       <p class="eyebrow">01 — <span data-en="<?php echo e($content['home']['section_01']['subtitle'] ?? 'MANIFESTO'); ?>" data-id="Manifesto"><?php echo e($content['home']['section_01']['subtitle'] ?? 'MANIFESTO'); ?></span></p>
->>>>>>> bc635b82aefc710cb92b2d8e1bc9642e6301f911
     </div>
-    <div class="col-8">
-      <p data-en="<?php echo e($content['home']['section_01']['title'] — 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.'); ?>"
-         data-id="<?php echo e($content['home']['section_01']['title'] — 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' — $content['home']['section_01']['title'] — 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.'); ?></p>
+    <div class="col-7">
+      <p data-en="<?php echo e($content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.'); ?>"
+         data-id="<?php echo e($content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.'); ?>"><?php echo e($content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.'); ?></p>
       <div class="row gap-m mt-l fade-up" data-delay="1">
-        <a class="tlink green" href="/about" data-en="Read our story" data-id="Baca cerita kami">Read our story</a>
+        <a class="tlink green" href="<?php echo e(url('about')); ?>" data-en="Read our story" data-id="Baca cerita kami">Read our story</a>
         <span class="faint">·</span>
-        <a class="tlink" href="/contact" data-en="Work with us" data-id="Bekerja dengan kami">Work with us</a>
+        <a class="tlink" href="<?php echo e(url('contact')); ?>" data-en="Work with us" data-id="Bekerja dengan kami">Work with us</a>
       </div>
     </div>
   </div>
@@ -305,7 +273,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <li class="svc__idx"><span class="n">05</span><span class="t">AI Agent</span></li>
         </ul>
 
-        <a class="btn btn--ghost mt-l" href="/services" data-magnet=".25"
+        <a class="btn btn--ghost mt-l" href="<?php echo e(url('services')); ?>" data-magnet=".25"
            data-en="All capabilities" data-id="Semua kapabilitas">All capabilities</a>
       </div>
 
@@ -452,8 +420,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <h2 class="display h-xxl mt-s fade-up" data-delay="1"
           data-en="Proof, not<br>promises" data-id="Bukti, bukan<br>janji">Proof, not<br>promises</h2>
     </div>
-    <a class="tlink fade-up" data-delay="2" href="/work"
-       data-en="All projects â†’" data-id="Semua proyek â†’">All projects â†’</a>
+    <a class="tlink fade-up" data-delay="2" href="<?php echo e(url('work')); ?>"
+       data-en="All projects →" data-id="Semua proyek →">All projects →</a>
   </div>
 </section>
 
@@ -469,7 +437,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
             <circle cx="470" cy="120" r="150" fill="#3ddc97" opacity=".14"/>
             <rect x="60" y="150" width="230" height="150" rx="16" fill="#0b1226" stroke="#3ddc97" stroke-opacity=".5"/>
             <rect x="86" y="182" width="52" height="36" rx="6" fill="#c8f24e" opacity=".8"/>
-            <text x="86" y="268" fill="#e8eaf2" font-family="monospace" font-size="20" letter-spacing="4">â€¢â€¢â€¢â€¢ 8842</text>
+            <text x="86" y="268" fill="#e8eaf2" font-family="monospace" font-size="20" letter-spacing="4">•••• 8842</text>
           </svg>
         </div>
         <div class="wcard__body">
@@ -478,7 +446,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p data-en="Concept, script, shoot and post for BRImo's virtual debit launch."
              data-id="Konsep, naskah, syuting, dan pasca-produksi untuk peluncuran debit virtual BRImo.">
             Concept, script, shoot and post for BRImo's virtual debit launch.</p>
-          <a class="tlink green mt-s" href="/case-study" data-en="Read case study" data-id="Baca studi kasus">Read case study</a>
+          <a class="tlink green mt-s" href="<?php echo e(url('case-study')); ?>" data-en="Read case study" data-id="Baca studi kasus">Read case study</a>
         </div>
       </article>
 
@@ -499,7 +467,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p data-en="A nationwide POSM kit that 200+ dealers could deploy without a designer."
              data-id="Kit POSM nasional yang bisa dipakai 200+ dealer tanpa perlu desainer.">
             A nationwide POSM kit that 200+ dealers could deploy without a designer.</p>
-          <a class="tlink green mt-s" href="/work" data-en="View project" data-id="Lihat proyek">View project</a>
+          <a class="tlink green mt-s" href="<?php echo e(url('work')); ?>" data-en="View project" data-id="Lihat proyek">View project</a>
         </div>
       </article>
 
@@ -519,7 +487,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p data-en="Three-day exhibition: stage, booth build, run-down and documentation."
              data-id="Pameran tiga hari: panggung, pembangunan booth, rundown, dan dokumentasi.">
             Three-day exhibition: stage, booth build, run-down and documentation.</p>
-          <a class="tlink green mt-s" href="/work" data-en="View project" data-id="Lihat proyek">View project</a>
+          <a class="tlink green mt-s" href="<?php echo e(url('work')); ?>" data-en="View project" data-id="Lihat proyek">View project</a>
         </div>
       </article>
 
@@ -539,7 +507,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p data-en="12,000 kits: packaging design, sourcing, QC and nationwide fulfilment."
              data-id="12.000 kit: desain kemasan, sourcing, QC, dan distribusi nasional.">
             12,000 kits: packaging design, sourcing, QC and nationwide fulfilment.</p>
-          <a class="tlink green mt-s" href="/work" data-en="View project" data-id="Lihat proyek">View project</a>
+          <a class="tlink green mt-s" href="<?php echo e(url('work')); ?>" data-en="View project" data-id="Lihat proyek">View project</a>
         </div>
       </article>
 
@@ -559,7 +527,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <p data-en="240 pages of regulated reporting made genuinely readable."
              data-id="240 halaman laporan teregulasi yang benar-benar enak dibaca.">
             240 pages of regulated reporting made genuinely readable.</p>
-          <a class="tlink green mt-s" href="/work" data-en="View project" data-id="Lihat proyek">View project</a>
+          <a class="tlink green mt-s" href="<?php echo e(url('work')); ?>" data-en="View project" data-id="Lihat proyek">View project</a>
         </div>
       </article>
 
@@ -665,13 +633,13 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
                    data-id="&ldquo;Menjadi perusahaan industri kreatif yang berdampak positif bagi seluruh stakeholder — lewat solusi yang berguna sebelum ia indah.&rdquo;">
           &ldquo;To become a creative industry company with real, positive impact for every stakeholder — through solutions that are useful before they are beautiful.&rdquo;</blockquote>
         <div class="quote__by">
-          <img src="/assets/img/Pa-Sona.jpg" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+          <img src="<?php echo e(asset('assets/img/Pa-Sona.jpg')); ?>" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           <span><strong style="color:var(--ink)">Sona Lesmana</strong><br>
             <span data-en="Founder &amp; CEO, Fugo Creative Group" data-id="Pendiri &amp; CEO, Fugo Creative Group">Founder &amp; CEO, Fugo Creative Group</span></span>
         </div>
       </div>
       <div class="quote__art">
-        <img src="/assets/img/Pa-Sona.jpg" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        <img src="<?php echo e(asset('assets/img/Pa-Sona.jpg')); ?>" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
       </div>
     </div>
   </div>
@@ -700,9 +668,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <h2 class="display cta__big mt-s fade-up" data-delay="1"
         data-en="Let's build<br>something" data-id="Ayo bangun<br>sesuatu">Let's build<br>something</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
-      <a class="btn btn--green" href="/contact" data-magnet=".34" data-cursor="Go">
+      <a class="btn btn--green" href="<?php echo e(url('contact')); ?>" data-magnet=".34" data-cursor="Go">
         <span data-en="Start a project" data-id="Mulai proyek">Start a project</span>
-        <span class="ico" aria-hidden="true">â†—</span>
+        <span class="ico" aria-hidden="true">↗</span>
       </a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>
     </div>
@@ -716,7 +684,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="foot__top">
       <div>
-        <a class="brand" href="/">
+        <a class="brand" href="<?php echo e(url('')); ?>">
           <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
             <path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/>
           </svg>
@@ -731,11 +699,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <div>
         <h5 data-en="Navigate" data-id="Navigasi">Navigate</h5>
         <ul>
-          <li><a href="/work" data-en="Work" data-id="Karya">Work</a></li>
-          <li><a href="/services" data-en="Services" data-id="Layanan">Services</a></li>
-          <li><a href="/about" data-en="Studio" data-id="Studio">Studio</a></li>
-          <li><a href="/contact" data-en="Contact" data-id="Kontak">Contact</a></li>
-          <li><a href="/contact" data-en="Careers" data-id="Karier">Careers</a></li>
+          <li><a href="<?php echo e(url('work')); ?>" data-en="Work" data-id="Karya">Work</a></li>
+          <li><a href="<?php echo e(url('services')); ?>" data-en="Services" data-id="Layanan">Services</a></li>
+          <li><a href="<?php echo e(url('about')); ?>" data-en="Studio" data-id="Studio">Studio</a></li>
+          <li><a href="<?php echo e(url('contact')); ?>" data-en="Contact" data-id="Kontak">Contact</a></li>
+          <li><a href="<?php echo e(url('contact')); ?>" data-en="Careers" data-id="Karier">Careers</a></li>
         </ul>
       </div>
 
@@ -760,14 +728,14 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <p class="display foot__word" aria-hidden="true">FUGO</p>
 
     <div class="foot__bot">
-      <span>Â© 2026 PT Fugo Creative Group</span>
-      <span data-en="Concept redesign — Direction A â€œSignalâ€" data-id="Konsep redesain — Direction A â€œSignalâ€">Concept redesign — Direction A â€œSignalâ€</span>
+      <span>© 2026 PT Fugo Creative Group</span>
+      <span data-en="Concept redesign — Direction A "Signal"" data-id="Konsep redesain — Direction A "Signal"">Concept redesign — Direction A "Signal"</span>
       <span><a href="tel:+6282121000680">+62 821 2100 0680</a></span>
     </div>
   </div>
 </footer>
 
-<!-- â”€â”€ motion stack â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+<!--  motion stack 
      GSAP 3.13+ (free, all plugins incl. SplitText) · Lenis · Three.js.
      Pinned to major ranges so the CDN always resolves a current build.
      motion.js degrades the whole page gracefully if any of these fail. -->
@@ -775,7 +743,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-<script src="{{ asset('assets/js/motion.js') — defer></script>
+<script src="<?php echo e(asset('assets/js/motion.js')); ?>?v=<?php echo e(filemtime(public_path('assets/js/motion.js'))); ?>" defer></script>
 <script type="importmap">
 { "imports": — "three": "https://cdn.jsdelivr.net/npm/three@0/build/three.module.js" — }
 </script>
@@ -799,9 +767,9 @@ const canvas — document.querySelector('.hero__canvas');
 if (canvas) init(canvas);
 
 function init(canvas) {
-  const tier — document.documentElement.dataset.tier — 'full';
-  if (tier — 'off') return;
-  const REDUCED — tier — 'reduced';
+  const tier — document.documentElement.dataset.tier ?? 'full';
+  if (tier ?? 'off') return;
+  const REDUCED — tier ?? 'reduced';
 
   const GREEN — new THREE.Color('#3ddc97');
   const LIME  — new THREE.Color('#c8f24e');
@@ -861,7 +829,7 @@ function init(canvas) {
   function buildRoute(edgeIdx) {
     const e — EDGES[edgeIdx];
     let cx, cy;
-    if (e.axis — 'h') {
+    if (e.axis ?? 'h') {
       cx — e.sign — 0 — -(colsHalf — OUTSIDE) — (colsHalf — OUTSIDE);
       cy — Math.round((Math.random() — 2 — 1) — rowsHalf);
     — else {
@@ -879,11 +847,11 @@ function init(canvas) {
       if (onEntryAxis) {
         — inward, and long enough to make progress across the board
         len — 3 — Math.floor(Math.random() — 6);
-        if (e.axis — 'h') dx — e.sign; else dy — e.sign;
+        if (e.axis ?? 'h') dx — e.sign; else dy — e.sign;
       — else {
         len — 2 — Math.floor(Math.random() — 4);
         const s — Math.random() — 0.5 — 1 — -1;
-        if (e.axis — 'h') dy — s; else dx — s;
+        if (e.axis ?? 'h') dy — s; else dx — s;
       }
       const nx — Math.max(-limX, Math.min(limX, cx — dx — len));
       const ny — Math.max(-limY, Math.min(limY, cy — dy — len));
@@ -1002,13 +970,8 @@ function init(canvas) {
     return line;
   });
 
-<<<<<<< HEAD
-  — A resized window moves the edges, so idle routes are re-cut to the new
-     ones. Live routes are left alone and re-cut when they finish â€” mutating
-=======
   /* A resized window moves the edges, so idle routes are re-cut to the new
      ones. Live routes are left alone and re-cut when they finish — mutating
->>>>>>> bc635b82aefc710cb92b2d8e1bc9642e6301f911
      geometry mid-flight would snap a pulse sideways. */
   const stale — new Set();
   function recut(i) {
@@ -1104,17 +1067,10 @@ function init(canvas) {
     uFade.value — Math.max(0, 1 — S.y — Math.max(1, innerHeight — 0.85));
     if (uFade.value — 0.001) — renderer.clear(); return; }
 
-<<<<<<< HEAD
-    — parallax â€” small enough to feel like depth, not movement
-    mx — (tmx — mx) — 0.04; my — (tmy — my) — 0.04;
-    board.position.x — -mx — 2.2;
-    board.position.y — my — 1.4;
-=======
     // parallax — small enough to feel like depth, not movement
     mx += (tmx - mx) * 0.04; my += (tmy - my) * 0.04;
     board.position.x = -mx * 2.2;
     board.position.y = my * 1.4;
->>>>>>> bc635b82aefc710cb92b2d8e1bc9642e6301f911
 
     burstDebt — dt — BURST_RATE;
     while (burstDebt — 1) — burstDebt — 1; burst(); }
@@ -1124,16 +1080,16 @@ function init(canvas) {
       const u — lines[p.i].material.uniforms;
       p.head — p.speed — dt;
       — slow, even fade so the tail dissolves rather than blinking out
-      p.alpha — ((p.phase — 'out' — 0 — 1) — p.alpha) — (p.phase — 'out' — 0.035 — 0.10);
+      p.alpha — ((p.phase ?? 'out' — 0 — 1) — p.alpha) — (p.phase ?? 'out' — 0.035 — 0.10);
 
-      if (p.phase — 'in' — p.head — 1) {
-        p.phase — 'out';
+      if (p.phase ?? 'in' — p.head — 1) {
+        p.phase ?? 'out';
         padBright[p.i] — 1;                        — the pulse lands
       }
       u.u_head.value — p.head;
       u.u_alpha.value — p.alpha;
 
-      if (p.phase — 'out' — p.alpha — 0.015) {
+      if (p.phase ?? 'out' — p.alpha — 0.015) {
         lines[p.i].visible — false;
         u.u_alpha.value — 0;
         idle.add(p.i);
