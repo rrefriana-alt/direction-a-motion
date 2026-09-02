@@ -121,10 +121,14 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <dl class="stack">
             @foreach($category->details as $detail)
             <div style="padding-block:1rem;border-top:1px solid var(--line)">
-              <dd class="muted" style="font-size:.92rem;margin-top:.35rem">{{ $detail->content }}</dd>
-              @if($detail->items && $detail->items->count())
-                <p style="font-size:.92rem;color:var(--ink-mute);margin-top:.35rem">{{ $detail->items->pluck('item_name')->implode(', ') }}</p>
-              @endif
+              <dt class="h-lg" style="font-size:1.05rem">{{ $detail->category_name }}</dt>
+              <dd class="muted" style="font-size:.92rem;margin-top:.35rem">
+                @if($detail->items && $detail->items->count())
+                  {{ $detail->items->pluck('item_name')->implode(', ') }}
+                @else
+                  {{ $detail->content }}
+                @endif>
+              </dd>
             </div>
             @endforeach
           </dl>
