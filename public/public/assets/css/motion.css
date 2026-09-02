@@ -1,0 +1,233 @@
+/* ==========================================================================
+   FUGO CREATIVE — Direction A "SIGNAL"  ·  motion layer additions
+   Loaded after core.css. Nothing here changes the design; it adds the hooks
+   the Lenis + GSAP + Three layer needs, plus the fallbacks that keep the page
+   readable when any of them is unavailable.
+   ========================================================================== */
+
+/* ---- Lenis ------------------------------------------------------------- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---- masked line reveal (SplitText) ------------------------------------ */
+.line-mask { display: block; overflow: hidden; }
+.line-mask > .line { display: block; will-change: transform; }
+
+/* GSAP owns the hero characters now, so the CSS keyframe version must not
+   also run — two things animating one element is the classic double-motion
+   bug.
+
+   core.css parks .char at translateY(102%) and opacity 0, relying on the
+   keyframe to bring it back. With the keyframe disabled, a char that never
+   gets tweened stays parked and clipped — which is exactly how "Create to"
+   went missing while "Elevate" (driven by .is-in, not a keyframe) stayed.
+   The resting state here is therefore *in place*: JS moves it away to
+   animate, never the other way round. */
+html:not(.no-motion) .hero__title .char {
+  animation: none !important;
+  opacity: 1;
+  transform: none;
+}
+.hero__title .word { display: inline-block; overflow: hidden; }
+.hero__title .char { display: inline-block; will-change: transform; }
+.hero .reveal-line { display: block; overflow: hidden; }
+.hero .reveal-line .tint { display: inline-block; will-change: transform; }
+/* core.css transitions this line on .is-in; GSAP animates the same property,
+   and two engines on one property is what jitter looks like. GSAP wins. */
+html:not(.no-motion) .hero .reveal-line > span { transition: none !important; }
+
+/* ---- WebGL hero -------------------------------------------------------- */
+.hero__canvas { display: block; width: 100%; height: 100%; }
+/* The headline sits bottom-left, so the board is faded out underneath it.
+   Cheaper and more controllable than dimming the whole canvas, and it keeps
+   the empty upper area rich. */
+.hero__canvas {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, rgba(0,0,0,.30) 86%, rgba(0,0,0,.14) 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 40%, rgba(0,0,0,.30) 86%, rgba(0,0,0,.14) 100%);
+}
+/* No WebGL: a still board would be better than nothing, but a quiet gradient
+   is honest about being a fallback and costs no bytes. */
+html[data-tier="off"] .hero__canvas {
+  background:
+    radial-gradient(120% 80% at 72% 8%, rgba(61,220,151,.10) 0%, transparent 60%),
+    radial-gradient(90% 70% at 20% 90%, rgba(200,242,78,.04) 0%, transparent 60%);
+}
+
+/* ---- page transition curtain ------------------------------------------ */
+.curtain {
+  position: fixed; inset: 0; z-index: 200; pointer-events: none;
+  background: var(--bg);
+  display: grid; place-items: center;
+  will-change: transform;
+  /* Default = lifted. Only a page entered through a transition puts it down,
+     via the .nav-in class set in <head> before first paint. */
+  transform: translateY(-100%);
+}
+html.nav-in .curtain { transform: none; }
+.curtain__mark {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(1.6rem, 5vw, 3.4rem); letter-spacing: -.03em;
+  color: var(--ink);
+}
+.curtain__mark em { font-style: normal; background: var(--grad-signal);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+html.no-motion .curtain { display: none; }
+
+/* ---- horizontal work --------------------------------------------------- */
+/* Scroll-driven on every screen size, phones included — a row that only moves
+   when you swipe it sideways is a row most visitors never see past the first
+   card. The native-swipe fallback is kept for reduced motion only. */
+.hscroll.is-native { height: auto !important; }
+.hscroll.is-native .hscroll__vp { overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; }
+.hscroll.is-native .hscroll__track { transform: none !important; }
+.hscroll.is-native .wcard { scroll-snap-align: center; }
+
+/* ---- marquee ----------------------------------------------------------- */
+/* core.css runs the loop as a CSS keyframe on each track. JS drives it now —
+   one transform on one wrapper, timed in seconds rather than frames — so the
+   keyframe has to stop, or the two fight and the seam stutters. */
+html:not(.no-motion) .marquee__track { animation: none !important; }
+.marquee__row { display: flex; flex: none; will-change: transform; }
+html.no-motion .marquee__row { will-change: auto; }
+
+/* ---- velocity skew ----------------------------------------------------- */
+/* Applied to leaf cards only: skewing a .section would create a containing
+   block around the sticky service index and the sticky hscroll viewport. */
+.wcard, .svc__panels .card { will-change: transform; }
+
+/* ---- degraded mode: everything visible, nothing animated --------------- */
+html.no-motion .fade-up,
+html.no-motion .fade-in,
+html.no-motion [data-reveal],
+html.no-motion .line,
+html.no-motion .hero__title .char,
+html.no-motion .hero .reveal-line .tint {
+  opacity: 1 !important; transform: none !important; animation: none !important;
+}
+html.no-motion .manifesto .w { opacity: 1 !important; }
+html.no-motion .loader { display: none; }
+html.no-motion .wcard, html.no-motion .svc__panels .card { transform: none !important; }
+
+/* ---- reduced motion ---------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  /* No page transitions, no curtain, no loader */
+  .curtain { display: none !important; }
+  .loader  { display: none !important; }
+
+  /* No fade-in / slide-up animations — everything shows immediately */
+  .fade-up,
+  .fade-in,
+  [data-reveal],
+  .hero__title .char,
+  .hero .reveal-line .tint,
+  .line { opacity: 1 !important; transform: none !important; animation: none !important; }
+
+  /* No WebGL canvas */
+  .hero__canvas { opacity: 0; pointer-events: none; }
+
+  /* No scroll-driven card skew */
+  .wcard, .svc__panels .card { will-change: auto; transform: none !important; }
+
+  /* No marquee motion */
+  .marquee__track { animation: none !important; }
+
+  /* Instant transitions on all interactive elements */
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* ---- headlines use the masked line reveal, not the generic fade --------- */
+html:not(.no-motion) .is-split-head { opacity: 1 !important; transform: none !important; }
+html:not(.no-motion) .is-split-head .line { will-change: transform; }
+
+/* ==========================================================================
+   FOOTER — mobile tidy-up
+   The desktop footer is a four-column grid that collapses to one long stack
+   on a phone, and the bottom row uses space-between with wrapping, which
+   leaves three ragged lines at uneven intervals. Neither is wrong at desktop
+   width; both need different rules once there is no width to spread into.
+   ========================================================================== */
+@media (max-width: 640px) {
+  /* Two columns for the short link lists, full width for prose and addresses,
+     so the footer is about half as tall and reads as a block rather than a
+     column of loose fragments. */
+  .foot__top { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+  .foot__top > *:first-child { grid-column: 1 / -1; }
+  .foot__top > *:last-child  { grid-column: 1 / -1; }
+
+  /* Stacked and left-aligned beats space-between once the row has to wrap. */
+  .foot__bot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
+    padding-block: 1.4rem;
+  }
+
+  /* The outlined wordmark is meant to span the full width. At 15.5vw it
+     shrinks to its clamp floor on a phone and reads as an orphan. */
+  .foot__word { font-size: clamp(4.5rem, 27vw, 16rem); margin-top: 2.5rem; }
+}
+
+@media (max-width: 340px) {
+  /* Below this the two link columns start truncating, so give up and stack.
+     360px phones still fit two — checked against the longest label. */
+  .foot__top { grid-template-columns: 1fr; }
+  .foot__top > * { grid-column: 1 / -1; }
+}
+
+/* ==========================================================================
+   CLIENT LOGO TICKER
+   Real client logos off the live site, in place of the text names. They are
+   full-colour PNGs on transparent, so at rest they are knocked back to white
+   silhouettes — 48 different brand palettes side by side would fight the page
+   and each other. Colour returns on hover, which also reads as a reward for
+   stopping (the marquee slows on hover already).
+   ========================================================================== */
+.marquee--logos .marquee__item { gap: 2.5rem; }
+.marquee--logos img {
+  display: block; width: auto;
+  height: clamp(20px, 2.3vw, 30px);
+  filter: brightness(0) invert(1);
+  opacity: .5;
+  transition: filter var(--dur-base) var(--e-out), opacity var(--dur-base) var(--e-out);
+}
+.marquee--logos .marquee__item:hover img { filter: none; opacity: 1; }
+/* Touch devices never hover, so leave them legible rather than half-lit. */
+@media (hover: none) { .marquee--logos img { opacity: .62; } }
+@media (prefers-reduced-motion: reduce) { .marquee--logos img { transition: none; } }
+
+/* ==========================================================================
+   TOUCH TARGETS
+   The design was drawn for a cursor, so several controls sit at ~30px tall —
+   under WCAG 2.5.8's 24px floor in spirit and well under the ~44px a thumb
+   actually needs. Grown on coarse pointers only, so the desktop layout is
+   untouched.
+
+   min-height rather than padding, because .tlink positions its underline with
+   an ::after at bottom:0 and padding would drag the underline off the text.
+   ========================================================================== */
+@media (pointer: coarse) {
+  /* Footer link lists — standalone navigation, the worst offenders at ~30px. */
+  .foot li a { display: flex; align-items: center; min-height: 42px; }
+  .foot li + li { margin-top: 0; }
+
+  /* Language pills — small, and tapped more than anything else on the page. */
+  .lang__btn { min-height: 40px; padding-inline: .85rem; }
+
+  /* Text links, including "Read case study" on every work card. Padding is
+     mirrored so the animated underline stays welded to the text. */
+  .tlink { padding-top: .55rem; padding-bottom: calc(3px + .55rem); }
+  .tlink::after { bottom: .55rem; }
+
+  /* Nav home link, and the breadcrumb "FUGO" home link on inner pages. */
+  .brand { min-height: 44px; }
+  .crumb a { display: inline-block; padding-block: .6rem; }
+
+  /* Inline links in addresses and the bottom row stay inline — turning these
+     into flex boxes would break the line. Vertical room is enough. */
+  .foot address a,
+  .foot__bot a,
+  .foot p a { display: inline-block; padding-block: .55rem; }
+}

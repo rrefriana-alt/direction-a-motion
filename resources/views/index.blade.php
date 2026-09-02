@@ -78,7 +78,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <a class="nav__link is-active" href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a>
       <a class="nav__link" href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a>
       <a class="nav__link" href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a>
-      <a class="nav__link" href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a>
+      <a class="nav__link" href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a>
       <a class="nav__link" href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a>
     </nav>
 
@@ -101,12 +101,12 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a></li>
     <li class="menu__item"><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li>
     <li class="menu__item"><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li>
-    <li class="menu__item"><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li>
+    <li class="menu__item"><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li>
     <li class="menu__item"><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
-    <span>{{ $content['contact']['email'] ?? 'hello@fugocreativegroup.com' }}</span>
-    <span>{{ $content['contact']['phone'] ?? '+62 821 2100 0680' }}</span>
+    <span>{{ \App\Models\Setting::get('contact_email', 'hello@fugocreativegroup.com') }}</span>
+    <span>{{ \App\Models\Setting::get('contact_phone', '+62 821 2100 0680') }}</span>
     <span>Bandung · Jakarta · Bali</span>
   </div>
 </div>
@@ -119,8 +119,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="hero__glow" aria-hidden="true"></div>
 
   <div class="shell hero__in">
-    <p class="eyebrow" data-en="{{ $content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali' }}"
-       data-id="{{ $content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali' }}">{{ $content['home']['hero']['tagline'] ?? 'Creative group · Est. 2016 · Bandung / Jakarta / Bali' }}</p>
+    <p class="eyebrow" data-en="{{ $heroTagline }}" data-id="{{ $heroTagline }}">{{ $heroTagline }}</p>
 
     <h1 class="display h-mega hero__title">
       <span data-split data-en="Create to" data-id="Cipta untuk">Create to</span>
@@ -129,9 +128,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
     <div class="hero__meta">
       <p class="lede" data-delay="1"
-         data-en="{{ $content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.' }}"
-         data-id="{{ $content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.' }}">
-        {{ $content['home']['hero']['description'] ?? 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.' }}</p>
+         data-en="{{ $heroDescription }}"
+         data-id="{{ $heroDescription }}">{{ $heroDescription }}</p>
 
       <div class="hero__cta" data-delay="2">
         <a class="btn" href="{{ url('work') }}" data-magnet=".3" data-cursor="View">
@@ -148,7 +146,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         <span class="scroll-cue__line" aria-hidden="true"></span>
         <span class="mono" data-en="Scroll" data-id="Gulir">Scroll</span>
       </div>
-      <p class="mono faint" data-en="65+ brands trusted us" data-id="65+ brand mempercayai kami">65+ brands trusted us</p>
+      <p class="mono faint" data-en="{{ $heroTagline }}" data-id="{{ $heroTagline }}">{{ $heroTagline }}</p>
     </div>
   </div>
 </section>
@@ -157,54 +155,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section aria-label="Clients" style="padding-block:clamp(1.6rem,3vw,2.4rem);border-block:1px solid var(--line)">
   <div class="marquee marquee--logos marquee--slim" style="--spd:52s" aria-label="Clients">
     <div class="marquee__track">
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bri.webp') }}" alt="BRI" width="168" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bca.webp') }}" alt="BCA" width="183" height="56" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/mandiri.webp') }}" alt="Bank Mandiri" width="200" height="58" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/mandirisyariah.webp') }}" alt="Mandiri Syariah" width="126" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/btpn.webp') }}" alt="BTPN" width="107" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/permatabank.webp') }}" alt="Permata Bank" width="200" height="50" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bjb-syariah.webp') }}" alt="bjb Syariah" width="88" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/qris.webp') }}" alt="QRIS" width="172" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/agi.webp') }}" alt="AGI" width="193" height="39" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/daihatsu1.webp') }}" alt="Daihatsu" width="200" height="23" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/suzuki.webp') }}" alt="Suzuki" width="200" height="39" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/jeep2.webp') }}" alt="Jeep" width="160" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/citylink.webp') }}" alt="Citilink" width="200" height="47" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/panorama.webp') }}" alt="Panorama" width="200" height="34" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/auto.webp') }}" alt="Auto2000" width="200" height="44" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/JackalHolidays.webp') }}" alt="Jackal Holidays" width="82" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/telkomsel.webp') }}" alt="Telkomsel" width="200" height="46" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bumn.webp') }}" alt="BUMN" width="200" height="40" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/pos.webp') }}" alt="Pos Indonesia" width="97" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kemenhub.webp') }}" alt="Kemenhub" width="55" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/kemendag.webp') }}" alt="Kemendag" width="55" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/PUPR.webp') }}" alt="PUPR" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/LPSK.webp') }}" alt="LPSK" width="64" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Bapenda.webp') }}" alt="Bapenda" width="200" height="61" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Pemkab.webp') }}" alt="Pemkab" width="69" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/STPbdg.webp') }}" alt="STP Bandung" width="67" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kailogistik.webp') }}" alt="KAI Logistik" width="140" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/pp.webp') }}" alt="PP" width="103" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/tut.webp') }}" alt="TUT" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/bandungterkini1.webp') }}" alt="Bandung Terkini" width="168" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Oscar.webp') }}" alt="Oscar" width="198" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Index.webp') }}" alt="Index" width="86" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/demeter.webp') }}" alt="Demeter" width="170" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Louella.webp') }}" alt="Louella" width="171" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Kaula.webp') }}" alt="Kaula" width="164" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Lois.webp') }}" alt="Lois" width="136" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/LoisGoods.webp') }}" alt="Lois Goods" width="97" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Sahaja.webp') }}" alt="Sahaja" width="110" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Trickburger.webp') }}" alt="Trickburger" width="154" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Sucre.webp') }}" alt="Sucre" width="156" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Royal.webp') }}" alt="Royal" width="69" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Hip.webp') }}" alt="Hip" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Oval.webp') }}" alt="Oval" width="63" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Giri.webp') }}" alt="Giri" width="137" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/grandasalam.webp') }}" alt="Grand Asalam" width="200" height="54" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Multiguna.webp') }}" alt="Multiguna" width="200" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/CaTechno.webp') }}" alt="Ca Techno" width="77" height="64" loading="lazy" decoding="async"></span>
-      <span class="marquee__item"><img src="{{ asset('assets/img/clients/Ossmap.webp') }}" alt="Ossmap" width="200" height="62" loading="lazy" decoding="async"></span>
+      @foreach($clientLogos as $logo)
+      <span class="marquee__item"><img src="{{ asset('assets/img/clients/' . $logo->image) }}" alt="{{ $logo->name }}" loading="lazy" decoding="async"></span>
+      @endforeach
     </div>
   </div>
 </section>
@@ -213,11 +166,10 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section manifesto">
   <div class="shell grid g-12">
     <div class="col-5">
-      <p class="eyebrow">01 — <span data-en="{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}" data-id="Manifesto">{{ $content['home']['section_01']['subtitle'] ?? 'MANIFESTO' }}</span></p>
+      <p class="eyebrow">01 — <span data-en="{{ $manifestoSubtitle }}" data-id="{{ $manifestoSubtitle }}">{{ $manifestoSubtitle }}</span></p>
     </div>
     <div class="col-7">
-      <p data-en="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}"
-         data-id="{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}">{{ $content['home']['section_01']['title'] ?? 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.' }}</p>
+      <p data-en="{{ $manifestoTitle }}" data-id="{{ $manifestoTitle }}">{{ $manifestoTitle }}</p>
       <div class="row gap-m mt-l fade-up" data-delay="1">
         <a class="tlink green" href="{{ url('about') }}" data-en="Read our story" data-id="Baca cerita kami">Read our story</a>
         <span class="faint">·</span>
@@ -231,22 +183,12 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:0">
   <div class="shell">
     <div class="stats">
-      <div class="stat fade-up">
-        <p class="stat__n"><span data-count="9">0</span><sup>+</sup></p>
-        <p class="stat__l" data-en="Years in the industry" data-id="Tahun di industri">Years in the industry</p>
+      @foreach($stats as $index => $stat)
+      <div class="stat fade-up"{{ $index > 0 ? ' data-delay="' . $index . '"' : '' }}>
+        <p class="stat__n"><span data-count="{{ $stat->value }}">0</span>@if($stat->suffix)<sup>{{ $stat->suffix }}</sup>@endif</p>
+        <p class="stat__l" data-en="{{ $stat->label }}" data-id="{{ $stat->label }}">{{ $stat->label }}</p>
       </div>
-      <div class="stat fade-up" data-delay="1">
-        <p class="stat__n"><span data-count="65">0</span><sup>+</sup></p>
-        <p class="stat__l" data-en="Clients served" data-id="Klien dilayani">Clients served</p>
-      </div>
-      <div class="stat fade-up" data-delay="2">
-        <p class="stat__n"><span data-count="5">0</span></p>
-        <p class="stat__l" data-en="Specialist divisions" data-id="Divisi spesialis">Specialist divisions</p>
-      </div>
-      <div class="stat fade-up" data-delay="3">
-        <p class="stat__n"><span data-count="3">0</span></p>
-        <p class="stat__l" data-en="Cities: Bandung, Jakarta, Bali" data-id="Kota: Bandung, Jakarta, Bali">Cities: Bandung, Jakarta, Bali</p>
-      </div>
+      @endforeach
     </div>
   </div>
 </section>
@@ -258,19 +200,21 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
       <div class="svc__sticky">
         <p class="eyebrow">02 — <span data-en="Capabilities" data-id="Kapabilitas">Capabilities</span></p>
+        @php
+            $capTitle = \App\Models\Setting::get('home_capabilities_title', "Five studios,<br>one standard");
+            $capDesc = \App\Models\Setting::get('home_capabilities_description', 'Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax.');
+        @endphp
         <h2 class="display h-xxl mt-s fade-up" data-delay="1"
-            data-en="Five studios,<br>one standard" data-id="Lima studio,<br>satu standar">Five studios,<br>one standard</h2>
+            data-en="{!! $capTitle !!}" data-id="{!! $capTitle !!}">{!! $capTitle !!}</h2>
         <p class="lede mt-s fade-up" data-delay="2"
-           data-en="Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax."
-           data-id="Brief satu tim dan dapatkan seluruh rantai — strategi, desain, film, panggung, dan produk fisik — tanpa biaya estafet antar-agensi.">
-          Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax.</p>
+           data-en="{{ $capDesc }}"
+           data-id="{{ $capDesc }}">
+          {{ $capDesc }}</p>
 
         <ul class="svc__index" aria-hidden="true">
-          @if(isset($categories) && count($categories) > 0)
-              @foreach($categories as $index => $cat)
-              <li class="svc__idx {{ $index === 0 ? 'on' : '' }}"><span class="n">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span><span class="t">{{ $cat->name }}</span></li>
-              @endforeach
-          @endif
+          @foreach($capabilities as $index => $cap)
+          <li class="svc__idx {{ $index === 0 ? 'on' : '' }}"><span class="n">{{ str_pad($cap->number, 2, '0', STR_PAD_LEFT) }}</span><span class="t">{{ $cap->title }}</span></li>
+          @endforeach
         </ul>
 
         <a class="btn btn--ghost mt-l" href="{{ url('services') }}" data-magnet=".25"
@@ -278,97 +222,95 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       </div>
 
       <div class="svc__panels">
-          @if(isset($categories) && count($categories) > 0)
-              @foreach($categories as $index => $cat)
-              <article class="card fade-up" data-cursor="{{ $cat->name }}">
-                <div class="card__art">
-                  @if($cat->image)
-                      <img src="{{ $cat->image }}" style="width:100%;height:100%;object-fit:cover;">
-                  @else
-                      @switch($index)
-                          @case(0)
-                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-              <defs><linearGradient id="ga1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#3ddc97" stop-opacity=".9"/><stop offset="1" stop-color="#c8f24e" stop-opacity=".25"/></linearGradient></defs>
-              <rect width="400" height="240" fill="#0d0f13"/>
-              <g stroke="#23272f"><path d="M0 60h400M0 120h400M0 180h400M100 0v240M200 0v240M300 0v240"/></g>
-              <circle cx="140" cy="120" r="66" fill="url(#ga1)"/>
-              <rect x="196" y="54" width="132" height="132" rx="10" fill="none" stroke="#3ddc97" stroke-width="1.5"/>
-              <path d="M196 186 328 54" stroke="#c8f24e" stroke-width="1.5"/>
-            </svg>
-                              @break
-                          @case(1)
-                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-              <rect width="400" height="240" fill="#0d0f13"/>
-              <g fill="#23272f"><rect x="0" y="16" width="400" height="14"/><rect x="0" y="210" width="400" height="14"/></g>
-              <g fill="#07080a"><rect x="14" y="19" width="20" height="8" rx="2"/><rect x="54" y="19" width="20" height="8" rx="2"/><rect x="94" y="19" width="20" height="8" rx="2"/><rect x="134" y="19" width="20" height="8" rx="2"/><rect x="174" y="19" width="20" height="8" rx="2"/><rect x="214" y="19" width="20" height="8" rx="2"/><rect x="254" y="19" width="20" height="8" rx="2"/><rect x="294" y="19" width="20" height="8" rx="2"/><rect x="334" y="19" width="20" height="8" rx="2"/>
-                <rect x="14" y="213" width="20" height="8" rx="2"/><rect x="54" y="213" width="20" height="8" rx="2"/><rect x="94" y="213" width="20" height="8" rx="2"/><rect x="134" y="213" width="20" height="8" rx="2"/><rect x="174" y="213" width="20" height="8" rx="2"/><rect x="214" y="213" width="20" height="8" rx="2"/><rect x="254" y="213" width="20" height="8" rx="2"/><rect x="294" y="213" width="20" height="8" rx="2"/><rect x="334" y="213" width="20" height="8" rx="2"/></g>
-              <rect x="40" y="52" width="150" height="136" rx="8" fill="#14171d" stroke="#23272f"/>
-              <rect x="210" y="52" width="150" height="136" rx="8" fill="#14171d" stroke="#23272f"/>
-              <circle cx="115" cy="120" r="26" fill="none" stroke="#3ddc97" stroke-width="2"/>
-              <path d="M107 108l22 12-22 12z" fill="#3ddc97"/>
-              <path d="M226 160c30-56 60-56 90 0" stroke="#c8f24e" stroke-width="2" fill="none"/>
-            </svg>
-                              @break
-                          @case(2)
-                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-              <defs><radialGradient id="gb1" cx=".5" cy="0" r="1">
-                <stop offset="0" stop-color="#3ddc97" stop-opacity=".55"/><stop offset="1" stop-color="#3ddc97" stop-opacity="0"/></radialGradient></defs>
-              <rect width="400" height="240" fill="#0d0f13"/>
-              <path d="M120 0 40 240h120L200 0z" fill="url(#gb1)"/>
-              <path d="M280 0 200 240h120L360 0z" fill="url(#gb1)" opacity=".6"/>
-              <rect x="60" y="180" width="280" height="8" rx="4" fill="#23272f"/>
-              <g fill="#3ddc97"><circle cx="110" cy="200" r="5"/><circle cx="150" cy="206" r="5"/><circle cx="190" cy="198" r="5"/><circle cx="230" cy="207" r="5"/><circle cx="270" cy="199" r="5"/></g>
-              <rect x="150" y="60" width="100" height="60" rx="6" fill="none" stroke="#c8f24e" stroke-width="1.5"/>
-            </svg>
-                              @break
-                          @case(3)
-                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-              <rect width="400" height="240" fill="#0d0f13"/>
-              <g stroke="#23272f" fill="none">
-                <rect x="30" y="50" width="100" height="140" rx="10"/>
-                <rect x="150" y="50" width="100" height="140" rx="10"/>
-                <rect x="270" y="50" width="100" height="140" rx="10"/>
-              </g>
-              <path d="M60 90h40v70H60z" fill="#3ddc97" opacity=".85"/>
-              <circle cx="200" cy="120" r="34" fill="none" stroke="#c8f24e" stroke-width="2"/>
-              <path d="M186 120h28M200 106v28" stroke="#c8f24e" stroke-width="2"/>
-              <path d="M300 100h40v20h-40zM300 130h40v30h-40z" fill="#23272f"/>
-              <rect x="300" y="100" width="40" height="20" fill="#3ddc97" opacity=".5"/>
-            </svg>
-                              @break
-                          @case(4)
-                              <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-              <rect width="400" height="240" fill="#0d0f13"/>
-              <g stroke="#23272f"><path d="M0 60h400M0 180h400M100 0v240M300 0v240"/></g>
-              <!-- orthogonal agent graph, echoing the hero's routing -->
-              <g stroke="#3ddc97" stroke-width="1.5" fill="none">
-                <path d="M60 120h60v-60h80"/>
-                <path d="M60 120h60v60h80"/>
-                <path d="M280 60h40v60h20"/>
-                <path d="M280 180h40v-60"/>
-              </g>
-              <rect x="150" y="96" width="100" height="48" rx="6" fill="#14171d" stroke="#c8f24e" stroke-width="1.5"/>
-              <g fill="#c8f24e"><rect x="170" y="116" width="8" height="8"/><rect x="196" y="116" width="8" height="8"/><rect x="222" y="116" width="8" height="8"/></g>
-              <g fill="#3ddc97"><rect x="54" y="114" width="12" height="12"/><rect x="274" y="54" width="12" height="12"/><rect x="274" y="174" width="12" height="12"/><rect x="334" y="114" width="12" height="12"/></g>
-            </svg>
-                              @break
-                          @default
-                              <div style="width:100%;height:100%;background:#0d0f13;display:flex;align-items:center;justify-content:center;color:#3ddc97;font-size:2rem;"><i class="bi bi-image"></i></div>
-                      @endswitch
-                  @endif
-                </div>
-                <p class="card__num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</p>
-                <h3>{{ $cat->name }}</h3>
-                <p>{{ $cat->description }}</p>
-                <div class="card__tags">
-                  @foreach($cat->items as $item)
-                      <span class="tag">{{ $item->title }}</span>
-                  @endforeach
-                </div>
-              </article>
+          @foreach($capabilities as $index => $cap)
+          @php $tags = json_decode($cap->tags, true) ?: []; @endphp
+          <article class="card fade-up" data-cursor="{{ $cap->title }}">
+            <div class="card__art">
+              @if($cap->image)
+                  <img src="{{ asset('img/' . $cap->image) }}" style="width:100%;height:100%;object-fit:cover;">
+              @else
+                  @switch($index)
+                      @case(0)
+                          <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+            <defs><linearGradient id="ga1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#3ddc97" stop-opacity=".9"/><stop offset="1" stop-color="#c8f24e" stop-opacity=".25"/></linearGradient></defs>
+            <rect width="400" height="240" fill="#0d0f13"/>
+            <g stroke="#23272f"><path d="M0 60h400M0 120h400M0 180h400M100 0v240M200 0v240M300 0v240"/></g>
+            <circle cx="140" cy="120" r="66" fill="url(#ga1)"/>
+            <rect x="196" y="54" width="132" height="132" rx="10" fill="none" stroke="#3ddc97" stroke-width="1.5"/>
+            <path d="M196 186 328 54" stroke="#c8f24e" stroke-width="1.5"/>
+          </svg>
+                          @break
+                      @case(1)
+                          <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+            <rect width="400" height="240" fill="#0d0f13"/>
+            <g fill="#23272f"><rect x="0" y="16" width="400" height="14"/><rect x="0" y="210" width="400" height="14"/></g>
+            <g fill="#07080a"><rect x="14" y="19" width="20" height="8" rx="2"/><rect x="54" y="19" width="20" height="8" rx="2"/><rect x="94" y="19" width="20" height="8" rx="2"/><rect x="134" y="19" width="20" height="8" rx="2"/><rect x="174" y="19" width="20" height="8" rx="2"/><rect x="214" y="19" width="20" height="8" rx="2"/><rect x="254" y="19" width="20" height="8" rx="2"/><rect x="294" y="19" width="20" height="8" rx="2"/><rect x="334" y="19" width="20" height="8" rx="2"/>
+              <rect x="14" y="213" width="20" height="8" rx="2"/><rect x="54" y="213" width="20" height="8" rx="2"/><rect x="94" y="213" width="20" height="8" rx="2"/><rect x="134" y="213" width="20" height="8" rx="2"/><rect x="174" y="213" width="20" height="8" rx="2"/><rect x="214" y="213" width="20" height="8" rx="2"/><rect x="254" y="213" width="20" height="8" rx="2"/><rect x="294" y="213" width="20" height="8" rx="2"/><rect x="334" y="213" width="20" height="8" rx="2"/></g>
+            <rect x="40" y="52" width="150" height="136" rx="8" fill="#14171d" stroke="#23272f"/>
+            <rect x="210" y="52" width="150" height="136" rx="8" fill="#14171d" stroke="#23272f"/>
+            <circle cx="115" cy="120" r="26" fill="none" stroke="#3ddc97" stroke-width="2"/>
+            <path d="M107 108l22 12-22 12z" fill="#3ddc97"/>
+            <path d="M226 160c30-56 60-56 90 0" stroke="#c8f24e" stroke-width="2" fill="none"/>
+          </svg>
+                          @break
+                      @case(2)
+                          <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+            <defs><radialGradient id="gb1" cx=".5" cy="0" r="1">
+              <stop offset="0" stop-color="#3ddc97" stop-opacity=".55"/><stop offset="1" stop-color="#3ddc97" stop-opacity="0"/></radialGradient></defs>
+            <rect width="400" height="240" fill="#0d0f13"/>
+            <path d="M120 0 40 240h120L200 0z" fill="url(#gb1)"/>
+            <path d="M280 0 200 240h120L360 0z" fill="url(#gb1)" opacity=".6"/>
+            <rect x="60" y="180" width="280" height="8" rx="4" fill="#23272f"/>
+            <g fill="#3ddc97"><circle cx="110" cy="200" r="5"/><circle cx="150" cy="206" r="5"/><circle cx="190" cy="198" r="5"/><circle cx="230" cy="207" r="5"/><circle cx="270" cy="199" r="5"/></g>
+            <rect x="150" y="60" width="100" height="60" rx="6" fill="none" stroke="#c8f24e" stroke-width="1.5"/>
+          </svg>
+                          @break
+                      @case(3)
+                          <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+            <rect width="400" height="240" fill="#0d0f13"/>
+            <g stroke="#23272f" fill="none">
+              <rect x="30" y="50" width="100" height="140" rx="10"/>
+              <rect x="150" y="50" width="100" height="140" rx="10"/>
+              <rect x="270" y="50" width="100" height="140" rx="10"/>
+            </g>
+            <path d="M60 90h40v70H60z" fill="#3ddc97" opacity=".85"/>
+            <circle cx="200" cy="120" r="34" fill="none" stroke="#c8f24e" stroke-width="2"/>
+            <path d="M186 120h28M200 106v28" stroke="#c8f24e" stroke-width="2"/>
+            <path d="M300 100h40v20h-40zM300 130h40v30h-40z" fill="#23272f"/>
+            <rect x="300" y="100" width="40" height="20" fill="#3ddc97" opacity=".5"/>
+          </svg>
+                          @break
+                      @case(4)
+                          <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+            <rect width="400" height="240" fill="#0d0f13"/>
+            <g stroke="#23272f"><path d="M0 60h400M0 180h400M100 0v240M300 0v240"/></g>
+            <g stroke="#3ddc97" stroke-width="1.5" fill="none">
+              <path d="M60 120h60v-60h80"/>
+              <path d="M60 120h60v60h80"/>
+              <path d="M280 60h40v60h20"/>
+              <path d="M280 180h40v-60"/>
+            </g>
+            <rect x="150" y="96" width="100" height="48" rx="6" fill="#14171d" stroke="#c8f24e" stroke-width="1.5"/>
+            <g fill="#c8f24e"><rect x="170" y="116" width="8" height="8"/><rect x="196" y="116" width="8" height="8"/><rect x="222" y="116" width="8" height="8"/></g>
+            <g fill="#3ddc97"><rect x="54" y="114" width="12" height="12"/><rect x="274" y="54" width="12" height="12"/><rect x="274" y="174" width="12" height="12"/><rect x="334" y="114" width="12" height="12"/></g>
+          </svg>
+                          @break
+                      @default
+                          <div style="width:100%;height:100%;background:#0d0f13;display:flex;align-items:center;justify-content:center;color:#3ddc97;font-size:2rem;"><i class="bi bi-image"></i></div>
+                  @endswitch
+              @endif
+            </div>
+            <p class="card__num">{{ str_pad($cap->number, 2, '0', STR_PAD_LEFT) }}</p>
+            <h3>{{ $cap->title }}</h3>
+            <p>{{ $cap->description }}</p>
+            <div class="card__tags">
+              @foreach($tags as $tag)
+                  <span class="tag">{{ $tag }}</span>
               @endforeach
-          @endif
+            </div>
+          </article>
+          @endforeach
         </div>
       </div>
     </div>
@@ -390,30 +332,23 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <div class="hscroll">
   <div class="hscroll__vp">
     <div class="hscroll__track">
-      @if(isset($projects) && count($projects) > 0)
-          @foreach($projects as $proj)
-          <article class="wcard" data-cursor="Case study">
-            <div class="wcard__art">
-                @if($proj->hero_image)
-                    <img src="{{ $proj->hero_image }}" style="width:100%;height:100%;object-fit:cover;">
-                @else
-                    <svg viewBox="0 0 620 440" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
-                        <defs><linearGradient id="w1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0e3c8c"/><stop offset="1" stop-color="#07080a"/></linearGradient></defs>
-                        <rect width="620" height="440" fill="url(#w1)"/>
-                        <circle cx="470" cy="120" r="150" fill="#3ddc97" opacity=".14"/>
-                        <rect x="60" y="150" width="230" height="150" rx="16" fill="#0b1226" stroke="#3ddc97" stroke-opacity=".5"/>
-                    </svg>
-                @endif
-            </div>
-            <div class="wcard__body">
-              <div class="wcard__meta"><span>{{ $proj->client ?? 'Client' }}</span><span>&bull;</span><span>{{ $proj->category ?? 'Category' }}</span><span>&bull;</span><span>{{ $proj->year ?? 'Year' }}</span></div>
-              <h3>{{ $proj->title }}</h3>
-              <p>{{ $proj->challenge ?? $proj->description ?? '' }}</p>
-              <a class="tlink green mt-s" href="{{ route('case-study', $proj->id) }}">Read case study</a>
-            </div>
-          </article>
-          @endforeach
-      @endif
+      @foreach($works as $w)
+      <article class="wcard" data-cursor="Case study">
+        <div class="wcard__art">
+            @if(!empty($w['hero_image']))
+                <img src="{{ asset('img/' . $w['hero_image']) }}" style="width:100%;height:100%;object-fit:cover;">
+            @else
+                {!! \App\Support\Works::art($w, 0) !!}
+            @endif
+        </div>
+        <div class="wcard__body">
+          <div class="wcard__meta"><span>{{ \App\Support\Works::text($w['client']) }}</span><span>&bull;</span><span{!! \App\Support\Works::attrs($w['category']) !!}>{{ \App\Support\Works::text($w['category']) }}</span><span>&bull;</span><span>{{ $w['year'] }}</span></div>
+          <h3>{{ \App\Support\Works::text($w['title']) }}</h3>
+          <p>{{ \App\Support\Works::text($w['lede'] ?? '') }}</p>
+          <a class="tlink green mt-s" href="{{ url('work') }}" data-en="View project" data-id="Lihat proyek">View project</a>
+        </div>
+      </article>
+      @endforeach
     </div>
   </div>
 </div>
@@ -427,30 +362,16 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         data-id="Brand teregulasi, menuntut,<br>dan sangat terlihat">Regulated, demanding,<br>high-visibility brands</h2>
 
     <div class="sectors fade-up" data-delay="2">
+      @foreach($sectors as $sector)
       <div class="sector">
-        <h4 data-en="Finance — Banking" data-id="Keuangan — Perbankan">Finance &amp; Banking</h4>
-        <ul><li>BRI</li><li>BCA</li><li>Bank Mandiri</li><li>BTPN</li><li>Permata</li><li>bjb Syariah</li></ul>
+        <h4 data-en="{{ $sector->heading_en }}" data-id="{{ $sector->heading_id }}">{{ $sector->heading_en }}</h4>
+        <ul>
+          @foreach($sector->items->where('is_active', true) as $item)
+            <li>{{ $item->name }}</li>
+          @endforeach
+        </ul>
       </div>
-      <div class="sector">
-        <h4 data-en="Automotive — Transport" data-id="Otomotif — Transportasi">Automotive &amp; Transport</h4>
-        <ul><li>Daihatsu</li><li>Suzuki</li><li>Citilink</li><li>Jeep</li></ul>
-      </div>
-      <div class="sector">
-        <h4 data-en="Government — SOE" data-id="Pemerintah — BUMN">Government &amp; SOE</h4>
-        <ul><li>Kemenhub</li><li>Pos Indonesia</li><li>BUMN</li></ul>
-      </div>
-      <div class="sector">
-        <h4 data-en="Fashion — Lifestyle" data-id="Fesyen — Gaya Hidup">Fashion &amp; Lifestyle</h4>
-        <ul><li>Abigail</li><li>Demeter</li><li>Louella</li><li>+10 more</li></ul>
-      </div>
-      <div class="sector">
-        <h4 data-en="Food — Beverage" data-id="Makanan — Minuman">Food &amp; Beverage</h4>
-        <ul><li>Nutrigoat</li><li>Trickburger</li><li>Royal</li></ul>
-      </div>
-      <div class="sector">
-        <h4 data-en="Telco — Enterprise" data-id="Telko — Korporasi">Telco &amp; Enterprise</h4>
-        <ul><li>Telkomsel</li><li>Developers</li><li>Corporates</li></ul>
-      </div>
+      @endforeach
     </div>
   </div>
 </section>
@@ -459,48 +380,22 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:0">
   <div class="shell grid g-12">
     <div class="col-4">
-      <p class="eyebrow">05 — <span data-en="How we work" data-id="Cara kami bekerja">How we work</span></p>
+      <p class="eyebrow">{!! $processEyebrow !!}</p>
       <h2 class="display h-xl mt-s fade-up" data-delay="1"
-          data-en="A short line<br>to remarkable" data-id="Garis pendek<br>menuju luar biasa">A short line<br>to remarkable</h2>
+          data-en="{{ strip_tags($processTitleEn) }}"
+          data-id="{{ strip_tags($processTitleId) }}">{!! $processTitleEn !!}</h2>
     </div>
     <div class="col-8">
       <div class="steps">
-        <div class="step fade-up">
-          <span class="step__n">01</span>
+        @foreach($processSteps as $index => $step)
+        <div class="step fade-up"{{ $index > 0 ? ' data-delay="' . $index . '"' : '' }}>
+          <span class="step__n">{{ str_pad($step->step_number, 2, '0', STR_PAD_LEFT) }}</span>
           <div class="step__b">
-            <h3 data-en="Listen — frame" data-id="Dengar — rumuskan">Listen &amp; frame</h3>
-            <p data-en="We start by rewriting the brief in one sentence. If we can't, we haven't understood the business problem yet."
-               data-id="Kami mulai dengan menulis ulang brief dalam satu kalimat. Kalau belum bisa, berarti kami belum paham masalah bisnisnya.">
-              We start by rewriting the brief in one sentence. If we can't, we haven't understood the business problem yet.</p>
+            <h3 data-en="{{ $step->title_en }}" data-id="{{ $step->title_id }}">{{ $step->title_en }}</h3>
+            <p data-en="{{ $step->description_en }}" data-id="{{ $step->description_id }}">{{ $step->description_en }}</p>
           </div>
         </div>
-        <div class="step fade-up" data-delay="1">
-          <span class="step__n">02</span>
-          <div class="step__b">
-            <h3 data-en="Route options" data-id="Opsi jalur">Route options</h3>
-            <p data-en="Two or three genuinely different creative routes — costed, scheduled, and honest about trade-offs."
-               data-id="Dua atau tiga jalur kreatif yang benar-benar berbeda — lengkap dengan biaya, jadwal, dan trade-off yang jujur.">
-              Two or three genuinely different creative routes — costed, scheduled, and honest about trade-offs.</p>
-          </div>
-        </div>
-        <div class="step fade-up" data-delay="2">
-          <span class="step__n">03</span>
-          <div class="step__b">
-            <h3 data-en="Produce in-house" data-id="Produksi in-house">Produce in-house</h3>
-            <p data-en="Design, film, stage and merch under one roof, so revisions don't bounce between vendors."
-               data-id="Desain, film, panggung, dan merch dalam satu atap, sehingga revisi tidak memantul antar vendor.">
-              Design, film, stage and merch under one roof, so revisions don't bounce between vendors.</p>
-          </div>
-        </div>
-        <div class="step fade-up" data-delay="3">
-          <span class="step__n">04</span>
-          <div class="step__b">
-            <h3 data-en="Land it" data-id="Daratkan">Land it</h3>
-            <p data-en="Delivery, on-site supervision and a full asset handover — files you can still use in three years."
-               data-id="Pengiriman, supervisi di lokasi, dan serah terima aset lengkap — file yang masih bisa dipakai tiga tahun lagi.">
-              Delivery, on-site supervision and a full asset handover — files you can still use in three years.</p>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </div>
@@ -512,17 +407,18 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="quote fade-up">
       <div>
         <p class="eyebrow" style="margin-bottom:1.6rem">06 — <span data-en="From the founder" data-id="Dari pendiri">From the founder</span></p>
-        <blockquote data-en="&ldquo;To become a creative industry company with real, positive impact for every stakeholder — through solutions that are useful before they are beautiful.&rdquo;"
-                   data-id="&ldquo;Menjadi perusahaan industri kreatif yang berdampak positif bagi seluruh stakeholder — lewat solusi yang berguna sebelum ia indah.&rdquo;">
-          &ldquo;To become a creative industry company with real, positive impact for every stakeholder — through solutions that are useful before they are beautiful.&rdquo;</blockquote>
+        <blockquote data-en="&ldquo;{{ $founderQuote }}&rdquo;"
+                   data-id="&ldquo;{{ $founderQuote }}&rdquo;">
+          &ldquo;{{ $founderQuote }}&rdquo;</blockquote>
         <div class="quote__by">
-          <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-          <span><strong style="color:var(--ink)">Sona Lesmana</strong><br>
-            <span data-en="Founder &amp; CEO, Fugo Creative Group" data-id="Pendiri &amp; CEO, Fugo Creative Group">Founder &amp; CEO, Fugo Creative Group</span></span>
+          @php $founderImage = \App\Models\Setting::get('home_founder_image', 'Pa-Sona.jpg'); @endphp
+          <img src="{{ asset('assets/img/' . $founderImage) }}" alt="{{ $founderName }}" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+          <span><strong style="color:var(--ink)">{{ $founderName }}</strong><br>
+            <span data-en="{{ $founderTitle }}, Fugo Creative Group" data-id="{{ $founderTitle }}, Fugo Creative Group">{{ $founderTitle }}, Fugo Creative Group</span></span>
         </div>
       </div>
       <div class="quote__art">
-        <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        <img src="{{ asset('assets/img/' . $founderImage) }}" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
       </div>
     </div>
   </div>
@@ -532,12 +428,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section aria-hidden="true" style="padding-block:clamp(1rem,2vw,2rem)">
   <div class="marquee" style="--spd:26s">
     <div class="marquee__track">
-      <span class="marquee__item">Create to Elevate</span>
-      <span class="marquee__item">Design</span>
-      <span class="marquee__item">Film</span>
-      <span class="marquee__item">Events</span>
-      <span class="marquee__item">Merch</span>
-      <span class="marquee__item">AI</span>
+      @foreach($marqueeItems as $mItem)
+      <span class="marquee__item">{{ $mItem->text }}</span>
+      @endforeach
     </div>
   </div>
 </section>
@@ -547,9 +440,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="eyebrow is-plain fade-up" style="justify-content:center"
-       data-en="Available for Q4 2026 projects" data-id="Tersedia untuk proyek Q4 2026">Available for Q4 2026 projects</p>
+       data-en="{{ $ctaEyebrow }}" data-id="{{ $ctaEyebrow }}">{{ $ctaEyebrow }}</p>
     <h2 class="display cta__big mt-s fade-up" data-delay="1"
-        data-en="Let's build<br>something" data-id="Ayo bangun<br>sesuatu">Let's build<br>something</h2>
+        data-en="{{ $ctaTitle }}" data-id="{{ $ctaTitle }}">{!! $ctaTitle !!}</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="{{ url('contact') }}" data-magnet=".34" data-cursor="Go">
         <span data-en="Start a project" data-id="Mulai proyek">Start a project</span>
@@ -562,61 +455,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
 </main>
 
-<!-- — FOOTER — -->
-<footer class="foot">
-  <div class="shell">
-    <div class="foot__top">
-      <div>
-        <a class="brand" href="{{ url('') }}">
-          <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/>
-          </svg>
-          <span class="brand__txt">Fugo<span>Creative</span></span>
-        </a>
-        <p class="muted mt-m" style="max-width:34ch;font-size:.92rem"
-           data-en="PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016."
-           data-id="PT Fugo Creative Group — creative company yang menghadirkan solusi inovatif dan berdampak sejak 2016.">
-          PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016.</p>
-      </div>
-
-      <div>
-        <h5 data-en="Navigate" data-id="Navigasi">Navigate</h5>
-        <ul>
-          <li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li>
-          <li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li>
-          <li><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li>
-          <li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li>
-          <li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h5 data-en="Follow" data-id="Ikuti">Follow</h5>
-        <ul>
-          <li><a href="https://instagram.com/fugocreative" rel="noopener">Instagram</a></li>
-          <li><a href="https://id.linkedin.com/company/fugo-creativegroup" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://tiktok.com/@fugo.creative" rel="noopener">TikTok</a></li>
-          <li><a href="https://youtube.com/@fugocreative" rel="noopener">YouTube</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h5 data-en="Studios" data-id="Studio">Studios</h5>
-        <address><strong style="color:var(--ink)">Bandung — HQ</strong><br>Jl. Permata Taman Sari Raya No.21, Arcamanik</address>
-        <address><strong style="color:var(--ink)">Jakarta</strong><br>Jl. Srengseng Sawah No.16, Jagakarsa</address>
-        <address><strong style="color:var(--ink)">Bali</strong><br>Jl. Tukad Melangit, Samplangan, Gianyar</address>
-      </div>
-    </div>
-
-    <p class="display foot__word" aria-hidden="true">FUGO</p>
-
-    <div class="foot__bot">
-      <span>© 2026 PT Fugo Creative Group</span>
-      <span data-en="Concept redesign — Direction A "Signal"" data-id="Konsep redesain — Direction A "Signal"">Concept redesign — Direction A "Signal"</span>
-      <span><a href="tel:+6282121000680">+62 821 2100 0680</a></span>
-    </div>
-  </div>
-</footer>
+@include('partials.footer')
 
 <!--  motion stack 
      GSAP 3.13+ (free, all plugins incl. SplitText) · Lenis · Three.js.

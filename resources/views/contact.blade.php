@@ -67,7 +67,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <a class="nav__link" href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a>
       <a class="nav__link" href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a>
       <a class="nav__link" href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a>
-      <a class="nav__link" href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a>
+      <a class="nav__link" href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a>
       <a class="nav__link is-active" href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a>
     </nav>
     <div class="nav__side">
@@ -86,7 +86,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a></li>
     <li class="menu__item"><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li>
     <li class="menu__item"><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li>
-    <li class="menu__item"><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li>
+    <li class="menu__item"><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li>
     <li class="menu__item"><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
@@ -99,14 +99,15 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="crumb fade-up"><a href="{{ url('') }}">Fugo</a> <span>/</span> <span data-en="Contact" data-id="Kontak">Contact</span></p>
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="Tell us what&lt;br&gt;you need to land" data-id="Ceritakan apa&lt;br&gt;yang harus mendarat">Tell us what<br>you need to land</h1>
-    <p class="lede mt-m fade-up" data-delay="2" data-en="A short brief is enough to start. We reply within one working day with questions, a route and a rough number — before any meeting." data-id="Brief singkat sudah cukup untuk memulai. Kami membalas dalam satu hari kerja dengan pertanyaan, opsi jalur, dan estimasi kasar — sebelum rapat apa pun.">A short brief is enough to start. We reply within one working day with questions, a route and a rough number — before any meeting.</p>
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! $contactHeadline !!}</h1>
+    <p class="lede mt-m fade-up" data-delay="2">{{ $contactSubtitle }}</p>
   </div>
 </section>
 <section class="section" style="padding-top:clamp(1.5rem,3vw,2.5rem)">
   <div class="shell grid g-12">
     <div class="col-7">
-      <form data-demo class="fade-up" novalidate>
+      <form action="{{ route('contact.send') }}" method="POST" class="fade-up" novalidate>
+        @csrf
         <p class="mono faint" data-en="What do you need?" data-id="Apa yang Anda butuhkan?">What do you need?</p>
         <div class="chips" role="group">
           <button type="button" class="chip on">Design</button>
@@ -118,23 +119,24 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
         <div class="field" style="margin-top:2rem">
           <label for="f-name" data-en="Your name" data-id="Nama Anda">Your name</label>
-          <input id="f-name" type="text" autocomplete="name" required>
-        </div>
-        <div class="field">
-          <label for="f-co" data-en="Company" data-id="Perusahaan">Company</label>
-          <input id="f-co" type="text" autocomplete="organization">
+          <input id="f-name" name="name" type="text" autocomplete="name" required value="{{ old('name') }}">
+          @error('name') <span style="color:#ef4444;font-size:.8rem">{{ $message }}</span> @enderror
         </div>
         <div class="field">
           <label for="f-mail" data-en="Email" data-id="Email">Email</label>
-          <input id="f-mail" type="email" autocomplete="email" required>
+          <input id="f-mail" name="email" type="email" autocomplete="email" required value="{{ old('email') }}">
+          @error('email') <span style="color:#ef4444;font-size:.8rem">{{ $message }}</span> @enderror
         </div>
         <div class="field">
           <label for="f-msg" data-en="What are we making?" data-id="Apa yang akan kita buat?">What are we making?</label>
-          <textarea id="f-msg" rows="4"></textarea>
+          <textarea id="f-msg" name="message" rows="4">{{ old('message') }}</textarea>
+          @error('message') <span style="color:#ef4444;font-size:.8rem">{{ $message }}</span> @enderror
         </div>
 
         <button class="btn btn--green mt-l" type="submit" data-magnet=".3" data-en="Send the brief" data-id="Kirim brief">Send the brief</button>
-        <p class="mono faint mt-m" data-en="This prototype form does not send anything yet." data-id="Formulir prototipe ini belum mengirim apa pun.">This prototype form does not send anything yet.</p>
+        @if(session('success'))
+          <p class="mono mt-m" style="color:#10b981">{{ session('success') }}</p>
+        @endif
       </form>
     </div>
 
@@ -142,27 +144,27 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <div class="card fade-up" data-delay="1">
         <p class="card__num" data-en="Direct" data-id="Langsung">Direct</p>
         <h3 style="font-size:1.4rem">WhatsApp</h3>
-        <p><a class="tlink green" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $content['contact']['phone'] ?? '6282121000680') }}" rel="noopener">{{ $content['contact']['phone'] ?? '+62 821 2100 0680' }}</a></p>
-        <p class="mt-m"><a class="tlink" href="mailto:{{ $content['contact']['email'] ?? 'hello@fugocreativegroup.com' }}">{{ $content['contact']['email'] ?? 'hello@fugocreativegroup.com' }}</a></p>
+        <p><a class="tlink green" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contactPhone) }}" rel="noopener">{{ $contactPhone }}</a></p>
+        <p class="mt-m"><a class="tlink" href="mailto:{{ $contactEmail }}">{{ $contactEmail }}</a></p>
         <div class="card__tags" style="margin-top:1.6rem">
           <span class="tag" data-en="Reply within 1 working day" data-id="Balasan dalam 1 hari kerja">Reply within 1 working day</span>
         </div>
       </div>
 
       <div class="card fade-up mt-m" data-delay="2">
-        <p class="card__num" data-en="Studios" data-id="Studio">Studios</p>
+        <p class="card__num" data-en="Offices" data-id="Kantor">Offices</p>
         <address class="muted mt-s" style="font-style:normal;line-height:1.7">
-          <strong style="color:var(--ink)">Bandung — HQ</strong><br>{{ $content['contact']['address_bdg'] ?? 'Jl. Permata Taman Sari Raya No.21, Arcamanik' }}<br><br>
-          <strong style="color:var(--ink)">Jakarta</strong><br>Jl. Srengseng Sawah No.16, Jagakarsa<br><br>
-          <strong style="color:var(--ink)">Bali</strong><br>Jl. Tukad Melangit, Samplangan, Gianyar
+          <strong style="color:var(--ink)">Bandung — HQ</strong><br>{{ $contactAddressBdg }}<br><br>
+          <strong style="color:var(--ink)">Jakarta</strong><br>{{ $contactAddressJkt }}<br><br>
+          <strong style="color:var(--ink)">Bali</strong><br>{{ $contactAddressBali }}
         </address>
       </div>
 
       <div class="card fade-up mt-m" data-delay="3">
         <p class="card__num" data-en="Careers" data-id="Karier">Careers</p>
-        <h3 style="font-size:1.4rem" data-en="Join the studio" data-id="Gabung studio">Join the studio</h3>
+        <h3 style="font-size:1.4rem" data-en="Join the team" data-id="Gabung tim">Join the team</h3>
         <p data-en="We hire designers, editors and producers in Bandung and Jakarta. Send work, not a cover letter." data-id="Kami merekrut desainer, editor, dan produser di Bandung dan Jakarta. Kirim karya, bukan surat lamaran.">We hire designers, editors and producers in Bandung and Jakarta. Send work, not a cover letter.</p>
-        <a class="tlink green mt-s" href="mailto:hello@fugocreativegroup.com" data-en="Send your portfolio" data-id="Kirim portofolio">Send your portfolio</a>
+        <a class="tlink green mt-s" href="mailto:{{ $contactEmail }}" data-en="Send your portfolio" data-id="Kirim portofolio">Send your portfolio</a>
       </div>
     </div>
   </div>
@@ -181,7 +183,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       </div>
       <div>
         <h5 data-en="Navigate" data-id="Navigasi">Navigate</h5>
-        <ul><li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li><li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li><li><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li><li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li></ul>
+        <ul><li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li><li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li><li><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li><li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li></ul>
       </div>
       <div>
         <h5 data-en="Follow" data-id="Ikuti">Follow</h5>
@@ -193,7 +195,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         </ul>
       </div>
       <div>
-        <h5 data-en="Studios" data-id="Studio">Studios</h5>
+        <h5 data-en="Offices" data-id="Kantor">Offices</h5>
         <address><strong style="color:var(--ink)">Bandung — HQ</strong><br>Jl. Permata Taman Sari Raya No.21, Arcamanik</address>
         <address><strong style="color:var(--ink)">Jakarta</strong><br>Jl. Srengseng Sawah No.16, Jagakarsa</address>
         <address><strong style="color:var(--ink)">Bali</strong><br>Jl. Tukad Melangit, Samplangan, Gianyar</address>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Studio — Fugo Creative — Indonesian Creative Group Since 2016</title>
+<title>About — Fugo Creative — Indonesian Creative Group Since 2016</title>
 <meta name="description" content="PT Fugo Creative Group started in 2016 printing merchandise in Bandung. Nine years on: five divisions, three cities, 65+ clients across finance, government and lifestyle.">
 <meta name="theme-color" content="#07080a">
 <link rel="canonical" href="https://fugocreativegroup.com/about.html">
@@ -11,14 +11,14 @@
 <meta property="og:site_name" content="Fugo Creative">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="id_ID">
-<meta property="og:title" content="Studio — Fugo Creative — Indonesian Creative Group Since 2016">
+<meta property="og:title" content="About — Fugo Creative — Indonesian Creative Group Since 2016">
 <meta property="og:description" content="PT Fugo Creative Group started in 2016 printing merchandise in Bandung. Nine years on: five divisions, three cities, 65+ clients across finance, government and lifestyle.">
 <meta property="og:url" content="https://fugocreativegroup.com/about.html">
 <meta property="og:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Studio — Fugo Creative — Indonesian Creative Group Since 2016">
+<meta name="twitter:title" content="About — Fugo Creative — Indonesian Creative Group Since 2016">
 <meta name="twitter:description" content="PT Fugo Creative Group started in 2016 printing merchandise in Bandung. Nine years on: five divisions, three cities, 65+ clients across finance, government and lifestyle.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
@@ -67,7 +67,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <a class="nav__link" href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a>
       <a class="nav__link" href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a>
       <a class="nav__link" href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a>
-      <a class="nav__link is-active" href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a>
+      <a class="nav__link is-active" href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a>
       <a class="nav__link" href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a>
     </nav>
     <div class="nav__side">
@@ -86,7 +86,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a></li>
     <li class="menu__item"><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li>
     <li class="menu__item"><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li>
-    <li class="menu__item"><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li>
+    <li class="menu__item"><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li>
     <li class="menu__item"><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
@@ -98,19 +98,19 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="phead">
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
-    <p class="crumb fade-up"><a href="{{ url('') }}">Fugo</a> <span>/</span> <span data-en="Studio" data-id="Studio">Studio</span></p>
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="A creative group,&lt;br&gt;not a vendor list" data-id="Creative group,&lt;br&gt;bukan daftar vendor">A creative group,<br>not a vendor list</h1>
-    <p class="lede mt-m fade-up" data-delay="2" data-en="We started in 2016 printing merchandise. Nine years later we run five divisions across three cities — and we still answer the phone ourselves." data-id="Kami mulai pada 2016 dengan mencetak merchandise. Sembilan tahun kemudian kami menjalankan lima divisi di tiga kota — dan kami masih mengangkat telepon sendiri.">We started in 2016 printing merchandise. Nine years later we run five divisions across three cities — and we still answer the phone ourselves.</p>
+    <p class="crumb fade-up"><a href="{{ url('') }}">Fugo</a> <span>/</span> <span data-en="About" data-id="Tentang">About</span></p>
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! \App\Models\Setting::get('about_page_headline', 'A creative group,<br>not a vendor list') !!}</h1>
+    <p class="lede mt-m fade-up" data-delay="2">{{ \App\Models\Setting::get('about_page_subtitle', 'We started in 2016 printing merchandise. Nine years later we run five divisions across three cities — and we still answer the phone ourselves.') }}</p>
   </div>
 </section>
 <section class="section" style="padding-top:clamp(2rem,4vw,3rem)">
   <div class="shell grid g-12">
     <div class="col-5">
-      <p class="eyebrow fade-up" data-en="Our belief" data-id="Keyakinan kami">Our belief</p>
+      <p class="eyebrow fade-up">{{ \App\Models\Setting::get('about_belief_title', 'Our belief') }}</p>
     </div>
     <div class="col-7">
-      <p class="h-lg fade-up" style="font-size:clamp(1.3rem,2.6vw,2rem);max-width:24ch" data-en="Every brief can be solved with creativity, an innovative route, and execution that actually lands." data-id="Setiap brief bisa diselesaikan dengan kreativitas, jalur inovatif, dan eksekusi yang benar-benar mendarat.">Every brief can be solved with creativity, an innovative route, and execution that actually lands.</p>
-      <p class="lede mt-m fade-up" data-delay="1" data-en="We reject the word impossible. Not as a slogan — as a working method: when a route is blocked we go and find the next one, and we tell you what it costs before you commit." data-id="Kami menolak kata mustahil. Bukan sebagai slogan — tapi sebagai metode kerja: ketika satu jalur tertutup, kami cari jalur berikutnya, dan kami sampaikan biayanya sebelum Anda memutuskan.">We reject the word impossible. Not as a slogan — as a working method: when a route is blocked we go and find the next one, and we tell you what it costs before you commit.</p>
+      <p class="h-lg fade-up" style="font-size:clamp(1.3rem,2.6vw,2rem);max-width:24ch">{{ \App\Models\Setting::get('about_belief_text', 'Every brief can be solved with creativity, an innovative route, and execution that actually lands.') }}</p>
+      <p class="lede mt-m fade-up" data-delay="1">{{ \App\Models\Setting::get('about_belief_elaboration', 'We reject the word impossible. Not as a slogan — as a working method: when a route is blocked we go and find the next one, and we tell you what it costs before you commit.') }}</p>
     </div>
   </div>
 </section>
@@ -134,36 +134,12 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     </div>
     <div class="col-8">
       <div class="steps">
-        
-        <div class="step fade-up">
-          <span class="step__n">2016</span>
-          <div class="step__b"><p class="muted" style="padding-top:.4rem" data-en="Founded as a merchandise production channel in Bandung." data-id="Berdiri sebagai kanal produksi merchandise di Bandung.">Founded as a merchandise production channel in Bandung.</p></div>
+        @foreach($timelines as $index => $timeline)
+        <div class="step fade-up" @if($index > 0) data-delay="{{ min($index, 5) }}" @endif>
+          <span class="step__n">{{ $timeline->year }}</span>
+          <div class="step__b"><p class="muted" style="padding-top:.4rem">{{ $timeline->description }}</p></div>
         </div>
-        <div class="step fade-up" data-delay="1">
-          <span class="step__n">2018</span>
-          <div class="step__b"><p class="muted" style="padding-top:.4rem" data-en="Production house division opens; first TVC work." data-id="Divisi production house dibuka; karya TVC pertama.">Production house division opens; first TVC work.</p></div>
-        </div>
-        <div class="step fade-up" data-delay="2">
-          <span class="step__n">2020</span>
-          <div class="step__b"><p class="muted" style="padding-top:.4rem" data-en="Incorporated as PT Fugo Creative Group." data-id="Resmi menjadi PT Fugo Creative Group.">Incorporated as PT Fugo Creative Group.</p></div>
-        </div>
-        <div class="step fade-up" data-delay="3">
-          <span class="step__n">2022</span>
-          <div class="step__b"><p class="muted" style="padding-top:.4rem" data-en="Event organizer division formalised." data-id="Divisi event organizer diresmikan.">Event organizer division formalised.</p></div>
-        </div>
-        <div class="step fade-up" data-delay="4">
-          <span class="step__n">2024</span>
-          <div class="step__b"><p class="muted" style="padding-top:.4rem" data-en="Jakarta branch opens; Bali studio follows." data-id="Cabang Jakarta dibuka; studio Bali menyusul.">Jakarta branch opens; Bali studio follows.</p></div>
-        </div>
-        <div class="step fade-up" data-delay="5">
-          <span class="step__n">2025</span>
-          <div class="step__b"><p class="muted" style="padding-top:.4rem" data-en="65+ clients across finance, government, automotive and lifestyle." data-id="65+ klien di sektor keuangan, pemerintahan, otomotif, dan gaya hidup.">65+ clients across finance, government, automotive and lifestyle.</p></div>
-        </div>
-        <div class="step fade-up" data-delay="5">
-          <span class="step__n">2026</span>
-          <div class="step__b"><p class="muted" style="padding-top:.4rem" data-en="Artificial Intelligence division launched — agents and automation as the fifth studio." data-id="Divisi Artificial Intelligence diluncurkan — agent dan otomasi sebagai studio kelima.">Artificial Intelligence division launched — agents and automation as the fifth studio.</p></div>
-        </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </div>
@@ -176,8 +152,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         <p class="eyebrow" style="margin-bottom:1.6rem" data-en="From the founder" data-id="Dari pendiri">From the founder</p>
         <blockquote data-en="{{ $content['about']['founder']['quote'] }}" data-id="{{ $content['about']['founder']['quote'] }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
         <div class="quote__by">
-          @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
-            <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+          @if($ceoProfile && $ceoProfile->photo)
+            <img src="{{ asset($ceoProfile->photo) }}" alt="{{ $ceoProfile->name }}" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           @else
             <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           @endif
@@ -186,8 +162,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         </div>
       </div>
       <div class="quote__art">
-        @if(isset($content['about']['founder']['image']) && $content['about']['founder']['image'])
-          <img src="{{ asset($content['about']['founder']['image']) }}" alt="{{ $content['about']['founder']['name'] }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        @if($ceoProfile && $ceoProfile->photo)
+          <img src="{{ asset($ceoProfile->photo) }}" alt="{{ $ceoProfile->name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
         @else
           <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
         @endif
@@ -198,20 +174,20 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
 <section class="section" style="padding-top:0">
   <div class="shell">
-    <p class="eyebrow fade-up" data-en="Studios" data-id="Studio">Studios</p>
+    <p class="eyebrow fade-up" data-en="Offices" data-id="Kantor">Offices</p>
     <h2 class="display h-xl mt-s fade-up" data-delay="1" data-en="Three cities" data-id="Tiga kota">Three cities</h2>
     <div class="fade-up" data-delay="2" style="display: flex; width: 100%; margin-top: 2.5rem; border: 1px solid rgba(255,255,255,.15); border-radius: 16px; overflow: hidden;">
       <div style="flex: 1; padding: 2rem 2.5rem; border-right: 1px solid rgba(255,255,255,.15); box-sizing: border-box;">
         <h4 style="margin: 0 0 0.8rem 0; font-size: 1.1rem; font-weight: 700; color: #fff;">Bandung — HQ</h4>
-        <p class="muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4; opacity: 0.7;">Jl. Permata Taman Sari Raya No.21, Arcamanik</p>
+        <p class="muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4; opacity: 0.7;">{{ \App\Models\Setting::get('contact_address_bdg', 'Jl. Permata Taman Sari Raya No.21, Arcamanik') }}</p>
       </div>
       <div style="flex: 1; padding: 2rem 2.5rem; border-right: 1px solid rgba(255,255,255,.15); box-sizing: border-box;">
         <h4 style="margin: 0 0 0.8rem 0; font-size: 1.1rem; font-weight: 700; color: #fff;">Jakarta</h4>
-        <p class="muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4; opacity: 0.7;">Jl. Srengseng Sawah No.16, Jagakarsa</p>
+        <p class="muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4; opacity: 0.7;">{{ \App\Models\Setting::get('contact_address_jkt', 'Jl. Srengseng Sawah No.16, Jagakarsa') }}</p>
       </div>
       <div style="flex: 1; padding: 2rem 2.5rem; box-sizing: border-box;">
         <h4 style="margin: 0 0 0.8rem 0; font-size: 1.1rem; font-weight: 700; color: #fff;">Bali</h4>
-        <p class="muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4; opacity: 0.7;">Jl. Tukad Melangit, Samplangan, Gianyar</p>
+        <p class="muted" style="margin: 0; font-size: 0.9rem; line-height: 1.4; opacity: 0.7;">{{ \App\Models\Setting::get('contact_address_bali', 'Jl. Tukad Melangit, Samplangan, Gianyar') }}</p>
       </div>
     </div>
   </div>
@@ -242,7 +218,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       </div>
       <div>
         <h5 data-en="Navigate" data-id="Navigasi">Navigate</h5>
-        <ul><li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li><li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li><li><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li><li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li></ul>
+        <ul><li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li><li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li><li><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li><li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li></ul>
       </div>
       <div>
         <h5 data-en="Follow" data-id="Ikuti">Follow</h5>
@@ -254,7 +230,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         </ul>
       </div>
       <div>
-        <h5 data-en="Studios" data-id="Studio">Studios</h5>
+        <h5 data-en="Offices" data-id="Kantor">Offices</h5>
         <address><strong style="color:var(--ink)">Bandung — HQ</strong><br>Jl. Permata Taman Sari Raya No.21, Arcamanik</address>
         <address><strong style="color:var(--ink)">Jakarta</strong><br>Jl. Srengseng Sawah No.16, Jagakarsa</address>
         <address><strong style="color:var(--ink)">Bali</strong><br>Jl. Tukad Melangit, Samplangan, Gianyar</address>

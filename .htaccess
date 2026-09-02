@@ -1,17 +1,14 @@
-﻿<IfModule mod_rewrite.c>
+<IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /public/direction-a-motion/
 
-    # Stop if already in public/ - prevents loop when serving static files
-    RewriteRule ^public/ - [L]
-
-    # Serve static files (CSS, JS, images) from the public/ subfolder
+    # Biarkan file statis (gambar, css, js) dibaca dari folder public/
     RewriteRule ^(assets|_build\.js|_inline-gl\.js|hero-preview\.png|sitemap\.xml)(.*)$ public/$1$2 [L]
 
-    # For actual files (like our index.php), stop and serve directly
+    # Hentikan proses jika ini adalah file nyata (seperti index.php)
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
-    # Route all other requests to our proxy index.php
+    # Kirim SEMUA request halaman ke file index.php proxy kita
     RewriteRule ^ index.php [L]
 </IfModule>
