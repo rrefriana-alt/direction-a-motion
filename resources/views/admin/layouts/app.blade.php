@@ -40,6 +40,11 @@
         .sidebar-nav li a.active{color:var(--green-700);background:var(--green-50);border-left-color:var(--green-500);font-weight:600}
         .sidebar-nav li a.active i{color:var(--green-500)}
         .sidebar-nav li a i{font-size:1.05rem;width:1.15rem;text-align:center}
+        .sidebar-submenu{list-style:none;padding:0 0 0 1.5rem;margin:0;border-left:1px dashed var(--gray-200)}
+        .sidebar-submenu li{display:block}
+        .sidebar-submenu li a{display:flex;align-items:center;gap:.65rem;padding:.4rem 1.25rem;font-size:.78rem;font-weight:400;color:var(--gray-500);text-decoration:none;border-left:3px solid transparent;transition:all .2s}
+        .sidebar-submenu li a:hover{color:var(--gray-800);background:var(--gray-50)}
+        .sidebar-submenu li a.active{color:var(--green-700);background:var(--green-50);border-left-color:var(--green-500)}
         .sidebar-footer{margin-top:auto;padding:1rem 1.25rem;border-top:1px solid var(--gray-100)}
         .sidebar-user{display:flex;align-items:center;gap:.65rem}
         .sidebar-user .avatar{width:34px;height:34px;border-radius:50%;background:var(--green-500);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;flex-shrink:0}
@@ -222,7 +227,19 @@
             <li><a href="{{ route('admin.portfolio.index') }}" class="{{ request()->routeIs('admin.portfolio*') ? 'active' : '' }}"><i class="bi bi-briefcase"></i>Work</a></li>
             <li><a href="{{ route('admin.work-settings.edit') }}" class="{{ request()->routeIs('admin.work-settings*') ? 'active' : '' }}"><i class="bi bi-gear"></i>Work Page</a></li>
             <li><a href="{{ route('admin.services.index') }}" class="{{ request()->routeIs('admin.services*') ? 'active' : '' }}"><i class="bi bi-gear"></i>Services</a></li>
-            <li><a href="{{ route('admin.about.index') }}" class="{{ request()->routeIs('admin.about*') ? 'active' : '' }}"><i class="bi bi-building"></i>About</a></li>
+            <li>
+            <a href="{{ route('admin.about.index') }}" class="{{ request()->routeIs('admin.about*') && !request()->routeIs('admin.about.statistics*') && !request()->routeIs('admin.about.sectors*') && !request()->routeIs('admin.about.timeline*') && !request()->routeIs('admin.about.ceo*') && !request()->routeIs('admin.about.settings*') ? 'active' : '' }}">
+              <i class="bi bi-building"></i>About
+            </a>
+            <ul class="sidebar-submenu">
+              <li><a href="{{ route('admin.about.index') }}" class="{{ request()->routeIs('admin.about.index') ? 'active' : '' }}"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+              <li><a href="{{ route('admin.about.settings.edit') }}" class="{{ request()->routeIs('about.settings*') ? 'active' : '' }}"><i class="bi bi-gear"></i> Page Settings</a></li>
+              <li><a href="{{ route('admin.about.ceo-profile') }}" class="{{ request()->routeIs('admin.about.ceo-profile*') ? 'active' : '' }}"><i class="bi bi-person-check"></i> CEO Profile</a></li>
+              <li><a href="{{ route('admin.about.timeline.index') }}" class="{{ request()->routeIs('admin.about.timeline*') ? 'active' : '' }}"><i class="bi bi-clock-history"></i> Timeline</a></li>
+              <li><a href="{{ route('admin.about.statistics.index') }}" class="{{ request()->routeIs('admin.about.statistics*') ? 'active' : '' }}"><i class="bi bi-bar-chart-steps"></i> Statistics</a></li>
+              <li><a href="{{ route('admin.about.sectors.index') }}" class="{{ request()->routeIs('admin.about.sectors*') ? 'active' : '' }}"><i class="bi bi-tag"></i> Sectors</a></li>
+            </ul>
+          </li>
             <li><a href="{{ route('admin.contact.index') }}" class="{{ request()->routeIs('admin.contact*') && !request()->routeIs('admin.career*') ? 'active' : '' }}"><i class="bi bi-envelope"></i>Contact</a></li>
         </ul>
 

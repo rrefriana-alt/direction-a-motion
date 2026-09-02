@@ -26,13 +26,13 @@ Route::get('/', function () {
     $stats = \App\Models\Stat::where('is_active', true)->orderBy('sort_order')->get();
     $sectors = \App\Models\Sector::with('items')->where('is_active', true)->orderBy('sort_order')->get();
     $processSteps = \App\Models\ProcessStep::where('is_active', true)->orderBy('sort_order')->get();
-    $processEyebrow = \App\Models\Setting::get('home_process_eyebrow_en', '05 — How we work');
+    $processEyebrow = \App\Models\Setting::get('home_process_eyebrow_en', '05 ï¿½ How we work');
     $processTitleEn = \App\Models\Setting::get('home_process_title_en', 'A short line<br>to remarkable');
     $processTitleId = \App\Models\Setting::get('home_process_title_id', 'Garis pendek<br>menuju luar biasa');
 
     // Section settings
     $heroTagline = \App\Models\Setting::get('home_hero_tagline', '65+ brands trusted us');
-    $heroDescription = \App\Models\Setting::get('home_hero_description', 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.');
+    $heroDescription = \App\Models\Setting::get('home_hero_description', 'Design ï¿½ Production House ï¿½ Events ï¿½ Merch. An Indonesian creative group since 2016.');
     $manifestoSubtitle = \App\Models\Setting::get('home_manifesto_subtitle', 'MANIFESTO');
     $manifestoTitle = \App\Models\Setting::get('home_manifesto_title', 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.');
     $founderQuote = \App\Models\Setting::get('home_founder_quote', 'Creativity without execution is just a hallucination.');
@@ -89,7 +89,7 @@ Route::get('/contact', function () {
     $contactPhone = \App\Models\Setting::get('contact_phone', '+62 821 2100 0680');
     $contactEmail = \App\Models\Setting::get('contact_email', 'hello@fugocreativegroup.com');
     $contactHeadline = \App\Models\Setting::get('contact_page_headline', 'Tell us what you need to land');
-    $contactSubtitle = \App\Models\Setting::get('contact_page_subtitle', 'A short brief is enough to start. We reply within one working day with questions, a route and a rough number — before any meeting.');
+    $contactSubtitle = \App\Models\Setting::get('contact_page_subtitle', 'A short brief is enough to start. We reply within one working day with questions, a route and a rough number ï¿½ before any meeting.');
     $contactAddressBdg = \App\Models\Setting::get('contact_address_bdg', 'Jl. Permata Taman Sari Raya No.21, Arcamanik, Bandung');
     $contactAddressJkt = \App\Models\Setting::get('contact_address_jkt', 'Jl. Srengseng Sawah No.16, Jagakarsa, Jakarta Selatan');
     $contactAddressBali = \App\Models\Setting::get('contact_address_bali', 'Jl. Tukad Melangit, Samplangan, Gianyar, Bali');
@@ -234,15 +234,39 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::put('/work-settings', [\App\Http\Controllers\Admin\WorkSettingsController::class, 'update'])->name('work-settings.update');
 
     // ==================== ABOUT MODULE ====================
-    Route::get('/about', [AboutController::class, 'index'])->name('about.index');
-    Route::get('/about/ceo-profile', [AboutController::class, 'ceoProfile'])->name('about.ceo-profile');
-    Route::post('/about/ceo-profile', [AboutController::class, 'updateCeoProfile'])->name('about.ceo-profile.update');
-    Route::get('/about/timeline', [AboutController::class, 'timelineIndex'])->name('about.timeline.index');
-    Route::get('/about/timeline/create', [AboutController::class, 'timelineCreate'])->name('about.timeline.create');
-    Route::post('/about/timeline', [AboutController::class, 'timelineStore'])->name('about.timeline.store');
-    Route::get('/about/timeline/{timeline}/edit', [AboutController::class, 'timelineEdit'])->name('about.timeline.edit');
-    Route::put('/about/timeline/{timeline}', [AboutController::class, 'timelineUpdate'])->name('about.timeline.update');
-    Route::delete('/about/timeline/{timeline}', [AboutController::class, 'timelineDestroy'])->name('about.timeline.destroy');
+    Route::prefix('about')->name('about.')->group(function() {
+        Route::get('/', [AboutController::class, 'index'])->name('index');
+        Route::get('/settings', [AboutController::class, 'aboutHeaderEdit'])->name('settings.edit');
+        Route::put('/settings', [AboutController::class, 'aboutHeaderUpdate'])->name('settings.update');
+        Route::get('/ceo-profile', [AboutController::class, 'ceoProfile'])->name('ceo-profile');
+        Route::post('/ceo-profile', [AboutController::class, 'updateCeoProfile'])->name('ceo-profile.update');
+        Route::get('/timeline', [AboutController::class, 'timelineIndex'])->name('timeline.index');
+        Route::get('/timeline/create', [AboutController::class, 'timelineCreate'])->name('timeline.create');
+        Route::post('/timeline', [AboutController::class, 'timelineStore'])->name('timeline.store');
+        Route::get('/timeline/{timeline}/edit', [AboutController::class, 'timelineEdit'])->name('timeline.edit');
+        Route::put('/timeline/{timeline}', [AboutController::class, 'timelineUpdate'])->name('timeline.update');
+        Route::delete('/timeline/{timeline}', [AboutController::class, 'timelineDestroy'])->name('timeline.destroy');
+
+        // ==================== STATISTICS MODULE ====================
+        Route::get('/statistics', [AboutController::class, 'statisticsIndex'])->name('statistics.index');
+        Route::get('/statistics/create', [AboutController::class, 'statisticsCreate'])->name('statistics.create');
+        Route::post('/statistics', [AboutController::class, 'statisticsStore'])->name('statistics.store');
+        Route::get('/statistics/{stat}/edit', [AboutController::class, 'statisticsEdit'])->name('statistics.edit');
+        Route::put('/statistics/{stat}', [AboutController::class, 'statisticsUpdate'])->name('statistics.update');
+        Route::delete('/statistics/{stat}', [AboutController::class, 'statisticsDestroy'])->name('statistics.destroy');
+        Route::post('/statistics/reorder', [AboutController::class, 'statisticsReorder'])->name('statistics.reorder');
+        Route::post('/statistics/{stat}/toggle', [AboutController::class, 'statisticsToggle'])->name('statistics.toggle');
+
+        // ==================== SECTORS MODULE ====================
+        Route::get('/sectors', [AboutController::class, 'sectorIndex'])->name('sectors.index');
+        Route::get('/sectors/create', [AboutController::class, 'sectorCreate'])->name('sectors.create');
+        Route::post('/sectors', [AboutController::class, 'sectorStore'])->name('sectors.store');
+        Route::get('/sectors/{sector}/edit', [AboutController::class, 'sectorEdit'])->name('sectors.edit');
+        Route::put('/sectors/{sector}', [AboutController::class, 'sectorUpdate'])->name('sectors.update');
+        Route::delete('/sectors/{sector}', [AboutController::class, 'sectorDestroy'])->name('sectors.destroy');
+        Route::post('/sectors/reorder', [AboutController::class, 'sectorReorder'])->name('sectors.reorder');
+        Route::post('/sectors/{sector}/toggle', [AboutController::class, 'sectorToggle'])->name('sectors.toggle');
+    });
 
     // ==================== SERVICES MODULE ====================
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
