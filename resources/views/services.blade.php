@@ -124,10 +124,10 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
               <dt class="h-lg" style="font-size:1.05rem">{{ $detail->category_name }}</dt>
               <dd class="muted" style="font-size:.92rem;margin-top:.35rem">
                 @if($detail->items && $detail->items->count())
-                  {{ Str::replace($detail->items->pluck('item_name')->implode(', '), '>', '') }}
+                  {{ \Illuminate\Support\Str::replace('>', '', $detail->items->pluck('item_name')->implode(', ')) }}
                 @else
-                  {{ Str::replace($detail->content, '>', '') }}
-                @endif>
+                  {{ \Illuminate\Support\Str::replace('>', '', $detail->content) }}
+@endif
               </dd>
             </div>
             @endforeach
