@@ -52,9 +52,10 @@ Route::get('/', function () {
 
 Route::get('/work', function () {
     $works = \App\Support\Works::all();
+    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
     $workTitle = \App\Models\Setting::get('work_page_title', 'Selected work');
     $workLede = \App\Models\Setting::get('work_page_lede', 'Ten projects that show the range: a national TVC, a dealer system used in 200+ locations, a three-day expo, and 12,000 kits shipped on time.');
-    return view('work', compact('works', 'workTitle', 'workLede'));
+    return view('work', compact('works', 'latestPosts', 'workTitle', 'workLede'));
 })->name('work');
 
 Route::get('/services', function () {
@@ -68,7 +69,8 @@ Route::get('/services', function () {
         ->orderBy('sort_order')
         ->get();
     $engagements = \App\Models\EngagementModel::where('is_active', true)->orderBy('sort_order')->get();
-    return view('services', compact('categories', 'engagements'));
+    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
+    return view('services', compact('categories', 'engagements', 'latestPosts'));
 })->name('services');
 
 Route::get('/about', function () {
@@ -85,7 +87,8 @@ Route::get('/about', function () {
             ],
         ],
     ];
-    return view('about', compact('content', 'timelines', 'ceoProfile', 'statistics'));
+    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
+    return view('about', compact('content', 'timelines', 'ceoProfile', 'statistics', 'latestPosts'));
 })->name('about');
 Route::get('/contact', function () {
     $contactPhone = \App\Models\Setting::get('contact_phone', '+62 821 2100 0680');
@@ -95,7 +98,8 @@ Route::get('/contact', function () {
     $contactAddressBdg = \App\Models\Setting::get('contact_address_bdg', 'Jl. Permata Taman Sari Raya No.21, Arcamanik, Bandung');
     $contactAddressJkt = \App\Models\Setting::get('contact_address_jkt', 'Jl. Srengseng Sawah No.16, Jagakarsa, Jakarta Selatan');
     $contactAddressBali = \App\Models\Setting::get('contact_address_bali', 'Jl. Tukad Melangit, Samplangan, Gianyar, Bali');
-    return view('contact', compact('contactPhone', 'contactEmail', 'contactHeadline', 'contactSubtitle', 'contactAddressBdg', 'contactAddressJkt', 'contactAddressBali'));
+    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
+    return view('contact', compact('contactPhone', 'contactEmail', 'contactHeadline', 'contactSubtitle', 'contactAddressBdg', 'contactAddressJkt', 'contactAddressBali', 'latestPosts'));
 })->name('contact');
 
 Route::get('/journal', function (Illuminate\Http\Request $request) {
