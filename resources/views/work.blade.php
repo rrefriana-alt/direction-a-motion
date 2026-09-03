@@ -61,10 +61,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <header class="nav is-solid">
   <div class="nav__in">
     <a class="brand" href="{{ url('') }}" aria-label="Fugo Creative — home">
-      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/>
-      </svg>
-      <span class="brand__txt">Fugo<span>Creative</span></span>
+      <img class="brand__mark" src="{{ asset('assets/img/logo-full.webp') }}" alt="Fugo Creative">
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a class="nav__link" href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a>
@@ -248,8 +245,7 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
     <div class="foot__top">
       <div>
         <a class="brand" href="{{ url('') }}">
-          <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/></svg>
-          <span class="brand__txt">Fugo<span>Creative</span></span>
+          <img class="brand__mark" src="{{ asset('assets/img/logo-full.webp') }}" alt="Fugo Creative">
         </a>
         <p class="muted mt-m" style="max-width:34ch;font-size:.92rem" data-en="PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016." data-id="PT Fugo Creative Group — creative company yang menghadirkan solusi inovatif dan berdampak sejak 2016.">PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016.</p>
       </div>
