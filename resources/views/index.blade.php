@@ -424,6 +424,127 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   </div>
 </section>
 
+<!-- — JOURNAL — -->
+<section class="section" style="padding-top:0">
+  <div class="shell">
+    <div class="row between end gap-m">
+      <div>
+        <p class="eyebrow">07 — <span data-en="Journal" data-id="Jurnal">Journal</span></p>
+        <h2 class="display h-xxl mt-s fade-up" data-delay="1"
+            data-en="Notes from<br>the studio" data-id="Catatan dari<br>studio">Notes from<br>the studio</h2>
+        <p class="lede mt-s fade-up" data-delay="2"
+           data-en="Process notes, project stories and takes on the industry — written by the people who make the work."
+           data-id="Catatan proses, cerita proyek, dan pandangan soal industri — ditulis oleh orang-orang yang membuat karyanya.">Process notes, project stories and takes on the industry — written by the people who make the work.</p>
+      </div>
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index') }}"
+         data-en="All articles →" data-id="Semua artikel →">All articles →</a>
+    </div>
+
+    @if($latestPosts->count())
+    @php $feat = $latestPosts->first(); $rest = $latestPosts->skip(1); @endphp
+    <div class="bfeat mt-l">
+      <article class="bfeat__card fade-up" data-cursor="Read">
+        <a class="bfeat__art" href="{{ route('journal.show', $feat->slug) }}" aria-label="{{ $feat->title }}">
+          @if(!empty($feat->featured_image) && file_exists(public_path('img/' . $feat->featured_image)))
+            <img src="{{ asset('img/' . $feat->featured_image) }}" alt="{{ $feat->title }}" loading="lazy">
+          @else
+            @include('partials.jart', ['seed' => $feat->id * 7 + 1])
+          @endif
+          <span class="tag">{{ $feat->category_display }}</span>
+        </a>
+        <div class="bfeat__body">
+          <p class="card__num">01 — <span data-en="Latest" data-id="Terbaru">Latest</span> &nbsp;·&nbsp; {{ $feat->published_date?->format('d M Y') }}</p>
+          <h3><a href="{{ route('journal.show', $feat->slug) }}">{{ $feat->title }}</a></h3>
+          <p class="bfeat__ex">{{ $feat->excerpt }}</p>
+          <div class="bfeat__by">
+            <span class="bfeat__avatar" aria-hidden="true">{{ strtoupper(mb_substr($feat->author ?? 'F', 0, 1)) }}</span>
+            <span>{{ $feat->author }}<br><span class="faint">{{ $feat->read_time }} min read</span></span>
+          </div>
+          <div class="bcard__foot">
+            <a class="btn btn--sm" href="{{ route('journal.show', $feat->slug) }}">
+              <span data-en="Read article" data-id="Baca artikel">Read article</span>
+              <span class="ico" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <div class="bfeat__side">
+        @foreach($rest as $j => $post)
+        <article class="bmini fade-up" data-delay="{{ $j + 1 }}" data-cursor="Read">
+          <a class="bmini__thumb" href="{{ route('journal.show', $post->slug) }}" aria-label="{{ $post->title }}">
+            @if(!empty($post->featured_image) && file_exists(public_path('img/' . $post->featured_image)))
+              <img src="{{ asset('img/' . $post->featured_image) }}" alt="{{ $post->title }}" loading="lazy">
+            @else
+              @include('partials.jart', ['seed' => $post->id * 3 + 2])
+            @endif
+          </a>
+          <div class="bmini__txt">
+            <div class="bcard__meta"><span>0{{ $j + 2 }}</span><span class="dot">&bull;</span><span>{{ $post->category_display }}</span><span class="dot">&bull;</span><span>{{ $post->published_date?->format('d M Y') }}</span></div>
+            <h4><a href="{{ route('journal.show', $post->slug) }}">{{ $post->title }}</a></h4>
+            <a class="tlink green" href="{{ route('journal.show', $post->slug) }}"
+               data-en="Read →" data-id="Baca →">Read →</a>
+          </div>
+        </article>
+        @endforeach
+        <a class="bmini bmini--more fade-up" data-delay="3" href="{{ route('journal.index') }}">
+          <span class="bmini__txt">
+            <span class="bcard__meta"><span data-en="Archive" data-id="Arsip">Archive</span></span>
+            <span class="bmini__more-t" data-en="Browse all articles →" data-id="Lihat semua artikel →">Browse all articles →</span>
+          </span>
+          <span class="bmini__arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+    @else
+    <div class="bfeat mt-l">
+      <article class="bfeat__card fade-up" data-cursor="Read">
+        <a class="bfeat__art" href="{{ route('journal.index') }}" aria-label="Journal">
+          @include('partials.jart', ['seed' => 41])
+          <span class="tag">Insights</span>
+        </a>
+        <div class="bfeat__body">
+          <p class="card__num">01 — <span data-en="Latest" data-id="Terbaru">Latest</span></p>
+          <h3><a href="{{ route('journal.index') }}">How we take a brief from deck to stage</a></h3>
+          <p class="bfeat__ex">A look inside our end-to-end process — strategy, design, film, stage and physical product under one roof.</p>
+          <div class="bcard__foot">
+            <a class="btn btn--sm" href="{{ route('journal.index') }}">
+              <span data-en="Browse journal" data-id="Lihat jurnal">Browse journal</span>
+              <span class="ico" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </article>
+      <div class="bfeat__side">
+        @foreach([
+          ['n' => '02', 'cat' => 'Events', 'title' => 'What it takes to run a three-day expo'],
+          ['n' => '03', 'cat' => 'Company', 'title' => '65+ brands later: what we keep learning'],
+        ] as $j => $fb)
+        <article class="bmini fade-up" data-delay="{{ $j + 1 }}">
+          <a class="bmini__thumb" href="{{ route('journal.index') }}" aria-label="{{ $fb['title'] }}">
+            @include('partials.jart', ['seed' => 43 + $j])
+          </a>
+          <div class="bmini__txt">
+            <div class="bcard__meta"><span>{{ $fb['n'] }}</span><span class="dot">&bull;</span><span>{{ $fb['cat'] }}</span></div>
+            <h4><a href="{{ route('journal.index') }}">{{ $fb['title'] }}</a></h4>
+            <a class="tlink green" href="{{ route('journal.index') }}"
+               data-en="Browse →" data-id="Lihat →">Browse →</a>
+          </div>
+        </article>
+        @endforeach
+        <a class="bmini bmini--more fade-up" data-delay="3" href="{{ route('journal.index') }}">
+          <span class="bmini__txt">
+            <span class="bcard__meta"><span data-en="Archive" data-id="Arsip">Archive</span></span>
+            <span class="bmini__more-t" data-en="Browse all articles →" data-id="Lihat semua artikel →">Browse all articles →</span>
+          </span>
+          <span class="bmini__arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+    @endif
+  </div>
+</section>
+
 <!-- — BIG MARQUEE — -->
 <section aria-hidden="true" style="padding-block:clamp(1rem,2vw,2rem)">
   <div class="marquee" style="--spd:26s">

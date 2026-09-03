@@ -40,12 +40,13 @@ Route::get('/', function () {
     $founderTitle = \App\Models\Setting::get('home_founder_title', 'Founder & CEO');
     $ctaEyebrow = \App\Models\Setting::get('home_cta_eyebrow', 'Available for Q4 2026 projects');
     $ctaTitle = \App\Models\Setting::get('home_cta_title', "Let's build<br>something");
+    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(3)->get();
 
     return view('index', compact(
         'capabilities', 'works', 'categories', 'clientLogos', 'marqueeItems', 'stats', 'sectors',
         'processSteps', 'processEyebrow', 'processTitleEn', 'processTitleId',
         'heroTagline', 'heroDescription', 'manifestoSubtitle', 'manifestoTitle',
-        'founderQuote', 'founderName', 'founderTitle', 'ctaEyebrow', 'ctaTitle'
+        'founderQuote', 'founderName', 'founderTitle', 'ctaEyebrow', 'ctaTitle', 'latestPosts'
     ));
 })->name('home');
 
@@ -96,6 +97,26 @@ Route::get('/contact', function () {
     $contactAddressBali = \App\Models\Setting::get('contact_address_bali', 'Jl. Tukad Melangit, Samplangan, Gianyar, Bali');
     return view('contact', compact('contactPhone', 'contactEmail', 'contactHeadline', 'contactSubtitle', 'contactAddressBdg', 'contactAddressJkt', 'contactAddressBali'));
 })->name('contact');
+
+Route::get('/journal', function (Illuminate\Http\Request $request) {
+    $categories = ['company', 'industry', 'events', 'updates', 'insights'];
+    $activeCategory = $request->query('category');
+    $query = \App\Models\News::published()->orderByDesc('published_date');
+    if ($activeCategory && in_array($activeCategory, $categories)) {
+        $query->where('category', $activeCategory);
+    }
+    $posts = $query->paginate(9)->withQueryString();
+    return view('journal', compact('posts', 'categories', 'activeCategory'));
+})->name('journal.index');
+
+Route::get('/journal/{slug}', function ($slug) {
+    $post = \App\Models\News::published()->where('slug', $slug)->firstOrFail();
+    $post->increment('view_count');
+    $morePosts = \App\Models\News::published()->where('id', '!=', $post->id)->orderByDesc('published_date')->take(3)->get();
+    $newerPost = \App\Models\News::published()->where('published_date', '>', $post->published_date)->orderBy('published_date')->first();
+    $olderPost = \App\Models\News::published()->where('published_date', '<', $post->published_date)->orderByDesc('published_date')->first();
+    return view('journal-show', compact('post', 'morePosts', 'newerPost', 'olderPost'));
+})->name('journal.show');
 
 Route::get('/case-study', fn() => view('case-study'))->name('case-study.static');
 Route::get('/case-study/project/{id}', function ($id) {

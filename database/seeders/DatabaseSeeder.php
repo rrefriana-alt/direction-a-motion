@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SectorsSeeder::class,
             ProcessStepsSeeder::class,
             MarqueeItemSeeder::class,
+            NewsSeeder::class,
         ]);
     }
 }
