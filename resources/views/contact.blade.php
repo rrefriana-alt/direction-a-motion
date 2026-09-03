@@ -213,43 +213,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
 </main>
 
-<footer class="foot">
-  <div class="shell">
-    <div class="foot__top">
-      <div>
-        <a class="brand" href="{{ url('') }}">
-          <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/></svg>
-          <span class="brand__txt">Fugo<span>Creative</span></span>
-        </a>
-        <p class="muted mt-m" style="max-width:34ch;font-size:.92rem" data-en="PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016." data-id="PT Fugo Creative Group — creative company yang menghadirkan solusi inovatif dan berdampak sejak 2016.">PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016.</p>
-      </div>
-      <div>
-        <h5 data-en="Navigate" data-id="Navigasi">Navigate</h5>
-        <ul><li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li><li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li><li><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li><li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li></ul>
-      </div>
-      <div>
-        <h5 data-en="Follow" data-id="Ikuti">Follow</h5>
-        <ul>
-          <li><a href="https://instagram.com/fugocreative" rel="noopener">Instagram</a></li>
-          <li><a href="https://id.linkedin.com/company/fugo-creativegroup" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://tiktok.com/@fugo.creative" rel="noopener">TikTok</a></li>
-          <li><a href="https://youtube.com/@fugocreative" rel="noopener">YouTube</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5 data-en="Offices" data-id="Kantor">Offices</h5>
-        <address><strong style="color:var(--ink)">Bandung — HQ</strong><br>Jl. Permata Taman Sari Raya No.21, Arcamanik</address>
-        <address><strong style="color:var(--ink)">Jakarta</strong><br>Jl. Srengseng Sawah No.16, Jagakarsa</address>
-        <address><strong style="color:var(--ink)">Bali</strong><br>Jl. Tukad Melangit, Samplangan, Gianyar</address>
-      </div>
-    </div>
-    <p class="display foot__word" aria-hidden="true">FUGO</p>
-    <div class="foot__bot">
-      <span>© 2026 PT Fugo Creative Group</span>
-      <span><a href="tel:+6282121000680">+62 821 2100 0680</a></span>
-    </div>
-  </div>
-</footer>
+@include('partials.footer')
 <!-- — motion stack ────────────────────────────────────────────────
      GSAP 3.13+ (free, all plugins incl. SplitText) — Lenis.
      Three.js is index-only — the WebGL hero does not exist on inner pages.
