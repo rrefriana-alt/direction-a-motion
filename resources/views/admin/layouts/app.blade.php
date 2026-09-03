@@ -238,19 +238,7 @@
             <li><a href="{{ route('admin.portfolio.index') }}" class="{{ request()->routeIs('admin.portfolio*') ? 'active' : '' }}"><i class="bi bi-briefcase"></i>Work</a></li>
             <li><a href="{{ route('admin.work-settings.edit') }}" class="{{ request()->routeIs('admin.work-settings*') ? 'active' : '' }}"><i class="bi bi-gear"></i>Work Page</a></li>
             <li><a href="{{ route('admin.services.index') }}" class="{{ request()->routeIs('admin.services*') ? 'active' : '' }}"><i class="bi bi-gear"></i>Services</a></li>
-            <li>
-            <a href="{{ route('admin.about.index') }}" class="{{ request()->routeIs('admin.about*') && !request()->routeIs('admin.about.statistics*') && !request()->routeIs('admin.about.sectors*') && !request()->routeIs('admin.about.timeline*') && !request()->routeIs('admin.about.ceo*') && !request()->routeIs('admin.about.settings*') ? 'active' : '' }}">
-              <i class="bi bi-building"></i>About
-            </a>
-            <ul class="sidebar-submenu">
-              <li><a href="{{ route('admin.about.index') }}" class="{{ request()->routeIs('admin.about.index') ? 'active' : '' }}"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-              <li><a href="{{ route('admin.about.settings.edit') }}" class="{{ request()->routeIs('admin.about.settings*') ? 'active' : '' }}"><i class="bi bi-gear"></i> Page Settings</a></li>
-              <li><a href="{{ route('admin.about.ceo-profile') }}" class="{{ request()->routeIs('admin.about.ceo-profile*') ? 'active' : '' }}"><i class="bi bi-person-check"></i> CEO Profile</a></li>
-              <li><a href="{{ route('admin.about.timeline.index') }}" class="{{ request()->routeIs('admin.about.timeline*') ? 'active' : '' }}"><i class="bi bi-clock-history"></i> Timeline</a></li>
-              <li><a href="{{ route('admin.about.statistics.index') }}" class="{{ request()->routeIs('admin.about.statistics*') ? 'active' : '' }}"><i class="bi bi-bar-chart-steps"></i> Statistics</a></li>
-              <li><a href="{{ route('admin.about.sectors.index') }}" class="{{ request()->routeIs('admin.about.sectors*') ? 'active' : '' }}"><i class="bi bi-tag"></i> Sectors</a></li>
-            </ul>
-          </li>
+            <li><a href="{{ route('admin.about.index') }}" class="{{ request()->routeIs('admin.about*') ? 'active' : '' }}"><i class="bi bi-building"></i>About</a></li>
             <li><a href="{{ route('admin.contact.index') }}" class="{{ request()->routeIs('admin.contact*') && !request()->routeIs('admin.career*') ? 'active' : '' }}"><i class="bi bi-envelope"></i>Contact</a></li>
         </ul>
 
