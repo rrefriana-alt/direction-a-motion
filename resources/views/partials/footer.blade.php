@@ -63,7 +63,6 @@
 
     <div class="foot__bot">
       <span>© {{ date('Y') }} PT Fugo Creative Group</span>
-      <span data-en="Concept redesign — Direction A &quot;Signal&quot;" data-id="Konsep redesain — Direction A &quot;Signal&quot;">Concept redesign — Direction A "Signal"</span>
       <span><a href="tel:{{ str_replace(' ', '', $footerPhone) }}">{{ $footerPhone }}</a></span>
     </div>
   </div>
