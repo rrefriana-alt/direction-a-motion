@@ -117,7 +117,7 @@ const cta = `
   </div>
 </section>`;
 
-const foot = (label) => `
+const foot = () => `
 <footer class="foot">
   <div class="shell">
     <div class="foot__top">
@@ -151,7 +151,6 @@ const foot = (label) => `
     <p class="display foot__word" aria-hidden="true">FUGO</p>
     <div class="foot__bot">
       <span>© 2026 PT Fugo Creative Group</span>
-      <span>${label}</span>
       <span><a href="tel:+6282121000680">+62 821 2100 0680</a></span>
     </div>
   </div>
@@ -171,7 +170,7 @@ const foot = (label) => `
 const page = ({ file, title, desc, body, withCta = true }) =>
   fs.writeFileSync(__dirname + '/' + file,
     head(title, desc, file) + nav(file) + '\n<main>\n' + body + (withCta ? cta : '') + '\n</main>\n' +
-    foot('Concept redesign — Direction A “Signal”'));
+    foot());
 
 /* ---------- shared bits ---------- */
 const phead = (num, kicker, kickerId, h, hId, lede, ledeId) => `

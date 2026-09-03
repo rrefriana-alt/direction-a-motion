@@ -152,7 +152,6 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <p class="display foot__word" aria-hidden="true">FUGO</p>
     <div class="foot__bot">
       <span>© 2026 PT Fugo Creative Group</span>
-      <span>Concept redesign — Direction A “Signal”</span>
       <span><a href="tel:+6282121000680">+62 821 2100 0680</a></span>
     </div>
   </div>
