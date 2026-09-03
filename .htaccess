@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /public/direction-a-motion/
+    RewriteBase /
 
     # Biarkan file statis (gambar, css, js) dibaca dari folder public/
     RewriteRule ^(assets|_build\.js|_inline-gl\.js|hero-preview\.png|sitemap\.xml)(.*)$ public/$1$2 [L]

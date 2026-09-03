@@ -1,7 +1,7 @@
 <?php
 // Proxy untuk Shared Hosting
-$_SERVER['SCRIPT_NAME'] = '/public/direction-a-motion/index.php';
-$_SERVER['PHP_SELF']    = '/public/direction-a-motion/index.php';
+$_SERVER['SCRIPT_NAME'] = '/index.php';
+$_SERVER['PHP_SELF']    = '/index.php';
 
 define('LARAVEL_START', microtime(true));
 
