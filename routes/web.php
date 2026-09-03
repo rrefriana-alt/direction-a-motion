@@ -32,7 +32,7 @@ Route::get('/', function () {
 
     // Section settings
     $heroTagline = \App\Models\Setting::get('home_hero_tagline', '65+ brands trusted us');
-    $heroDescription = \App\Models\Setting::get('home_hero_description', 'Design � Production House � Events � Merch. An Indonesian creative group since 2016.');
+    $heroDescription = \App\Models\Setting::get('home_hero_description', 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.');
     $manifestoSubtitle = \App\Models\Setting::get('home_manifesto_subtitle', 'MANIFESTO');
     $manifestoTitle = \App\Models\Setting::get('home_manifesto_title', 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.');
     $founderQuote = \App\Models\Setting::get('home_founder_quote', 'Creativity without execution is just a hallucination.');
