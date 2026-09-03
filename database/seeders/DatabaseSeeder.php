@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             TimelineSeeder::class,
             CeoProfileSeeder::class,
             ProjectsFromCuratedSeeder::class,
-            StatisticsSeeder::class,
             StatsSeeder::class,
             CapabilitiesSeeder::class,
             ClientLogoSeeder::class,

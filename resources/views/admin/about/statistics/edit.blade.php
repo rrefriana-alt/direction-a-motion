@@ -3,82 +3,84 @@
 @section('page-title', 'Edit Statistic')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.about.index') }}">About</a></li>
     <li class="breadcrumb-item"><a href="{{ route('admin.about.statistics.index') }}">Statistics</a></li>
     <li class="breadcrumb-item active">Edit</li>
 @endsection
 
-@push('styles')
-<style>
-    .fg{display:flex;flex-direction:column;gap:.25rem;margin-bottom:1rem;}
-    .fg-label{font-size:.75rem;font-weight:600;color:var(--gray-700);}
-    .fg-input{border:1px solid var(--gray-300);border-radius:var(--radius-md);padding:.5rem .75rem;font-size:.8rem;color:var(--gray-900);transition:all .2s;}
-    .fg-input:focus{border-color:var(--green-500);box-shadow:0 0 0 3px rgba(16,185,129,.1);outline:none;}
-    textarea.fg-input{resize:vertical;min-height:60px;}
-    .fl-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-    .svc-toggle{position:relative;width:36px;height:20px;background:var(--gray-200);border-radius:10px;cursor:pointer;transition:background .2s;flex-shrink:0;}
-    .svc-toggle.on{background:var(--green-500);}
-    .svc-toggle::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.15);}
-    .svc-toggle.on::after{transform:translateX(16px);}
-    #alertContainer{position:fixed;top:1rem;right:1rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;}
-</style>
-@endpush
-
 @section('content')
-<div id="alertContainer"></div>
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h2>Edit Statistic</h2>
+        <p>Update this statistic entry.</p>
+    </div>
+    <a href="{{ route('admin.about.statistics.index') }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+</div>
 
-<form action="{{ route('admin.about.statistics.update', $stat->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <div class="card">
-        <div class="card-header">
-            <h3 style="margin:0"><i class="bi bi-pencil"></i> Edit Statistic</h3>
+<div class="card-white" style="max-width:640px">
+    <form action="{{ route('admin.about.statistics.update', $stat->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="form-section-title">Statistic Details</div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Value <span class="required">*</span></label>
+                    <input type="text" name="value" class="form-control @error('value') is-invalid @enderror" value="{{ old('value', $stat->value) }}" required>
+                    @error('value') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Suffix</label>
+                    <input type="text" name="suffix" class="form-control" value="{{ old('suffix', $stat->suffix ?? '') }}">
+                    <div class="form-text">Optional suffix after the value</div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="fl-2">
-                <div class="fg">
-                    <label class="fg-label">Value <span style="color:var(--danger)">*</span></label>
-                    <input type="text" name="value" class="fg-input" required value="{{ $stat->value }}">
-                </div>
-                <div class="fg">
-                    <label class="fg-label">Suffix</label>
-                    <input type="text" name="suffix" class="fg-input" value="{{ $stat->suffix ?? '' }}">
+
+        <div class="form-group">
+            <label class="form-label">Label <span class="required">*</span></label>
+            <input type="text" name="label" class="form-control @error('label') is-invalid @enderror" value="{{ old('label', $stat->label) }}" required>
+            @error('label') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Sort Order</label>
+                    <input type="number" name="sort_order" class="form-control" value="{{ old('sort_order', $stat->sort_order) }}" min="0">
                 </div>
             </div>
-
-            <div class="fg">
-                <label class="fg-label">Label <span style="color:var(--danger)">*</span></label>
-                <input type="text" name="label" class="fg-input" required value="{{ $stat->label }}">
-            </div>
-
-            <div class="fl-2">
-                <div class="fg">
-                    <label class="fg-label">Sort Order</label>
-                    <input type="number" name="sort_order" class="fg-input" min="0" value="{{ $stat->sort_order }}">
-                </div>
-                <div class="fg">
-                    <label class="fg-label">Status</label>
-                    <div style="display:flex;align-items:center;gap:.5rem;">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <div style="display:flex;align-items:center;gap:.5rem;padding-top:.35rem">
                         <div class="svc-toggle {{ $stat->is_active ? 'on' : '' }}" id="toggleStatus"></div>
-                        <span style="font-size:.75rem;color:var(--gray-600)" id="statusText">{{ $stat->is_active ? 'Active' : 'Inactive' }}</span>
+                        <span style="font-size:.78rem;color:var(--gray-600)" id="statusText">{{ $stat->is_active ? 'Active' : 'Inactive' }}</span>
                     </div>
                     <input type="hidden" name="is_active" value="{{ $stat->is_active ? '1' : '0' }}" id="statusInput">
                 </div>
             </div>
         </div>
-    </div>
 
-    <div style="display:flex;gap:.75rem;margin-top:1.25rem;justify-content:flex-end;">
-        <a href="{{ route('admin.about.statistics.index') }}" class="btn btn-secondary">Cancel</a>
-        <button type="submit" class="btn btn-primary">Update Statistic</button>
-    </div>
-</form>
+        <div class="form-actions">
+            <a href="{{ route('admin.about.statistics.index') }}" class="btn btn-secondary btn-sm">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save Changes</button>
+        </div>
+    </form>
+</div>
+@endsection
 
+@push('scripts')
 <script>
 document.getElementById('toggleStatus').addEventListener('click', function() {
     this.classList.toggle('on');
-    const isActive = this.classList.contains('on');
+    var isActive = this.classList.contains('on');
     document.getElementById('statusInput').value = isActive ? '1' : '0';
     document.getElementById('statusText').textContent = isActive ? 'Active' : 'Inactive';
 });
 </script>
-@endsection
+@endpush

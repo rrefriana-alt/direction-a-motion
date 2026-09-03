@@ -200,6 +200,17 @@
         .d-inline{display:inline}
         .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
+        /* ── Toggle Switch ── */
+        .svc-toggle{position:relative;width:36px;height:20px;background:var(--gray-200);border-radius:10px;cursor:pointer;transition:background .2s;flex-shrink:0}
+        .svc-toggle.on{background:var(--green-500)}
+        .svc-toggle::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+        .svc-toggle.on::after{transform:translateX(16px)}
+
+        /* ── Transition Utilities ── */
+        .opacity-0{opacity:0}
+        .opacity-100{opacity:1}
+        .transition{transition:all .2s ease}
+
     </style>
     @stack('styles')
 </head>
@@ -233,7 +244,7 @@
             </a>
             <ul class="sidebar-submenu">
               <li><a href="{{ route('admin.about.index') }}" class="{{ request()->routeIs('admin.about.index') ? 'active' : '' }}"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-              <li><a href="{{ route('admin.about.settings.edit') }}" class="{{ request()->routeIs('about.settings*') ? 'active' : '' }}"><i class="bi bi-gear"></i> Page Settings</a></li>
+              <li><a href="{{ route('admin.about.settings.edit') }}" class="{{ request()->routeIs('admin.about.settings*') ? 'active' : '' }}"><i class="bi bi-gear"></i> Page Settings</a></li>
               <li><a href="{{ route('admin.about.ceo-profile') }}" class="{{ request()->routeIs('admin.about.ceo-profile*') ? 'active' : '' }}"><i class="bi bi-person-check"></i> CEO Profile</a></li>
               <li><a href="{{ route('admin.about.timeline.index') }}" class="{{ request()->routeIs('admin.about.timeline*') ? 'active' : '' }}"><i class="bi bi-clock-history"></i> Timeline</a></li>
               <li><a href="{{ route('admin.about.statistics.index') }}" class="{{ request()->routeIs('admin.about.statistics*') ? 'active' : '' }}"><i class="bi bi-bar-chart-steps"></i> Statistics</a></li>

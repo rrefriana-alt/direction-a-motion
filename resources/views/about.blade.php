@@ -118,10 +118,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:0">
   <div class="shell">
     <div class="stats">
-      <div class="stat fade-up"><p class="stat__n"><span data-count="9">0</span><sup>+</sup></p><p class="stat__l" data-en="Years" data-id="Tahun">Years</p></div>
-      <div class="stat fade-up" data-delay="1"><p class="stat__n"><span data-count="65">0</span><sup>+</sup></p><p class="stat__l" data-en="Clients" data-id="Klien">Clients</p></div>
-      <div class="stat fade-up" data-delay="2"><p class="stat__n"><span data-count="5">0</span></p><p class="stat__l" data-en="Divisions" data-id="Divisi">Divisions</p></div>
-      <div class="stat fade-up" data-delay="3"><p class="stat__n"><span data-count="3">0</span></p><p class="stat__l" data-en="Cities" data-id="Kota">Cities</p></div>
+      @foreach($statistics as $index => $stat)
+      <div class="stat fade-up" @if($index > 0) data-delay="{{ $index }}" @endif><p class="stat__n"><span data-count="{{ $stat->value }}">0</span>@if($stat->suffix)<sup>{{ $stat->suffix }}</sup>@endif</p><p class="stat__l" data-en="{{ $stat->label }}" data-id="{{ $stat->label }}">{{ $stat->label }}</p></div>
+      @endforeach
     </div>
   </div>
 </section>
@@ -153,7 +152,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         <blockquote data-en="{{ $content['about']['founder']['quote'] }}" data-id="{{ $content['about']['founder']['quote'] }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
         <div class="quote__by">
           @if($ceoProfile && $ceoProfile->photo)
-            <img src="{{ asset($ceoProfile->photo) }}" alt="{{ $ceoProfile->name }}" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+            <img src="{{ asset('img/' . $ceoProfile->photo) }}" alt="{{ $ceoProfile->name }}" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           @else
             <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           @endif
@@ -163,7 +162,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       </div>
       <div class="quote__art">
         @if($ceoProfile && $ceoProfile->photo)
-          <img src="{{ asset($ceoProfile->photo) }}" alt="{{ $ceoProfile->name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+          <img src="{{ asset('img/' . $ceoProfile->photo) }}" alt="{{ $ceoProfile->name }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
         @else
           <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Founder Quote Image" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
         @endif

@@ -25,7 +25,7 @@
             <label class="form-label">Photo</label>
             @if(isset($ceo->photo) && $ceo->photo)
             <div style="margin-bottom:.75rem">
-                <img src="{{ $ceo->photo }}" alt="CEO Photo" style="width:100px;height:100px;object-fit:cover;border-radius:50%;border:2px solid var(--gray-200)">
+                <img src="{{ asset('img/' . $ceo->photo) }}" alt="CEO Photo" style="width:100px;height:100px;object-fit:cover;border-radius:50%;border:2px solid var(--gray-200)">
             </div>
             @endif
             <input type="file" class="form-control" name="photo" accept="image/*">
@@ -50,7 +50,7 @@
             <label class="form-label">Signature</label>
             @if(isset($ceo->signature) && $ceo->signature)
             <div style="margin-bottom:.75rem">
-                <img src="{{ $ceo->signature }}" alt="Signature" style="max-height:60px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:.5rem;background:#fff">
+                <img src="{{ asset('img/' . $ceo->signature) }}" alt="Signature" style="max-height:60px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:.5rem;background:#fff">
             </div>
             @endif
             <input type="file" class="form-control" name="signature" accept="image/*">

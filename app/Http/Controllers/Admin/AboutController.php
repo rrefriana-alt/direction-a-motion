@@ -278,7 +278,7 @@ class AboutController extends Controller
             'sort_order' => 'nullable|integer',
             'is_active' => 'nullable',
             'items' => 'nullable|array',
-            'items.*.item_name' => 'required|string|max:255',
+            'items.*.name' => 'required|string|max:255',
             'items.*.description' => 'nullable|string',
             'items.*.icon' => 'nullable|string|max:255',
             'items.*.sort_order' => 'nullable|integer',
@@ -295,9 +295,9 @@ class AboutController extends Controller
 
             if (isset($validated['items'])) {
                 foreach ($validated['items'] as $item) {
-                    if (!empty($item['item_name'])) {
+                    if (!empty($item['name'])) {
                         $sector->items()->create([
-                            'item_name' => $item['item_name'],
+                            'name' => $item['name'],
                             'description' => $item['description'] ?? '',
                             'icon' => $item['icon'] ?? 'bi-circle',
                             'sort_order' => $item['sort_order'] ?? 0,
@@ -327,7 +327,7 @@ class AboutController extends Controller
             'sort_order' => 'nullable|integer',
             'is_active' => 'nullable',
             'items' => 'nullable|array',
-            'items.*.item_name' => 'required|string|max:255',
+            'items.*.name' => 'required|string|max:255',
             'items.*.description' => 'nullable|string',
             'items.*.icon' => 'nullable|string|max:255',
             'items.*.sort_order' => 'nullable|integer',
@@ -351,10 +351,10 @@ class AboutController extends Controller
             // Update or create items
             if (isset($validated['items'])) {
                 foreach ($validated['items'] as $key => $item) {
-                    if (!empty($item['item_name'])) {
+                    if (!empty($item['name'])) {
                         $itemData = [
                             'sector_id' => $sector->id,
-                            'item_name' => $item['item_name'],
+                            'name' => $item['name'],
                             'description' => $item['description'] ?? '',
                             'icon' => $item['icon'] ?? 'bi-circle',
                             'sort_order' => $item['sort_order'] ?? 0,

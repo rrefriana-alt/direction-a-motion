@@ -10,7 +10,7 @@ class SectorItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['sector_id', 'name', 'sort_order', 'is_active'];
+    protected $fillable = ['sector_id', 'name', 'description', 'icon', 'sort_order', 'is_active'];
     protected $casts = ['is_active' => 'boolean'];
 
     public function sector(): BelongsTo

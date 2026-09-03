@@ -73,6 +73,7 @@ Route::get('/services', function () {
 Route::get('/about', function () {
     $timelines = \App\Models\Timeline::where('is_active', true)->orderBy('sort_order')->get();
     $ceoProfile = \App\Models\CeoProfile::first();
+    $statistics = \App\Models\Stat::where('is_active', true)->orderBy('sort_order')->get();
     $content = [
         'about' => [
             'founder' => [
@@ -83,7 +84,7 @@ Route::get('/about', function () {
             ],
         ],
     ];
-    return view('about', compact('content', 'timelines', 'ceoProfile'));
+    return view('about', compact('content', 'timelines', 'ceoProfile', 'statistics'));
 })->name('about');
 Route::get('/contact', function () {
     $contactPhone = \App\Models\Setting::get('contact_phone', '+62 821 2100 0680');
@@ -175,10 +176,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/home/footer', [HomeController::class, 'footerEdit'])->name('home.footer.edit');
     Route::put('/home/footer', [HomeController::class, 'footerUpdate'])->name('home.footer.update');
 
-    // About Page Settings
-    Route::get('/about/settings', [AboutController::class, 'aboutHeaderEdit'])->name('about.settings.edit');
-    Route::put('/about/settings', [AboutController::class, 'aboutHeaderUpdate'])->name('about.settings.update');
-
     // Contact Page Settings (under home for convenience)
     Route::get('/home/contact-page', [HomeController::class, 'contactPageEdit'])->name('contact.settings.edit');
     Route::put('/home/contact-page', [HomeController::class, 'contactPageUpdate'])->name('contact.settings.update');
@@ -239,7 +236,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
         Route::get('/settings', [AboutController::class, 'aboutHeaderEdit'])->name('settings.edit');
         Route::put('/settings', [AboutController::class, 'aboutHeaderUpdate'])->name('settings.update');
         Route::get('/ceo-profile', [AboutController::class, 'ceoProfile'])->name('ceo-profile');
-        Route::post('/ceo-profile', [AboutController::class, 'updateCeoProfile'])->name('ceo-profile.update');
+        Route::put('/ceo-profile', [AboutController::class, 'updateCeoProfile'])->name('ceo-profile.update');
         Route::get('/timeline', [AboutController::class, 'timelineIndex'])->name('timeline.index');
         Route::get('/timeline/create', [AboutController::class, 'timelineCreate'])->name('timeline.create');
         Route::post('/timeline', [AboutController::class, 'timelineStore'])->name('timeline.store');

@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
-@section('title', 'Statistics Management')
-@section('page-title', 'Statistics Management')
+@section('title', 'Statistics')
+@section('page-title', 'Statistics')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('admin.about.index') }}">About</a></li>
@@ -9,23 +9,22 @@
 
 @push('styles')
 <style>
-    .stat-card{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);margin-bottom:.75rem;transition:box-shadow .2s;}
-    .stat-card:hover{box-shadow:var(--shadow-sm);}
-    .stat-num{font-family:var(--f-mono,monospace);font-size:1.1rem;font-weight:700;color:var(--green-500);width:32px;text-align:center;flex-shrink:0;}
-    .stat-info{flex:1;min-width:0;}
-    .stat-name{font-size:.9rem;font-weight:600;color:var(--gray-900);}
-    .stat-value{font-size:.8rem;color:var(--gray-500);margin-top:.125rem;}
-    .stat-suffix{font-size:.7rem;background:var(--gray-100);color:var(--gray-600);padding:.1rem .5rem;border-radius:var(--radius-sm);margin-left:.35rem;}
-    .stat-label{font-size:.75rem;color:var(--gray-500);margin-top:.125rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .stat-badge{display:inline-flex;align-items:center;font-size:.65rem;font-weight:600;padding:.15rem .5rem;border-radius:99px;line-height:1.2;}
-    .stat-badge.on{background:var(--green-50);color:var(--green-700);}
-    .stat-badge.off{background:var(--gray-100);color:var(--gray-400);}
-    .stat-acts{display:flex;gap:.3rem;flex-shrink:0;}
-    .svc-toggle{position:relative;width:36px;height:20px;background:var(--gray-200);border-radius:10px;cursor:pointer;transition:background .2s;flex-shrink:0;}
-    .svc-toggle.on{background:var(--green-500);}
-    .svc-toggle::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.15);}
-    .svc-toggle.on::after{transform:translateX(16px);}
-    #alertContainer{position:fixed;top:1rem;right:1rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;}
+    .svc-list{display:flex;flex-direction:column;gap:.65rem}
+    .svc-card{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);transition:all .2s;cursor:grab}
+    .svc-card:hover{box-shadow:var(--shadow-sm);border-color:var(--gray-300)}
+    .svc-card.dragging{opacity:.5;border-style:dashed}
+    .svc-card.drag-over{border-color:var(--green-500);box-shadow:0 0 0 2px rgba(16,185,129,.15)}
+    .svc-num{font-family:'Inter',monospace;font-size:1.1rem;font-weight:700;color:var(--green-500);width:28px;text-align:center;flex-shrink:0}
+    .svc-info{flex:1;min-width:0}
+    .svc-label{font-size:.9rem;font-weight:600;color:var(--gray-900)}
+    .svc-meta{display:flex;align-items:center;gap:.5rem;margin-top:.2rem;flex-wrap:wrap}
+    .svc-badge{font-size:.7rem;font-weight:600;padding:.15rem .5rem;border-radius:50rem;line-height:1.2}
+    .svc-badge--val{background:var(--green-50);color:var(--green-700)}
+    .svc-badge--sfx{background:var(--gray-100);color:var(--gray-600)}
+    .svc-badge--off{background:var(--gray-100);color:var(--gray-400)}
+    .svc-acts{display:flex;align-items:center;gap:.35rem;flex-shrink:0}
+    .drag-handle{color:var(--gray-300);cursor:grab;font-size:1rem;padding:.25rem}
+    .drag-handle:hover{color:var(--gray-500)}
 </style>
 @endpush
 
@@ -34,115 +33,131 @@
 
 <div class="page-header d-flex justify-content-between align-items-center">
     <div>
-        <h2 style="margin:0">Statistics Management</h2>
-        <p style="margin:0;color:var(--gray-500);font-size:.8125rem">Manage statistics shown on the About page.</p>
+        <h2>Statistics</h2>
+        <p>Manage statistics shown on the About page.</p>
     </div>
-    <a href="{{ route('admin.about.statistics.create') }}" class="btn btn-primary">
-        <i class="bi bi-plus-lg"></i> Add Statistic
-    </a>
-</div>
-
-<div id="statsList">
-    @foreach($stats as $stat)
-    @include('admin.about.statistics._stat_card', ['stat' => $stat, 'index' => $loop->index])
-    @endforeach
+    <a href="{{ route('admin.about.statistics.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Statistic</a>
 </div>
 
 @if($stats->isEmpty())
-<div class="card" style="text-align:center;padding:3rem">
-    <i class="bi bi-layers" style="font-size:2rem;color:var(--gray-300)"></i>
-    <div style="font-size:.9rem;font-weight:500;color:var(--gray-500);margin-top:.5rem">No statistics found</div>
-    <div style="font-size:.8rem;color:var(--gray-400);margin-top:.25rem">Click <strong>"Add Statistic"</strong> to create your first statistic.</div>
+<div class="empty-state">
+    <i class="bi bi-bar-chart-steps"></i>
+    <p>No statistics yet. Click "Add Statistic" to create your first one.</p>
+</div>
+@else
+<div class="svc-list" id="statsList">
+    @foreach($stats as $index => $stat)
+    <div class="svc-card" data-id="{{ $stat->id }}">
+        <span class="drag-handle"><i class="bi bi-grip-vertical"></i></span>
+        <span class="svc-num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+        <div class="svc-info">
+            <div class="svc-label">{{ $stat->label }}</div>
+            <div class="svc-meta">
+                <span class="svc-badge svc-badge--val">{{ $stat->value }}</span>
+                @if($stat->suffix)<span class="svc-badge svc-badge--sfx">{{ $stat->suffix }}</span>@endif
+            </div>
+        </div>
+        <div class="svc-acts">
+            <span class="svc-badge {{ $stat->is_active ? 'svc-badge--val' : 'svc-badge--off' }}">{{ $stat->is_active ? 'Active' : 'Off' }}</span>
+            <div class="svc-toggle {{ $stat->is_active ? 'on' : '' }}" data-toggle-url="{{ route('admin.about.statistics.toggle', $stat->id) }}"></div>
+            <a href="{{ route('admin.about.statistics.edit', $stat->id) }}" class="btn btn-secondary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
+            <form action="{{ route('admin.about.statistics.destroy', $stat->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Delete this statistic?')">
+                @csrf @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></button>
+            </form>
+        </div>
+    </div>
+    @endforeach
 </div>
 @endif
-
 @endsection
 
 @push('scripts')
-<script src="{{ asset('vendor/alpine/alpine.min.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('statsList');
-    let dragSrcEl = null;
+    if (!container) return;
 
-    const draggables = container.querySelectorAll('.stat-card');
-    draggables.forEach((item, index) => {
-        item.setAttribute('draggable', 'true');
-        item.classList.add('draggable-item');
-
-        item.addEventListener('dragstart', function(e) {
-            dragSrcEl = this;
-            this.classList.add('dragging');
-            setTimeout(() => this.classList.add('hide'), 0);
-            e.dataTransfer.effectAllowed = 'move';
-        });
-
-        item.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            return false;
-        });
-
-        item.addEventListener('dragenter', function(e) {
-            this.classList.add('drag-over');
-        });
-
-        item.addEventListener('dragleave', function(e) {
-            this.classList.remove('drag-over');
-        });
-
-        item.addEventListener('drop', function(e) {
-            e.preventDefault();
-            this.classList.remove('drag-over');
-            if (this !== dragSrcEl) {
-                const newIndex = Array.from(container.children).indexOf(this);
-                const oldIndex = Array.from(container.children).indexOf(dragSrcEl);
-
-                let order = [];
-                container.childNodes.forEach((node, i) => {
-                    if (node.nodeType === 1) {
-                        const id = node.getAttribute('data-id');
-                        order.push(id);
-                    }
-                });
-
-                fetch('/admin/about/statistics/reorder', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ order: order })
-                })
-                .then(r => r.json())
-                .then(data => {
-                    if (data.success) {
-                        showAlert('success', data.message);
-                    } else {
-                        showAlert('danger', data.message);
-                    }
-                })
-                .catch(err => showAlert('danger', err.message));
-            }
-        });
-
-        item.addEventListener('dragend', function(e) {
-            this.classList.remove('dragging');
-            this.classList.remove('hide');
+    container.querySelectorAll('.svc-toggle').forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+            fetch(this.dataset.toggleUrl, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            }).then(function(r) { return r.json(); }).then(function(data) {
+                if (data.success) location.reload();
+            });
         });
     });
 
-    window.showAlert = function(type, msg) {
-        const el = document.createElement('div');
+    var dragSrc = null;
+    container.querySelectorAll('.svc-card').forEach(function(card) {
+        card.setAttribute('draggable', 'true');
+
+        card.addEventListener('dragstart', function(e) {
+            dragSrc = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        });
+
+        card.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        });
+
+        card.addEventListener('dragenter', function(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        });
+
+        card.addEventListener('dragleave', function() {
+            this.classList.remove('drag-over');
+        });
+
+        card.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            if (this === dragSrc) return;
+            container.insertBefore(dragSrc, this);
+            saveOrder();
+        });
+
+        card.addEventListener('dragend', function() {
+            this.classList.remove('dragging');
+            container.querySelectorAll('.svc-card').forEach(function(c) { c.classList.remove('drag-over'); });
+        });
+    });
+
+    function saveOrder() {
+        var ids = [];
+        container.querySelectorAll('.svc-card').forEach(function(c) { ids.push(c.dataset.id); });
+        fetch('{{ route("admin.about.statistics.reorder") }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ order: ids })
+        }).then(function(r) { return r.json(); }).then(function(d) {
+            if (d.success) showToast('success', d.message);
+            else showToast('danger', d.message);
+        }).catch(function(e) { showToast('danger', e.message); });
+    }
+
+    window.showToast = function(type, msg) {
+        var el = document.createElement('div');
         el.className = 'alert alert-' + type;
-        el.style.cssText = 'border-radius:var(--radius-md);font-size:.8125rem;padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;min-width:280px;box-shadow:var(--shadow-sm);';
+        el.style.cssText = 'border-radius:var(--radius-md);font-size:.8rem;padding:.6rem 1rem;display:flex;align-items:center;gap:.5rem;min-width:260px;box-shadow:var(--shadow-sm);';
         if (type === 'success') { el.style.background = '#dcfce7'; el.style.color = '#166534'; }
         else { el.style.background = '#fef2f2'; el.style.color = '#991b1b'; }
         el.innerHTML = '<i class="bi bi-' + (type === 'success' ? 'check-circle-fill' : 'exclamation-triangle-fill') + '"></i> ' + msg;
         document.getElementById('alertContainer').appendChild(el);
-        setTimeout(() => el.remove(), 4000);
+        setTimeout(function() { el.remove(); }, 4000);
     };
 });
 </script>
