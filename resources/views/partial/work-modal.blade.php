@@ -95,7 +95,7 @@
             <div class="steps">
               @foreach ($w['steps'] as $i => $step)
                 <div class="step">
-                  <span class="step__n">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                  <span class="step__n">{{ str_pad((int) $i + 1, 2, '0', STR_PAD_LEFT) }}</span>
                   <div class="step__b">
                     <h3{!! W::attrs($step['h']) !!}>{{ W::text($step['h']) }}</h3>
                     <p{!! W::attrs($step['p']) !!}>{{ W::text($step['p']) }}</p>
@@ -140,9 +140,9 @@
                         data-cursor="{{ $isVideo ? 'Play' : 'Expand' }}">
                   <span class="wm__tilemedia">
                     @if (! empty($item['src']))
-                      <img src="{{ asset($item['src']) }}" alt="{{ W::text($item['cap'] ?? '') }}" loading="lazy">
+                      <img src="{{ W::img($item['src']) }}" alt="{{ W::text($item['cap'] ?? '') }}" loading="lazy">
                     @elseif (is_string($item['video'] ?? null))
-                      <video src="{{ asset($item['video']) }}" @if(!empty($item['poster'])) poster="{{ asset($item['poster']) }}" @endif muted playsinline preload="none"></video>
+                      <video src="{{ W::img($item['video']) }}" @if(!empty($item['poster'])) poster="{{ W::img($item['poster']) }}" @endif muted playsinline preload="none"></video>
                     @else
                       {!! W::art($w, $idx + 1, 'gal') !!}
                     @endif

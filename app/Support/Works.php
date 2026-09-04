@@ -7,17 +7,39 @@ use Throwable;
 
 class Works
 {
-    // ponytail: handle both "en||id" string and Project cast arrays
+    // ponytail: handle "en||id" string, cast arrays, and double-encoded JSON from seeder
+    public static function normalizeString($s): string
+    {
+        if ($s === null) return '';
+        if (is_array($s)) $s = $s['en'] ?? $s[0] ?? '';
+        $s = (string) $s;
+        // unwrap double-encoded JSON strings like '"[\"TVC\"]"' -> '["TVC"]' -> 'TVC'
+        for ($k = 0; $k < 6; $k++) {
+            $t = trim($s);
+            if ($t === '' || ($t[0] !== '"' && $t[0] !== '[')) break;
+            $d = json_decode($t, true);
+            if (json_last_error() !== 0) break;
+            if (is_string($d)) { $s = $d; continue; }
+            if (is_array($d) && count($d) === 1 && is_string($d[0])) { $s = $d[0]; continue; }
+            // plain array like ["TVC","Film"] -> take first for single-tag context would be wrong; break
+            break;
+        }
+        return $s;
+    }
+
     public static function pair($s): array
     {
         if (is_array($s)) {
-            // gallery/stat label stored as ['en'=>..,'id'=>..] or [0=>'en',1=>'id']
-            if (isset($s['en']) || isset($s['id'])) return ['en' => (string) ($s['en'] ?? ''), 'id' => isset($s['id']) && $s['id'] !== '' ? (string) $s['id'] : null];
-            if (isset($s[0])) $s = (string) $s[0];
+            if (isset($s['en']) || isset($s['id'])) {
+                $en = self::normalizeString($s['en'] ?? '');
+                $id = isset($s['id']) && $s['id'] !== '' ? self::normalizeString($s['id']) : null;
+                return ['en' => $en, 'id' => $id];
+            }
+            if (isset($s[0])) $s = $s[0];
             else return ['en' => '', 'id' => null];
         }
-        if ($s === null) $s = '';
-        $s = (string) $s;
+        $s = self::normalizeString($s);
+        if ($s === '') return ['en' => '', 'id' => null];
         if (! str_contains($s, '||')) {
             return ['en' => $s, 'id' => null];
         }
