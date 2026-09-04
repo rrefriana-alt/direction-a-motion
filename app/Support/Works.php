@@ -7,8 +7,16 @@ use Throwable;
 
 class Works
 {
+    // ponytail: handle both "en||id" string and Project cast arrays
     public static function pair($s): array
     {
+        if (is_array($s)) {
+            // gallery/stat label stored as ['en'=>..,'id'=>..] or [0=>'en',1=>'id']
+            if (isset($s['en']) || isset($s['id'])) return ['en' => (string) ($s['en'] ?? ''), 'id' => isset($s['id']) && $s['id'] !== '' ? (string) $s['id'] : null];
+            if (isset($s[0])) $s = (string) $s[0];
+            else return ['en' => '', 'id' => null];
+        }
+        if ($s === null) $s = '';
         $s = (string) $s;
         if (! str_contains($s, '||')) {
             return ['en' => $s, 'id' => null];
@@ -20,11 +28,13 @@ class Works
 
     public static function text($s): string
     {
+        if ($s === null) return '';
         return self::pair($s)['en'];
     }
 
     public static function attrs($s): string
     {
+        if ($s === null || $s === '') return '';
         $p = self::pair($s);
         if ($p['id'] === null) {
             // auto-translate EN -> ID, cached forever
