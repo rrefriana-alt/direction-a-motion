@@ -139,7 +139,7 @@ class Works
             'scope'           => $p->scope,
             'bg'              => $p->bg_color ?: '#101722',
             'accent'          => $p->accent_color ?: '#3ddc97',
-            'tags'            => $p->tags,
+            'tags'            => self::normalizeTags($p->tags),
             'lede'            => $p->lede ?: $p->description,
             'about'           => $p->about,
             'steps'           => $p->steps,
@@ -156,13 +156,44 @@ class Works
         ]);
     }
 
+    // ponytail: tolerant img helper - handles old "projects/*" without img/ prefix + missing files
     public static function img(?string $path): string
     {
         if (!$path) return '';
         $p = ltrim($path, '/');
         if (str_starts_with($p, 'http://') || str_starts_with($p, 'https://')) return $p;
-        if (str_starts_with($p, 'img/') || str_starts_with($p, 'assets/')) return asset($p);
+        // normalize already-prefixed
+        if (str_starts_with($p, 'img/') || str_starts_with($p, 'assets/')) {
+            // verify file exists else fallback handled by caller (art)
+            return asset($p);
+        }
+        // legacy DB stores "projects/1/card.jpg" -> map to img/projects/1/card.jpg
         return asset('img/' . $p);
+    }
+
+    public static function normalizeTags($tags): array
+    {
+        if ($tags === null) return [];
+        if (is_string($tags)) {
+            $d = json_decode($tags, true);
+            if (json_last_error() === 0) $tags = $d;
+        }
+        if (!is_array($tags)) return [];
+        $out = [];
+        foreach ($tags as $t) {
+            if (is_array($t)) continue;
+            $s = self::normalizeString((string) $t);
+            // if still looks like JSON array string, decode and expand
+            if (str_starts_with(trim($s), '[')) {
+                $d = json_decode($s, true);
+                if (json_last_error() === 0 && is_array($d)) {
+                    foreach ($d as $v) { $v = self::normalizeString((string) $v); if ($v !== '') $out[] = $v; }
+                    continue;
+                }
+            }
+            if ($s !== '') $out[] = $s;
+        }
+        return array_values(array_unique($out));
     }
 
     public static function imageUrl(?string $path): string
