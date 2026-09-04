@@ -422,7 +422,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}">All articles →</a>
     </div>
 
-    @if($latestPosts->count())
+    @if(($latestPosts ?? collect())->count())
     @php $feat = $latestPosts->first(); $rest = $latestPosts->skip(1); @endphp
     <div class="bfeat mt-l">
       <article class="bfeat__card fade-up" data-cursor="Read">

@@ -199,7 +199,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 </section>
 
 <!-- — JOURNAL — -->
-@if($latestPosts->count())
+@if(($latestPosts ?? collect())->count())
 <section class="section">
   <div class="shell">
     <div class="row between end gap-m">

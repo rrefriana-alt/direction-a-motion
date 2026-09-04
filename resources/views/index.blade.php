@@ -440,7 +440,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
          data-en="All articles →" data-id="Semua artikel →">All articles →</a>
     </div>
 
-    @if($latestPosts->count())
+    @if(($latestPosts ?? collect())->count())
     @php $feat = $latestPosts->first(); $rest = $latestPosts->skip(1); @endphp
     <div class="bfeat mt-l">
       <article class="bfeat__card fade-up" data-cursor="Read">

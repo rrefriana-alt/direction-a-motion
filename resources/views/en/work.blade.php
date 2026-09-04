@@ -150,7 +150,7 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
 </div>
 
 <!-- — JOURNAL — -->
-@if($latestPosts->count())
+@if(($latestPosts ?? collect())->count())
 <section class="section">
   <div class="shell">
     <div class="row between end gap-m">
