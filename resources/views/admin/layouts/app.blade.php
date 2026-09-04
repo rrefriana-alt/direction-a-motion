@@ -234,6 +234,7 @@
             <div class="sidebar-section-title">Page Manager</div>
         </div>
         <ul class="sidebar-nav">
+            <li><a href="{{ route('admin.translations.index') }}" class="{{ request()->routeIs('admin.translations*') ? 'active' : '' }}"><i class="bi bi-translate"></i>Translations <span style="margin-left:auto;font-size:.62rem;background:var(--green-50);color:var(--green-700);padding:.12rem .42rem;border-radius:999px;font-weight:800;border:1px solid var(--green-200)">EN | ID</span></a></li>
             <li><a href="{{ route('admin.home') }}" class="{{ request()->routeIs('admin.home') ? 'active' : '' }}"><i class="bi bi-house-door"></i>Home</a></li>
             <li><a href="{{ route('admin.portfolio.index') }}" class="{{ request()->routeIs('admin.portfolio*') ? 'active' : '' }}"><i class="bi bi-briefcase"></i>Work</a></li>
             <li><a href="{{ route('admin.work-settings.edit') }}" class="{{ request()->routeIs('admin.work-settings*') ? 'active' : '' }}"><i class="bi bi-gear"></i>Work Page</a></li>

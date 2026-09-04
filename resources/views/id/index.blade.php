@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -12,8 +12,8 @@
 <link rel="canonical" href="https://fugocreativegroup.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Fugo Creative">
-<meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="id_ID">
+<meta property="og:locale" content="id_ID">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://fugocreativegroup.com/">
 <meta property="og:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
@@ -70,26 +70,26 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <!-- — NAV — -->
 <header class="nav">
   <div class="nav__in">
-    <a class="brand" href="{{ url('') }}" aria-label="Fugo Creative — home">
+    <a class="brand" href="{{ url($locale) }}" aria-label="Fugo Creative — home">
       <img class="brand__mark" src="{{ asset('assets/img/logo-full.webp') }}" alt="Fugo Creative">
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      <a class="nav__link is-active" href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a>
-      <a class="nav__link" href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a>
-      <a class="nav__link" href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a>
-      <a class="nav__link" href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a>
-      <a class="nav__link" href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a>
+      <a class="nav__link is-active" href="{{ url($locale) }}">Beranda</a>
+      <a class="nav__link" href="{{ url($locale.'/work') }}">Karya</a>
+      <a class="nav__link" href="{{ url($locale.'/services') }}">Layanan</a>
+      <a class="nav__link" href="{{ url($locale.'/about') }}">Tentang</a>
+      <a class="nav__link" href="{{ url($locale.'/contact') }}">Kontak</a>
     </nav>
 
     <div class="nav__side">
-      <div class="lang" data-lang="en" role="group" aria-label="Language">
+                        @php $p = trim(preg_replace('#^(en|id)(/|$)#', '', trim(request()->path(), '/')), '/'); $qs = request()->getQueryString() ? '?' . request()->getQueryString() : ''; @endphp
+            <div class="lang" data-lang="id" role="group" aria-label="Language">
         <span class="lang__pill" aria-hidden="true"></span>
-        <button class="lang__btn is-on" data-lang="en" aria-label="English">EN</button>
-        <button class="lang__btn" data-lang="id" aria-label="Bahasa Indonesia">ID</button>
+        <a class="lang__btn" href="{{ url('en' . ($p ? '/'.$p : '') . $qs) }}" aria-label="English">EN</a>
+        <a class="lang__btn is-on" href="{{ url('id' . ($p ? '/'.$p : '') . $qs) }}" aria-label="Bahasa Indonesia">ID</a>
       </div>
-      <a class="btn btn--green btn--sm" href="{{ url('contact') }}" data-magnet=".28"
-         data-en="Start a project" data-id="Mulai proyek">Start a project</a>
+      <a class="btn btn--green btn--sm" href="{{ url($locale.'/contact') }}" data-magnet=".28">Mulai proyek</a>
       <button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
     </div>
   </div>
@@ -98,11 +98,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <!-- — MOBILE MENU — -->
 <div class="menu" id="menu">
   <ul class="menu__list">
-    <li class="menu__item"><a href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a></li>
-    <li class="menu__item"><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li>
-    <li class="menu__item"><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li>
-    <li class="menu__item"><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li>
-    <li class="menu__item"><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li>
+    <li class="menu__item"><a href="{{ url($locale) }}">Beranda</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/work') }}">Karya</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/services') }}">Layanan</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/about') }}">Tentang</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/contact') }}">Kontak</a></li>
   </ul>
   <div class="menu__foot">
     <span>{{ \App\Models\Setting::get('contact_email', 'hello@fugocreativegroup.com') }}</span>
@@ -122,8 +122,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <p class="eyebrow" data-en="{{ $heroTagline }}" data-id="{{ \App\Support\TranslationService::translate($heroTagline) }}">{{ $heroTagline }}</p>
 
     <h1 class="display h-mega hero__title">
-      <span data-split>Create to</span>
-      <span class="reveal-line"><span class="tint">Elevate</span></span>
+      <span data-split>Tumbuh dan</span>
+      <span class="reveal-line"><span class="tint">melesat bersama.</span></span>
     </h1>
 
     <div class="hero__meta">
@@ -132,19 +132,18 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
          data-id="{{ \App\Support\TranslationService::translate($heroDescription) }}">{{ $heroDescription }}</p>
 
       <div class="hero__cta" data-delay="2">
-        <a class="btn" href="{{ url('work') }}" data-magnet=".3" data-cursor="View">
-          <span data-en="See selected work" data-id="Lihat karya">See selected work</span>
+        <a class="btn" href="{{ url($locale.'/work') }}" data-magnet=".3" data-cursor="View">
+          <span>Lihat karya</span>
           <span class="ico" aria-hidden="true">↗</span>
         </a>
-        <a class="btn btn--ghost" href="{{ url('services') }}"
-           data-en="What we do" data-id="Layanan kami">What we do</a>
+        <a class="btn btn--ghost" href="{{ url($locale.'/services') }}">Layanan kami</a>
       </div>
     </div>
 
     <div class="row between center mt-m" data-delay="3">
       <div class="scroll-cue">
         <span class="scroll-cue__line" aria-hidden="true"></span>
-        <span class="mono" data-en="Scroll" data-id="Gulir">Scroll</span>
+        <span class="mono">Gulir</span>
       </div>
       <p class="mono faint" data-en="{{ $heroTagline }}" data-id="{{ \App\Support\TranslationService::translate($heroTagline) }}">{{ $heroTagline }}</p>
     </div>
@@ -171,9 +170,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="col-7">
       <p data-en="{{ $manifestoTitle }}" data-id="{{ \App\Support\TranslationService::translate($manifestoTitle) }}">{{ $manifestoTitle }}</p>
       <div class="row gap-m mt-l fade-up" data-delay="1">
-        <a class="tlink green" href="{{ url('about') }}" data-en="Read our story" data-id="Baca cerita kami">Read our story</a>
+        <a class="tlink green" href="{{ url($locale.'/about') }}">Baca cerita kami</a>
         <span class="faint">·</span>
-        <a class="tlink" href="{{ url('contact') }}" data-en="Work with us" data-id="Bekerja dengan kami">Work with us</a>
+        <a class="tlink" href="{{ url($locale.'/contact') }}">Bekerja dengan kami</a>
       </div>
     </div>
   </div>
@@ -199,7 +198,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="svc__grid">
 
       <div class="svc__sticky">
-        <p class="eyebrow">02 — <span data-en="Capabilities" data-id="Kapabilitas">Capabilities</span></p>
+        <p class="eyebrow">02 — <span>Kapabilitas</span></p>
         @php
             $capTitle = \App\Models\Setting::get('home_capabilities_title', "Five studios,<br>one standard");
             $capDesc = \App\Models\Setting::get('home_capabilities_description', 'Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax.');
@@ -217,8 +216,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           @endforeach
         </ul>
 
-        <a class="btn btn--ghost mt-l" href="{{ url('services') }}" data-magnet=".25"
-           data-en="All capabilities" data-id="Semua kapabilitas">All capabilities</a>
+        <a class="btn btn--ghost mt-l" href="{{ url($locale.'/services') }}" data-magnet=".25">Semua kapabilitas</a>
       </div>
 
       <div class="svc__panels">
@@ -320,12 +318,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-bottom:0">
   <div class="shell row between end gap-m">
     <div>
-      <p class="eyebrow">03 — <span data-en="Selected work" data-id="Karya pilihan">Selected work</span></p>
+      <p class="eyebrow">03 — <span>Karya pilihan</span></p>
       <h2 class="display h-xxl mt-s fade-up" data-delay="1"
           data-en="Proof, not<br>promises" data-id="Bukti, bukan<br>janji">Proof, not<br>promises</h2>
     </div>
-    <a class="tlink fade-up" data-delay="2" href="{{ url('work') }}"
-       data-en="All projects →" data-id="Semua proyek →">All projects →</a>
+    <a class="tlink fade-up" data-delay="2" href="{{ url($locale.'/work') }}">Semua proyek →</a>
   </div>
 </section>
 
@@ -345,7 +342,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <div class="wcard__meta"><span>{{ \App\Support\Works::text($w['client']) }}</span><span>&bull;</span><span{!! \App\Support\Works::attrs($w['category']) !!}>{{ \App\Support\Works::text($w['category']) }}</span><span>&bull;</span><span>{{ $w['year'] }}</span></div>
           <h3>{{ \App\Support\Works::text($w['title']) }}</h3>
           <p>{{ \App\Support\Works::text($w['lede'] ?? '') }}</p>
-          <a class="tlink green mt-s" href="{{ url('work') }}" data-en="View project" data-id="Lihat proyek">View project</a>
+          <a class="tlink green mt-s" href="{{ url($locale.'/work') }}">Lihat proyek</a>
         </div>
       </article>
       @endforeach
@@ -356,7 +353,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <!-- — SECTORS — -->
 <section class="section">
   <div class="shell">
-    <p class="eyebrow">04 — <span data-en="Who we work with" data-id="Siapa yang kami layani">Who we work with</span></p>
+    <p class="eyebrow">04 — <span>Siapa yang kami layani</span></p>
     <h2 class="display h-xl mt-s mb fade-up" data-delay="1" style="margin-bottom:2.5rem"
         data-en="Regulated, demanding,<br>high-visibility brands"
         data-id="Brand teregulasi, menuntut,<br>dan sangat terlihat">Regulated, demanding,<br>high-visibility brands</h2>
@@ -406,7 +403,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="quote fade-up">
       <div>
-        <p class="eyebrow" style="margin-bottom:1.6rem">06 — <span data-en="From the founder" data-id="Dari pendiri">From the founder</span></p>
+        <p class="eyebrow" style="margin-bottom:1.6rem">06 — <span>Dari pendiri</span></p>
         <blockquote data-en="&ldquo;{{ $founderQuote }}&rdquo;"
                    data-id="&ldquo;{{ $founderQuote }}&rdquo;">
           &ldquo;{{ $founderQuote }}&rdquo;</blockquote>
@@ -429,22 +426,20 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="row between end gap-m">
       <div>
-        <p class="eyebrow">07 — <span data-en="Journal" data-id="Jurnal">Journal</span></p>
+        <p class="eyebrow">07 — <span>Jurnal</span></p>
         <h2 class="display h-xxl mt-s fade-up" data-delay="1"
             data-en="Notes from<br>the studio" data-id="Catatan dari<br>studio">Notes from<br>the studio</h2>
-        <p class="lede mt-s fade-up" data-delay="2"
-           data-en="Process notes, project stories and takes on the industry — written by the people who make the work."
-           data-id="Catatan proses, cerita proyek, dan pandangan soal industri — ditulis oleh orang-orang yang membuat karyanya.">Process notes, project stories and takes on the industry — written by the people who make the work.</p>
+        <p class="lede mt-s fade-up" data-delay="2">Catatan proses, cerita proyek, dan pandangan soal industri — ditulis oleh orang-orang yang membuat karyanya.</p>
       </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index') }}"
-         data-en="All articles →" data-id="Semua artikel →">All articles →</a>
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}"
+         data-en="All articles →" data-id="Semua artikel →">Semua artikel →</a>
     </div>
 
     @if($latestPosts->count())
     @php $feat = $latestPosts->first(); $rest = $latestPosts->skip(1); @endphp
     <div class="bfeat mt-l">
       <article class="bfeat__card fade-up" data-cursor="Read">
-        <a class="bfeat__art" href="{{ route('journal.show', $feat->slug) }}" aria-label="{{ $feat->title }}">
+        <a class="bfeat__art" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}" aria-label="{{ $feat->title }}">
           @if(!empty($feat->featured_image) && file_exists(public_path('img/' . $feat->featured_image)))
             <img src="{{ asset('img/' . $feat->featured_image) }}" alt="{{ $feat->title }}" loading="lazy">
           @else
@@ -453,16 +448,16 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <span class="tag">{{ $feat->category_display }}</span>
         </a>
         <div class="bfeat__body">
-          <p class="card__num">01 — <span data-en="Latest" data-id="Terbaru">Latest</span> &nbsp;·&nbsp; {{ $feat->published_date?->format('d M Y') }}</p>
-          <h3><a href="{{ route('journal.show', $feat->slug) }}">{{ $feat->title }}</a></h3>
+          <p class="card__num">01 — <span>Terbaru</span> &nbsp;·&nbsp; {{ $feat->published_date?->format('d M Y') }}</p>
+          <h3><a href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}">{{ $feat->title }}</a></h3>
           <p class="bfeat__ex">{{ $feat->excerpt }}</p>
           <div class="bfeat__by">
             <span class="bfeat__avatar" aria-hidden="true">{{ strtoupper(mb_substr($feat->author ?? 'F', 0, 1)) }}</span>
             <span>{{ $feat->author }}<br><span class="faint">{{ $feat->read_time }} min read</span></span>
           </div>
           <div class="bcard__foot">
-            <a class="btn btn--sm" href="{{ route('journal.show', $feat->slug) }}">
-              <span data-en="Read article" data-id="Baca artikel">Read article</span>
+            <a class="btn btn--sm" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}">
+              <span>Baca artikel</span>
               <span class="ico" aria-hidden="true">↗</span>
             </a>
           </div>
@@ -472,7 +467,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <div class="bfeat__side">
         @foreach($rest as $j => $post)
         <article class="bmini fade-up" data-delay="{{ $j + 1 }}" data-cursor="Read">
-          <a class="bmini__thumb" href="{{ route('journal.show', $post->slug) }}" aria-label="{{ $post->title }}">
+          <a class="bmini__thumb" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$post->slug]) }}" aria-label="{{ $post->title }}">
             @if(!empty($post->featured_image) && file_exists(public_path('img/' . $post->featured_image)))
               <img src="{{ asset('img/' . $post->featured_image) }}" alt="{{ $post->title }}" loading="lazy">
             @else
@@ -481,16 +476,16 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           </a>
           <div class="bmini__txt">
             <div class="bcard__meta"><span>0{{ $j + 2 }}</span><span class="dot">&bull;</span><span>{{ $post->category_display }}</span><span class="dot">&bull;</span><span>{{ $post->published_date?->format('d M Y') }}</span></div>
-            <h4><a href="{{ route('journal.show', $post->slug) }}">{{ $post->title }}</a></h4>
-            <a class="tlink green" href="{{ route('journal.show', $post->slug) }}"
-               data-en="Read →" data-id="Baca →">Read →</a>
+            <h4><a href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$post->slug]) }}">{{ $post->title }}</a></h4>
+            <a class="tlink green" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$post->slug]) }}"
+               data-en="Read →" data-id="Baca →">Baca →</a>
           </div>
         </article>
         @endforeach
-        <a class="bmini bmini--more fade-up" data-delay="3" href="{{ route('journal.index') }}">
+        <a class="bmini bmini--more fade-up" data-delay="3" href="{{ route('journal.index', ['locale'=>$locale]) }}">
           <span class="bmini__txt">
-            <span class="bcard__meta"><span data-en="Archive" data-id="Arsip">Archive</span></span>
-            <span class="bmini__more-t" data-en="Browse all articles →" data-id="Lihat semua artikel →">Browse all articles →</span>
+            <span class="bcard__meta"><span>Arsip</span></span>
+            <span class="bmini__more-t">Lihat semua artikel →</span>
           </span>
           <span class="bmini__arrow" aria-hidden="true">↗</span>
         </a>
@@ -499,17 +494,17 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     @else
     <div class="bfeat mt-l">
       <article class="bfeat__card fade-up" data-cursor="Read">
-        <a class="bfeat__art" href="{{ route('journal.index') }}" aria-label="Journal">
+        <a class="bfeat__art" href="{{ route('journal.index', ['locale'=>$locale]) }}" aria-label="Journal">
           @include('partials.jart', ['seed' => 41])
           <span class="tag">Insights</span>
         </a>
         <div class="bfeat__body">
-          <p class="card__num">01 — <span data-en="Latest" data-id="Terbaru">Latest</span></p>
-          <h3><a href="{{ route('journal.index') }}">How we take a brief from deck to stage</a></h3>
+          <p class="card__num">01 — <span>Terbaru</span></p>
+          <h3><a href="{{ route('journal.index', ['locale'=>$locale]) }}">How we take a brief from deck to stage</a></h3>
           <p class="bfeat__ex">A look inside our end-to-end process — strategy, design, film, stage and physical product under one roof.</p>
           <div class="bcard__foot">
-            <a class="btn btn--sm" href="{{ route('journal.index') }}">
-              <span data-en="Browse journal" data-id="Lihat jurnal">Browse journal</span>
+            <a class="btn btn--sm" href="{{ route('journal.index', ['locale'=>$locale]) }}">
+              <span>Lihat jurnal</span>
               <span class="ico" aria-hidden="true">↗</span>
             </a>
           </div>
@@ -521,21 +516,21 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           ['n' => '03', 'cat' => 'Company', 'title' => '65+ brands later: what we keep learning'],
         ] as $j => $fb)
         <article class="bmini fade-up" data-delay="{{ $j + 1 }}">
-          <a class="bmini__thumb" href="{{ route('journal.index') }}" aria-label="{{ $fb['title'] }}">
+          <a class="bmini__thumb" href="{{ route('journal.index', ['locale'=>$locale]) }}" aria-label="{{ $fb['title'] }}">
             @include('partials.jart', ['seed' => 43 + $j])
           </a>
           <div class="bmini__txt">
             <div class="bcard__meta"><span>{{ $fb['n'] }}</span><span class="dot">&bull;</span><span>{{ $fb['cat'] }}</span></div>
-            <h4><a href="{{ route('journal.index') }}">{{ $fb['title'] }}</a></h4>
-            <a class="tlink green" href="{{ route('journal.index') }}"
-               data-en="Browse →" data-id="Lihat →">Browse →</a>
+            <h4><a href="{{ route('journal.index', ['locale'=>$locale]) }}">{{ $fb['title'] }}</a></h4>
+            <a class="tlink green" href="{{ route('journal.index', ['locale'=>$locale]) }}"
+               data-en="Browse →" data-id="Lihat →">Lihat →</a>
           </div>
         </article>
         @endforeach
-        <a class="bmini bmini--more fade-up" data-delay="3" href="{{ route('journal.index') }}">
+        <a class="bmini bmini--more fade-up" data-delay="3" href="{{ route('journal.index', ['locale'=>$locale]) }}">
           <span class="bmini__txt">
-            <span class="bcard__meta"><span data-en="Archive" data-id="Arsip">Archive</span></span>
-            <span class="bmini__more-t" data-en="Browse all articles →" data-id="Lihat semua artikel →">Browse all articles →</span>
+            <span class="bcard__meta"><span>Arsip</span></span>
+            <span class="bmini__more-t">Lihat semua artikel →</span>
           </span>
           <span class="bmini__arrow" aria-hidden="true">↗</span>
         </a>
@@ -565,8 +560,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <h2 class="display cta__big mt-s fade-up" data-delay="1"
         data-en="{{ $ctaTitle }}" data-id="{{ \App\Support\TranslationService::translate($ctaTitle) }}">{!! $ctaTitle !!}</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
-      <a class="btn btn--green" href="{{ url('contact') }}" data-magnet=".34" data-cursor="Go">
-        <span data-en="Start a project" data-id="Mulai proyek">Start a project</span>
+      <a class="btn btn--green" href="{{ url($locale.'/contact') }}" data-magnet=".34" data-cursor="Go">
+        <span>Mulai proyek</span>
         <span class="ico" aria-hidden="true">↗</span>
       </a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>

@@ -16,7 +16,7 @@
         </a>
         <p class="muted mt-m" style="max-width:34ch;font-size:.92rem"
            data-en="{{ $footerDesc }}"
-           data-id="{{ $footerDesc }}">{{ $footerDesc }}</p>
+           data-id="{{ \App\Support\TranslationService::translate($footerDesc) }}">{{ $footerDesc }}</p>
       </div>
 
       <div>

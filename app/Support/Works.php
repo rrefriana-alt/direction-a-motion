@@ -27,7 +27,8 @@ class Works
     {
         $p = self::pair($s);
         if ($p['id'] === null) {
-            return '';
+            // auto-translate EN -> ID, cached forever
+            $p['id'] = TranslationService::translate($p['en'], 'id');
         }
 
         return ' data-en="'.e($p['en']).'" data-id="'.e($p['id']).'"';

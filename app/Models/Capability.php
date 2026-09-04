@@ -10,8 +10,11 @@ class Capability extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image', 'number', 'title', 'description', 'tags', 'sort_order', 'is_active'];
+    protected $fillable = ['image', 'number', 'title', 'title_id', 'description', 'description_id', 'tags', 'sort_order', 'is_active'];
     protected $casts = ['sort_order' => 'integer', 'is_active' => 'boolean'];
+
+    public function titleLocalized(?string $locale = null): string { $l = $locale ?? app()->getLocale(); return $l === 'id' && !empty($this->title_id) ? $this->title_id : $this->title; }
+    public function descLocalized(?string $locale = null): string { $l = $locale ?? app()->getLocale(); return $l === 'id' && !empty($this->description_id) ? $this->description_id : $this->description; }
 
     public function scopeActive(Builder $query): Builder
     {

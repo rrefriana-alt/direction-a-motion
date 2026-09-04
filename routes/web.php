@@ -17,122 +17,147 @@ use App\Http\Controllers\Admin\ClientLogosController;
 use App\Http\Controllers\Admin\MarqueeController;
 
 // ==================== FRONTEND ====================
-Route::get('/', function () {
-    $capabilities = \App\Models\Capability::where('is_active', true)->orderBy('sort_order')->get();
-    $works = \App\Support\Works::homepage();
-    $categories = \App\Models\ServiceCategory::with('details.items')->take(5)->get();
-    $clientLogos = \App\Models\ClientLogo::where('is_active', true)->orderBy('sort_order')->get();
-    $marqueeItems = \App\Models\MarqueeItem::where('is_active', true)->orderBy('sort_order')->get();
-    $stats = \App\Models\Stat::where('is_active', true)->orderBy('sort_order')->get();
-    $sectors = \App\Models\Sector::with('items')->where('is_active', true)->orderBy('sort_order')->get();
-    $processSteps = \App\Models\ProcessStep::where('is_active', true)->orderBy('sort_order')->get();
-    $processEyebrow = \App\Models\Setting::get('home_process_eyebrow_en', '05 � How we work');
-    $processTitleEn = \App\Models\Setting::get('home_process_title_en', 'A short line<br>to remarkable');
-    $processTitleId = \App\Models\Setting::get('home_process_title_id', 'Garis pendek<br>menuju luar biasa');
-
-    // Section settings
-    $heroTagline = \App\Models\Setting::get('home_hero_tagline', '65+ brands trusted us');
-    $heroDescription = \App\Models\Setting::get('home_hero_description', 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.');
-    $manifestoSubtitle = \App\Models\Setting::get('home_manifesto_subtitle', 'MANIFESTO');
-    $manifestoTitle = \App\Models\Setting::get('home_manifesto_title', 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.');
-    $founderQuote = \App\Models\Setting::get('home_founder_quote', 'Creativity without execution is just a hallucination.');
-    $founderName = \App\Models\Setting::get('home_founder_name', 'Sona Lesmana');
-    $founderTitle = \App\Models\Setting::get('home_founder_title', 'Founder & CEO');
-    $ctaEyebrow = \App\Models\Setting::get('home_cta_eyebrow', 'Available for Q4 2026 projects');
-    $ctaTitle = \App\Models\Setting::get('home_cta_title', "Let's build<br>something");
-    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(3)->get();
-
-    return view('index', compact(
-        'capabilities', 'works', 'categories', 'clientLogos', 'marqueeItems', 'stats', 'sectors',
-        'processSteps', 'processEyebrow', 'processTitleEn', 'processTitleId',
-        'heroTagline', 'heroDescription', 'manifestoSubtitle', 'manifestoTitle',
-        'founderQuote', 'founderName', 'founderTitle', 'ctaEyebrow', 'ctaTitle', 'latestPosts'
-    ));
-})->name('home');
-
-Route::get('/work', function () {
-    $works = \App\Support\Works::all();
-    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
-    $workTitle = \App\Models\Setting::get('work_page_title', 'Selected work');
-    $workLede = \App\Models\Setting::get('work_page_lede', 'Ten projects that show the range: a national TVC, a dealer system used in 200+ locations, a three-day expo, and 12,000 kits shipped on time.');
-    return view('work', compact('works', 'latestPosts', 'workTitle', 'workLede'));
-})->name('work');
-
-Route::get('/services', function () {
-    $categories = \App\Models\ServiceCategory::where('is_active', true)
-        ->with(['details' => function ($q) {
-            $q->where('is_active', true)->orderBy('sort_order');
-            $q->with(['items' => function ($q2) {
-                $q2->where('is_active', true)->orderBy('sort_order');
-            }]);
-        }])
-        ->orderBy('sort_order')
-        ->get();
-    $engagements = \App\Models\EngagementModel::where('is_active', true)->orderBy('sort_order')->get();
-    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
-    return view('services', compact('categories', 'engagements', 'latestPosts'));
-})->name('services');
-
-Route::get('/about', function () {
-    $timelines = \App\Models\Timeline::where('is_active', true)->orderBy('sort_order')->get();
-    $ceoProfile = \App\Models\CeoProfile::first();
-    $statistics = \App\Models\Stat::where('is_active', true)->orderBy('sort_order')->get();
-    $content = [
-        'about' => [
-            'founder' => [
-                'quote'  => $ceoProfile->quote ?? \App\Models\Setting::get('about_founder_quote', 'Creativity without execution is just a hallucination.'),
-                'name'   => $ceoProfile->name ?? \App\Models\Setting::get('about_founder_name', 'Sona Lesmana'),
-                'title'  => $ceoProfile->position ?? \App\Models\Setting::get('about_founder_title', 'Founder & CEO'),
-                'image'  => $ceoProfile->photo ?? \App\Models\Setting::get('about_founder_image', ''),
-            ],
-        ],
-    ];
-    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
-    return view('about', compact('content', 'timelines', 'ceoProfile', 'statistics', 'latestPosts'));
-})->name('about');
-Route::get('/contact', function () {
-    $contactPhone = \App\Models\Setting::get('contact_phone', '+62 821 2100 0680');
-    $contactEmail = \App\Models\Setting::get('contact_email', 'hello@fugocreativegroup.com');
-    $contactHeadline = \App\Models\Setting::get('contact_page_headline', 'Tell us what you need to land');
-    $contactSubtitle = \App\Models\Setting::get('contact_page_subtitle', 'A short brief is enough to start. We reply within one working day with questions, a route and a rough number � before any meeting.');
-    $contactAddressBdg = \App\Models\Setting::get('contact_address_bdg', 'Jl. Permata Taman Sari Raya No.21, Arcamanik, Bandung');
-    $contactAddressJkt = \App\Models\Setting::get('contact_address_jkt', 'Jl. Srengseng Sawah No.16, Jagakarsa, Jakarta Selatan');
-    $contactAddressBali = \App\Models\Setting::get('contact_address_bali', 'Jl. Tukad Melangit, Samplangan, Gianyar, Bali');
-    $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
-    return view('contact', compact('contactPhone', 'contactEmail', 'contactHeadline', 'contactSubtitle', 'contactAddressBdg', 'contactAddressJkt', 'contactAddressBali', 'latestPosts'));
-})->name('contact');
-
-Route::get('/journal', function (Illuminate\Http\Request $request) {
-    $categories = ['company', 'industry', 'events', 'updates', 'insights'];
-    $activeCategory = $request->query('category');
-    $query = \App\Models\News::published()->orderByDesc('published_date');
-    if ($activeCategory && in_array($activeCategory, $categories)) {
-        $query->where('category', $activeCategory);
+// Locale helper
+function localeView(string $base, string $locale): string
+{
+    if (view()->exists($locale . '.' . $base)) {
+        return $locale . '.' . $base;
     }
-    $posts = $query->paginate(9)->withQueryString();
-    return view('journal', compact('posts', 'categories', 'activeCategory'));
-})->name('journal.index');
+    return $base;
+}
 
-Route::get('/journal/{slug}', function ($slug) {
-    $post = \App\Models\News::published()->where('slug', $slug)->firstOrFail();
-    $post->increment('view_count');
-    $morePosts = \App\Models\News::published()->where('id', '!=', $post->id)->orderByDesc('published_date')->take(3)->get();
-    $newerPost = \App\Models\News::published()->where('published_date', '>', $post->published_date)->orderBy('published_date')->first();
-    $olderPost = \App\Models\News::published()->where('published_date', '<', $post->published_date)->orderByDesc('published_date')->first();
-    return view('journal-show', compact('post', 'morePosts', 'newerPost', 'olderPost'));
-})->name('journal.show');
+Route::get('/', fn() => redirect('/en'))->name('home.redirect');
 
-Route::get('/case-study', fn() => view('case-study'))->name('case-study.static');
-Route::get('/case-study/project/{id}', function ($id) {
-    $project = \App\Models\Project::findOrFail($id);
-    return view('case-study', compact('project'));
-})->name('case-study');
+Route::prefix('{locale}')->where(['locale' => 'en|id'])->middleware('setlocale')->group(function () {
 
-Route::post('/contact', function (Illuminate\Http\Request $request) {
-    $request->validate(['name' => 'required', 'email' => 'required|email', 'message' => 'required']);
-    \App\Models\Message::create($request->only(['name', 'email', 'message']) + ['subject' => 'Contact Form']);
-    return back()->with('success', 'Your message has been sent!');
-})->name('contact.send');
+    Route::get('/', function (string $locale) {
+        $capabilities = \App\Models\Capability::where('is_active', true)->orderBy('sort_order')->get();
+        $works = \App\Support\Works::homepage();
+        $categories = \App\Models\ServiceCategory::with('details.items')->take(5)->get();
+        $clientLogos = \App\Models\ClientLogo::where('is_active', true)->orderBy('sort_order')->get();
+        $marqueeItems = \App\Models\MarqueeItem::where('is_active', true)->orderBy('sort_order')->get();
+        $stats = \App\Models\Stat::where('is_active', true)->orderBy('sort_order')->get();
+        $sectors = \App\Models\Sector::with('items')->where('is_active', true)->orderBy('sort_order')->get();
+        $processSteps = \App\Models\ProcessStep::where('is_active', true)->orderBy('sort_order')->get();
+        $processEyebrow = \App\Models\Setting::localized('home_process_eyebrow', $locale, '05 — How we work');
+        $processTitleEn = \App\Models\Setting::get('home_process_title_en', 'A short line<br>to remarkable');
+        $processTitleId = \App\Models\Setting::get('home_process_title_id', 'Garis pendek<br>menuju luar biasa');
+        $processTitle = $locale === 'id' ? $processTitleId : $processTitleEn;
+        $processEyebrowVal = $locale === 'id' ? \App\Models\Setting::get('home_process_eyebrow_id', $processEyebrow) : $processEyebrow;
+
+        $heroTagline = \App\Models\Setting::localized('home_hero_tagline', $locale, '65+ brands trusted us');
+        $heroDescription = \App\Models\Setting::localized('home_hero_description', $locale, 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.');
+        $manifestoSubtitle = \App\Models\Setting::localized('home_manifesto_subtitle', $locale, 'MANIFESTO');
+        $manifestoTitle = \App\Models\Setting::localized('home_manifesto_title', $locale, 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.');
+        $founderQuote = \App\Models\Setting::localized('home_founder_quote', $locale, 'Creativity without execution is just a hallucination.');
+        $founderName = \App\Models\Setting::get('home_founder_name', 'Sona Lesmana');
+        $founderTitle = \App\Models\Setting::localized('home_founder_title', $locale, 'Founder & CEO');
+        $ctaEyebrow = \App\Models\Setting::localized('home_cta_eyebrow', $locale, 'Available for Q4 2026 projects');
+        $ctaTitle = \App\Models\Setting::localized('home_cta_title', $locale, "Let's build<br>something");
+        $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(3)->get();
+
+        return view(localeView('index', $locale), compact(
+            'capabilities', 'works', 'categories', 'clientLogos', 'marqueeItems', 'stats', 'sectors',
+            'processSteps', 'processEyebrow', 'processTitleEn', 'processTitleId', 'processEyebrowVal', 'processTitle',
+            'heroTagline', 'heroDescription', 'manifestoSubtitle', 'manifestoTitle',
+            'founderQuote', 'founderName', 'founderTitle', 'ctaEyebrow', 'ctaTitle', 'latestPosts', 'locale'
+        ));
+    })->name('home');
+
+    Route::get('/work', function (string $locale) {
+        $works = \App\Support\Works::all();
+        $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
+        $workTitle = \App\Models\Setting::localized('work_page_title', $locale, 'Selected work');
+        $workLede = \App\Models\Setting::localized('work_page_lede', $locale, 'Ten projects that show the range: a national TVC, a dealer system used in 200+ locations, a three-day expo, and 12,000 kits shipped on time.');
+        return view(localeView('work', $locale), compact('works', 'latestPosts', 'workTitle', 'workLede', 'locale'));
+    })->name('work');
+
+    Route::get('/services', function (string $locale) {
+        $categories = \App\Models\ServiceCategory::where('is_active', true)
+            ->with(['details' => function ($q) {
+                $q->where('is_active', true)->orderBy('sort_order');
+                $q->with(['items' => function ($q2) {
+                    $q2->where('is_active', true)->orderBy('sort_order');
+                }]);
+            }])
+            ->orderBy('sort_order')
+            ->get();
+        $engagements = \App\Models\EngagementModel::where('is_active', true)->orderBy('sort_order')->get();
+        $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
+        return view(localeView('services', $locale), compact('categories', 'engagements', 'latestPosts', 'locale'));
+    })->name('services');
+
+    Route::get('/about', function (string $locale) {
+        $timelines = \App\Models\Timeline::where('is_active', true)->orderBy('sort_order')->get();
+        $ceoProfile = \App\Models\CeoProfile::first();
+        $statistics = \App\Models\Stat::where('is_active', true)->orderBy('sort_order')->get();
+        $content = [
+            'about' => [
+                'founder' => [
+                    'quote'  => \App\Models\Setting::localized('about_founder_quote', $locale, $ceoProfile->quote ?? 'Creativity without execution is just a hallucination.'),
+                    'name'   => $ceoProfile->name ?? \App\Models\Setting::get('about_founder_name', 'Sona Lesmana'),
+                    'title'  => \App\Models\Setting::localized('about_founder_title', $locale, $ceoProfile->position ?? 'Founder & CEO'),
+                    'image'  => $ceoProfile->photo ?? \App\Models\Setting::get('about_founder_image', ''),
+                ],
+            ],
+        ];
+        $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
+        return view(localeView('about', $locale), compact('content', 'timelines', 'ceoProfile', 'statistics', 'latestPosts', 'locale'));
+    })->name('about');
+
+    Route::get('/contact', function (string $locale) {
+        $contactPhone = \App\Models\Setting::get('contact_phone', '+62 821 2100 0680');
+        $contactEmail = \App\Models\Setting::get('contact_email', 'hello@fugocreativegroup.com');
+        $contactHeadline = \App\Models\Setting::localized('contact_page_headline', $locale, 'Tell us what you need to land');
+        $contactSubtitle = \App\Models\Setting::localized('contact_page_subtitle', $locale, 'A short brief is enough to start. We reply within one working day with questions, a route and a rough number — before any meeting.');
+        $contactAddressBdg = \App\Models\Setting::get('contact_address_bdg', 'Jl. Permata Taman Sari Raya No.21, Arcamanik, Bandung');
+        $contactAddressJkt = \App\Models\Setting::get('contact_address_jkt', 'Jl. Srengseng Sawah No.16, Jagakarsa, Jakarta Selatan');
+        $contactAddressBali = \App\Models\Setting::get('contact_address_bali', 'Jl. Tukad Melangit, Samplangan, Gianyar, Bali');
+        $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(1)->get();
+        return view(localeView('contact', $locale), compact('contactPhone', 'contactEmail', 'contactHeadline', 'contactSubtitle', 'contactAddressBdg', 'contactAddressJkt', 'contactAddressBali', 'latestPosts', 'locale'));
+    })->name('contact');
+
+    Route::get('/journal', function (string $locale, Illuminate\Http\Request $request) {
+        $categories = ['company', 'industry', 'events', 'updates', 'insights'];
+        $activeCategory = $request->query('category');
+        $query = \App\Models\News::published()->orderByDesc('published_date');
+        if ($activeCategory && in_array($activeCategory, $categories)) {
+            $query->where('category', $activeCategory);
+        }
+        $posts = $query->paginate(9)->withQueryString();
+        return view(localeView('journal', $locale), compact('posts', 'categories', 'activeCategory', 'locale'));
+    })->name('journal.index');
+
+    Route::get('/journal/{slug}', function (string $locale, $slug) {
+        $post = \App\Models\News::published()->where('slug', $slug)->firstOrFail();
+        $post->increment('view_count');
+        $morePosts = \App\Models\News::published()->where('id', '!=', $post->id)->orderByDesc('published_date')->take(3)->get();
+        $newerPost = \App\Models\News::published()->where('published_date', '>', $post->published_date)->orderBy('published_date')->first();
+        $olderPost = \App\Models\News::published()->where('published_date', '<', $post->published_date)->orderByDesc('published_date')->first();
+        return view(localeView('journal-show', $locale), compact('post', 'morePosts', 'newerPost', 'olderPost', 'locale'));
+    })->name('journal.show');
+
+    Route::get('/case-study', fn(string $locale) => view(localeView('case-study', $locale), ['locale' => $locale]))->name('case-study.static');
+    Route::get('/case-study/project/{id}', function (string $locale, $id) {
+        $project = \App\Models\Project::findOrFail($id);
+        return view(localeView('case-study', $locale), compact('project', 'locale'));
+    })->name('case-study');
+
+    Route::post('/contact', function (string $locale, Illuminate\Http\Request $request) {
+        $request->validate(['name' => 'required', 'email' => 'required|email', 'message' => 'required']);
+        \App\Models\Message::create($request->only(['name', 'email', 'message']) + ['subject' => 'Contact Form']);
+        return back()->with('success', $locale === 'id' ? 'Pesan Anda telah terkirim!' : 'Your message has been sent!');
+    })->name('contact.send');
+
+});
+
+// Legacy redirects (no locale) -> /en/...
+Route::get('/work', fn() => redirect('/en/work'));
+Route::get('/services', fn() => redirect('/en/services'));
+Route::get('/about', fn() => redirect('/en/about'));
+Route::get('/contact-legacy', fn() => redirect('/en/contact'))->name('contact.legacy');
+Route::get('/journal-legacy', fn() => redirect('/en/journal'));
+
 
 // ==================== AUTH ====================
 Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
@@ -371,6 +396,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/contact/messages', [ContactController::class, 'messagesIndex'])->name('contact.messages.index');
     Route::delete('/contact/messages/{message}', [ContactController::class, 'messageDestroy'])->name('contact.messages.destroy');
     Route::post('/contact/messages/{message}/toggle-read', [ContactController::class, 'messageToggleRead'])->name('contact.messages.toggle-read');
+
+    // ==================== TRANSLATIONS (EN/ID per page/section) ====================
+    Route::get('/translations', [\App\Http\Controllers\Admin\TranslationController::class, 'index'])->name('translations.index');
+    Route::put('/translations', [\App\Http\Controllers\Admin\TranslationController::class, 'update'])->name('translations.update');
 
     // ==================== ACCOUNT MODULE ====================
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');

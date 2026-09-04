@@ -23,6 +23,11 @@ class HomeController extends Controller
     public function heroEdit()
     {
         $settings = [
+            'tagline_en' => Setting::get('home_hero_tagline_en', Setting::get('home_hero_tagline', '65+ brands trusted us')),
+            'tagline_id' => Setting::get('home_hero_tagline_id', Setting::get('home_hero_tagline_en', '65+ brands trusted us')),
+            'description_en' => Setting::get('home_hero_description_en', Setting::get('home_hero_description', 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.')),
+            'description_id' => Setting::get('home_hero_description_id', 'Desain · Production House · Event · Merch. Grup kreatif Indonesia sejak 2016.'),
+            // legacy
             'tagline' => Setting::get('home_hero_tagline', '65+ brands trusted us'),
             'description' => Setting::get('home_hero_description', 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.'),
         ];
@@ -32,18 +37,29 @@ class HomeController extends Controller
     public function heroUpdate(Request $request)
     {
         $request->validate([
-            'tagline' => 'required|string|max:255',
-            'description' => 'required|string',
+            'tagline_en' => 'required|string|max:255',
+            'tagline_id' => 'required|string|max:255',
+            'description_en' => 'required|string',
+            'description_id' => 'required|string',
         ]);
-        Setting::set('home_hero_tagline', $request->tagline);
-        Setting::set('home_hero_description', $request->description);
-        return redirect()->route('admin.home.hero.edit')->with('success', 'Hero settings berhasil diupdate!');
+        Setting::set('home_hero_tagline_en', $request->tagline_en);
+        Setting::set('home_hero_tagline_id', $request->tagline_id);
+        Setting::set('home_hero_description_en', $request->description_en);
+        Setting::set('home_hero_description_id', $request->description_id);
+        // keep legacy for fallback
+        Setting::set('home_hero_tagline', $request->tagline_en);
+        Setting::set('home_hero_description', $request->description_en);
+        return redirect()->route('admin.home.hero.edit')->with('success', 'Hero EN/ID berhasil diupdate!');
     }
 
     // ==================== CAPABILITIES HEADER ====================
     public function capabilitiesHeaderEdit()
     {
         $settings = [
+            'title_en' => Setting::get('home_capabilities_title_en', Setting::get('home_capabilities_title', "Five studios,<br>one standard")),
+            'title_id' => Setting::get('home_capabilities_title_id', "Lima studio,<br>satu standar"),
+            'description_en' => Setting::get('home_capabilities_description_en', Setting::get('home_capabilities_description', 'Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax.')),
+            'description_id' => Setting::get('home_capabilities_description_id', 'Brief satu tim dan dapatkan seluruh rantai — strategi, desain, film, panggung, hingga produk fisik — tanpa biaya estafet antar agensi.'),
             'title' => Setting::get('home_capabilities_title', "Five studios,<br>one standard"),
             'description' => Setting::get('home_capabilities_description', 'Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax.'),
         ];
@@ -53,18 +69,28 @@ class HomeController extends Controller
     public function capabilitiesHeaderUpdate(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title_en' => 'required|string|max:255',
+            'title_id' => 'required|string|max:255',
+            'description_en' => 'required|string',
+            'description_id' => 'required|string',
         ]);
-        Setting::set('home_capabilities_title', $request->title);
-        Setting::set('home_capabilities_description', $request->description);
-        return redirect()->route('admin.home.capabilities-header.edit')->with('success', 'Capabilities header berhasil diupdate!');
+        Setting::set('home_capabilities_title_en', $request->title_en);
+        Setting::set('home_capabilities_title_id', $request->title_id);
+        Setting::set('home_capabilities_description_en', $request->description_en);
+        Setting::set('home_capabilities_description_id', $request->description_id);
+        Setting::set('home_capabilities_title', $request->title_en);
+        Setting::set('home_capabilities_description', $request->description_en);
+        return redirect()->route('admin.home.capabilities-header.edit')->with('success', 'Capabilities header EN/ID berhasil diupdate!');
     }
 
     // ==================== MANIFESTO ====================
     public function manifestoEdit()
     {
         $settings = [
+            'subtitle_en' => Setting::get('home_manifesto_subtitle_en', Setting::get('home_manifesto_subtitle', 'MANIFESTO')),
+            'subtitle_id' => Setting::get('home_manifesto_subtitle_id', 'MANIFESTO'),
+            'title_en' => Setting::get('home_manifesto_title_en', Setting::get('home_manifesto_title', 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.')),
+            'title_id' => Setting::get('home_manifesto_title_id', 'Setiap brief bisa diselesaikan dengan *kreativitas, *jalur yang inovatif, dan eksekusi yang benar-benar mengena.'),
             'subtitle' => Setting::get('home_manifesto_subtitle', 'MANIFESTO'),
             'title' => Setting::get('home_manifesto_title', 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.'),
         ];
@@ -74,12 +100,18 @@ class HomeController extends Controller
     public function manifestoUpdate(Request $request)
     {
         $request->validate([
-            'subtitle' => 'required|string|max:255',
-            'title' => 'required|string',
+            'subtitle_en' => 'required|string|max:255',
+            'subtitle_id' => 'required|string|max:255',
+            'title_en' => 'required|string',
+            'title_id' => 'required|string',
         ]);
-        Setting::set('home_manifesto_subtitle', $request->subtitle);
-        Setting::set('home_manifesto_title', $request->title);
-        return redirect()->route('admin.home.manifesto.edit')->with('success', 'Manifesto berhasil diupdate!');
+        Setting::set('home_manifesto_subtitle_en', $request->subtitle_en);
+        Setting::set('home_manifesto_subtitle_id', $request->subtitle_id);
+        Setting::set('home_manifesto_title_en', $request->title_en);
+        Setting::set('home_manifesto_title_id', $request->title_id);
+        Setting::set('home_manifesto_subtitle', $request->subtitle_en);
+        Setting::set('home_manifesto_title', $request->title_en);
+        return redirect()->route('admin.home.manifesto.edit')->with('success', 'Manifesto EN/ID berhasil diupdate!');
     }
 
     // ==================== STATS ====================
@@ -379,6 +411,10 @@ class HomeController extends Controller
     public function ctaEdit()
     {
         $settings = [
+            'eyebrow_en' => Setting::get('home_cta_eyebrow_en', Setting::get('home_cta_eyebrow', 'Available for Q4 2026 projects')),
+            'eyebrow_id' => Setting::get('home_cta_eyebrow_id', 'Tersedia untuk proyek Q4 2026'),
+            'title_en' => Setting::get('home_cta_title_en', Setting::get('home_cta_title', "Let's build<br>something")),
+            'title_id' => Setting::get('home_cta_title_id', 'Ayo bangun<br>sesuatu'),
             'eyebrow' => Setting::get('home_cta_eyebrow', 'Available for Q4 2026 projects'),
             'title' => Setting::get('home_cta_title', "Let's build<br>something"),
         ];
@@ -388,18 +424,28 @@ class HomeController extends Controller
     public function ctaUpdate(Request $request)
     {
         $request->validate([
-            'eyebrow' => 'required|string|max:255',
-            'title' => 'required|string',
+            'eyebrow_en' => 'required|string|max:255',
+            'eyebrow_id' => 'required|string|max:255',
+            'title_en' => 'required|string',
+            'title_id' => 'required|string',
         ]);
-        Setting::set('home_cta_eyebrow', $request->eyebrow);
-        Setting::set('home_cta_title', $request->title);
-        return redirect()->route('admin.home.cta.edit')->with('success', 'CTA berhasil diupdate!');
+        Setting::set('home_cta_eyebrow_en', $request->eyebrow_en);
+        Setting::set('home_cta_eyebrow_id', $request->eyebrow_id);
+        Setting::set('home_cta_title_en', $request->title_en);
+        Setting::set('home_cta_title_id', $request->title_id);
+        Setting::set('home_cta_eyebrow', $request->eyebrow_en);
+        Setting::set('home_cta_title', $request->title_en);
+        return redirect()->route('admin.home.cta.edit')->with('success', 'CTA EN/ID berhasil diupdate!');
     }
 
     // ==================== SERVICES PAGE ====================
     public function servicesPageEdit()
     {
         $settings = [
+            'headline_en' => Setting::get('services_page_headline_en', Setting::get('services_page_headline', 'Five studios, one invoice')),
+            'headline_id' => Setting::get('services_page_headline_id', 'Lima studio, satu tagihan'),
+            'subtitle_en' => Setting::get('services_page_subtitle_en', Setting::get('services_page_subtitle', 'From brand identity to mass production — all delivered under one roof.')),
+            'subtitle_id' => Setting::get('services_page_subtitle_id', 'Dari identitas brand hingga produksi massal — semua dalam satu atap.'),
             'headline' => Setting::get('services_page_headline', 'Five studios, one invoice'),
             'subtitle' => Setting::get('services_page_subtitle', 'From brand identity to mass production — all delivered under one roof.'),
         ];
@@ -409,12 +455,18 @@ class HomeController extends Controller
     public function servicesPageUpdate(Request $request)
     {
         $request->validate([
-            'headline' => 'required|string|max:255',
-            'subtitle' => 'required|string',
+            'headline_en' => 'required|string|max:255',
+            'headline_id' => 'required|string|max:255',
+            'subtitle_en' => 'required|string',
+            'subtitle_id' => 'required|string',
         ]);
-        Setting::set('services_page_headline', $request->headline);
-        Setting::set('services_page_subtitle', $request->subtitle);
-        return redirect()->route('admin.home.services-page.edit')->with('success', 'Services page settings berhasil diupdate!');
+        Setting::set('services_page_headline_en', $request->headline_en);
+        Setting::set('services_page_headline_id', $request->headline_id);
+        Setting::set('services_page_subtitle_en', $request->subtitle_en);
+        Setting::set('services_page_subtitle_id', $request->subtitle_id);
+        Setting::set('services_page_headline', $request->headline_en);
+        Setting::set('services_page_subtitle', $request->subtitle_en);
+        return redirect()->route('admin.home.services-page.edit')->with('success', 'Services page EN/ID berhasil diupdate!');
     }
 
     // ==================== CONTACT PAGE ====================

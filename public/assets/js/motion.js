@@ -78,38 +78,93 @@ function revertSplits() {
 }
 
 const I18N = {
-  set(lang) {
-    if (lang !== 'en' && lang !== 'id') return;
-
+  _map: null,
+  _loading: false,
+  _q: [],
+  _enabled: !/^\/(en|id)(\/|$)/.test(location.pathname),
+  _ensure(cb){
+    if(this._map) return cb(this._map);
+    this._q.push(cb);
+    if(this._loading) return;
+    this._loading = true;
+    // file permanen, tanpa provider luar. prefetch single json, cache browser force-cache
+    const url = new URL('assets/translations.json', document.baseURI).href;
+    fetch(url, {cache:'force-cache'}).then(r=>r.json()).then(m=>{
+      this._map = m || {};
+      const q=this._q; this._q=[]; q.forEach(f=>f(this._map));
+    }).catch(()=>{ this._map={}; const q=this._q; this._q=[]; q.forEach(f=>f(this._map)); });
+  },
+  _apply(lang, map){
     revertSplits();
     html.lang = lang;
-
-    $$('[data-en]').forEach(el => {
-      const v = el.getAttribute('data-' + lang);
-      if (v == null) return;
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { el.placeholder = v; return; }
-      // Every element gets its copy written, split or not. The old code
-      // skipped [data-split] and left it to a listener, which is exactly the
-      // path that could not run yet during load.
-      el.dataset.raw = v;
-      if (v.includes('<')) el.innerHTML = v;
-      else el.textContent = v;
+    const getMapVal = (en)=>{
+      if(!en) return null;
+      if(map[en]!=null && String(map[en]).trim()!=='') return String(map[en]);
+      if(window.__TR_MAP && window.__TR_MAP[en]!=null && String(window.__TR_MAP[en]).trim()!=='') return String(window.__TR_MAP[en]);
+      return null;
+    };
+    $$('[data-en]').forEach(el=>{
+      let v = el.getAttribute('data-' + lang);
+      const en = el.getAttribute('data-en');
+      // server-rendered data-id == data-en means not translated yet -> lookup file map (natural human)
+      if(lang==='id' && v!=null && en!=null && v===en){
+        const mv=getMapVal(en); if(mv){ v=mv; el.setAttribute('data-id', v); }
+      }
+      if(v==null && lang==='id' && en){
+        const mv=getMapVal(en); if(mv){ v=mv; el.setAttribute('data-id', v); }
+      }
+      if(v==null) return;
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){ el.placeholder=v; return; }
+      el.dataset.raw=v;
+      if(v.includes('<')) el.innerHTML=v; else el.textContent=v;
     });
-
-    const pill = $('.lang');
-    if (pill) {
-      pill.dataset.lang = lang;
-      $$('.lang__btn', pill).forEach(b => b.classList.toggle('is-on', b.dataset.lang === lang));
-    }
-    try { localStorage.setItem('fugo-lang', lang); } catch {}
-
-    document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
+    const extras=[
+      ['[data-en-placeholder]','placeholder','-placeholder'],
+      ['[data-en-alt]','alt','-alt'],
+      ['[data-en-aria-label]','aria-label','-aria-label'],
+      ['[data-en-title]','title','-title'],
+      ['[data-en-content]','content','-content'],
+    ];
+    extras.forEach(([sel,attr,suf])=>{
+      $$(sel).forEach(el=>{
+        let v=el.getAttribute('data-'+lang+suf);
+        const en=el.getAttribute('data-en'+suf);
+        if(lang==='id' && v!=null && en!=null && v===en){
+          const mv=getMapVal(en); if(mv){ v=mv; el.setAttribute('data-id'+suf, v); }
+        }
+        if(v==null && lang==='id' && en){
+          const mv=getMapVal(en); if(mv){ v=mv; el.setAttribute('data-id'+suf, v); }
+        }
+        if(v==null) return;
+        el.setAttribute(attr, v);
+      });
+    });
+    const pill=$('.lang');
+    if(pill){ pill.dataset.lang=lang; $$('.lang__btn',pill).forEach(b=>b.classList.toggle('is-on', b.dataset.lang===lang)); }
+    try{ localStorage.setItem('fugo-lang', lang); }catch{}
+    document.dispatchEvent(new CustomEvent('langchange',{detail:lang}));
   },
-  init() {
-    $$('.lang__btn').forEach(b => b.addEventListener('click', () => I18N.set(b.dataset.lang)));
-    let saved = null;
-    try { saved = localStorage.getItem('fugo-lang'); } catch {}
-    if (saved && saved !== html.lang) I18N.set(saved);
+  set(lang){
+    if(!this._enabled) return;
+    if(lang!=='en' && lang!=='id') return;
+    // window.__TR_MAP inject dari Blade kalau ada, biar 0 fetch
+    const inline = window.__TR_MAP || null;
+    if(lang==='id' && !this._map && !inline){
+      this._ensure(m=>this._apply(lang, m));
+    } else {
+      this._apply(lang, this._map || inline || {});
+    }
+  },
+  init(){
+    if(!this._enabled) return;
+    // prefetch map biar toggle ID instant
+    this._ensure(()=>{});
+    $$('.lang__btn').forEach(b=>{
+      // only bind for JS-toggle pills (button[data-lang]), locale links are <a>
+      if(b.tagName === 'BUTTON') b.addEventListener('click',()=>I18N.set(b.dataset.lang));
+    });
+    let saved=null; try{ saved=localStorage.getItem('fugo-lang'); }catch{}
+    if(saved && saved!==html.lang) I18N.set(saved);
   }
 };
 

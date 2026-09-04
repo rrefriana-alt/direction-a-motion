@@ -22,18 +22,31 @@
             @csrf
             @method('PUT')
 
-            <div class="form-group">
-                <label class="form-label">Subtitle <span style="color:var(--red-600)">*</span></label>
-                <input type="text" name="subtitle" class="form-control @error('subtitle') is-invalid @enderror" id="subtitleInput" value="{{ old('subtitle', $settings['subtitle']) }}" required placeholder="e.g. MANIFESTO">
-                @error('subtitle') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div class="form-group">
+                    <label class="form-label">Subtitle — EN <span style="color:var(--red-600)">*</span></label>
+                    <input type="text" name="subtitle_en" class="form-control @error('subtitle_en') is-invalid @enderror" value="{{ old('subtitle_en', $settings['subtitle_en']) }}" required>
+                    @error('subtitle_en') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Subtitle — ID <span style="color:var(--red-600)">*</span></label>
+                    <input type="text" name="subtitle_id" class="form-control @error('subtitle_id') is-invalid @enderror" value="{{ old('subtitle_id', $settings['subtitle_id']) }}" required>
+                    @error('subtitle_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
             </div>
-
-            <div class="form-group">
-                <label class="form-label">Title <span style="color:var(--red-600)">*</span></label>
-                <textarea name="title" class="form-control @error('title') is-invalid @enderror" id="titleInput" rows="4" required>{{ old('title', $settings['title']) }}</textarea>
-                @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                <div style="font-size:.72rem;color:var(--gray-400);margin-top:.25rem">Use *word* to mark bold words in the frontend</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div class="form-group">
+                    <label class="form-label">Title — EN <span style="color:var(--red-600)">*</span></label>
+                    <textarea name="title_en" class="form-control @error('title_en') is-invalid @enderror" rows="4" required>{{ old('title_en', $settings['title_en']) }}</textarea>
+                    @error('title_en') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Title — ID <span style="color:var(--red-600)">*</span></label>
+                    <textarea name="title_id" class="form-control @error('title_id') is-invalid @enderror" rows="4" required>{{ old('title_id', $settings['title_id']) }}</textarea>
+                    @error('title_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
             </div>
+            <div style="font-size:.72rem;color:var(--gray-400);margin-top:.25rem">Use *word* to mark bold words</div>
 
             <div class="form-actions">
                 <a href="{{ route('admin.home') }}" class="btn btn-secondary btn-sm">Cancel</a>

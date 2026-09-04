@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title data-en="Contact — Fugo Creative — Bandung, Jakarta &amp; Bali" data-id="Kontak — Fugo Creative — Bandung, Jakarta &amp; Bali">Contact — Fugo Creative — Bandung, Jakarta &amp; Bali</title>
+<title>Contact — Fugo Creative — Bandung, Jakarta & Bali</title>
 <meta name="description" data-en-content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves." data-id-content="Mulai proyek bersama Fugo Creative. Kantor di Bandung, Jakarta, dan Bali. WhatsApp +62 821 2100 0680 atau email hello@fugocreativegroup.com — kami jawab telepon sendiri." content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves.">
 <meta name="theme-color" content="#07080a">
 <link rel="canonical" href="https://fugocreativegroup.com/contact.html">
@@ -60,34 +60,35 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <div class="prog" aria-hidden="true"></div>
 <header class="nav is-solid">
   <div class="nav__in">
-    <a class="brand" href="{{ url('') }}" aria-label="Fugo Creative — home">
+    <a class="brand" href="{{ url($locale) }}" aria-label="Fugo Creative — home">
       <img class="brand__mark" src="{{ asset('assets/img/logo-full.webp') }}" alt="Fugo Creative">
     </a>
     <nav class="nav__links" aria-label="Primary">
-      <a class="nav__link" href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a>
-      <a class="nav__link" href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a>
-      <a class="nav__link" href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a>
-      <a class="nav__link" href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a>
-      <a class="nav__link is-active" href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a>
+      <a class="nav__link" href="{{ url($locale) }}">Home</a>
+      <a class="nav__link" href="{{ url($locale.'/work') }}">Work</a>
+      <a class="nav__link" href="{{ url($locale.'/services') }}">Services</a>
+      <a class="nav__link" href="{{ url($locale.'/about') }}">About</a>
+      <a class="nav__link is-active" href="{{ url($locale.'/contact') }}">Contact</a>
     </nav>
     <div class="nav__side">
-      <div class="lang" data-lang="en" role="group" aria-label="Language">
+                        @php $p = trim(preg_replace('#^(en|id)(/|$)#', '', trim(request()->path(), '/')), '/'); $qs = request()->getQueryString() ? '?' . request()->getQueryString() : ''; @endphp
+            <div class="lang" data-lang="en" role="group" aria-label="Language">
         <span class="lang__pill" aria-hidden="true"></span>
-        <button class="lang__btn is-on" data-lang="en" aria-label="English">EN</button>
-        <button class="lang__btn" data-lang="id" aria-label="Bahasa Indonesia">ID</button>
+        <a class="lang__btn is-on" href="{{ url('en' . ($p ? '/'.$p : '') . $qs) }}" aria-label="English">EN</a>
+        <a class="lang__btn" href="{{ url('id' . ($p ? '/'.$p : '') . $qs) }}" aria-label="Bahasa Indonesia">ID</a>
       </div>
-      <a class="btn btn--green btn--sm" href="{{ url('contact') }}" data-magnet=".28" data-en="Start a project" data-id="Mulai proyek">Start a project</a>
+      <a class="btn btn--green btn--sm" href="{{ url($locale.'/contact') }}" data-magnet=".28">Start a project</a>
       <button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
     </div>
   </div>
 </header>
 <div class="menu" id="menu">
   <ul class="menu__list">
-    <li class="menu__item"><a href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a></li>
-    <li class="menu__item"><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li>
-    <li class="menu__item"><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li>
-    <li class="menu__item"><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li>
-    <li class="menu__item"><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li>
+    <li class="menu__item"><a href="{{ url($locale) }}">Home</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/work') }}">Work</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/services') }}">Services</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/about') }}">About</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/contact') }}">Contact</a></li>
   </ul>
   <div class="menu__foot">
     <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
@@ -98,7 +99,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="phead">
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
-    <p class="crumb fade-up"><a href="{{ url('') }}">Fugo</a> <span>/</span> <span data-en="Contact" data-id="Kontak">Contact</span></p>
+    <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <span>Contact</span></p>
     <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! $contactHeadline !!}</h1>
     <p class="lede mt-m fade-up" data-delay="2">{{ $contactSubtitle }}</p>
   </div>
@@ -108,32 +109,32 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="col-7">
       <form action="{{ route('contact.send') }}" method="POST" class="fade-up" novalidate>
         @csrf
-        <p class="mono faint" data-en="What do you need?" data-id="Apa yang Anda butuhkan?">What do you need?</p>
+        <p class="mono faint">What do you need?</p>
         <div class="chips" role="group">
           <button type="button" class="chip on">Design</button>
-          <button type="button" class="chip" data-en="Film — TVC" data-id="Film — TVC">Film — TVC</button>
-          <button type="button" class="chip" data-en="Event" data-id="Acara">Event</button>
+          <button type="button" class="chip">Film — TVC</button>
+          <button type="button" class="chip">Event</button>
           <button type="button" class="chip">Merch</button>
-          <button type="button" class="chip" data-en="Not sure yet" data-id="Belum yakin">Not sure yet</button>
+          <button type="button" class="chip">Not sure yet</button>
         </div>
 
         <div class="field" style="margin-top:2rem">
-          <label for="f-name" data-en="Your name" data-id="Nama Anda">Your name</label>
+          <label for="f-name">Your name</label>
           <input id="f-name" name="name" type="text" autocomplete="name" required value="{{ old('name') }}" placeholder="Your name" data-en-placeholder="Your name" data-id-placeholder="Nama Anda">
           @error('name') <span style="color:#ef4444;font-size:.8rem">{{ $message }}</span> @enderror
         </div>
         <div class="field">
-          <label for="f-mail" data-en="Email" data-id="Email">Email</label>
+          <label for="f-mail">Email</label>
           <input id="f-mail" name="email" type="email" autocomplete="email" required value="{{ old('email') }}" placeholder="you@company.com" data-en-placeholder="you@company.com" data-id-placeholder="you@company.com">
           @error('email') <span style="color:#ef4444;font-size:.8rem">{{ $message }}</span> @enderror
         </div>
         <div class="field">
-          <label for="f-msg" data-en="What are we making?" data-id="Apa yang akan kita buat?">What are we making?</label>
+          <label for="f-msg">What are we making?</label>
           <textarea id="f-msg" name="message" rows="4" placeholder="Tell us about your project, timeline and budget" data-en-placeholder="Tell us about your project, timeline and budget" data-id-placeholder="Ceritakan tentang proyek, linimasa, dan anggaran Anda">{{ old('message') }}</textarea>
           @error('message') <span style="color:#ef4444;font-size:.8rem">{{ $message }}</span> @enderror
         </div>
 
-        <button class="btn btn--green mt-l" type="submit" data-magnet=".3" data-en="Send the brief" data-id="Kirim brief">Send the brief</button>
+        <button class="btn btn--green mt-l" type="submit" data-magnet=".3">Send the brief</button>
         @if(session('success'))
           <p class="mono mt-m" style="color:#10b981">{{ session('success') }}</p>
         @endif
@@ -142,17 +143,17 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
     <div class="col-5">
       <div class="card fade-up" data-delay="1">
-        <p class="card__num" data-en="Direct" data-id="Langsung">Direct</p>
+        <p class="card__num">Direct</p>
         <h3 style="font-size:1.4rem">WhatsApp</h3>
         <p><a class="tlink green" href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contactPhone) }}" rel="noopener">{{ $contactPhone }}</a></p>
         <p class="mt-m"><a class="tlink" href="mailto:{{ $contactEmail }}">{{ $contactEmail }}</a></p>
         <div class="card__tags" style="margin-top:1.6rem">
-          <span class="tag" data-en="Reply within 1 working day" data-id="Balasan dalam 1 hari kerja">Reply within 1 working day</span>
+          <span class="tag">Reply within 1 working day</span>
         </div>
       </div>
 
       <div class="card fade-up mt-m" data-delay="2">
-        <p class="card__num" data-en="Offices" data-id="Kantor">Offices</p>
+        <p class="card__num">Offices</p>
         <address class="muted mt-s" style="font-style:normal;line-height:1.7">
           <strong style="color:var(--ink)">Bandung — HQ</strong><br>{{ $contactAddressBdg }}<br><br>
           <strong style="color:var(--ink)">Jakarta</strong><br>{{ $contactAddressJkt }}<br><br>
@@ -161,10 +162,10 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       </div>
 
       <div class="card fade-up mt-m" data-delay="3">
-        <p class="card__num" data-en="Careers" data-id="Karier">Careers</p>
-        <h3 style="font-size:1.4rem" data-en="Join the team" data-id="Gabung tim">Join the team</h3>
-        <p data-en="We hire designers, editors and producers in Bandung and Jakarta. Send work, not a cover letter." data-id="Kami merekrut desainer, editor, dan produser di Bandung dan Jakarta. Kirim karya, bukan surat lamaran.">We hire designers, editors and producers in Bandung and Jakarta. Send work, not a cover letter.</p>
-        <a class="tlink green mt-s" href="mailto:{{ $contactEmail }}" data-en="Send your portfolio" data-id="Kirim portofolio">Send your portfolio</a>
+        <p class="card__num">Careers</p>
+        <h3 style="font-size:1.4rem">Join the team</h3>
+        <p>We hire designers, editors and producers in Bandung and Jakarta. Send work, not a cover letter.</p>
+        <a class="tlink green mt-s" href="mailto:{{ $contactEmail }}">Send your portfolio</a>
       </div>
     </div>
   </div>
@@ -176,17 +177,17 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="row between end gap-m">
       <div>
-        <p class="eyebrow"><span data-en="Journal" data-id="Jurnal">Journal</span></p>
+        <p class="eyebrow"><span>Journal</span></p>
         <h2 class="display h-xxl mt-s fade-up" data-delay="1"
             data-en="Notes from<br>the studio" data-id="Catatan dari<br>studio">Notes from<br>the studio</h2>
       </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index') }}"
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}"
          data-en="All articles →" data-id="Semua artikel →">All articles →</a>
     </div>
     @php $feat = $latestPosts->first(); @endphp
     <div class="bfeat mt-l">
       <article class="bfeat__card fade-up" data-cursor="Read">
-        <a class="bfeat__art" href="{{ route('journal.show', $feat->slug) }}" aria-label="{{ $feat->title }}">
+        <a class="bfeat__art" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}" aria-label="{{ $feat->title }}">
           @if(!empty($feat->featured_image) && file_exists(public_path('img/' . $feat->featured_image)))
             <img src="{{ asset('img/' . $feat->featured_image) }}" alt="{{ $feat->title }}" loading="lazy">
           @else
@@ -196,11 +197,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         </a>
         <div class="bfeat__body">
           <p class="card__num">{{ $feat->published_date?->format('d M Y') }}</p>
-          <h3><a href="{{ route('journal.show', $feat->slug) }}">{{ $feat->title }}</a></h3>
+          <h3><a href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}">{{ $feat->title }}</a></h3>
           <p class="bfeat__ex">{{ $feat->excerpt }}</p>
           <div class="bcard__foot">
-            <a class="btn btn--sm" href="{{ route('journal.show', $feat->slug) }}">
-              <span data-en="Read article" data-id="Baca artikel">Read article</span>
+            <a class="btn btn--sm" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}">
+              <span>Read article</span>
               <span class="ico" aria-hidden="true">↗</span>
             </a>
           </div>

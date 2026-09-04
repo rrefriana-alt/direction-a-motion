@@ -10,8 +10,8 @@
 @section('content')
 <div class="page-header d-flex justify-content-between align-items-center">
     <div>
-        <h2>Hero Settings</h2>
-        <p>Edit the homepage hero tagline and description</p>
+        <h2>Hero Settings — EN / ID</h2>
+        <p>Edit tagline & description per bahasa (switching bahasa = switching konten)</p>
     </div>
     <a href="{{ route('admin.home') }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
 </div>
@@ -22,53 +22,44 @@
             @csrf
             @method('PUT')
 
-            <div class="form-group">
-                <label class="form-label">Tagline <span style="color:var(--red-600)">*</span></label>
-                <input type="text" name="tagline" class="form-control @error('tagline') is-invalid @enderror" id="taglineInput" value="{{ old('tagline', $settings['tagline']) }}" required placeholder="e.g. 65+ brands trusted us">
-                @error('tagline') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                <div style="font-size:.72rem;color:var(--gray-400);margin-top:.25rem">Short headline displayed at the top</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div class="form-group">
+                    <label class="form-label">Tagline — EN <span style="color:var(--red-600)">*</span></label>
+                    <input type="text" name="tagline_en" class="form-control @error('tagline_en') is-invalid @enderror" value="{{ old('tagline_en', $settings['tagline_en']) }}" required>
+                    @error('tagline_en') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tagline — ID <span style="color:var(--red-600)">*</span></label>
+                    <input type="text" name="tagline_id" class="form-control @error('tagline_id') is-invalid @enderror" value="{{ old('tagline_id', $settings['tagline_id']) }}" required>
+                    @error('tagline_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Description <span style="color:var(--red-600)">*</span></label>
-                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="descInput" rows="3" required>{{ old('description', $settings['description']) }}</textarea>
-                @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                <div style="font-size:.72rem;color:var(--gray-400);margin-top:.25rem">Subtitle text below the main title</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div class="form-group">
+                    <label class="form-label">Description — EN <span style="color:var(--red-600)">*</span></label>
+                    <textarea name="description_en" class="form-control @error('description_en') is-invalid @enderror" rows="3" required>{{ old('description_en', $settings['description_en']) }}</textarea>
+                    @error('description_en') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description — ID <span style="color:var(--red-600)">*</span></label>
+                    <textarea name="description_id" class="form-control @error('description_id') is-invalid @enderror" rows="3" required>{{ old('description_id', $settings['description_id']) }}</textarea>
+                    @error('description_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
             </div>
 
             <div class="form-actions">
                 <a href="{{ route('admin.home') }}" class="btn btn-secondary btn-sm">Cancel</a>
-                <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save Changes</button>
+                <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save EN/ID</button>
             </div>
         </form>
     </div>
-
     <div>
-        <div style="font-size:.75rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">Live Preview</div>
+        <div style="font-size:.75rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">Preview</div>
         <div class="card-white" style="padding:1.5rem;background:var(--gray-900);color:white;text-align:center">
-            <div style="font-size:.72rem;font-weight:600;color:var(--green-400);letter-spacing:.05em;margin-bottom:.75rem;text-transform:uppercase" id="previewTagline">{{ $settings['tagline'] }}</div>
-            <div style="font-size:1.3rem;font-weight:700;margin-bottom:.5rem;line-height:1.2">Create to<br><span style="color:var(--green-400)">Elevate</span></div>
-            <div style="font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:1rem" id="previewDesc">{{ $settings['description'] }}</div>
-            <div style="display:flex;gap:.5rem;justify-content:center">
-                <span style="background:var(--green-500);color:white;padding:.4rem .8rem;border-radius:6px;font-size:.7rem;font-weight:600">See selected work ↗</span>
-                <span style="border:1px solid rgba(255,255,255,.2);color:white;padding:.4rem .8rem;border-radius:6px;font-size:.7rem">What we do</span>
-            </div>
+            <div style="font-size:.7rem;color:var(--gray-400)">EN: {{ $settings['tagline_en'] }}</div>
+            <div style="font-size:.7rem;color:var(--green-400)">ID: {{ $settings['tagline_id'] }}</div>
         </div>
-        <div style="font-size:.72rem;color:var(--gray-400);margin-top:.5rem;text-align:center">Hero section on the homepage</div>
     </div>
 </div>
 @endsection
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const taglineInput = document.getElementById('taglineInput');
-    const descInput = document.getElementById('descInput');
-    const previewTagline = document.getElementById('previewTagline');
-    const previewDesc = document.getElementById('previewDesc');
-
-    taglineInput.addEventListener('input', () => { previewTagline.textContent = taglineInput.value || 'Tagline'; });
-    descInput.addEventListener('input', () => { previewDesc.textContent = descInput.value || 'Description...'; });
-});
-</script>
-@endpush

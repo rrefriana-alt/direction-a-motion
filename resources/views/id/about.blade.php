@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -9,8 +9,8 @@
 <link rel="canonical" href="https://fugocreativegroup.com/about.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Fugo Creative">
-<meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="id_ID">
+<meta property="og:locale" content="id_ID">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:title" content="About — Fugo Creative — Indonesian Creative Group Since 2016">
 <meta property="og:description" content="PT Fugo Creative Group started in 2016 printing merchandise in Bandung. Nine years on: five divisions, three cities, 65+ clients across finance, government and lifestyle.">
 <meta property="og:url" content="https://fugocreativegroup.com/about.html">
@@ -60,34 +60,35 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <div class="prog" aria-hidden="true"></div>
 <header class="nav is-solid">
   <div class="nav__in">
-    <a class="brand" href="{{ url('') }}" aria-label="Fugo Creative — home">
+    <a class="brand" href="{{ url($locale) }}" aria-label="Fugo Creative — home">
       <img class="brand__mark" src="{{ asset('assets/img/logo-full.webp') }}" alt="Fugo Creative">
     </a>
     <nav class="nav__links" aria-label="Primary">
-      <a class="nav__link" href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a>
-      <a class="nav__link" href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a>
-      <a class="nav__link" href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a>
-      <a class="nav__link is-active" href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a>
-      <a class="nav__link" href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a>
+      <a class="nav__link" href="{{ url($locale) }}">Beranda</a>
+      <a class="nav__link" href="{{ url($locale.'/work') }}">Karya</a>
+      <a class="nav__link" href="{{ url($locale.'/services') }}">Layanan</a>
+      <a class="nav__link is-active" href="{{ url($locale.'/about') }}">Tentang</a>
+      <a class="nav__link" href="{{ url($locale.'/contact') }}">Kontak</a>
     </nav>
     <div class="nav__side">
-      <div class="lang" data-lang="en" role="group" aria-label="Language">
+                        @php $p = trim(preg_replace('#^(en|id)(/|$)#', '', trim(request()->path(), '/')), '/'); $qs = request()->getQueryString() ? '?' . request()->getQueryString() : ''; @endphp
+            <div class="lang" data-lang="id" role="group" aria-label="Language">
         <span class="lang__pill" aria-hidden="true"></span>
-        <button class="lang__btn is-on" data-lang="en" aria-label="English">EN</button>
-        <button class="lang__btn" data-lang="id" aria-label="Bahasa Indonesia">ID</button>
+        <a class="lang__btn" href="{{ url('en' . ($p ? '/'.$p : '') . $qs) }}" aria-label="English">EN</a>
+        <a class="lang__btn is-on" href="{{ url('id' . ($p ? '/'.$p : '') . $qs) }}" aria-label="Bahasa Indonesia">ID</a>
       </div>
-      <a class="btn btn--green btn--sm" href="{{ url('contact') }}" data-magnet=".28" data-en="Start a project" data-id="Mulai proyek">Start a project</a>
+      <a class="btn btn--green btn--sm" href="{{ url($locale.'/contact') }}" data-magnet=".28">Mulai proyek</a>
       <button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
     </div>
   </div>
 </header>
 <div class="menu" id="menu">
   <ul class="menu__list">
-    <li class="menu__item"><a href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a></li>
-    <li class="menu__item"><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li>
-    <li class="menu__item"><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li>
-    <li class="menu__item"><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li>
-    <li class="menu__item"><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li>
+    <li class="menu__item"><a href="{{ url($locale) }}">Beranda</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/work') }}">Karya</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/services') }}">Layanan</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/about') }}">Tentang</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/contact') }}">Kontak</a></li>
   </ul>
   <div class="menu__foot">
     <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
@@ -98,7 +99,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="phead">
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
-    <p class="crumb fade-up"><a href="{{ url('') }}">Fugo</a> <span>/</span> <span data-en="About" data-id="Tentang">About</span></p>
+    <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <span>Tentang</span></p>
     @php $aboutHeadline = \App\Models\Setting::get('about_page_headline', 'A creative group,<br>not a vendor list'); @endphp
     <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="{!! $aboutHeadline !!}" data-id="{!! \App\Support\TranslationService::translate($aboutHeadline) !!}">{!! $aboutHeadline !!}</h1>
     @php $aboutSubtitle = \App\Models\Setting::get('about_page_subtitle', 'We started in 2016 printing merchandise. Nine years later we run five divisions across three cities — and we still answer the phone ourselves.'); @endphp
@@ -133,7 +134,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:0">
   <div class="shell grid g-12">
     <div class="col-4">
-      <p class="eyebrow fade-up" data-en="Timeline" data-id="Linimasa">Timeline</p>
+      <p class="eyebrow fade-up">Linimasa</p>
       <h2 class="display h-xl mt-s fade-up" data-delay="1" data-en="Nine years,&lt;br&gt;four divisions" data-id="Sembilan tahun,&lt;br&gt;empat divisi">Nine years,<br>four divisions</h2>
     </div>
     <div class="col-8">
@@ -153,7 +154,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="quote fade-up">
       <div>
-        <p class="eyebrow" style="margin-bottom:1.6rem" data-en="From the founder" data-id="Dari pendiri">From the founder</p>
+        <p class="eyebrow" style="margin-bottom:1.6rem">Dari pendiri</p>
         <blockquote data-en="{{ $content['about']['founder']['quote'] }}" data-id="{{ \App\Support\TranslationService::translate($content['about']['founder']['quote']) }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
         <div class="quote__by">
           @if($ceoProfile && $ceoProfile->photo)
@@ -178,8 +179,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
 <section class="section" style="padding-top:0">
   <div class="shell">
-    <p class="eyebrow fade-up" data-en="Offices" data-id="Kantor">Offices</p>
-    <h2 class="display h-xl mt-s fade-up" data-delay="1" data-en="Three cities" data-id="Tiga kota">Three cities</h2>
+    <p class="eyebrow fade-up">Kantor</p>
+    <h2 class="display h-xl mt-s fade-up" data-delay="1">Tiga kota</h2>
     <div class="fade-up" data-delay="2" style="display: flex; width: 100%; margin-top: 2.5rem; border: 1px solid rgba(255,255,255,.15); border-radius: 16px; overflow: hidden;">
       <div style="flex: 1; padding: 2rem 2.5rem; border-right: 1px solid rgba(255,255,255,.15); box-sizing: border-box;">
         <h4 style="margin: 0 0 0.8rem 0; font-size: 1.1rem; font-weight: 700; color: #fff;">Bandung — HQ</h4>
@@ -203,17 +204,17 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="row between end gap-m">
       <div>
-        <p class="eyebrow"><span data-en="Journal" data-id="Jurnal">Journal</span></p>
+        <p class="eyebrow"><span>Jurnal</span></p>
         <h2 class="display h-xxl mt-s fade-up" data-delay="1"
             data-en="Notes from<br>the studio" data-id="Catatan dari<br>studio">Notes from<br>the studio</h2>
       </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index') }}"
-         data-en="All articles →" data-id="Semua artikel →">All articles →</a>
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}"
+         data-en="All articles →" data-id="Semua artikel →">Semua artikel →</a>
     </div>
     @php $feat = $latestPosts->first(); @endphp
     <div class="bfeat mt-l">
       <article class="bfeat__card fade-up" data-cursor="Read">
-        <a class="bfeat__art" href="{{ route('journal.show', $feat->slug) }}" aria-label="{{ $feat->title }}">
+        <a class="bfeat__art" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}" aria-label="{{ $feat->title }}">
           @if(!empty($feat->featured_image) && file_exists(public_path('img/' . $feat->featured_image)))
             <img src="{{ asset('img/' . $feat->featured_image) }}" alt="{{ $feat->title }}" loading="lazy">
           @else
@@ -223,11 +224,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         </a>
         <div class="bfeat__body">
           <p class="card__num">{{ $feat->published_date?->format('d M Y') }}</p>
-          <h3><a href="{{ route('journal.show', $feat->slug) }}">{{ $feat->title }}</a></h3>
+          <h3><a href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}">{{ $feat->title }}</a></h3>
           <p class="bfeat__ex">{{ $feat->excerpt }}</p>
           <div class="bcard__foot">
-            <a class="btn btn--sm" href="{{ route('journal.show', $feat->slug) }}">
-              <span data-en="Read article" data-id="Baca artikel">Read article</span>
+            <a class="btn btn--sm" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}">
+              <span>Baca artikel</span>
               <span class="ico" aria-hidden="true">↗</span>
             </a>
           </div>
@@ -241,10 +242,10 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section cta">
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
-    <p class="eyebrow is-plain fade-up" style="justify-content:center" data-en="Available for Q4 2026 projects" data-id="Tersedia untuk proyek Q4 2026">Available for Q4 2026 projects</p>
+    <p class="eyebrow is-plain fade-up" style="justify-content:center">Tersedia untuk proyek Q4 2026</p>
     <h2 class="display cta__big mt-s fade-up" data-delay="1" data-en="Let's build&lt;br&gt;something" data-id="Ayo bangun&lt;br&gt;sesuatu">Let's build<br>something</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
-      <a class="btn btn--green" href="{{ url('contact') }}" data-magnet=".34" data-cursor="Go"><span data-en="Start a project" data-id="Mulai proyek">Start a project</span><span class="ico" aria-hidden="true">↗</span></a>
+      <a class="btn btn--green" href="{{ url($locale.'/contact') }}" data-magnet=".34" data-cursor="Go"><span>Mulai proyek</span><span class="ico" aria-hidden="true">↗</span></a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>
     </div>
   </div>
@@ -255,18 +256,18 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="foot__top">
       <div>
-        <a class="brand" href="{{ url('') }}">
+        <a class="brand" href="{{ url($locale) }}">
           <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 6h14l-3.4 5.6H7.6zM7.6 14h12l-3.4 5.6H4.2zM4.2 22h10l-3.4 5.6H.8z" fill="#3ddc97"/></svg>
           <span class="brand__txt">Fugo<span>Creative</span></span>
         </a>
-        <p class="muted mt-m" style="max-width:34ch;font-size:.92rem" data-en="PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016." data-id="PT Fugo Creative Group — creative company yang menghadirkan solusi inovatif dan berdampak sejak 2016.">PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016.</p>
+        <p class="muted mt-m" style="max-width:34ch;font-size:.92rem">PT Fugo Creative Group — creative company yang menghadirkan solusi inovatif dan berdampak sejak 2016.</p>
       </div>
       <div>
-        <h5 data-en="Navigate" data-id="Navigasi">Navigate</h5>
-        <ul><li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li><li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li><li><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li><li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li></ul>
+        <h5>Navigasi</h5>
+        <ul><li><a href="{{ url($locale.'/work') }}">Karya</a></li><li><a href="{{ url($locale.'/services') }}">Layanan</a></li><li><a href="{{ url($locale.'/about') }}">Tentang</a></li><li><a href="{{ url($locale.'/contact') }}">Kontak</a></li><li><a href="{{ url($locale.'/contact') }}">Karier</a></li></ul>
       </div>
       <div>
-        <h5 data-en="Follow" data-id="Ikuti">Follow</h5>
+        <h5>Ikuti</h5>
         <ul>
           <li><a href="https://instagram.com/fugocreative" rel="noopener">Instagram</a></li>
           <li><a href="https://id.linkedin.com/company/fugo-creativegroup" rel="noopener">LinkedIn</a></li>
@@ -275,7 +276,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
         </ul>
       </div>
       <div>
-        <h5 data-en="Offices" data-id="Kantor">Offices</h5>
+        <h5>Kantor</h5>
         <address><strong style="color:var(--ink)">Bandung — HQ</strong><br>Jl. Permata Taman Sari Raya No.21, Arcamanik</address>
         <address><strong style="color:var(--ink)">Jakarta</strong><br>Jl. Srengseng Sawah No.16, Jagakarsa</address>
         <address><strong style="color:var(--ink)">Bali</strong><br>Jl. Tukad Melangit, Samplangan, Gianyar</address>

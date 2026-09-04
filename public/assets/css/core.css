@@ -122,6 +122,8 @@ body::after{
   font-variation-settings:"wdth" 100,"opsz" 48;
 }
 .h-mega{font-size:var(--t-mega)}
+html[lang="id"] .hero__title{font-size:clamp(2.9rem,11vw,12rem)}
+@media(max-width:640px){html[lang="id"] .hero__title{font-size:clamp(2.4rem,10.8vw,8rem)}}
 .h-xxl {font-size:var(--t-xxl)}
 .h-xl  {font-size:var(--t-xl)}
 .h-lg{

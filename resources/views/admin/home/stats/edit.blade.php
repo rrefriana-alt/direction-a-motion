@@ -36,9 +36,16 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Label <span style="color:var(--red-600)">*</span></label>
+                <label class="form-label">Label — EN <span style="color:var(--red-600)">*</span></label>
                 <input type="text" class="form-control @error('label') is-invalid @enderror" name="label" value="{{ old('label', $stat->label) }}" required placeholder="e.g. Years in the industry">
                 @error('label') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Label — ID</label>
+                <input type="text" class="form-control @error('label_id') is-invalid @enderror" name="label_id" value="{{ old('label_id', $stat->label_id ?? '') }}" placeholder="e.g. Tahun di industri">
+                @error('label_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                <div style="font-size:.72rem;color:var(--gray-400);margin-top:.25rem">Kosongkan untuk pakai label EN</div>
             </div>
 
             <div class="form-group">

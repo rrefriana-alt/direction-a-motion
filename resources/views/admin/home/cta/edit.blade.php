@@ -22,19 +22,31 @@
             @csrf
             @method('PUT')
 
-            <div class="form-group">
-                <label class="form-label">Eyebrow <span style="color:var(--red-600)">*</span></label>
-                <input type="text" name="eyebrow" class="form-control @error('eyebrow') is-invalid @enderror" id="eyebrowInput" value="{{ old('eyebrow', $settings['eyebrow']) }}" required placeholder="e.g. Available for Q4 2026 projects">
-                @error('eyebrow') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                <div style="font-size:.72rem;color:var(--gray-400);margin-top:.25rem">Small text above the title</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div class="form-group">
+                    <label class="form-label">Eyebrow — EN <span style="color:var(--red-600)">*</span></label>
+                    <input type="text" name="eyebrow_en" class="form-control @error('eyebrow_en') is-invalid @enderror" value="{{ old('eyebrow_en', $settings['eyebrow_en']) }}" required>
+                    @error('eyebrow_en') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Eyebrow — ID <span style="color:var(--red-600)">*</span></label>
+                    <input type="text" name="eyebrow_id" class="form-control @error('eyebrow_id') is-invalid @enderror" value="{{ old('eyebrow_id', $settings['eyebrow_id']) }}" required>
+                    @error('eyebrow_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
             </div>
-
-            <div class="form-group">
-                <label class="form-label">Title <span style="color:var(--red-600)">*</span></label>
-                <textarea name="title" class="form-control @error('title') is-invalid @enderror" id="titleInput" rows="2" required>{{ old('title', $settings['title']) }}</textarea>
-                @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                <div style="font-size:.72rem;color:var(--gray-400);margin-top:.25rem">Main CTA text. Use &lt;br&gt; for line breaks.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                <div class="form-group">
+                    <label class="form-label">Title — EN <span style="color:var(--red-600)">*</span></label>
+                    <textarea name="title_en" class="form-control @error('title_en') is-invalid @enderror" rows="2" required>{{ old('title_en', $settings['title_en']) }}</textarea>
+                    @error('title_en') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Title — ID <span style="color:var(--red-600)">*</span></label>
+                    <textarea name="title_id" class="form-control @error('title_id') is-invalid @enderror" rows="2" required>{{ old('title_id', $settings['title_id']) }}</textarea>
+                    @error('title_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
             </div>
+            <div style="font-size:.72rem;color:var(--gray-400);margin-top:.25rem">Use &lt;br&gt; for line breaks</div>
 
             <div class="form-actions">
                 <a href="{{ route('admin.home') }}" class="btn btn-secondary btn-sm">Cancel</a>
