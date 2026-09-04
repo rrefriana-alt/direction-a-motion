@@ -55,7 +55,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <body>
 
 <!-- page-transition curtain -->
-<div class="curtain" aria-hidden="true"><span class="curtain__mark">Create to <em>Elevate</em></span></div>
+<div class="curtain" aria-hidden="true"><span class="curtain__mark">Create to <em>melesat bersama.</em></span></div>
 
 <div class="prog" aria-hidden="true"></div>
 <header class="nav is-solid">
@@ -100,10 +100,10 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <span>Layanan</span></p>
-    @php $svcHeadline = \App\Models\Setting::get('services_page_headline', 'Five studios,<br>one invoice'); @endphp
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="{!! $svcHeadline !!}" data-id="{!! \App\Support\TranslationService::translate($svcHeadline) !!}">{!! $svcHeadline !!}</h1>
-    @php $svcSubtitle = \App\Models\Setting::get('services_page_subtitle', 'Most agencies subcontract at least half of this. We do not — which is why the schedule holds and the brand stays consistent across every touchpoint.'); @endphp
-    <p class="lede mt-m fade-up" data-delay="2" data-en="{{ $svcSubtitle }}" data-id="{{ \App\Support\TranslationService::translate($svcSubtitle) }}">{{ $svcSubtitle }}</p>
+    @php $svcHeadline = \App\Models\Setting::localized('services_page_headline', 'id', 'Five studios,<br>one invoice'); @endphp
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! $svcHeadline !!}</h1>
+    @php $svcSubtitle = \App\Models\Setting::localized('services_page_subtitle', 'id', 'Most agencies subcontract at least half of this. We do not — which is why the schedule holds and the brand stays consistent across every touchpoint.'); @endphp
+    <p class="lede mt-m fade-up" data-delay="2">{{ $svcSubtitle }}</p>
   </div>
 </section>
 <section class="section">
@@ -116,8 +116,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           @if($category->icon)
             <div style="margin-bottom:.75rem"><i class="bi {{ $category->icon }}" style="font-size:1.5rem;color:var(--green-600)"></i></div>
           @endif
-          <h3>{{ $category->title }}</h3>
-          <p>{{ $category->description }}</p>
+          <h3>{{ !empty($category->title_id) ? $category->title_id : $category->title }}</h3>
+          <p>{{ !empty($category->description_id) ? $category->description_id : $category->description }}</p>
           <a class="btn btn--ghost mt-m" href="{{ url($locale.'/contact') }}">Brief tim ini</a>
         </div>
         <div class="col-7">
@@ -145,7 +145,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:0">
   <div class="shell">
     <p class="eyebrow fade-up">Model kerja sama</p>
-    <h2 class="display h-xl mt-s fade-up" data-delay="1" data-en="Three ways to work&lt;br&gt;with us" data-id="Tiga cara bekerja&lt;br&gt;dengan kami">Three ways to work<br>with us</h2>
+    <h2 class="display h-xl mt-s fade-up" data-delay="1">Tiga cara bekerja<br>dengan kami</h2>
     <div class="grid g-12 mt-l">
       @forelse($engagements as $index => $engagement)
       <div class="col-4 card fade-up" @if($index > 0) data-delay="{{ $index }}" @endif>
@@ -177,11 +177,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="row between end gap-m">
       <div>
         <p class="eyebrow"><span>Jurnal</span></p>
-        <h2 class="display h-xxl mt-s fade-up" data-delay="1"
-            data-en="Notes from<br>the studio" data-id="Catatan dari<br>studio">Notes from<br>the studio</h2>
+        <h2 class="display h-xxl mt-s fade-up" data-delay="1">Catatan dari<br>studio</h2>
       </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}"
-         data-en="All articles →" data-id="Semua artikel →">Semua artikel →</a>
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}">Semua artikel →</a>
     </div>
     @php $feat = $latestPosts->first(); @endphp
     <div class="bfeat mt-l">
@@ -215,7 +213,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="eyebrow is-plain fade-up" style="justify-content:center">Tersedia untuk proyek Q4 2026</p>
-    <h2 class="display cta__big mt-s fade-up" data-delay="1" data-en="Let's build&lt;br&gt;something" data-id="Ayo bangun&lt;br&gt;sesuatu">Let's build<br>something</h2>
+    <h2 class="display cta__big mt-s fade-up" data-delay="1">Ayo bangun<br>sesuatu</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="{{ url($locale.'/contact') }}" data-magnet=".34" data-cursor="Go"><span>Mulai proyek</span><span class="ico" aria-hidden="true">↗</span></a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>

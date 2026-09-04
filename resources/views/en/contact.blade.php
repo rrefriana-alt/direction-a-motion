@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Contact — Fugo Creative — Bandung, Jakarta & Bali</title>
-<meta name="description" data-en-content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves." data-id-content="Mulai proyek bersama Fugo Creative. Kantor di Bandung, Jakarta, dan Bali. WhatsApp +62 821 2100 0680 atau email hello@fugocreativegroup.com — kami jawab telepon sendiri." content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves.">
+<meta name="description" content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves.">
 <meta name="theme-color" content="#07080a">
 <link rel="canonical" href="https://fugocreativegroup.com/contact.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Fugo Creative">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="id_ID">
-<meta property="og:title" data-en-content="Contact — Fugo Creative — Bandung, Jakarta &amp; Bali" data-id-content="Kontak — Fugo Creative — Bandung, Jakarta &amp; Bali" content="Contact — Fugo Creative — Bandung, Jakarta &amp; Bali">
-<meta property="og:description" data-en-content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves." data-id-content="Mulai proyek bersama Fugo Creative. Kantor di Bandung, Jakarta, dan Bali. WhatsApp +62 821 2100 0680 atau email hello@fugocreativegroup.com — kami jawab telepon sendiri." content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves.">
+<meta property="og:title" content="Contact — Fugo Creative — Bandung, Jakarta &amp; Bali">
+<meta property="og:description" content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves.">
 <meta property="og:url" content="https://fugocreativegroup.com/contact.html">
 <meta property="og:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" data-en-content="Contact — Fugo Creative — Bandung, Jakarta &amp; Bali" data-id-content="Kontak — Fugo Creative — Bandung, Jakarta &amp; Bali" content="Contact — Fugo Creative — Bandung, Jakarta &amp; Bali">
-<meta name="twitter:description" data-en-content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves." data-id-content="Mulai proyek bersama Fugo Creative. Kantor di Bandung, Jakarta, dan Bali. WhatsApp +62 821 2100 0680 atau email hello@fugocreativegroup.com — kami jawab telepon sendiri." content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves.">
+<meta name="twitter:title" content="Contact — Fugo Creative — Bandung, Jakarta &amp; Bali">
+<meta name="twitter:description" content="Start a project with Fugo Creative. Offices in Bandung, Jakarta and Bali. WhatsApp +62 821 2100 0680 or email hello@fugocreativegroup.com — we answer the phone ourselves.">
 <meta name="twitter:image" content="https://fugocreativegroup.com/assets/img/og.png">
 <script type="application/ld+json">
 {"@@context":"https://schema.org","@@graph":[
@@ -120,17 +120,17 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 
         <div class="field" style="margin-top:2rem">
           <label for="f-name">Your name</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required value="{{ old('name') }}" placeholder="Your name" data-en-placeholder="Your name" data-id-placeholder="Nama Anda">
+          <input id="f-name" name="name" type="text" autocomplete="name" required value="{{ old('name') }}" placeholder="Your name">
           @error('name') <span style="color:#ef4444;font-size:.8rem">{{ $message }}</span> @enderror
         </div>
         <div class="field">
           <label for="f-mail">Email</label>
-          <input id="f-mail" name="email" type="email" autocomplete="email" required value="{{ old('email') }}" placeholder="you@company.com" data-en-placeholder="you@company.com" data-id-placeholder="you@company.com">
+          <input id="f-mail" name="email" type="email" autocomplete="email" required value="{{ old('email') }}" placeholder="you@company.com">
           @error('email') <span style="color:#ef4444;font-size:.8rem">{{ $message }}</span> @enderror
         </div>
         <div class="field">
           <label for="f-msg">What are we making?</label>
-          <textarea id="f-msg" name="message" rows="4" placeholder="Tell us about your project, timeline and budget" data-en-placeholder="Tell us about your project, timeline and budget" data-id-placeholder="Ceritakan tentang proyek, linimasa, dan anggaran Anda">{{ old('message') }}</textarea>
+          <textarea id="f-msg" name="message" rows="4" placeholder="Tell us about your project, timeline and budget">{{ old('message') }}</textarea>
           @error('message') <span style="color:#ef4444;font-size:.8rem">{{ $message }}</span> @enderror
         </div>
 
@@ -178,11 +178,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="row between end gap-m">
       <div>
         <p class="eyebrow"><span>Journal</span></p>
-        <h2 class="display h-xxl mt-s fade-up" data-delay="1"
-            data-en="Notes from<br>the studio" data-id="Catatan dari<br>studio">Notes from<br>the studio</h2>
+        <h2 class="display h-xxl mt-s fade-up" data-delay="1">Notes from<br>the studio</h2>
       </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}"
-         data-en="All articles →" data-id="Semua artikel →">All articles →</a>
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}">All articles →</a>
     </div>
     @php $feat = $latestPosts->first(); @endphp
     <div class="bfeat mt-l">

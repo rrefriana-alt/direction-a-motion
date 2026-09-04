@@ -80,7 +80,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <span>Journal</span></p>
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="Studio&lt;br&gt;journal" data-id="Jurnal&lt;br&gt;studio">Studio<br>journal</h1>
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1">Studio<br>journal</h1>
     <p class="lede mt-m fade-up" data-delay="2">Process notes, project stories and takes on the industry — written by the people who make the work.</p>
   </div>
 </section>
@@ -88,7 +88,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:clamp(2rem,4vw,3rem)">
   <div class="shell">
     <div class="chips fade-up" style="margin-bottom:2.5rem" role="group" aria-label="Filter">
-      <a class="chip {{ empty($activeCategory) ? 'on' : '' }}" href="{{ route('journal.index', ['locale'=>$locale]) }}" data-en="All" data-id="Semua">All</a>
+      <a class="chip {{ empty($activeCategory) ? 'on' : '' }}" href="{{ route('journal.index', ['locale'=>$locale]) }}">All</a>
       @foreach($categories as $cat)
         <a class="chip {{ $activeCategory === $cat ? 'on' : '' }}" href="{{ route('journal.index', ['category' => $cat]) }}">{{ ucfirst($cat) }}</a>
       @endforeach
@@ -118,8 +118,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <h3><a href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$post->slug]) }}">{{ $post->title }}</a></h3>
           <p class="bcard__ex">{{ $post->excerpt }}</p>
           <div class="bcard__foot">
-            <a class="tlink green" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$post->slug]) }}"
-               data-en="Read article →" data-id="Baca artikel →">Read article →</a>
+            <a class="tlink green" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$post->slug]) }}">Read article →</a>
           </div>
         </div>
       </article>
@@ -159,7 +158,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="eyebrow is-plain fade-up" style="justify-content:center">Available for Q4 2026 projects</p>
-    <h2 class="display cta__big mt-s fade-up" data-delay="1" data-en="Let's build&lt;br&gt;something" data-id="Ayo bangun&lt;br&gt;sesuatu">Let's build<br>something</h2>
+    <h2 class="display cta__big mt-s fade-up" data-delay="1">Let's build<br>something</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="{{ url($locale.'/contact') }}" data-magnet=".34" data-cursor="Go"><span>Start a project</span><span class="ico" aria-hidden="true">↗</span></a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>

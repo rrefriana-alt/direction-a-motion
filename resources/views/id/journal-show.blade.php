@@ -33,7 +33,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <body>
 
 <!-- page-transition curtain -->
-<div class="curtain" aria-hidden="true"><span class="curtain__mark">Create to <em>Elevate</em></span></div>
+<div class="curtain" aria-hidden="true"><span class="curtain__mark">Create to <em>melesat bersama.</em></span></div>
 
 <div class="prog" aria-hidden="true"></div>
 <header class="nav is-solid">
@@ -78,7 +78,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
     <div class="article">
-      <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <a href="{{ route('journal.index', ['locale'=>$locale]) }}" data-en="Journal" data-id="Jurnal">Jurnal</a> <span>/</span> <span>{{ $post->category_display }}</span></p>
+      <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <a href="{{ route('journal.index', ['locale'=>$locale]) }}">Jurnal</a> <span>/</span> <span>{{ $post->category_display }}</span></p>
       <div class="card__tags fade-up" data-delay="1" style="margin-top:1.2rem">
         <a class="tag" href="{{ route('journal.index', ['category' => $post->category]) }}" style="text-decoration:none">{{ $post->category_display }}</a>
         <span class="tag">{{ $post->read_time }} min read</span>
@@ -122,7 +122,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <div class="article__body fade-up">{!! nl2br(e($post->content)) !!}</div>
       <div class="card__tags fade-up" style="margin-top:2.2rem">
         <a class="tag" href="{{ route('journal.index', ['category' => $post->category]) }}" style="text-decoration:none">{{ $post->category_display }}</a>
-        <a class="tag" href="{{ route('journal.index', ['locale'=>$locale]) }}" style="text-decoration:none" data-en="Studio journal" data-id="Jurnal studio">Studio journal</a>
+        <a class="tag" href="{{ route('journal.index', ['locale'=>$locale]) }}" style="text-decoration:none">Jurnal studio</a>
       </div>
       <div class="abyline fade-up">
         <span class="bfeat__avatar" aria-hidden="true">{{ strtoupper(mb_substr($post->author ?? 'F', 0, 1)) }}</span>
@@ -152,7 +152,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       @endif
 
       <div class="mt-l fade-up">
-        <a class="tlink green" href="{{ route('journal.index', ['locale'=>$locale]) }}" data-en="← Back to journal" data-id="← Kembali ke jurnal">← Back to journal</a>
+        <a class="tlink green" href="{{ route('journal.index', ['locale'=>$locale]) }}">← Kembali ke jurnal</a>
       </div>
     </div>
   </div>
@@ -164,11 +164,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="row between end gap-m">
       <div>
         <p class="eyebrow"><span>Lanjut baca</span></p>
-        <h2 class="display h-xl mt-s fade-up" data-delay="1"
-            data-en="More from<br>the studio" data-id="Lainnya dari<br>studio">More from<br>the studio</h2>
+        <h2 class="display h-xl mt-s fade-up" data-delay="1">Lainnya dari<br>studio</h2>
       </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}"
-         data-en="All articles →" data-id="Semua artikel →">Semua artikel →</a>
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}">Semua artikel →</a>
     </div>
     <div class="bgrid mt-l">
       @foreach($morePosts as $i => $more)
@@ -190,8 +188,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
           <h3><a href="{{ route('journal.show', $more->slug) }}">{{ $more->title }}</a></h3>
           <p class="bcard__ex">{{ $more->excerpt }}</p>
           <div class="bcard__foot">
-            <a class="tlink green" href="{{ route('journal.show', $more->slug) }}"
-               data-en="Read article →" data-id="Baca artikel →">Read article →</a>
+            <a class="tlink green" href="{{ route('journal.show', $more->slug) }}">Read article →</a>
           </div>
         </div>
       </article>
@@ -205,7 +202,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="eyebrow is-plain fade-up" style="justify-content:center">Tersedia untuk proyek Q4 2026</p>
-    <h2 class="display cta__big mt-s fade-up" data-delay="1" data-en="Let's build&lt;br&gt;something" data-id="Ayo bangun&lt;br&gt;sesuatu">Let's build<br>something</h2>
+    <h2 class="display cta__big mt-s fade-up" data-delay="1">Ayo bangun<br>sesuatu</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="{{ url($locale.'/contact') }}" data-magnet=".34" data-cursor="Go"><span>Mulai proyek</span><span class="ico" aria-hidden="true">↗</span></a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>

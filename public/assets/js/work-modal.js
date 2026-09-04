@@ -16,12 +16,9 @@
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PREFIX = '#work/';
 
-  const root = $('.wm-root');
-  if (!root) return;
-
-  const modals = new Map($$('.wm', root).map(m => [m.dataset.slug, m]));
-  const lb = $('#wm-lightbox');
-
+  let root = null;
+  let modals = new Map();
+  let lb = null;
   let current = null;        // open .wm element
   let opener = null;         // the row that opened it, for focus restore
   let pushed = false;        // did we add the history entry ourselves?
@@ -155,6 +152,7 @@
     pushed = !!(history.state && history.state.wm);
     sync();
   });
+  addEventListener('hashchange', sync);
 
   /* ------------------------------------------------------------- lightbox */
   function openLightbox(tile) {
@@ -214,6 +212,18 @@
     trap(e);
   }, true);
 
-  // Deep link: /work#work/<slug> opens straight into that project.
-  sync();
+  // Init after DOM ready so .wm-root exists even with defer
+  const init = () => {
+    root = $('.wm-root');
+    if (!root) return;
+    modals = new Map($$('.wm', root).map(m => [m.dataset.slug, m]));
+    lb = $('#wm-lightbox');
+    sync(); // deep link: /work#work/<slug> opens straight into that project
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

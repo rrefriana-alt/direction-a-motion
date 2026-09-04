@@ -55,7 +55,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <body>
 
 <!-- page-transition curtain -->
-<div class="curtain" aria-hidden="true"><span class="curtain__mark">Create to <em>Elevate</em></span></div>
+<div class="curtain" aria-hidden="true"><span class="curtain__mark">Create to <em>melesat bersama.</em></span></div>
 
 <div class="prog" aria-hidden="true"></div>
 <header class="nav is-solid">
@@ -103,9 +103,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <h1 class="display h-xxl mt-s fade-up" data-delay="1">BRI Debit<br>Virtual TVC</h1>
     <div class="row gap-l mt-m fade-up" data-delay="2">
       <div><p class="mono faint">Klien</p><p class="mt-s">Bank Rakyat Indonesia</p></div>
-      <div><p class="mono faint">Lingkup</p><p class="mt-s">Concept — Script — Production — Post</p></div>
+      <div><p class="mono faint">Lingkup</p><p class="mt-s">Konsep — Naskah — Produksi — Pasca</p></div>
       <div><p class="mono faint">Tahun</p><p class="mt-s">2025</p></div>
-      <div><p class="mono faint">Divisi</p><p class="mt-s">Production House</p></div>
+      <div><p class="mono faint">Divisi</p><p class="mt-s">Rumah Produksi</p></div>
     </div>
   </div>
 </section>
@@ -165,14 +165,14 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:0">
   <div class="shell row between center gap-m">
     <a class="tlink" href="{{ url($locale.'/work') }}">← Semua karya</a>
-    <a class="tlink green" href="{{ url($locale.'/work') }}" data-en="Next project — data-id="Proyek berikutnya →">Next project →</a>
+    <a class="tlink green" href="{{ url($locale.'/work') }}"Proyek berikutnya →">Proyek berikutnya →</a>
   </div>
 </section>
 <section class="section cta">
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="eyebrow is-plain fade-up" style="justify-content:center">Tersedia untuk proyek Q4 2026</p>
-    <h2 class="display cta__big mt-s fade-up" data-delay="1" data-en="Let's build&lt;br&gt;something" data-id="Ayo bangun&lt;br&gt;sesuatu">Let's build<br>something</h2>
+    <h2 class="display cta__big mt-s fade-up" data-delay="1">Ayo bangun<br>sesuatu</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="{{ url($locale.'/contact') }}" data-magnet=".34" data-cursor="Go"><span>Mulai proyek</span><span class="ico" aria-hidden="true">↗</span></a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>

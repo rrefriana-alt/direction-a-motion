@@ -103,20 +103,20 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     @php $aboutHeadline = \App\Models\Setting::get('about_page_headline', 'A creative group,<br>not a vendor list'); @endphp
     <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! $aboutHeadline !!}</h1>
     @php $aboutSubtitle = \App\Models\Setting::get('about_page_subtitle', 'We started in 2016 printing merchandise. Nine years later we run five divisions across three cities — and we still answer the phone ourselves.'); @endphp
-    <p class="lede mt-m fade-up" data-delay="2" data-en="{{ $aboutSubtitle }}" data-id="{{ \App\Support\TranslationService::translate($aboutSubtitle) }}">{{ $aboutSubtitle }}</p>
+    <p class="lede mt-m fade-up" data-delay="2">{{ $aboutSubtitle }}</p>
   </div>
 </section>
 <section class="section" style="padding-top:clamp(2rem,4vw,3rem)">
   <div class="shell grid g-12">
     <div class="col-5">
       @php $beliefTitle = \App\Models\Setting::get('about_belief_title', 'Our belief'); @endphp
-      <p class="eyebrow fade-up" data-en="{{ $beliefTitle }}" data-id="{{ \App\Support\TranslationService::translate($beliefTitle) }}">{{ $beliefTitle }}</p>
+      <p class="eyebrow fade-up">{{ $beliefTitle }}</p>
     </div>
     <div class="col-7">
       @php $beliefText = \App\Models\Setting::get('about_belief_text', 'Every brief can be solved with creativity, an innovative route, and execution that actually lands.'); @endphp
-      <p class="h-lg fade-up" style="font-size:clamp(1.3rem,2.6vw,2rem);max-width:24ch" data-en="{{ $beliefText }}" data-id="{{ \App\Support\TranslationService::translate($beliefText) }}">{{ $beliefText }}</p>
+      <p class="h-lg fade-up" style="font-size:clamp(1.3rem,2.6vw,2rem);max-width:24ch">{{ $beliefText }}</p>
       @php $beliefElab = \App\Models\Setting::get('about_belief_elaboration', 'We reject the word impossible. Not as a slogan — as a working method: when a route is blocked we go and find the next one, and we tell you what it costs before you commit.'); @endphp
-      <p class="lede mt-m fade-up" data-delay="1" data-en="{{ $beliefElab }}" data-id="{{ \App\Support\TranslationService::translate($beliefElab) }}">{{ $beliefElab }}</p>
+      <p class="lede mt-m fade-up" data-delay="1">{{ $beliefElab }}</p>
     </div>
   </div>
 </section>
@@ -125,7 +125,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="stats">
       @foreach($statistics as $index => $stat)
-      <div class="stat fade-up" @if($index > 0) data-delay="{{ $index }}" @endif><p class="stat__n"><span data-count="{{ $stat->value }}">0</span>@if($stat->suffix)<sup>{{ $stat->suffix }}</sup>@endif</p><p class="stat__l" data-en="{{ $stat->label }}" data-id="{{ \App\Support\TranslationService::translate($stat->label) }}">{{ $stat->label }}</p></div>
+      <div class="stat fade-up" @if($index > 0) data-delay="{{ $index }}" @endif><p class="stat__n"><span data-count="{{ $stat->value }}">0</span>@if($stat->suffix)<sup>{{ $stat->suffix }}</sup>@endif</p><p class="stat__l">{{ $stat->label }}</p></div>
       @endforeach
     </div>
   </div>
@@ -135,7 +135,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell grid g-12">
     <div class="col-4">
       <p class="eyebrow fade-up">Timeline</p>
-      <h2 class="display h-xl mt-s fade-up" data-delay="1" data-en="Nine years,&lt;br&gt;four divisions" data-id="Sembilan tahun,&lt;br&gt;empat divisi">Nine years,<br>four divisions</h2>
+      <h2 class="display h-xl mt-s fade-up" data-delay="1">Nine years,<br>four divisions</h2>
     </div>
     <div class="col-8">
       <div class="steps">
@@ -155,7 +155,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="quote fade-up">
       <div>
         <p class="eyebrow" style="margin-bottom:1.6rem">From the founder</p>
-        <blockquote data-en="{{ $content['about']['founder']['quote'] }}" data-id="{{ \App\Support\TranslationService::translate($content['about']['founder']['quote']) }}">&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
+        <blockquote>&ldquo;{{ $content['about']['founder']['quote'] }}&rdquo;</blockquote>
         <div class="quote__by">
           @if($ceoProfile && $ceoProfile->photo)
             <img src="{{ asset('img/' . $ceoProfile->photo) }}" alt="{{ $ceoProfile->name }}" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
@@ -163,7 +163,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
             <img src="{{ asset('assets/img/Pa-Sona.jpg') }}" alt="Sona Lesmana" class="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
           @endif
           <span><strong style="color:var(--ink)">{{ $content['about']['founder']['name'] }}</strong><br>
-            <span data-en="{{ $content['about']['founder']['title'] }}" data-id="{{ \App\Support\TranslationService::translate($content['about']['founder']['title']) }}">{{ $content['about']['founder']['title'] }}</span></span>
+            <span>{{ $content['about']['founder']['title'] }}</span></span>
         </div>
       </div>
       <div class="quote__art">
@@ -205,11 +205,9 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <div class="row between end gap-m">
       <div>
         <p class="eyebrow"><span>Journal</span></p>
-        <h2 class="display h-xxl mt-s fade-up" data-delay="1"
-            data-en="Notes from<br>the studio" data-id="Catatan dari<br>studio">Notes from<br>the studio</h2>
+        <h2 class="display h-xxl mt-s fade-up" data-delay="1">Notes from<br>the studio</h2>
       </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}"
-         data-en="All articles →" data-id="Semua artikel →">All articles →</a>
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}">All articles →</a>
     </div>
     @php $feat = $latestPosts->first(); @endphp
     <div class="bfeat mt-l">
@@ -243,7 +241,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="eyebrow is-plain fade-up" style="justify-content:center">Available for Q4 2026 projects</p>
-    <h2 class="display cta__big mt-s fade-up" data-delay="1" data-en="Let's build&lt;br&gt;something" data-id="Ayo bangun&lt;br&gt;sesuatu">Let's build<br>something</h2>
+    <h2 class="display cta__big mt-s fade-up" data-delay="1">Let's build<br>something</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="{{ url($locale.'/contact') }}" data-magnet=".34" data-cursor="Go"><span>Start a project</span><span class="ico" aria-hidden="true">↗</span></a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>

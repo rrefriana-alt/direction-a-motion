@@ -103,7 +103,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <span>Error</span></p>
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="This page&lt;br&gt;does not exist" data-id="Halaman ini&lt;br&gt;tidak ada">This page<br>does not exist</h1>
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1">This page<br>does not exist</h1>
     <p class="lede mt-m fade-up" data-delay="2">The link may be old, or the page may have moved. Everything else is still where you left it.</p>
   </div>
 </section>
@@ -111,7 +111,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="eyebrow is-plain fade-up" style="justify-content:center">Available for Q4 2026 projects</p>
-    <h2 class="display cta__big mt-s fade-up" data-delay="1" data-en="Let's build&lt;br&gt;something" data-id="Ayo bangun&lt;br&gt;sesuatu">Let's build<br>something</h2>
+    <h2 class="display cta__big mt-s fade-up" data-delay="1">Let's build<br>something</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="{{ url($locale.'/contact') }}" data-magnet=".34" data-cursor="Go"><span>Start a project</span><span class="ico" aria-hidden="true">↗</span></a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>

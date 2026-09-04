@@ -46,6 +46,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('assets/css/core.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/motion.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/work-modal.css') }}">
 <link rel="apple-touch-icon" href="{{ asset('assets/img/apple-touch-icon.png') }}">
 <link rel="icon" href="{{ asset('assets/img/apple-touch-icon.png') }}" type="image/png">
 <script>/* set before first paint: only pages arrived at via a curtain
@@ -100,7 +101,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <span>Work</span></p>
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="Selected&lt;br&gt;work" data-id="Karya&lt;br&gt;pilihan">Selected<br>work</h1>
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1">Selected<br>work</h1>
     <p class="lede mt-m fade-up" data-delay="2">Ten projects that show the range: a national TVC, a dealer system used in 200+ locations, a three-day expo, and 12,000 kits shipped on time.</p>
   </div>
 </section>
@@ -114,68 +115,14 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <button class="chip" data-filter="Merch">Merch</button>
     </div>
     <div class="wlist">
-      
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Production" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%230e3c8c&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">001</span>
-        <span class="wrow__t">BRI Debit Virtual TVC</span>
-        <span class="wrow__c">Bank Rakyat Indonesia — Production</span>
-        <span class="wrow__y">2025</span>
+      @foreach($works as $w)
+      <a class="wrow fade-up" href="#work/{{ $w["slug"] }}" data-wm-open="{{ $w["slug"] }}" data-cat="{{ \App\Support\Works::text($w["category"]) }}" data-cursor="Open" data-peek="{!! htmlspecialchars(\App\Support\Works::art($w, $loop->index), ENT_QUOTES) !!}">
+        <span class="wrow__n">{{ $w["n"] }}</span>
+        <span class="wrow__t">{{ \App\Support\Works::text($w["title"]) }}</span>
+        <span class="wrow__c">{{ \App\Support\Works::text($w["client"]) }} — {{ \App\Support\Works::text($w["category"]) }}</span>
+        <span class="wrow__y">{{ $w["year"] }}</span>
       </a>
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Design" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%231a1f2b&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">002</span>
-        <span class="wrow__t">Dealer Campaign System</span>
-        <span class="wrow__c">Daihatsu — Design</span>
-        <span class="wrow__y">2024</span>
-      </a>
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Events" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%23123&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">003</span>
-        <span class="wrow__t">National Transport Expo</span>
-        <span class="wrow__c">Kemenhub — Events</span>
-        <span class="wrow__y">2024</span>
-      </a>
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Merch" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%235a1414&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">004</span>
-        <span class="wrow__t">Partner Welcome Kit</span>
-        <span class="wrow__c">Telkomsel — Merch</span>
-        <span class="wrow__y">2023</span>
-      </a>
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Design" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%230a2f4a&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">005</span>
-        <span class="wrow__t">Annual Report 2023</span>
-        <span class="wrow__c">Bank Mandiri — Design</span>
-        <span class="wrow__y">2023</span>
-      </a>
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Merch" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%230f3d2e&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">006</span>
-        <span class="wrow__t">Cabin Crew Uniform Line</span>
-        <span class="wrow__c">Citilink — Merch</span>
-        <span class="wrow__y">2023</span>
-      </a>
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Production" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%232a1a4a&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">007</span>
-        <span class="wrow__t">Ramadan Brand Film</span>
-        <span class="wrow__c">bjb Syariah — Production</span>
-        <span class="wrow__y">2025</span>
-      </a>
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Events" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%233a2410&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">008</span>
-        <span class="wrow__t">Sales Kickoff Gathering</span>
-        <span class="wrow__c">BTPN — Events</span>
-        <span class="wrow__y">2024</span>
-      </a>
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Production" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%23141b2e&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">009</span>
-        <span class="wrow__t">Product Launch Coverage</span>
-        <span class="wrow__c">Suzuki — Production</span>
-        <span class="wrow__y">2024</span>
-      </a>
-      <a class="wrow fade-up" href="{{ url('case-study') }}" data-cat="Design" data-cursor="Open" data-peek="&lt;svg viewBox=&quot;0 0 300 210&quot; preserveAspectRatio=&quot;none&quot; style=&quot;width:100%;height:100%&quot;&gt;&lt;rect width=&quot;300&quot; height=&quot;210&quot; fill=&quot;%23123a1e&quot;/&gt;&lt;circle cx=&quot;220&quot; cy=&quot;40&quot; r=&quot;90&quot; fill=&quot;%233ddc97&quot; opacity=&quot;.28&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;120&quot; width=&quot;120&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23ffffff&quot; opacity=&quot;.5&quot;/&gt;&lt;rect x=&quot;28&quot; y=&quot;144&quot; width=&quot;70&quot; height=&quot;10&quot; rx=&quot;5&quot; fill=&quot;%23c8f24e&quot; opacity=&quot;.7&quot;/&gt;&lt;/svg&gt;">
-        <span class="wrow__n">010</span>
-        <span class="wrow__t">Brand Identity Refresh</span>
-        <span class="wrow__c">Nutrigoat — Design</span>
-        <span class="wrow__y">2025</span>
-      </a>
-    </div>
+      @endforeach</div>
     <p class="mono faint mt-l" id="wcount"></p>
   </div>
 </section>
@@ -187,6 +134,21 @@ chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.classList.re
 apply('all');document.addEventListener('langchange',()=>apply(document.querySelector('.chip.on').dataset.filter));})();
 </script>
 
+
+<div class="wm-root">
+@foreach($works as $i => $w)
+  @php $prev = $works[($i - 1 + count($works)) % count($works)]["slug"]; $next = $works[($i + 1) % count($works)]["slug"]; @endphp
+  @include('partial.work-modal', ['w' => $w, 'prev' => $prev, 'next' => $next])
+@endforeach
+</div>
+<div id="wm-lightbox" class="wm-lb" hidden>
+  <div class="wm-lb__fig">
+    <div class="wm-lb__media"></div>
+    <div class="wm-lb__cap"></div>
+  </div>
+  <button class="wm-lb__close" type="button" data-lb-close aria-label="Close">✕</button>
+</div>
+
 <!-- — JOURNAL — -->
 @if($latestPosts->count())
 <section class="section">
@@ -194,11 +156,9 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
     <div class="row between end gap-m">
       <div>
         <p class="eyebrow"><span>Journal</span></p>
-        <h2 class="display h-xxl mt-s fade-up" data-delay="1"
-            data-en="Notes from<br>the studio" data-id="Catatan dari<br>studio">Notes from<br>the studio</h2>
+        <h2 class="display h-xxl mt-s fade-up" data-delay="1">Notes from<br>the studio</h2>
       </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}"
-         data-en="All articles →" data-id="Semua artikel →">All articles →</a>
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}">All articles →</a>
     </div>
     @php $feat = $latestPosts->first(); @endphp
     <div class="bfeat mt-l">
@@ -232,7 +192,7 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="eyebrow is-plain fade-up" style="justify-content:center">Available for Q4 2026 projects</p>
-    <h2 class="display cta__big mt-s fade-up" data-delay="1" data-en="Let's build&lt;br&gt;something" data-id="Ayo bangun&lt;br&gt;sesuatu">Let's build<br>something</h2>
+    <h2 class="display cta__big mt-s fade-up" data-delay="1">Let's build<br>something</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="{{ url($locale.'/contact') }}" data-magnet=".34" data-cursor="Go"><span>Start a project</span><span class="ico" aria-hidden="true">↗</span></a>
       <a class="btn btn--ghost" href="mailto:hello@fugocreativegroup.com">hello@fugocreativegroup.com</a>
@@ -286,5 +246,6 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
 <script src="{{ asset('assets/js/motion.js') }}" defer></script>
+<script src="{{ asset('assets/js/work-modal.js') }}" defer></script>
 </body>
 </html>
