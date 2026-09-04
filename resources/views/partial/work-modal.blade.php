@@ -129,29 +129,30 @@
 
         {{-- gallery -------------------------------------------------------- --}}
         @if (! empty($w['gallery']))
+          @php $gallery = $w['gallery']; if (is_array($gallery) && isset($gallery['kind'])) $gallery = [$gallery]; @endphp
           <section class="wm__sec">
             <p class="eyebrow" data-en="Gallery" data-id="Galeri">Gallery</p>
             <p class="wm__hint mono faint" data-en="Click any frame to enlarge" data-id="Klik frame mana pun untuk memperbesar">Click any frame to enlarge</p>
             <div class="wm__gal">
-              @foreach ($w['gallery'] as $i => $item)
-                @php $isVideo = ! empty($item['video']); @endphp
-                <button class="wm__tile @if($i === 0) is-wide @endif" type="button" data-wm-lb
+              @foreach ($gallery as $item)
+                @php $isVideo = ! empty($item['video']); $idx = $loop->index; @endphp
+                <button class="wm__tile @if($idx === 0) is-wide @endif" type="button" data-wm-lb
                         data-cursor="{{ $isVideo ? 'Play' : 'Expand' }}">
                   <span class="wm__tilemedia">
                     @if (! empty($item['src']))
-                      <img src="{{ asset($item['src']) }}" alt="{{ W::text($item['cap']) }}" loading="lazy">
+                      <img src="{{ asset($item['src']) }}" alt="{{ W::text($item['cap'] ?? '') }}" loading="lazy">
                     @elseif (is_string($item['video'] ?? null))
                       <video src="{{ asset($item['video']) }}" @if(!empty($item['poster'])) poster="{{ asset($item['poster']) }}" @endif muted playsinline preload="none"></video>
                     @else
-                      {!! W::art($w, $i + 1, 'gal') !!}
+                      {!! W::art($w, $idx + 1, 'gal') !!}
                     @endif
                     @if ($isVideo)
                       <span class="wm__play" aria-hidden="true">▶</span>
                     @endif
                   </span>
                   <span class="wm__tilecap">
-                    <span class="mono faint"{!! W::attrs($item['kind']) !!}>{{ W::text($item['kind']) }}</span>
-                    <span{!! W::attrs($item['cap']) !!}>{{ W::text($item['cap']) }}</span>
+                    <span class="mono faint"{!! W::attrs($item['kind'] ?? '') !!}>{{ W::text($item['kind'] ?? '') }}</span>
+                    <span{!! W::attrs($item['cap'] ?? '') !!}>{{ W::text($item['cap'] ?? '') }}</span>
                   </span>
                 </button>
               @endforeach

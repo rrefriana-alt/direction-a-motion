@@ -167,7 +167,7 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
           @if(!empty($feat->featured_image) && file_exists(public_path('img/' . $feat->featured_image)))
             <img src="{{ asset('img/' . $feat->featured_image) }}" alt="{{ $feat->title }}" loading="lazy">
           @else
-            @include('partials.jart', ['seed' => $feat->id * 7 + 1])
+            @include('partials.jart', ['seed' => ((int) $feat->id * 7 + 1)])
           @endif
           <span class="tag">{{ $feat->category_display }}</span>
         </a>
