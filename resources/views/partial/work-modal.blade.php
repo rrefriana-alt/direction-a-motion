@@ -21,7 +21,7 @@
       <header class="wm__hero">
         <div class="wm__art">
           @if (! empty($w['hero_image']))
-            <img src="{{ asset($w['hero_image']) }}" alt="{{ W::text($w['title']) }}" loading="lazy">
+            <img src="{{ W::img($w['hero_image']) }}" alt="{{ W::text($w['title']) }}" loading="lazy">
           @else
             {!! W::art($w, 0, 'hero') !!}
           @endif
@@ -64,7 +64,7 @@
             </div>
           @endif
           @if (! empty($w['logo']))
-            <div class="wm__logo"><img src="{{ asset($w['logo']) }}" alt="{{ W::text($w['client']) }}" loading="lazy"></div>
+            <div class="wm__logo"><img src="{{ W::img($w['logo']) }}" alt="{{ W::text($w['client']) }}" loading="lazy"></div>
           @endif
         </div>
 

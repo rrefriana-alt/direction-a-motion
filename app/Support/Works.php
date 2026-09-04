@@ -124,6 +124,20 @@ class Works
         ]);
     }
 
+    public static function img(?string $path): string
+    {
+        if (!$path) return '';
+        $p = ltrim($path, '/');
+        if (str_starts_with($p, 'http://') || str_starts_with($p, 'https://')) return $p;
+        if (str_starts_with($p, 'img/') || str_starts_with($p, 'assets/')) return asset($p);
+        return asset('img/' . $p);
+    }
+
+    public static function imageUrl(?string $path): string
+    {
+        return self::img($path);
+    }
+
     public static function art(array $w, int $variant = 0, string $uid = ''): string
     {
         $bg = $w['bg'] ?? '#101722';
