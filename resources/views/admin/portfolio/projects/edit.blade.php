@@ -475,10 +475,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Collect tags before submit
-    document.getElementById('projectForm').addEventListener('submit', function() {
-        const tags = [...document.querySelectorAll('#tagsDisplay .tag-chip')].map(el => el.textContent.replace(/\s*\×\s*$/, '').trim());
-        document.getElementById('tagsHidden').value = JSON.stringify(tags);
+    // Collect tags before submit - expand to tags[] entries
+    document.getElementById('projectForm').addEventListener('submit', function(e) {
+        const hidden = document.getElementById('tagsHidden');
+        const tags = [...document.querySelectorAll('#tagsDisplay .tag-chip')].map(el => el.textContent.replace(/\s*\×\s*$/, '').trim()).filter(Boolean);
+        hidden.remove();
+        tags.forEach(t => { const inp=document.createElement('input'); inp.type='hidden'; inp.name='tags[]'; inp.value=t; e.target.appendChild(inp); });
+        if (tags.length===0) { const inp=document.createElement('input'); inp.type='hidden'; inp.name='tags'; inp.value=''; e.target.appendChild(inp); }
 
         // Convert about textarea array to pipe-delimited strings
         document.querySelectorAll('#aboutList textarea[name="about[]"]').forEach(ta => {

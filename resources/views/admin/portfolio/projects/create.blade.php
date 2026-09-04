@@ -314,9 +314,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('input[type="color"]').forEach(input => {
         input.addEventListener('input', () => { input.nextElementSibling.value = input.value; });
     });
-    document.getElementById('projectForm').addEventListener('submit', function() {
-        const tags = [...document.querySelectorAll('#tagsDisplay .tag-chip')].map(el => el.textContent.replace(/\s*\×\s*$/, '').trim());
-        document.getElementById('tagsHidden').value = JSON.stringify(tags);
+    document.getElementById('projectForm').addEventListener('submit', function(e) {
+        // expand JSON tag into multiple hidden inputs so Laravel receives tags[] as array of strings, not one JSON string
+        const hidden = document.getElementById('tagsHidden');
+        const tags = [...document.querySelectorAll('#tagsDisplay .tag-chip')].map(el => el.textContent.replace(/\s*\×\s*$/, '').trim()).filter(Boolean);
+        hidden.remove();
+        tags.forEach(t => {
+            const inp = document.createElement('input');
+            inp.type = 'hidden'; inp.name = 'tags[]'; inp.value = t;
+            e.target.appendChild(inp);
+        });
+        if (tags.length === 0) {
+            const inp = document.createElement('input'); inp.type='hidden'; inp.name='tags'; inp.value=''; e.target.appendChild(inp);
+        }
     });
 });
 
