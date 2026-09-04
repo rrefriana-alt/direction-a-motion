@@ -324,10 +324,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="hscroll__vp">
     <div class="hscroll__track">
       @foreach($works as $w)
+      @php $homeImg = $w['hero_image'] ?? $w['image'] ?? null; @endphp
       <article class="wcard" data-cursor="Case study">
         <div class="wcard__art">
-            @if(!empty($w['hero_image']))
-                <img src="{{ asset('img/' . $w['hero_image']) }}" style="width:100%;height:100%;object-fit:cover;">
+            @if(!empty($homeImg))
+                <img src="{{ \App\Support\Works::img($homeImg) }}" alt="{{ \App\Support\Works::text($w['title']) }}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
             @else
                 {!! \App\Support\Works::art($w, 0) !!}
             @endif
