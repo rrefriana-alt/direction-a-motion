@@ -49,7 +49,7 @@ class Works
         $items = self::fromDatabase();
 
         foreach ($items as $i => &$item) {
-            $item['n'] = str_pad((string) ($i + 1), 3, '0', STR_PAD_LEFT);
+            $item['n'] = str_pad((string) ((int) $i + 1), 3, '0', STR_PAD_LEFT);
         }
 
         return $items;
