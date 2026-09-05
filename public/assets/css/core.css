@@ -707,6 +707,8 @@ body.menu-open .menu__item a{transform:translateY(0)}
 }
 .field input,.field textarea{width:100%;font-size:1.05rem;padding-top:.65rem;resize:vertical}
 .field input:focus,.field textarea:focus{outline:none}
+.field input::placeholder,.field textarea::placeholder{opacity:0;transition:opacity .25s var(--e-out)}
+.field:focus-within input::placeholder,.field:focus-within textarea::placeholder,.field.filled input::placeholder,.field.filled textarea::placeholder{opacity:.38}
 .field:focus-within label,.field.filled label{transform:translateY(-1.5rem) scale(.72);color:var(--green)}
 .field::after{
   content:""; position:absolute; left:0; bottom:-1px; height:1px; width:100%;
