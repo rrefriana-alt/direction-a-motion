@@ -291,7 +291,18 @@
                 @endif
             </div>
             <div class="topbar-right">
-                <a href="{{ url('/') }}" target="_blank" class="topbar-btn" title="View Website">
+                @php $adminLocale = request()->route('locale') ?? 'en'; $adminOther = $adminLocale === 'en' ? 'id' : 'en'; @endphp
+                <div class="lang" data-lang="{{ $adminLocale }}" role="group" aria-label="Language" style="margin-right:.5rem">
+                    <span class="lang__pill" aria-hidden="true"></span>
+                    <a class="lang__btn {{ $adminLocale==='en' ? 'is-on' : '' }}" href="{{ url('admin/en') }}" aria-label="English">EN</a>
+                    <a class="lang__btn {{ $adminLocale==='id' ? 'is-on' : '' }}" href="{{ url('admin/id') }}" aria-label="Bahasa Indonesia">ID</a>
+                </div>
+                @if($adminLocale==='en')
+                    <span style="font-size:.65rem;font-weight:700;letter-spacing:.08em;color:var(--green-600);background:var(--green-50);border:1px solid var(--green-200);padding:.25rem .5rem;border-radius:999px">EN</span>
+                @else
+                    <span style="font-size:.65rem;font-weight:700;letter-spacing:.08em;color:#b45309;background:#fffbeb;border:1px solid #fde68a;padding:.25rem .5rem;border-radius:999px">ID</span>
+                @endif
+                <a href="{{ url('/' . $adminLocale) }}" target="_blank" class="topbar-btn" title="View Website {{ strtoupper($adminLocale) }}">
                     <i class="bi bi-globe2"></i>
                 </a>
             </div>

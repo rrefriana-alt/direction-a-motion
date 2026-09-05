@@ -94,13 +94,22 @@
             </div>
             <div class="bilingual">
                 <div class="field-group bilingual-col" data-lang="ENGLISH">
-                    <label class="field-label">Scope (EN||ID)</label>
-                    <input type="text" name="scope" class="form-control" value="{{ old('scope') }}" placeholder="Concept — Script — Production">
-                    <div class="field-hint">Use EN||ID format for bilingual</div>
+                    <label class="field-label">Scope — English</label>
+                    <input type="text" name="scope_en" class="form-control" value="{{ old('scope_en') }}" placeholder="Concept — Script — Production">
                 </div>
                 <div class="field-group bilingual-col" data-lang="BAHASA">
-                    <label class="field-label">Division (EN||ID)</label>
-                    <input type="text" name="division" class="form-control" value="{{ old('division') }}" placeholder="Production House||Rumah Produksi">
+                    <label class="field-label">Scope — Bahasa</label>
+                    <input type="text" name="scope_id" class="form-control" value="{{ old('scope_id') }}" placeholder="Konsep — Naskah — Produksi">
+                </div>
+            </div>
+            <div class="bilingual">
+                <div class="field-group bilingual-col" data-lang="ENGLISH">
+                    <label class="field-label">Division — English</label>
+                    <input type="text" name="division_en" class="form-control" value="{{ old('division_en') }}" placeholder="Production House">
+                </div>
+                <div class="field-group bilingual-col" data-lang="BAHASA">
+                    <label class="field-label">Division — Bahasa</label>
+                    <input type="text" name="division_id" class="form-control" value="{{ old('division_id') }}" placeholder="Rumah Produksi">
                 </div>
             </div>
         </div>
@@ -152,16 +161,25 @@
         <div class="card-white">
             <div class="bilingual">
                 <div class="field-group bilingual-col" data-lang="ENGLISH">
-                    <label class="field-label">Lede (EN||ID)</label>
-                    <textarea name="lede" class="form-control" rows="2">{{ old('lede') }}</textarea>
-                    <div class="field-hint">Short headline below the title in modal</div>
+                    <label class="field-label">Lede — English</label>
+                    <textarea name="lede_en" class="form-control" rows="2" placeholder="Short headline EN">{{ old('lede_en') }}</textarea>
                 </div>
                 <div class="field-group bilingual-col" data-lang="BAHASA">
-                    <label class="field-label">Result (EN||ID)</label>
-                    <textarea name="result" class="form-control" rows="2">{{ old('result') }}</textarea>
-                    <div class="field-hint">Shown if no stats are added</div>
+                    <label class="field-label">Lede — Bahasa</label>
+                    <textarea name="lede_id" class="form-control" rows="2" placeholder="Headline singkat ID">{{ old('lede_id') }}</textarea>
                 </div>
             </div>
+            <div class="bilingual">
+                <div class="field-group bilingual-col" data-lang="ENGLISH">
+                    <label class="field-label">Result — English</label>
+                    <textarea name="result_en" class="form-control" rows="2" placeholder="Outcome EN">{{ old('result_en') }}</textarea>
+                </div>
+                <div class="field-group bilingual-col" data-lang="BAHASA">
+                    <label class="field-label">Result — Bahasa</label>
+                    <textarea name="result_id" class="form-control" rows="2" placeholder="Hasil ID">{{ old('result_id') }}</textarea>
+                </div>
+            </div>
+            <div class="field-hint" style="margin-top:.35rem;color:var(--gray-400)">Result shown if no stats are added</div>
             <div class="field-group">
                 <label class="field-label">About — What it is</label>
                 <div id="aboutList"></div>
@@ -343,37 +361,37 @@ function addTag() {
 }
 
 function addAbout() {
-    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div class="bilingual"><div class="bilingual-col" data-lang="EN"><textarea name="about[]" class="form-control" rows="2" placeholder="English paragraph"></textarea></div><div class="bilingual-col" data-lang="ID"><textarea class="form-control" rows="2" placeholder="Bahasa paragraph" disabled></textarea></div></div></div>`;
+    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div class="bilingual"><div class="bilingual-col" data-lang="EN"><textarea name="about_en[]" class="form-control" rows="2" placeholder="English paragraph"></textarea></div><div class="bilingual-col" data-lang="ID"><textarea name="about_id[]" class="form-control" rows="2" placeholder="Paragraf Bahasa"></textarea></div></div></div>`;
     document.getElementById('aboutList').insertAdjacentHTML('beforeend', html);
 }
 
 function addStep() {
-    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div class="bilingual"><div class="bilingual-col" data-lang="HEADING (EN||ID)"><input type="text" name="steps[h][]" class="form-control" placeholder="Step heading"></div><div class="bilingual-col" data-lang="PARAGRAPH (EN||ID)"><textarea name="steps[p][]" class="form-control" rows="2" placeholder="Step description"></textarea></div></div></div>`;
+    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem"><div><label class="field-label" style="font-size:.65rem">Heading — EN</label><input type="text" name="steps[h_en][]" class="form-control" placeholder="Step heading EN"></div><div><label class="field-label" style="font-size:.65rem">Heading — ID</label><input type="text" name="steps[h_id][]" class="form-control" placeholder="Judul langkah ID"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem"><div><label class="field-label" style="font-size:.65rem">Paragraph — EN</label><textarea name="steps[p_en][]" class="form-control" rows="2" placeholder="Step description EN"></textarea></div><div><label class="field-label" style="font-size:.65rem">Paragraf — ID</label><textarea name="steps[p_id][]" class="form-control" rows="2" placeholder="Deskripsi ID"></textarea></div></div></div>`;
     document.getElementById('stepsList').insertAdjacentHTML('beforeend', html);
 }
 
 function addStat() {
-    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:80px 60px 1fr;gap:.5rem"><input type="text" name="stats[n][]" class="form-control form-control-sm" placeholder="Number"><input type="text" name="stats[suffix][]" class="form-control form-control-sm" placeholder="Suffix"><input type="text" name="stats[l][]" class="form-control form-control-sm" placeholder="Label (EN||ID)"></div></div>`;
+    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:80px 60px 1fr 1fr;gap:.5rem"><input type="text" name="stats[n][]" class="form-control form-control-sm" placeholder="Number"><input type="text" name="stats[suffix][]" class="form-control form-control-sm" placeholder="Suffix"><input type="text" name="stats[l_en][]" class="form-control form-control-sm" placeholder="Label EN"><input type="text" name="stats[l_id][]" class="form-control form-control-sm" placeholder="Label ID"></div></div>`;
     document.getElementById('statsList').insertAdjacentHTML('beforeend', html);
 }
 
 function addGalleryItem() {
-    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem"><div><label class="field-label" style="font-size:.65rem">Kind (EN||ID)</label><input type="text" name="gallery[kind][]" class="form-control form-control-sm" placeholder="Film||Film"></div><div><label class="field-label" style="font-size:.65rem">Caption (EN||ID)</label><input type="text" name="gallery[cap][]" class="form-control form-control-sm" placeholder="Opening frame||Frame pembuka"></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem"><div><label class="field-label" style="font-size:.65rem">Media Type</label><select name="gallery[type][]" class="form-select form-select-sm" onchange="toggleGalleryMedia(this)"><option value="art">Generated Art</option><option value="image">Image</option><option value="video_url">Video URL</option><option value="video_upload">Video Upload</option></select></div><div class="gallery-media-input" style="display:none"><label class="field-label" style="font-size:.65rem">Image File</label><input type="file" name="gallery_file[]" class="form-control form-control-sm" accept="image/*"></div><div class="gallery-media-input" style="display:none"><label class="field-label" style="font-size:.65rem">Video URL</label><input type="url" name="gallery[video_url][]" class="form-control form-control-sm" placeholder="https://..."></div></div></div>`;
+    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem"><div><label class="field-label" style="font-size:.65rem">Kind — EN</label><input type="text" name="gallery[kind_en][]" class="form-control form-control-sm" placeholder="Film"></div><div><label class="field-label" style="font-size:.65rem">Kind — ID</label><input type="text" name="gallery[kind_id][]" class="form-control form-control-sm" placeholder="Film"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem"><div><label class="field-label" style="font-size:.65rem">Caption — EN</label><input type="text" name="gallery[cap_en][]" class="form-control form-control-sm" placeholder="Opening frame"></div><div><label class="field-label" style="font-size:.65rem">Caption — ID</label><input type="text" name="gallery[cap_id][]" class="form-control form-control-sm" placeholder="Frame pembuka"></div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem"><div><label class="field-label" style="font-size:.65rem">Media Type</label><select name="gallery[type][]" class="form-select form-select-sm" onchange="toggleGalleryMedia(this)"><option value="art">Generated Art</option><option value="image">Image</option><option value="video_url">Video URL</option><option value="video_upload">Video Upload</option></select></div><div class="gallery-media-input" style="display:none"><label class="field-label" style="font-size:.65rem">Image File</label><input type="file" name="gallery_file[]" class="form-control form-control-sm" accept="image/*"></div><div class="gallery-media-input" style="display:none"><label class="field-label" style="font-size:.65rem">Video URL</label><input type="url" name="gallery[video_url][]" class="form-control form-control-sm" placeholder="https://..."></div></div></div>`;
     document.getElementById('galleryList').insertAdjacentHTML('beforeend', html);
 }
 
 function addDoc() {
-    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem"><div><label class="field-label" style="font-size:.65rem">Label (EN||ID)</label><input type="text" name="docs[label][]" class="form-control form-control-sm"></div><div><label class="field-label" style="font-size:.65rem">Meta (EN||ID)</label><input type="text" name="docs[meta][]" class="form-control form-control-sm" placeholder="PDF — 24 pages"></div><div><label class="field-label" style="font-size:.65rem">URL (optional)</label><input type="url" name="docs[href][]" class="form-control form-control-sm" placeholder="https://..."></div></div></div>`;
+    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem"><div><label class="field-label" style="font-size:.65rem">Label — EN</label><input type="text" name="docs[label_en][]" class="form-control form-control-sm" placeholder="Label EN"></div><div><label class="field-label" style="font-size:.65rem">Label — ID</label><input type="text" name="docs[label_id][]" class="form-control form-control-sm" placeholder="Label ID"></div><div><label class="field-label" style="font-size:.65rem">URL (optional)</label><input type="url" name="docs[href][]" class="form-control form-control-sm" placeholder="https://..."></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.5rem"><div><label class="field-label" style="font-size:.65rem">Meta — EN</label><input type="text" name="docs[meta_en][]" class="form-control form-control-sm" placeholder="PDF — 24 pages"></div><div><label class="field-label" style="font-size:.65rem">Meta — ID</label><input type="text" name="docs[meta_id][]" class="form-control form-control-sm" placeholder="PDF — 24 halaman"></div></div></div>`;
     document.getElementById('docsList').insertAdjacentHTML('beforeend', html);
 }
 
 function addUseCase() {
-    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div class="bilingual"><div class="bilingual-col" data-lang="HEADING (EN||ID)"><input type="text" name="usecases[h][]" class="form-control" placeholder="Use case heading"></div><div class="bilingual-col" data-lang="PARAGRAPH (EN||ID)"><textarea name="usecases[p][]" class="form-control" rows="2" placeholder="Use case description"></textarea></div></div></div>`;
+    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem"><div><label class="field-label" style="font-size:.65rem">Heading — EN</label><input type="text" name="usecases[h_en][]" class="form-control" placeholder="Use case heading EN"></div><div><label class="field-label" style="font-size:.65rem">Heading — ID</label><input type="text" name="usecases[h_id][]" class="form-control" placeholder="Judul ID"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem"><div><label class="field-label" style="font-size:.65rem">Paragraph — EN</label><textarea name="usecases[p_en][]" class="form-control" rows="2" placeholder="Use case description EN"></textarea></div><div><label class="field-label" style="font-size:.65rem">Paragraf — ID</label><textarea name="usecases[p_id][]" class="form-control" rows="2" placeholder="Deskripsi ID"></textarea></div></div></div>`;
     document.getElementById('usecasesList').insertAdjacentHTML('beforeend', html);
 }
 
 function addCredit() {
-    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem"><div><label class="field-label" style="font-size:.65rem">Role (EN||ID)</label><input type="text" name="credits[role][]" class="form-control form-control-sm" placeholder="Concept & script||Konsep & naskah"></div><div><label class="field-label" style="font-size:.65rem">Name</label><input type="text" name="credits[name][]" class="form-control form-control-sm" placeholder="Fugo Creative"></div></div></div>`;
+    const html = `<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem"><div><label class="field-label" style="font-size:.65rem">Role — EN</label><input type="text" name="credits[role_en][]" class="form-control form-control-sm" placeholder="Concept & script"></div><div><label class="field-label" style="font-size:.65rem">Role — ID</label><input type="text" name="credits[role_id][]" class="form-control form-control-sm" placeholder="Konsep & naskah"></div><div><label class="field-label" style="font-size:.65rem">Name</label><input type="text" name="credits[name][]" class="form-control form-control-sm" placeholder="Fugo Creative"></div></div></div>`;
     document.getElementById('creditsList').insertAdjacentHTML('beforeend', html);
 }
 
