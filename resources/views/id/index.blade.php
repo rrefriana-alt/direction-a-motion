@@ -416,11 +416,11 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <div class="row between end gap-m">
       <div>
-        <p class="eyebrow">07 — <span>Jurnal</span></p>
-        <h2 class="display h-xxl mt-s fade-up" data-delay="1">Catatan dari<br>studio</h2>
-        <p class="lede mt-s fade-up" data-delay="2">Catatan proses, cerita proyek, dan pandangan soal industri — ditulis oleh orang-orang yang membuat karyanya.</p>
+        <p class="eyebrow">{!! $journalEyebrow ?? '07 — Jurnal' !!}</p>
+        <h2 class="display h-xxl mt-s fade-up" data-delay="1">{!! $journalTitle ?? 'Catatan dari<br>studio' !!}</h2>
+        <p class="lede mt-s fade-up" data-delay="2">{{ $journalLede ?? 'Catatan proses, cerita proyek, dan pandangan soal industri — ditulis oleh orang-orang yang membuat karyanya.' }}</p>
       </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}">Semua artikel →</a>
+      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}">{{ $journalCtaLabel ?? 'Semua artikel →' }}</a>
     </div>
 
     @if(($latestPosts ?? collect())->count())

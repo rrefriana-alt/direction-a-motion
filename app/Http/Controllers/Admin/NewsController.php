@@ -14,10 +14,34 @@ class NewsController extends Controller
         return view('admin.news.index');
     }
 
-    public function list()
+    public function list(Request $request)
     {
-        $news = News::latest()->paginate(10);
-        return view('admin.news.list', compact('news'));
+        $categories = ['company', 'industry', 'events', 'updates', 'insights'];
+        $query = News::query();
+        $search = trim((string) $request->query('q', ''));
+        if ($search !== '') {
+            $query->where(function ($w) use ($search) {
+                $w->where('title', 'like', "%{$search}%")
+                  ->orWhere('author', 'like', "%{$search}%")
+                  ->orWhere('excerpt', 'like', "%{$search}%");
+            });
+        }
+        $activeCategory = $request->query('category', '');
+        if (in_array($activeCategory, $categories, true)) {
+            $query->where('category', $activeCategory);
+        }
+        $sort = $request->query('sort', 'latest');
+        if ($sort === 'oldest') {
+            $query->orderBy('created_at')->orderBy('id');
+        } elseif ($sort === 'views') {
+            $query->orderByDesc('view_count')->orderByDesc('id');
+        } else {
+            $sort = 'latest';
+            $query->orderByDesc('created_at')->orderByDesc('id');
+        }
+        $news = $query->paginate(10)->withQueryString();
+        $pinnedIds = array_values((array) (json_decode((string) \App\Models\Setting::get('home_journal_pinned_ids', '[]'), true) ?? []));
+        return view('admin.news.list', compact('news', 'pinnedIds', 'categories', 'search', 'activeCategory', 'sort'));
     }
 
     public function create()
@@ -66,20 +90,20 @@ class NewsController extends Controller
         return redirect()->route('admin.news.list')->with('success', 'News berhasil dibuat!');
     }
 
-    public function show($id)
+    public function show(string $locale, $id)
     {
         $news = News::findOrFail($id);
         return view('admin.news.show', compact('news'));
     }
 
-    public function edit($id)
+    public function edit(string $locale, $id)
     {
         $news = News::findOrFail($id);
         $categories = ['company', 'industry', 'events', 'updates', 'insights'];
         return view('admin.news.edit', compact('news', 'categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, string $locale, $id)
     {
         $news = News::findOrFail($id);
         $request->validate([
@@ -125,7 +149,7 @@ class NewsController extends Controller
         return redirect()->route('admin.news.list')->with('success', 'News berhasil diupdate!');
     }
 
-    public function destroy($id)
+    public function destroy(string $locale, $id)
     {
         $news = News::findOrFail($id);
         if ($news->featured_image && file_exists(public_path('img/' . $news->featured_image))) {

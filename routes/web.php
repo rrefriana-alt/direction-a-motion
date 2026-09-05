@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\CapabilitiesController;
 use App\Http\Controllers\Admin\ClientLogosController;
 use App\Http\Controllers\Admin\MarqueeController;
+use App\Http\Controllers\Admin\JournalHomeController;
 
 // ==================== FRONTEND ====================
 // Locale helper
@@ -54,13 +55,21 @@ Route::prefix('{locale}')->where(['locale' => 'en|id'])->middleware('setlocale')
         $founderTitle = \App\Models\Setting::localized('home_founder_title', $locale, 'Founder & CEO');
         $ctaEyebrow = \App\Models\Setting::localized('home_cta_eyebrow', $locale, 'Available for Q4 2026 projects');
         $ctaTitle = \App\Models\Setting::localized('home_cta_title', $locale, "Let's build<br>something");
-        $latestPosts = \App\Models\News::published()->orderByDesc('published_date')->take(3)->get();
+        $journalHeader = \App\Http\Controllers\Admin\JournalHomeController::header($locale);
+        $journalEyebrow = $journalHeader['eyebrow'];
+        $journalTitle = $journalHeader['title'];
+        $journalLede = $journalHeader['lede'];
+        $journalCtaLabel = $journalHeader['cta'];
+        $latestPosts = \App\Http\Controllers\Admin\JournalHomeController::curatedPosts(
+            (int) \App\Models\Setting::get('home_journal_limit', 3)
+        );
 
         return view(localeView('index', $locale), compact(
             'capabilities', 'works', 'categories', 'clientLogos', 'marqueeItems', 'stats', 'sectors',
             'processSteps', 'processEyebrow', 'processTitleEn', 'processTitleId', 'processEyebrowVal', 'processTitle',
             'heroTagline', 'heroDescription', 'manifestoSubtitle', 'manifestoTitle',
-            'founderQuote', 'founderName', 'founderTitle', 'ctaEyebrow', 'ctaTitle', 'latestPosts', 'locale'
+            'founderQuote', 'founderName', 'founderTitle', 'ctaEyebrow', 'ctaTitle', 'latestPosts', 'locale',
+            'journalEyebrow', 'journalTitle', 'journalLede', 'journalCtaLabel'
         ));
     })->name('home');
 
@@ -220,6 +229,13 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
     // CTA
     Route::get('/home/cta', [HomeController::class, 'ctaEdit'])->name('home.cta.edit');
     Route::put('/home/cta', [HomeController::class, 'ctaUpdate'])->name('home.cta.update');
+
+    // Journal (homepage section 07)
+    Route::get('/home/journal', [JournalHomeController::class, 'index'])->name('home.journal.index');
+    Route::get('/home/journal/header', [JournalHomeController::class, 'headerEdit'])->name('home.journal.header.edit');
+    Route::put('/home/journal/header', [JournalHomeController::class, 'headerUpdate'])->name('home.journal.header.update');
+    Route::get('/home/journal/curation', [JournalHomeController::class, 'curationEdit'])->name('home.journal.curation.edit');
+    Route::post('/home/journal/curation', [JournalHomeController::class, 'curationUpdate'])->name('home.journal.curation.update');
 
     // Services Page Header
     Route::get('/home/services-page', [HomeController::class, 'servicesPageEdit'])->name('home.services-page.edit');

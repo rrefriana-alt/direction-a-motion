@@ -84,6 +84,13 @@
         </a>
     </div>
     <div class="col-md-4">
+        <a href="{{ route('admin.home.journal.index') }}" class="dashboard-card">
+            <div class="dashboard-card-icon" style="background:#ecfdf5;color:#059669"><i class="bi bi-journal-text"></i></div>
+            <div class="dashboard-card-title">Journal</div>
+            <p class="dashboard-card-desc">Manage homepage journal header and pinned articles.</p>
+        </a>
+    </div>
+    <div class="col-md-4">
         <a href="{{ route('admin.home.cta.edit') }}" class="dashboard-card">
             <div class="dashboard-card-icon" style="background:#fff7ed;color:#ea580c"><i class="bi bi-megaphone"></i></div>
             <div class="dashboard-card-title">Call to Action</div>
