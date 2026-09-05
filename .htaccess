@@ -3,7 +3,7 @@
     RewriteBase /
 
     # Biarkan file statis (gambar, css, js) dibaca dari folder public/
-    RewriteRule ^(assets|_build\.js|_inline-gl\.js|hero-preview\.png|sitemap\.xml)(.*)$ public/$1$2 [L]
+    RewriteRule ^(assets|img|_build\.js|_inline-gl\.js|hero-preview\.png|sitemap\.xml)(.*)$ public/$1$2 [L]
 
     # Hentikan proses jika ini adalah file nyata (seperti index.php)
     RewriteCond %{REQUEST_FILENAME} -f
