@@ -100,13 +100,12 @@
             </div>
             <div class="bilingual">
                 <div class="field-group bilingual-col" data-lang="ENGLISH">
-                    <label class="field-label">Scope (EN||ID)</label>
-                    <input type="text" name="scope" class="form-control" value="{{ old('scope', $project->scope) }}" placeholder="Concept — Script — Production">
-                    <div class="field-hint">Use EN||ID format for bilingual</div>
+                    <label class="field-label">Scope — English</label>
+                    <input type="text" name="scope_en" class="form-control" value="{{ old('scope_en', \Illuminate\Support\Str::before($project->scope ?? '', '||')) }}" placeholder="Concept — Script — Production">
                 </div>
                 <div class="field-group bilingual-col" data-lang="BAHASA">
-                    <label class="field-label">Division (EN||ID)</label>
-                    <input type="text" name="division" class="form-control" value="{{ old('division', $project->division) }}" placeholder="Production House||Rumah Produksi">
+                    <label class="field-label">Scope — Bahasa</label>
+                    <input type="text" name="scope_id" class="form-control" value="{{ old('scope_id', str_contains($project->scope ?? '', '||') ? \Illuminate\Support\Str::after($project->scope, '||') : '') }}" placeholder="Konsep — Naskah — Produksi">
                 </div>
             </div>
         </div>
@@ -171,14 +170,22 @@
         <div class="card-white">
             <div class="bilingual">
                 <div class="field-group bilingual-col" data-lang="ENGLISH">
-                    <label class="field-label">Lede (EN||ID)</label>
-                    <textarea name="lede" class="form-control" rows="2">{{ old('lede', $project->lede) }}</textarea>
-                    <div class="field-hint">Short headline below the title in modal</div>
+                    <label class="field-label">Lede — English</label>
+                    <textarea name="lede_en" class="form-control" rows="2" placeholder="Short headline EN">{{ old('lede_en', \Illuminate\Support\Str::before($project->lede ?? '', '||')) }}</textarea>
                 </div>
                 <div class="field-group bilingual-col" data-lang="BAHASA">
-                    <label class="field-label">Result (EN||ID)</label>
-                    <textarea name="result" class="form-control" rows="2">{{ old('result', $project->result) }}</textarea>
-                    <div class="field-hint">Shown if no stats are added</div>
+                    <label class="field-label">Lede — Bahasa</label>
+                    <textarea name="lede_id" class="form-control" rows="2" placeholder="Headline singkat ID">{{ old('lede_id', str_contains($project->lede ?? '', '||') ? \Illuminate\Support\Str::after($project->lede, '||') : '') }}</textarea>
+                </div>
+            </div>
+            <div class="bilingual">
+                <div class="field-group bilingual-col" data-lang="ENGLISH">
+                    <label class="field-label">Result — English</label>
+                    <textarea name="result_en" class="form-control" rows="2" placeholder="Outcome EN">{{ old('result_en', \Illuminate\Support\Str::before($project->result ?? '', '||')) }}</textarea>
+                </div>
+                <div class="field-group bilingual-col" data-lang="BAHASA">
+                    <label class="field-label">Result — Bahasa</label>
+                    <textarea name="result_id" class="form-control" rows="2" placeholder="Hasil ID">{{ old('result_id', str_contains($project->result ?? '', '||') ? \Illuminate\Support\Str::after($project->result, '||') : '') }}</textarea>
                 </div>
             </div>
             <div class="field-group">
@@ -192,7 +199,7 @@
                                 <textarea name="about[]" class="form-control" rows="2" placeholder="English paragraph">{{ is_array($para) ? ($para['en'] ?? $para[0] ?? '') : $para }}</textarea>
                             </div>
                             <div class="bilingual-col" data-lang="ID">
-                                <textarea class="form-control" rows="2" placeholder="Bahasa paragraph" disabled></textarea>
+                                <textarea name="about_id[]" class="form-control" rows="2" placeholder="Paragraf Bahasa"></textarea>
                             </div>
                         </div>
                         <div class="field-hint">Store as single string with EN||ID format</div>
@@ -226,14 +233,7 @@
                     @foreach(old('steps', $project->steps ?? []) as $step)
                     <div class="list-item">
                         <button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button>
-                        <div class="bilingual">
-                            <div class="bilingual-col" data-lang="HEADING (EN||ID)">
-                                <input type="text" name="steps[h][]" class="form-control" value="{{ is_array($step) ? ($step['h'] ?? '') : $step }}" placeholder="Step heading">
-                            </div>
-                            <div class="bilingual-col" data-lang="PARAGRAPH (EN||ID)">
-                                <textarea name="steps[p][]" class="form-control" rows="2" placeholder="Step description">{{ is_array($step) ? ($step['p'] ?? '') : '' }}</textarea>
-                            </div>
-                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem"><div><label class="field-label" style="font-size:.65rem">Heading — EN</label><input type="text" name="steps[h_en][]" class="form-control" value="{{ is_array($step) ? \Illuminate\Support\Str::before($step['h'] ?? '', '||') : $step }}" placeholder="Step heading EN"></div><div><label class="field-label" style="font-size:.65rem">Heading — ID</label><input type="text" name="steps[h_id][]" class="form-control" value="{{ is_array($step) ? (str_contains($step['h'] ?? '', '||') ? \Illuminate\Support\Str::after($step['h'], '||') : '') : '' }}" placeholder="Judul ID"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem"><div><label class="field-label" style="font-size:.65rem">Paragraph — EN</label><textarea name="steps[p_en][]" class="form-control" rows="2" placeholder="Step description EN">{{ is_array($step) ? \Illuminate\Support\Str::before($step['p'] ?? '', '||') : '' }}</textarea></div><div><label class="field-label" style="font-size:.65rem">Paragraf — ID</label><textarea name="steps[p_id][]" class="form-control" rows="2" placeholder="Deskripsi ID">{{ is_array($step) ? (str_contains($step['p'] ?? '', '||') ? \Illuminate\Support\Str::after($step['p'], '||') : '') : '' }}</textarea></div></div>
                     </div>
                     @endforeach
                 </div>
@@ -512,7 +512,7 @@ function addAbout() {
                 <textarea name="about[]" class="form-control" rows="2" placeholder="English paragraph"></textarea>
             </div>
             <div class="bilingual-col" data-lang="ID">
-                <textarea class="form-control" rows="2" placeholder="Bahasa paragraph" disabled></textarea>
+                <textarea name="about_id[]" class="form-control" rows="2" placeholder="Paragraf Bahasa"></textarea>
             </div>
         </div>
     </div>`;
