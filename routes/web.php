@@ -179,79 +179,79 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
 
     // Hero
     Route::get('/home/hero', [HomeController::class, 'heroEdit'])->name('home.hero.edit');
-    Route::put('/home/hero', [HomeController::class, 'heroUpdate'])->name('home.hero.update');
+    Route::match(['PUT','POST'], '/home/hero', [HomeController::class, 'heroUpdate'])->name('home.hero.update');
 
     // Manifesto
     Route::get('/home/manifesto', [HomeController::class, 'manifestoEdit'])->name('home.manifesto.edit');
-    Route::put('/home/manifesto', [HomeController::class, 'manifestoUpdate'])->name('home.manifesto.update');
+    Route::match(['PUT','POST'], '/home/manifesto', [HomeController::class, 'manifestoUpdate'])->name('home.manifesto.update');
 
     // Statistics
     Route::get('/home/stats', [HomeController::class, 'statsIndex'])->name('home.stats.index');
     Route::get('/home/stats/create', [HomeController::class, 'statsCreate'])->name('home.stats.create');
     Route::post('/home/stats', [HomeController::class, 'statsStore'])->name('home.stats.store');
     Route::get('/home/stats/{id}/edit', [HomeController::class, 'statsEdit'])->name('home.stats.edit');
-    Route::put('/home/stats/{id}', [HomeController::class, 'statsUpdate'])->name('home.stats.update');
-    Route::delete('/home/stats/{id}', [HomeController::class, 'statsDestroy'])->name('home.stats.destroy');
+    Route::match(['PUT','POST'], '/home/stats/{id}', [HomeController::class, 'statsUpdate'])->name('home.stats.update');
+    Route::match(['DELETE','POST'], '/home/stats/{id}', [HomeController::class, 'statsDestroy'])->name('home.stats.destroy');
 
     // Sectors
     Route::get('/home/sectors', [HomeController::class, 'sectorsIndex'])->name('home.sectors.index');
     Route::get('/home/sectors/create', [HomeController::class, 'sectorsCreate'])->name('home.sectors.create');
     Route::post('/home/sectors', [HomeController::class, 'sectorsStore'])->name('home.sectors.store');
     Route::get('/home/sectors/{id}/edit', [HomeController::class, 'sectorsEdit'])->name('home.sectors.edit');
-    Route::put('/home/sectors/{id}', [HomeController::class, 'sectorsUpdate'])->name('home.sectors.update');
-    Route::delete('/home/sectors/{id}', [HomeController::class, 'sectorsDestroy'])->name('home.sectors.destroy');
+    Route::match(['PUT','POST'], '/home/sectors/{id}', [HomeController::class, 'sectorsUpdate'])->name('home.sectors.update');
+    Route::match(['DELETE','POST'], '/home/sectors/{id}', [HomeController::class, 'sectorsDestroy'])->name('home.sectors.destroy');
 
     // Process Header
     Route::get('/home/process-header', [HomeController::class, 'processHeaderEdit'])->name('home.process-header.edit');
-    Route::put('/home/process-header', [HomeController::class, 'processHeaderUpdate'])->name('home.process-header.update');
+    Route::match(['PUT','POST'], '/home/process-header', [HomeController::class, 'processHeaderUpdate'])->name('home.process-header.update');
 
     // Process
     Route::get('/home/process', [HomeController::class, 'processIndex'])->name('home.process.index');
     Route::get('/home/process/create', [HomeController::class, 'processCreate'])->name('home.process.create');
     Route::post('/home/process', [HomeController::class, 'processStore'])->name('home.process.store');
     Route::get('/home/process/{id}/edit', [HomeController::class, 'processEdit'])->name('home.process.edit');
-    Route::put('/home/process/{id}', [HomeController::class, 'processUpdate'])->name('home.process.update');
-    Route::delete('/home/process/{id}', [HomeController::class, 'processDestroy'])->name('home.process.destroy');
+    Route::match(['PUT','POST'], '/home/process/{id}', [HomeController::class, 'processUpdate'])->name('home.process.update');
+    Route::match(['DELETE','POST'], '/home/process/{id}', [HomeController::class, 'processDestroy'])->name('home.process.destroy');
 
     // Founder Quote
     Route::get('/home/founder', [HomeController::class, 'founderEdit'])->name('home.founder.edit');
-    Route::put('/home/founder', [HomeController::class, 'founderUpdate'])->name('home.founder.update');
+    Route::match(['PUT','POST'], '/home/founder', [HomeController::class, 'founderUpdate'])->name('home.founder.update');
 
     // CTA
     Route::get('/home/cta', [HomeController::class, 'ctaEdit'])->name('home.cta.edit');
-    Route::put('/home/cta', [HomeController::class, 'ctaUpdate'])->name('home.cta.update');
+    Route::match(['PUT','POST'], '/home/cta', [HomeController::class, 'ctaUpdate'])->name('home.cta.update');
 
     // Services Page Header
     Route::get('/home/services-page', [HomeController::class, 'servicesPageEdit'])->name('home.services-page.edit');
-    Route::put('/home/services-page', [HomeController::class, 'servicesPageUpdate'])->name('home.services-page.update');
+    Route::match(['PUT','POST'], '/home/services-page', [HomeController::class, 'servicesPageUpdate'])->name('home.services-page.update');
 
     // Footer
     Route::get('/home/footer', [HomeController::class, 'footerEdit'])->name('home.footer.edit');
-    Route::put('/home/footer', [HomeController::class, 'footerUpdate'])->name('home.footer.update');
+    Route::match(['PUT','POST'], '/home/footer', [HomeController::class, 'footerUpdate'])->name('home.footer.update');
 
     // Contact Page Settings (under home for convenience)
     Route::get('/home/contact-page', [HomeController::class, 'contactPageEdit'])->name('contact.settings.edit');
-    Route::put('/home/contact-page', [HomeController::class, 'contactPageUpdate'])->name('contact.settings.update');
+    Route::match(['PUT','POST'], '/home/contact-page', [HomeController::class, 'contactPageUpdate'])->name('contact.settings.update');
 
     // Capabilities (02-Capabilities section)
     Route::get('/home/capabilities', [CapabilitiesController::class, 'index'])->name('home.capabilities.index');
     Route::get('/home/capabilities/create', [CapabilitiesController::class, 'create'])->name('home.capabilities.create');
     Route::post('/home/capabilities', [CapabilitiesController::class, 'store'])->name('home.capabilities.store');
     Route::get('/home/capabilities/{capability}/edit', [CapabilitiesController::class, 'edit'])->name('home.capabilities.edit');
-    Route::put('/home/capabilities/{capability}', [CapabilitiesController::class, 'update'])->name('home.capabilities.update');
-    Route::delete('/home/capabilities/{capability}', [CapabilitiesController::class, 'destroy'])->name('home.capabilities.destroy');
+    Route::match(['PUT','POST'], '/home/capabilities/{capability}', [CapabilitiesController::class, 'update'])->name('home.capabilities.update');
+    Route::match(['DELETE','POST'], '/home/capabilities/{capability}', [CapabilitiesController::class, 'destroy'])->name('home.capabilities.destroy');
 
     // Capabilities Header (title + description)
     Route::get('/home/capabilities-header', [HomeController::class, 'capabilitiesHeaderEdit'])->name('home.capabilities-header.edit');
-    Route::put('/home/capabilities-header', [HomeController::class, 'capabilitiesHeaderUpdate'])->name('home.capabilities-header.update');
+    Route::match(['PUT','POST'], '/home/capabilities-header', [HomeController::class, 'capabilitiesHeaderUpdate'])->name('home.capabilities-header.update');
 
     // Client Logos (ticker carousel)
     Route::get('/home/clients', [ClientLogosController::class, 'index'])->name('home.clients.index');
     Route::get('/home/clients/create', [ClientLogosController::class, 'create'])->name('home.clients.create');
     Route::post('/home/clients', [ClientLogosController::class, 'store'])->name('home.clients.store');
     Route::get('/home/clients/{clientLogo}/edit', [ClientLogosController::class, 'edit'])->name('home.clients.edit');
-    Route::put('/home/clients/{clientLogo}', [ClientLogosController::class, 'update'])->name('home.clients.update');
-    Route::delete('/home/clients/{clientLogo}', [ClientLogosController::class, 'destroy'])->name('home.clients.destroy');
+    Route::match(['PUT','POST'], '/home/clients/{clientLogo}', [ClientLogosController::class, 'update'])->name('home.clients.update');
+    Route::match(['DELETE','POST'], '/home/clients/{clientLogo}', [ClientLogosController::class, 'destroy'])->name('home.clients.destroy');
 
     // Carousel Management
     Route::get('/home/clients/carousel', [ClientLogosController::class, 'carousel'])->name('home.clients.carousel');
@@ -262,8 +262,8 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
     Route::get('/home/marquee/create', [MarqueeController::class, 'create'])->name('home.marquee.create');
     Route::post('/home/marquee', [MarqueeController::class, 'store'])->name('home.marquee.store');
     Route::get('/home/marquee/{marqueeItem}/edit', [MarqueeController::class, 'edit'])->name('home.marquee.edit');
-    Route::put('/home/marquee/{marqueeItem}', [MarqueeController::class, 'update'])->name('home.marquee.update');
-    Route::delete('/home/marquee/{marqueeItem}', [MarqueeController::class, 'destroy'])->name('home.marquee.destroy');
+    Route::match(['PUT','POST'], '/home/marquee/{marqueeItem}', [MarqueeController::class, 'update'])->name('home.marquee.update');
+    Route::match(['DELETE','POST'], '/home/marquee/{marqueeItem}', [MarqueeController::class, 'destroy'])->name('home.marquee.destroy');
 
     // ==================== PORTFOLIO MODULE ====================
     Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
@@ -275,37 +275,37 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
     Route::get('/portfolio/projects/create', [ProjectController::class, 'create'])->name('portfolio.projects.create');
     Route::post('/portfolio/projects', [ProjectController::class, 'store'])->name('portfolio.projects.store');
     Route::get('/portfolio/projects/{project}/edit', [ProjectController::class, 'edit'])->name('portfolio.projects.edit');
-    Route::put('/portfolio/projects/{project}', [ProjectController::class, 'update'])->name('portfolio.projects.update');
+    Route::match(['PUT','POST'], '/portfolio/projects/{project}', [ProjectController::class, 'update'])->name('portfolio.projects.update');
     Route::post('/portfolio/projects/{project}', [ProjectController::class, 'update'])->name('portfolio.projects.update.post');
-    Route::delete('/portfolio/projects/{project}', [ProjectController::class, 'destroy'])->name('portfolio.projects.destroy');
+    Route::match(['DELETE','POST'], '/portfolio/projects/{project}', [ProjectController::class, 'destroy'])->name('portfolio.projects.destroy');
     Route::post('/portfolio/projects/update-sort', [ProjectController::class, 'updateSortOrder'])->name('portfolio.projects.update-sort');
 
     // Work Page Settings
     Route::get('/work-settings', [\App\Http\Controllers\Admin\WorkSettingsController::class, 'edit'])->name('work-settings.edit');
-    Route::put('/work-settings', [\App\Http\Controllers\Admin\WorkSettingsController::class, 'update'])->name('work-settings.update');
+    Route::match(['PUT','POST'], '/work-settings', [\App\Http\Controllers\Admin\WorkSettingsController::class, 'update'])->name('work-settings.update');
 
     // ==================== ABOUT MODULE ====================
     Route::prefix('about')->name('about.')->group(function() {
         Route::get('/', [AboutController::class, 'index'])->name('index');
         Route::get('/settings', [AboutController::class, 'aboutHeaderEdit'])->name('settings.edit');
-        Route::put('/settings', [AboutController::class, 'aboutHeaderUpdate'])->name('settings.update');
+        Route::match(['PUT','POST'], '/settings', [AboutController::class, 'aboutHeaderUpdate'])->name('settings.update');
         Route::get('/ceo-profile', [AboutController::class, 'ceoProfile'])->name('ceo-profile');
-        Route::put('/ceo-profile', [AboutController::class, 'updateCeoProfile'])->name('ceo-profile.update');
+        Route::match(['PUT','POST'], '/ceo-profile', [AboutController::class, 'updateCeoProfile'])->name('ceo-profile.update');
         Route::post('/ceo-profile', [AboutController::class, 'updateCeoProfile'])->name('ceo-profile.update.post');
         Route::get('/timeline', [AboutController::class, 'timelineIndex'])->name('timeline.index');
         Route::get('/timeline/create', [AboutController::class, 'timelineCreate'])->name('timeline.create');
         Route::post('/timeline', [AboutController::class, 'timelineStore'])->name('timeline.store');
         Route::get('/timeline/{timeline}/edit', [AboutController::class, 'timelineEdit'])->name('timeline.edit');
-        Route::put('/timeline/{timeline}', [AboutController::class, 'timelineUpdate'])->name('timeline.update');
-        Route::delete('/timeline/{timeline}', [AboutController::class, 'timelineDestroy'])->name('timeline.destroy');
+        Route::match(['PUT','POST'], '/timeline/{timeline}', [AboutController::class, 'timelineUpdate'])->name('timeline.update');
+        Route::match(['DELETE','POST'], '/timeline/{timeline}', [AboutController::class, 'timelineDestroy'])->name('timeline.destroy');
 
         // ==================== STATISTICS MODULE ====================
         Route::get('/statistics', [AboutController::class, 'statisticsIndex'])->name('statistics.index');
         Route::get('/statistics/create', [AboutController::class, 'statisticsCreate'])->name('statistics.create');
         Route::post('/statistics', [AboutController::class, 'statisticsStore'])->name('statistics.store');
         Route::get('/statistics/{stat}/edit', [AboutController::class, 'statisticsEdit'])->name('statistics.edit');
-        Route::put('/statistics/{stat}', [AboutController::class, 'statisticsUpdate'])->name('statistics.update');
-        Route::delete('/statistics/{stat}', [AboutController::class, 'statisticsDestroy'])->name('statistics.destroy');
+        Route::match(['PUT','POST'], '/statistics/{stat}', [AboutController::class, 'statisticsUpdate'])->name('statistics.update');
+        Route::match(['DELETE','POST'], '/statistics/{stat}', [AboutController::class, 'statisticsDestroy'])->name('statistics.destroy');
         Route::post('/statistics/reorder', [AboutController::class, 'statisticsReorder'])->name('statistics.reorder');
         Route::post('/statistics/{stat}/toggle', [AboutController::class, 'statisticsToggle'])->name('statistics.toggle');
 
@@ -314,8 +314,8 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
         Route::get('/sectors/create', [AboutController::class, 'sectorCreate'])->name('sectors.create');
         Route::post('/sectors', [AboutController::class, 'sectorStore'])->name('sectors.store');
         Route::get('/sectors/{sector}/edit', [AboutController::class, 'sectorEdit'])->name('sectors.edit');
-        Route::put('/sectors/{sector}', [AboutController::class, 'sectorUpdate'])->name('sectors.update');
-        Route::delete('/sectors/{sector}', [AboutController::class, 'sectorDestroy'])->name('sectors.destroy');
+        Route::match(['PUT','POST'], '/sectors/{sector}', [AboutController::class, 'sectorUpdate'])->name('sectors.update');
+        Route::match(['DELETE','POST'], '/sectors/{sector}', [AboutController::class, 'sectorDestroy'])->name('sectors.destroy');
         Route::post('/sectors/reorder', [AboutController::class, 'sectorReorder'])->name('sectors.reorder');
         Route::post('/sectors/{sector}/toggle', [AboutController::class, 'sectorToggle'])->name('sectors.toggle');
     });
@@ -324,14 +324,14 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
     Route::get('/services/crud', [ServiceController::class, 'crud'])->name('services.crud');
     Route::post('/services/categories', [ServiceController::class, 'storeCategory'])->name('services.categories.store');
-    Route::put('/services/categories/{id}', [ServiceController::class, 'updateCategory'])->name('services.categories.update');
-    Route::delete('/services/categories/{id}', [ServiceController::class, 'destroyCategory'])->name('services.categories.destroy');
+    Route::match(['PUT','POST'], '/services/categories/{id}', [ServiceController::class, 'updateCategory'])->name('services.categories.update');
+    Route::match(['DELETE','POST'], '/services/categories/{id}', [ServiceController::class, 'destroyCategory'])->name('services.categories.destroy');
     Route::post('/services/details', [ServiceController::class, 'storeDetail'])->name('services.details.store');
-    Route::put('/services/details/{id}', [ServiceController::class, 'updateDetail'])->name('services.details.update');
-    Route::delete('/services/details/{id}', [ServiceController::class, 'destroyDetail'])->name('services.details.destroy');
+    Route::match(['PUT','POST'], '/services/details/{id}', [ServiceController::class, 'updateDetail'])->name('services.details.update');
+    Route::match(['DELETE','POST'], '/services/details/{id}', [ServiceController::class, 'destroyDetail'])->name('services.details.destroy');
     Route::post('/services/items', [ServiceController::class, 'storeItem'])->name('services.items.store');
-    Route::put('/services/items/{id}', [ServiceController::class, 'updateItem'])->name('services.items.update');
-    Route::delete('/services/items/{id}', [ServiceController::class, 'destroyItem'])->name('services.items.destroy');
+    Route::match(['PUT','POST'], '/services/items/{id}', [ServiceController::class, 'updateItem'])->name('services.items.update');
+    Route::match(['DELETE','POST'], '/services/items/{id}', [ServiceController::class, 'destroyItem'])->name('services.items.destroy');
     // Reorder & Move
     Route::post('/services/details/{id}/reorder', [ServiceController::class, 'reorderDetail'])->name('services.details.reorder');
     Route::post('/services/items/{id}/reorder', [ServiceController::class, 'reorderItem'])->name('services.items.reorder');
@@ -342,8 +342,8 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
     Route::get('/services/engagement/create', [ServiceController::class, 'engagementCreate'])->name('services.engagement.create');
     Route::post('/services/engagement', [ServiceController::class, 'engagementStore'])->name('services.engagement.store');
     Route::get('/services/engagement/{id}/edit', [ServiceController::class, 'engagementEdit'])->name('services.engagement.edit');
-    Route::put('/services/engagement/{id}', [ServiceController::class, 'engagementUpdate'])->name('services.engagement.update');
-    Route::delete('/services/engagement/{id}', [ServiceController::class, 'engagementDestroy'])->name('services.engagement.destroy');
+    Route::match(['PUT','POST'], '/services/engagement/{id}', [ServiceController::class, 'engagementUpdate'])->name('services.engagement.update');
+    Route::match(['DELETE','POST'], '/services/engagement/{id}', [ServiceController::class, 'engagementDestroy'])->name('services.engagement.destroy');
     Route::post('/services/engagement/{id}/toggle-active', [ServiceController::class, 'engagementToggleActive'])->name('services.engagement.toggle');
 
     // ==================== NEWS MODULE ====================
@@ -353,8 +353,8 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
     Route::post('/news', [NewsController::class, 'store'])->name('news.store');
     Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
     Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
-    Route::put('/news/{id}', [NewsController::class, 'update'])->name('news.update');
-    Route::delete('/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+    Route::match(['PUT','POST'], '/news/{id}', [NewsController::class, 'update'])->name('news.update');
+    Route::match(['DELETE','POST'], '/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
 
     // ==================== CAREER MODULE ====================
     Route::get('/career', [CareerController::class, 'index'])->name('career.index');
@@ -373,7 +373,7 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
     Route::post('/career/positions', [CareerController::class, 'positionsStore'])->name('career.positions.store');
     Route::get('/career/positions/{id}/edit', [CareerController::class, 'positionsEdit'])->name('career.positions.edit');
     Route::post('/career/positions/{id}', [CareerController::class, 'positionsUpdate'])->name('career.positions.update');
-    Route::delete('/career/positions/{id}', [CareerController::class, 'positionsDestroy'])->name('career.positions.destroy');
+    Route::match(['DELETE','POST'], '/career/positions/{id}', [CareerController::class, 'positionsDestroy'])->name('career.positions.destroy');
     Route::post('/career/positions/{id}/toggle-active', [CareerController::class, 'positionsToggleActive'])->name('career.positions.toggle-active');
     Route::post('/career/positions/{id}/toggle-open', [CareerController::class, 'positionsToggleOpen'])->name('career.positions.toggle-open');
     Route::post('/career/positions/update-sort', [CareerController::class, 'positionsUpdateSort'])->name('career.positions.update-sort');
@@ -381,34 +381,34 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
     // Hero & Benefits
     Route::get('/career/hero-benefits', [CareerController::class, 'heroBenefitsIndex'])->name('career.hero-benefits.index');
     Route::get('/career/hero-benefits/hero', [CareerController::class, 'heroEdit'])->name('career.hero-benefits.hero.edit');
-    Route::put('/career/hero-benefits/hero', [CareerController::class, 'heroUpdate'])->name('career.hero-benefits.hero.update');
+    Route::match(['PUT','POST'], '/career/hero-benefits/hero', [CareerController::class, 'heroUpdate'])->name('career.hero-benefits.hero.update');
     Route::get('/career/hero-benefits/benefits/create', [CareerController::class, 'benefitsCreate'])->name('career.hero-benefits.benefits.create');
     Route::post('/career/hero-benefits/benefits', [CareerController::class, 'benefitsStore'])->name('career.hero-benefits.benefits.store');
     Route::get('/career/hero-benefits/benefits/{id}/edit', [CareerController::class, 'benefitsEdit'])->name('career.hero-benefits.benefits.edit');
-    Route::put('/career/hero-benefits/benefits/{id}', [CareerController::class, 'benefitsUpdate'])->name('career.hero-benefits.benefits.update');
-    Route::delete('/career/hero-benefits/benefits/{id}', [CareerController::class, 'benefitsDestroy'])->name('career.hero-benefits.benefits.destroy');
+    Route::match(['PUT','POST'], '/career/hero-benefits/benefits/{id}', [CareerController::class, 'benefitsUpdate'])->name('career.hero-benefits.benefits.update');
+    Route::match(['DELETE','POST'], '/career/hero-benefits/benefits/{id}', [CareerController::class, 'benefitsDestroy'])->name('career.hero-benefits.benefits.destroy');
     Route::post('/career/hero-benefits/benefits/{id}/toggle-active', [CareerController::class, 'benefitsToggleActive'])->name('career.hero-benefits.benefits.toggle-active');
     Route::post('/career/hero-benefits/benefits/update-sort', [CareerController::class, 'benefitsUpdateSort'])->name('career.hero-benefits.benefits.update-sort');
 
     // ==================== CONTACT MODULE ====================
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-    Route::put('/contact/{id}', [ContactController::class, 'update'])->name('contact.update');
-    Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+    Route::match(['PUT','POST'], '/contact/{id}', [ContactController::class, 'update'])->name('contact.update');
+    Route::match(['DELETE','POST'], '/contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
     Route::post('/contact/{id}/toggle-active', [ContactController::class, 'toggleActive'])->name('contact.toggle-active');
 
     // Contact Messages Inbox
     Route::get('/contact/messages', [ContactController::class, 'messagesIndex'])->name('contact.messages.index');
-    Route::delete('/contact/messages/{message}', [ContactController::class, 'messageDestroy'])->name('contact.messages.destroy');
+    Route::match(['DELETE','POST'], '/contact/messages/{message}', [ContactController::class, 'messageDestroy'])->name('contact.messages.destroy');
     Route::post('/contact/messages/{message}/toggle-read', [ContactController::class, 'messageToggleRead'])->name('contact.messages.toggle-read');
 
     // ==================== TRANSLATIONS (EN/ID per page/section) ====================
     Route::get('/translations', [\App\Http\Controllers\Admin\TranslationController::class, 'index'])->name('translations.index');
-    Route::put('/translations', [\App\Http\Controllers\Admin\TranslationController::class, 'update'])->name('translations.update');
+    Route::match(['PUT','POST'], '/translations', [\App\Http\Controllers\Admin\TranslationController::class, 'update'])->name('translations.update');
 
     // ==================== ACCOUNT MODULE ====================
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::post('/account', [AccountController::class, 'store'])->name('account.store');
-    Route::put('/account/{id}', [AccountController::class, 'update'])->name('account.update');
-    Route::delete('/account/{id}', [AccountController::class, 'destroy'])->name('account.destroy');
+    Route::match(['PUT','POST'], '/account/{id}', [AccountController::class, 'update'])->name('account.update');
+    Route::match(['DELETE','POST'], '/account/{id}', [AccountController::class, 'destroy'])->name('account.destroy');
 });
