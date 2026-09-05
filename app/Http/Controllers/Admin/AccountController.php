@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
         $admins = Admin::all();
-        return view('admin.account.index', compact('admins'));
+        return view('admin.account.index', compact('admins', 'locale'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, string $locale)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -29,10 +29,10 @@ class AccountController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('admin.account.index')->with('success', 'Admin account berhasil dibuat!');
+        return redirect()->route('admin.account.index', ['locale' => $locale])->with('success', 'Admin account berhasil dibuat!');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, string $locale, $id)
     {
         $admin = Admin::findOrFail($id);
         $request->validate([
@@ -47,15 +47,15 @@ class AccountController extends Controller
         }
 
         $admin->update($data);
-        return redirect()->route('admin.account.index')->with('success', 'Admin account berhasil diupdate!');
+        return redirect()->route('admin.account.index', ['locale' => $locale])->with('success', 'Admin account berhasil diupdate!');
     }
 
-    public function destroy($id)
+    public function destroy(string $locale, $id)
     {
         if ($id == auth('admin')->id()) {
-            return redirect()->route('admin.account.index')->with('error', 'Tidak bisa menghapus akun sendiri!');
+            return redirect()->route('admin.account.index', ['locale' => $locale])->with('error', 'Tidak bisa menghapus akun sendiri!');
         }
         Admin::findOrFail($id)->delete();
-        return redirect()->route('admin.account.index')->with('success', 'Admin account berhasil dihapus!');
+        return redirect()->route('admin.account.index', ['locale' => $locale])->with('success', 'Admin account berhasil dihapus!');
     }
 }

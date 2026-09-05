@@ -12,18 +12,18 @@ use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
-        return view('admin.service.index');
+        return view('admin.service.index', compact('locale'));
     }
 
-    public function crud()
+    public function crud(string $locale)
     {
         $categories = ServiceCategory::with(['allDetails.allItems'])->orderBy('sort_order')->get();
-        return view('admin.service.crud', compact('categories'));
+        return view('admin.service.crud', compact('categories', 'locale'));
     }
 
-    public function storeCategory(Request $request)
+    public function storeCategory(Request $request, string $locale)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -50,7 +50,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function updateCategory(Request $request, $id)
+    public function updateCategory(Request $request, string $locale, $id)
     {
         $category = ServiceCategory::findOrFail($id);
         $request->validate([
@@ -78,7 +78,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function destroyCategory($id)
+    public function destroyCategory(string $locale, $id)
     {
         try {
             ServiceCategory::findOrFail($id)->delete();
@@ -88,7 +88,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function storeDetail(Request $request)
+    public function storeDetail(Request $request, string $locale)
     {
         $request->validate([
             'service_category_id' => 'required|exists:service_categories,id',
@@ -111,7 +111,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function updateDetail(Request $request, $id)
+    public function updateDetail(Request $request, string $locale, $id)
     {
         $request->validate([
             'category_name' => 'required|string|max:255',
@@ -133,7 +133,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function destroyDetail($id)
+    public function destroyDetail(string $locale, $id)
     {
         try {
             ServiceDetail::findOrFail($id)->delete();
@@ -143,7 +143,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function storeItem(Request $request)
+    public function storeItem(Request $request, string $locale)
     {
         $request->validate([
             'service_detail_id' => 'required|exists:service_details,id',
@@ -174,7 +174,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function updateItem(Request $request, $id)
+    public function updateItem(Request $request, string $locale, $id)
     {
         $request->validate([
             'item_name' => 'required|string|max:255',
@@ -207,7 +207,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function destroyItem($id)
+    public function destroyItem(string $locale, $id)
     {
         try {
             $item = ServiceItem::findOrFail($id);
@@ -223,7 +223,7 @@ class ServiceController extends Controller
 
     // ==================== ENGAGEMENT MODELS ====================
     // ==================== REORDER & MOVE ====================
-    public function reorderDetail(Request $request, $id)
+    public function reorderDetail(Request $request, string $locale, $id)
     {
         $request->validate([
             'direction' => 'required|in:up,down',
@@ -281,7 +281,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function reorderItem(Request $request, $id)
+    public function reorderItem(Request $request, string $locale, $id)
     {
         $request->validate([
             'direction' => 'required|in:up,down',
@@ -338,7 +338,7 @@ class ServiceController extends Controller
         }
     }
 
-    public function moveItem(Request $request, $id)
+    public function moveItem(Request $request, string $locale, $id)
     {
         $request->validate([
             'service_detail_id' => 'required|exists:service_details,id',
@@ -359,18 +359,18 @@ class ServiceController extends Controller
         }
     }
 
-    public function engagementIndex()
+    public function engagementIndex(string $locale)
     {
         $engagements = EngagementModel::orderBy('sort_order')->get();
-        return view('admin.home.engagement.index', compact('engagements'));
+        return view('admin.home.engagement.index', compact('engagements', 'locale'));
     }
 
-    public function engagementCreate()
+    public function engagementCreate(string $locale)
     {
-        return view('admin.home.engagement.create');
+        return view('admin.home.engagement.create', compact('locale'));
     }
 
-    public function engagementStore(Request $request)
+    public function engagementStore(Request $request, string $locale)
     {
         $request->validate([
             'letter' => 'required|string|max:10',
@@ -384,16 +384,16 @@ class ServiceController extends Controller
         }
         $data['is_active'] = $request->boolean('is_active');
         EngagementModel::create($data);
-        return redirect()->route('admin.services.engagement.index')->with('success', 'Engagement model created');
+        return redirect()->route('admin.services.engagement.index', ['locale' => $locale])->with('success', 'Engagement model created');
     }
 
-    public function engagementEdit($id)
+    public function engagementEdit(string $locale, $id)
     {
         $engagement = EngagementModel::findOrFail($id);
-        return view('admin.home.engagement.edit', compact('engagement'));
+        return view('admin.home.engagement.edit', compact('engagement', 'locale'));
     }
 
-    public function engagementUpdate(Request $request, $id)
+    public function engagementUpdate(Request $request, string $locale, $id)
     {
         $request->validate([
             'letter' => 'required|string|max:10',
@@ -405,20 +405,20 @@ class ServiceController extends Controller
         $data = $request->all();
         $data['is_active'] = $request->boolean('is_active');
         $engagement->update($data);
-        return redirect()->route('admin.services.engagement.index')->with('success', 'Engagement model updated');
+        return redirect()->route('admin.services.engagement.index', ['locale' => $locale])->with('success', 'Engagement model updated');
     }
 
-    public function engagementDestroy($id)
+    public function engagementDestroy(string $locale, $id)
     {
         try {
             EngagementModel::findOrFail($id)->delete();
-            return redirect()->route('admin.services.engagement.index')->with('success', 'Engagement model deleted');
+            return redirect()->route('admin.services.engagement.index', ['locale' => $locale])->with('success', 'Engagement model deleted');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
     }
 
-    public function engagementToggleActive($id)
+    public function engagementToggleActive(string $locale, $id)
     {
         $engagement = EngagementModel::findOrFail($id);
         $engagement->update(['is_active' => !$engagement->is_active]);

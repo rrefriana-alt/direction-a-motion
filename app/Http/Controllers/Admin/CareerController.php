@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class CareerController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
         $stats = [
             'total_applications' => JobApplication::count(),
@@ -57,14 +57,14 @@ class CareerController extends Controller
         ));
     }
 
-    public function editApplication($id)
+    public function editApplication(string $locale, $id)
     {
         $application = JobApplication::findOrFail($id);
         $statusOptions = ['pending' => 'Pending', 'reviewed' => 'Reviewed', 'accepted' => 'Accepted', 'rejected' => 'Rejected'];
         return view('admin.career.applications.edit', compact('application', 'statusOptions'));
     }
 
-    public function updateApplicationStatus(Request $request, $id)
+    public function updateApplicationStatus(Request $request, string $locale, $id)
     {
         $request->validate(['status' => 'required|in:pending,reviewed,accepted,rejected']);
         try {
@@ -127,7 +127,7 @@ class CareerController extends Controller
     }
 
     // ==================== POSITIONS ====================
-    public function positionsIndex()
+    public function positionsIndex(string $locale)
     {
         $positions = JobPosition::orderBy('sort_order')->orderBy('created_at', 'desc')->get();
         $stats = [
@@ -139,14 +139,14 @@ class CareerController extends Controller
         return view('admin.career.positions.index', compact('positions', 'stats'));
     }
 
-    public function positionsCreate()
+    public function positionsCreate(string $locale)
     {
         $employmentTypes = JobPosition::getEmploymentTypes();
         $experienceLevels = JobPosition::getExperienceLevels();
         return view('admin.career.positions.create', compact('employmentTypes', 'experienceLevels'));
     }
 
-    public function positionsStore(Request $request)
+    public function positionsStore(Request $request, string $locale)
     {
         $request->validate([
             'job_title' => 'required|string|max:255',
@@ -178,7 +178,7 @@ class CareerController extends Controller
         }
     }
 
-    public function positionsEdit($id)
+    public function positionsEdit(string $locale, $id)
     {
         $position = JobPosition::findOrFail($id);
         $employmentTypes = JobPosition::getEmploymentTypes();
@@ -186,7 +186,7 @@ class CareerController extends Controller
         return view('admin.career.positions.edit', compact('position', 'employmentTypes', 'experienceLevels'));
     }
 
-    public function positionsUpdate(Request $request, $id)
+    public function positionsUpdate(Request $request, string $locale, $id)
     {
         $request->validate([
             'job_title' => 'required|string|max:255',
@@ -219,7 +219,7 @@ class CareerController extends Controller
         }
     }
 
-    public function positionsDestroy($id)
+    public function positionsDestroy(string $locale, $id)
     {
         try {
             $position = JobPosition::findOrFail($id);
@@ -230,7 +230,7 @@ class CareerController extends Controller
         }
     }
 
-    public function positionsToggleActive($id)
+    public function positionsToggleActive(string $locale, $id)
     {
         try {
             $position = JobPosition::findOrFail($id);
@@ -241,7 +241,7 @@ class CareerController extends Controller
         }
     }
 
-    public function positionsToggleOpen($id)
+    public function positionsToggleOpen(string $locale, $id)
     {
         try {
             $position = JobPosition::findOrFail($id);
@@ -265,7 +265,7 @@ class CareerController extends Controller
     }
 
     // ==================== HERO & BENEFITS ====================
-    public function heroBenefitsIndex()
+    public function heroBenefitsIndex(string $locale)
     {
         $hero = CareerHero::first();
         $benefits = CareerBenefit::orderBy('sort_order')->get();
@@ -277,7 +277,7 @@ class CareerController extends Controller
         return view('admin.career.hero-benefits.benefits-index', compact('hero', 'benefits', 'stats'));
     }
 
-    public function heroEdit()
+    public function heroEdit(string $locale)
     {
         $hero = CareerHero::first();
         if (!$hero) {
@@ -286,7 +286,7 @@ class CareerController extends Controller
         return view('admin.career.hero-benefits.hero-edit', compact('hero'));
     }
 
-    public function heroUpdate(Request $request)
+    public function heroUpdate(Request $request, string $locale)
     {
         $request->validate(['description' => 'required|string']);
         try {
@@ -298,13 +298,13 @@ class CareerController extends Controller
         }
     }
 
-    public function benefitsCreate()
+    public function benefitsCreate(string $locale)
     {
         $iconClasses = CareerBenefit::getIconClasses();
         return view('admin.career.hero-benefits.benefits-create', compact('iconClasses'));
     }
 
-    public function benefitsStore(Request $request)
+    public function benefitsStore(Request $request, string $locale)
     {
         $request->validate([
             'benefit_title' => 'required|string|max:255',
@@ -328,14 +328,14 @@ class CareerController extends Controller
         }
     }
 
-    public function benefitsEdit($id)
+    public function benefitsEdit(string $locale, $id)
     {
         $benefit = CareerBenefit::findOrFail($id);
         $iconClasses = CareerBenefit::getIconClasses();
         return view('admin.career.hero-benefits.benefits-edit', compact('benefit', 'iconClasses'));
     }
 
-    public function benefitsUpdate(Request $request, $id)
+    public function benefitsUpdate(Request $request, string $locale, $id)
     {
         $request->validate([
             'benefit_title' => 'required|string|max:255',
@@ -360,7 +360,7 @@ class CareerController extends Controller
         }
     }
 
-    public function benefitsDestroy($id)
+    public function benefitsDestroy(string $locale, $id)
     {
         try {
             CareerBenefit::findOrFail($id)->delete();
@@ -370,7 +370,7 @@ class CareerController extends Controller
         }
     }
 
-    public function benefitsToggleActive($id)
+    public function benefitsToggleActive(string $locale, $id)
     {
         try {
             $benefit = CareerBenefit::findOrFail($id);

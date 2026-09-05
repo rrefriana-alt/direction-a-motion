@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
         return view('admin.home.index');
     }
@@ -122,18 +122,18 @@ class HomeController extends Controller
     }
 
     // ==================== STATS ====================
-    public function statsIndex()
+    public function statsIndex(string $locale)
     {
         $stats = Stat::orderBy('sort_order')->orderBy('id')->get();
         return view('admin.home.stats.index', compact('stats'));
     }
 
-    public function statsCreate()
+    public function statsCreate(string $locale)
     {
         return view('admin.home.stats.create');
     }
 
-    public function statsStore(Request $request)
+    public function statsStore(Request $request, string $locale)
     {
         $request->validate([
             'value' => 'required|string|max:255',
@@ -150,13 +150,13 @@ class HomeController extends Controller
         return redirect()->route('admin.home.stats.index')->with('success', 'Stat berhasil ditambahkan!');
     }
 
-    public function statsEdit($id)
+    public function statsEdit(string $locale, $id)
     {
         $stat = Stat::findOrFail($id);
         return view('admin.home.stats.edit', compact('stat'));
     }
 
-    public function statsUpdate(Request $request, $id)
+    public function statsUpdate(Request $request, string $locale, $id)
     {
         $request->validate([
             'value' => 'required|string|max:255',
@@ -171,25 +171,25 @@ class HomeController extends Controller
         return redirect()->route('admin.home.stats.index')->with('success', 'Stat berhasil diupdate!');
     }
 
-    public function statsDestroy($id)
+    public function statsDestroy(string $locale, $id)
     {
         Stat::findOrFail($id)->delete();
         return redirect()->route('admin.home.stats.index')->with('success', 'Stat berhasil dihapus!');
     }
 
     // ==================== SECTORS ====================
-    public function sectorsIndex()
+    public function sectorsIndex(string $locale)
     {
         $sectors = Sector::withCount('items')->orderBy('sort_order')->get();
         return view('admin.home.sectors.index', compact('sectors'));
     }
 
-    public function sectorsCreate()
+    public function sectorsCreate(string $locale)
     {
         return view('admin.home.sectors.create');
     }
 
-    public function sectorsStore(Request $request)
+    public function sectorsStore(Request $request, string $locale)
     {
         $request->validate([
             'heading_en' => 'required|string|max:255',
@@ -224,13 +224,13 @@ class HomeController extends Controller
         }
     }
 
-    public function sectorsEdit($id)
+    public function sectorsEdit(string $locale, $id)
     {
         $sector = Sector::with('items')->findOrFail($id);
         return view('admin.home.sectors.edit', compact('sector'));
     }
 
-    public function sectorsUpdate(Request $request, $id)
+    public function sectorsUpdate(Request $request, string $locale, $id)
     {
         $request->validate([
             'heading_en' => 'required|string|max:255',
@@ -266,7 +266,7 @@ class HomeController extends Controller
         }
     }
 
-    public function sectorsDestroy($id)
+    public function sectorsDestroy(string $locale, $id)
     {
         Sector::findOrFail($id)->delete();
         return redirect()->route('admin.home.sectors.index')->with('success', 'Sector berhasil dihapus!');
@@ -303,18 +303,18 @@ class HomeController extends Controller
     }
 
     // ==================== PROCESS STEPS ====================
-    public function processIndex()
+    public function processIndex(string $locale)
     {
         $steps = ProcessStep::orderBy('sort_order')->get();
         return view('admin.home.process.index', compact('steps'));
     }
 
-    public function processCreate()
+    public function processCreate(string $locale)
     {
         return view('admin.home.process.create');
     }
 
-    public function processStore(Request $request)
+    public function processStore(Request $request, string $locale)
     {
         $request->validate([
             'step_number' => 'required|integer|min:1|max:10',
@@ -342,13 +342,13 @@ class HomeController extends Controller
         }
     }
 
-    public function processEdit($id)
+    public function processEdit(string $locale, $id)
     {
         $step = ProcessStep::findOrFail($id);
         return view('admin.home.process.edit', compact('step'));
     }
 
-    public function processUpdate(Request $request, $id)
+    public function processUpdate(Request $request, string $locale, $id)
     {
         $request->validate([
             'step_number' => 'required|integer|min:1|max:10',
@@ -376,7 +376,7 @@ class HomeController extends Controller
         }
     }
 
-    public function processDestroy($id)
+    public function processDestroy(string $locale, $id)
     {
         ProcessStep::findOrFail($id)->delete();
         return redirect()->route('admin.home.process.index')->with('success', 'Step berhasil dihapus!');

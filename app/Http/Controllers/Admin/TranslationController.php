@@ -113,7 +113,7 @@ class TranslationController extends Controller
         'footer_description_id' => 'PT Fugo Creative Group — perusahaan kreatif yang menghadirkan solusi inovatif dan berdampak sejak 2016.',
     ];
 
-    public function index(Request $request)
+    public function index(Request $request, string $locale)
     {
         $active = $request->query('tab', 'home');
         if (!isset($this->groups[$active])) $active = 'home';
@@ -139,7 +139,7 @@ class TranslationController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, string $locale)
     {
         $rules = [];
         foreach ($this->defaults as $k => $v) {

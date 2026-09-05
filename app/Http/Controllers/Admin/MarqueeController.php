@@ -8,18 +8,18 @@ use Illuminate\Http\Request;
 
 class MarqueeController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
         $marqueeItems = MarqueeItem::query()->orderBy('sort_order')->orderBy('created_at', 'desc')->paginate(20);
         return view('admin.home.marquee.index', compact('marqueeItems'));
     }
 
-    public function create()
+    public function create(string $locale)
     {
         return view('admin.home.marquee.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, string $locale)
     {
         $validated = $request->validate([
             'text' => 'required|string|max:255',
@@ -33,18 +33,18 @@ class MarqueeController extends Controller
             }
 
             MarqueeItem::create($validated);
-            return redirect()->route('admin.home.marquee.index')->with('success', 'Marquee item berhasil ditambahkan!');
+            return redirect()->route('admin.home.marquee.index', ['locale' => $locale])->with('success', 'Marquee item berhasil ditambahkan!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function edit(MarqueeItem $marqueeItem)
+    public function edit(string $locale, MarqueeItem $marqueeItem)
     {
         return view('admin.home.marquee.edit', compact('marqueeItem'));
     }
 
-    public function update(Request $request, MarqueeItem $marqueeItem)
+    public function update(Request $request, string $locale, MarqueeItem $marqueeItem)
     {
         $validated = $request->validate([
             'text' => 'required|string|max:255',
@@ -55,17 +55,17 @@ class MarqueeController extends Controller
         try {
             $validated['is_active'] = $request->has('is_active');
             $marqueeItem->update($validated);
-            return redirect()->route('admin.home.marquee.index')->with('success', 'Marquee item berhasil diupdate!');
+            return redirect()->route('admin.home.marquee.index', ['locale' => $locale])->with('success', 'Marquee item berhasil diupdate!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function destroy(MarqueeItem $marqueeItem)
+    public function destroy(string $locale, MarqueeItem $marqueeItem)
     {
         try {
             $marqueeItem->delete();
-            return redirect()->route('admin.home.marquee.index')->with('success', 'Marquee item berhasil dihapus!');
+            return redirect()->route('admin.home.marquee.index', ['locale' => $locale])->with('success', 'Marquee item berhasil dihapus!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }

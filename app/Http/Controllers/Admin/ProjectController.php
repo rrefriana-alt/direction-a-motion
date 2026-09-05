@@ -122,11 +122,10 @@ class ProjectController extends Controller
 
     public function store(Request $request, string $locale)
     {
-        $catKeys = implode('|', array_map(fn($k)=>preg_quote($k,'/'), array_keys(self::categories())));
         $validated = $request->validate([
             'title'           => 'required|string|max:255',
             'client_name'     => 'nullable|string|max:255',
-            'category'        => 'required|regex:/^('.$catKeys.')$/',
+            'category'        => ['required', \Illuminate\Validation\Rule::in(array_keys(self::categories()))],
             'description'     => 'nullable|string',
             'lede'            => 'nullable|string',
             'year'            => 'nullable|string|max:10',
@@ -191,11 +190,10 @@ class ProjectController extends Controller
 
     public function update(Request $request, string $locale, Project $project)
     {
-        $catKeys = implode('|', array_map(fn($k)=>preg_quote($k,'/'), array_keys(self::categories())));
         $validated = $request->validate([
             'title'           => 'required|string|max:255',
             'client_name'     => 'nullable|string|max:255',
-            'category'        => 'required|regex:/^('.$catKeys.')$/',
+            'category'        => ['required', \Illuminate\Validation\Rule::in(array_keys(self::categories()))],
             'description'     => 'nullable|string',
             'lede'            => 'nullable|string',
             'year'            => 'nullable|string|max:10',

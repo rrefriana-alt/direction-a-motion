@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
         $contacts = Contact::orderBy('order')->get();
-        return view('admin.contact.index', compact('contacts'));
+        return view('admin.contact.index', compact('contacts', 'locale'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, string $locale)
     {
         $request->validate([
             'platform' => 'required|string|max:255',
@@ -25,10 +25,10 @@ class ContactController extends Controller
             'order' => 'required|integer',
         ]);
         Contact::create($request->all());
-        return redirect()->route('admin.contact.index')->with('success', 'Contact berhasil dibuat!');
+        return redirect()->route('admin.contact.index', ['locale' => $locale])->with('success', 'Contact berhasil dibuat!');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, string $locale, $id)
     {
         $request->validate([
             'platform' => 'required|string|max:255',
@@ -39,35 +39,35 @@ class ContactController extends Controller
         ]);
         $contact = Contact::findOrFail($id);
         $contact->update($request->all());
-        return redirect()->route('admin.contact.index')->with('success', 'Contact berhasil diupdate!');
+        return redirect()->route('admin.contact.index', ['locale' => $locale])->with('success', 'Contact berhasil diupdate!');
     }
 
-    public function destroy($id)
+    public function destroy(string $locale, $id)
     {
         Contact::findOrFail($id)->delete();
-        return redirect()->route('admin.contact.index')->with('success', 'Contact berhasil dihapus!');
+        return redirect()->route('admin.contact.index', ['locale' => $locale])->with('success', 'Contact berhasil dihapus!');
     }
 
-    public function toggleActive($id)
+    public function toggleActive(string $locale, $id)
     {
         $contact = Contact::findOrFail($id);
         $contact->update(['is_active' => !$contact->is_active]);
         return response()->json(['success' => true, 'is_active' => $contact->is_active]);
     }
 
-    public function messagesIndex()
+    public function messagesIndex(string $locale)
     {
         $messages = Message::orderBy('created_at', 'desc')->get();
-        return view('admin.contact.messages.index', compact('messages'));
+        return view('admin.contact.messages.index', compact('messages', 'locale'));
     }
 
-    public function messageDestroy($id)
+    public function messageDestroy(string $locale, $id)
     {
         Message::findOrFail($id)->delete();
-        return redirect()->route('admin.contact.messages.index')->with('success', 'Pesan berhasil dihapus!');
+        return redirect()->route('admin.contact.messages.index', ['locale' => $locale])->with('success', 'Pesan berhasil dihapus!');
     }
 
-    public function messageToggleRead($id)
+    public function messageToggleRead(string $locale, $id)
     {
         $message = Message::findOrFail($id);
         $message->update(['is_read' => !$message->is_read]);

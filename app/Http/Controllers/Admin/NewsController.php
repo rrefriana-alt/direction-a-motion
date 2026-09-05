@@ -9,12 +9,12 @@ use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
-        return view('admin.news.index');
+        return view('admin.news.index', compact('locale'));
     }
 
-    public function list(Request $request)
+    public function list(Request $request, string $locale)
     {
         $categories = ['company', 'industry', 'events', 'updates', 'insights'];
         $query = News::query();
@@ -41,17 +41,17 @@ class NewsController extends Controller
         }
         $news = $query->paginate(10)->withQueryString();
         $pinnedIds = array_values((array) (json_decode((string) \App\Models\Setting::get('home_journal_pinned_ids', '[]'), true) ?? []));
-        return view('admin.news.list', compact('news', 'pinnedIds', 'categories', 'search', 'activeCategory', 'sort'));
+        return view('admin.news.list', compact('news', 'pinnedIds', 'categories', 'search', 'activeCategory', 'sort', 'locale'));
     }
 
-    public function create()
+    public function create(string $locale)
     {
         $categories = ['company', 'industry', 'events', 'updates', 'insights'];
         $news = new News();
-        return view('admin.news.create', compact('categories', 'news'));
+        return view('admin.news.create', compact('categories', 'news', 'locale'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, string $locale)
     {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -87,7 +87,7 @@ class NewsController extends Controller
             'is_published' => $request->is_published ?? false,
         ]);
 
-        return redirect()->route('admin.news.list')->with('success', 'News berhasil dibuat!');
+        return redirect()->route('admin.news.list', ['locale' => $locale])->with('success', 'News berhasil dibuat!');
     }
 
     public function show(string $locale, $id)
@@ -146,7 +146,7 @@ class NewsController extends Controller
         }
 
         $news->update($data);
-        return redirect()->route('admin.news.list')->with('success', 'News berhasil diupdate!');
+        return redirect()->route('admin.news.list', ['locale' => $locale])->with('success', 'News berhasil diupdate!');
     }
 
     public function destroy(string $locale, $id)
@@ -156,6 +156,6 @@ class NewsController extends Controller
             unlink(public_path('img/' . $news->featured_image));
         }
         $news->delete();
-        return redirect()->route('admin.news.list')->with('success', 'News berhasil dihapus!');
+        return redirect()->route('admin.news.list', ['locale' => $locale])->with('success', 'News berhasil dihapus!');
     }
 }

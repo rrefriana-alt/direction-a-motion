@@ -8,18 +8,18 @@ use Illuminate\Http\Request;
 
 class CapabilitiesController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
         $capabilities = Capability::query()->orderBy('sort_order')->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.home.capabilities.index', compact('capabilities'));
     }
 
-    public function create()
+    public function create(string $locale)
     {
         return view('admin.home.capabilities.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, string $locale)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -51,18 +51,18 @@ class CapabilitiesController extends Controller
             $validated['number'] = $validated['number'] ?? 0;
 
             Capability::create($validated);
-            return redirect()->route('admin.home.capabilities.index')->with('success', 'Capability created successfully!');
+            return redirect()->route('admin.home.capabilities.index', ['locale' => $locale])->with('success', 'Capability created successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function edit(Capability $capability)
+    public function edit(string $locale, Capability $capability)
     {
         return view('admin.home.capabilities.edit', compact('capability'));
     }
 
-    public function update(Request $request, Capability $capability)
+    public function update(Request $request, string $locale, Capability $capability)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -98,20 +98,20 @@ class CapabilitiesController extends Controller
 
             $validated['is_active'] = $request->has('is_active');
             $capability->update($validated);
-            return redirect()->route('admin.home.capabilities.index')->with('success', 'Capability updated successfully!');
+            return redirect()->route('admin.home.capabilities.index', ['locale' => $locale])->with('success', 'Capability updated successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function destroy(Capability $capability)
+    public function destroy(string $locale, Capability $capability)
     {
         try {
             if ($capability->image && file_exists(public_path('img/' . $capability->image))) {
                 unlink(public_path('img/' . $capability->image));
             }
             $capability->delete();
-            return redirect()->route('admin.home.capabilities.index')->with('success', 'Capability deleted successfully!');
+            return redirect()->route('admin.home.capabilities.index', ['locale' => $locale])->with('success', 'Capability deleted successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }

@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
         return view('admin.about.index');
     }
@@ -41,7 +41,7 @@ class AboutController extends Controller
         return view('admin.about.settings.edit', compact('settings', 'locale'));
     }
 
-    public function aboutHeaderUpdate(Request $request)
+    public function aboutHeaderUpdate(Request $request, string $locale)
     {
         $locale = $request->route('locale') ?? 'en';
         $isEn = $locale === 'en';
@@ -72,13 +72,13 @@ class AboutController extends Controller
         return redirect()->route('admin.about.settings.edit', ['locale'=>$locale])->with('success', 'About page '.strtoupper($locale).' berhasil diupdate!');
     }
 
-    public function ceoProfile()
+    public function ceoProfile(string $locale)
     {
         $ceo = CeoProfile::first();
         return view('admin.about.ceo-profile', compact('ceo'));
     }
 
-    public function updateCeoProfile(Request $request)
+    public function updateCeoProfile(Request $request, string $locale)
     {
         $validated = $request->validate([
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:25600',
@@ -135,24 +135,24 @@ class AboutController extends Controller
             $ceoProfile->fill($validated);
             $ceoProfile->save();
 
-            return redirect()->route('admin.about.ceo-profile')->with('success', 'CEO Profile berhasil diupdate!');
+            return redirect()->route('admin.about.ceo-profile', ['locale'=>$locale])->with('success', 'CEO Profile berhasil diupdate!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function timelineIndex()
+    public function timelineIndex(string $locale)
     {
         $timelines = Timeline::orderBy('sort_order')->get();
         return view('admin.about.timeline.index', compact('timelines'));
     }
 
-    public function timelineCreate()
+    public function timelineCreate(string $locale)
     {
         return view('admin.about.timeline.create');
     }
 
-    public function timelineStore(Request $request)
+    public function timelineStore(Request $request, string $locale)
     {
         $locale = $request->route('locale') ?? 'en';
         $isEn = $locale === 'en';
@@ -196,12 +196,12 @@ class AboutController extends Controller
         }
     }
 
-    public function timelineEdit(Timeline $timeline)
+    public function timelineEdit(string $locale, Timeline $timeline)
     {
         return view('admin.about.timeline.edit', compact('timeline'));
     }
 
-    public function timelineUpdate(Request $request, Timeline $timeline)
+    public function timelineUpdate(Request $request, string $locale, Timeline $timeline)
     {
         $locale = $request->route('locale') ?? 'en';
         $isEn = $locale === 'en';
@@ -232,29 +232,29 @@ class AboutController extends Controller
         }
     }
 
-    public function timelineDestroy(Timeline $timeline)
+    public function timelineDestroy(string $locale, Timeline $timeline)
     {
         try {
             $timeline->delete();
-            return redirect()->route('admin.about.timeline.index')->with('success', 'Timeline berhasil dihapus!');
+            return redirect()->route('admin.about.timeline.index', ['locale'=>$locale])->with('success', 'Timeline berhasil dihapus!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
     }
 
     // ==================== STATISTICS ====================
-    public function statisticsIndex()
+    public function statisticsIndex(string $locale)
     {
         $stats = Stat::orderBy('sort_order')->get();
         return view('admin.about.statistics.index', compact('stats'));
     }
 
-    public function statisticsCreate()
+    public function statisticsCreate(string $locale)
     {
         return view('admin.about.statistics.create');
     }
 
-    public function statisticsStore(Request $request)
+    public function statisticsStore(Request $request, string $locale)
     {
         $validated = $request->validate([
             'value' => 'required|string|max:255',
@@ -271,18 +271,18 @@ class AboutController extends Controller
             }
             $validated['is_active'] = $request->boolean('is_active', true);
             Stat::create($validated);
-            return redirect()->route('admin.about.statistics.index')->with('success', 'Statistic berhasil dibuat!');
+            return redirect()->route('admin.about.statistics.index', ['locale'=>$locale])->with('success', 'Statistic berhasil dibuat!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function statisticsEdit(Stat $stat)
+    public function statisticsEdit(string $locale, Stat $stat)
     {
         return view('admin.about.statistics.edit', compact('stat'));
     }
 
-    public function statisticsUpdate(Request $request, Stat $stat)
+    public function statisticsUpdate(Request $request, string $locale, Stat $stat)
     {
         $validated = $request->validate([
             'value' => 'required|string|max:255',
@@ -295,17 +295,17 @@ class AboutController extends Controller
         try {
             $validated['is_active'] = $request->boolean('is_active', true);
             $stat->update($validated);
-            return redirect()->route('admin.about.statistics.index')->with('success', 'Statistic berhasil diupdate!');
+            return redirect()->route('admin.about.statistics.index', ['locale'=>$locale])->with('success', 'Statistic berhasil diupdate!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function statisticsDestroy(Stat $stat)
+    public function statisticsDestroy(string $locale, Stat $stat)
     {
         try {
             $stat->delete();
-            return redirect()->route('admin.about.statistics.index')->with('success', 'Statistic berhasil dihapus!');
+            return redirect()->route('admin.about.statistics.index', ['locale'=>$locale])->with('success', 'Statistic berhasil dihapus!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
@@ -335,18 +335,18 @@ class AboutController extends Controller
     }
 
     // ==================== SECTORS ====================
-    public function sectorIndex()
+    public function sectorIndex(string $locale)
     {
         $sectors = Sector::with('items')->orderBy('sort_order')->get();
         return view('admin.about.sectors.index', compact('sectors'));
     }
 
-    public function sectorCreate()
+    public function sectorCreate(string $locale)
     {
         return view('admin.about.sectors.create');
     }
 
-    public function sectorStore(Request $request)
+    public function sectorStore(Request $request, string $locale)
     {
         $validated = $request->validate([
             'heading_en' => 'required|string|max:255',
@@ -383,19 +383,19 @@ class AboutController extends Controller
                 }
             }
 
-            return redirect()->route('admin.about.sectors.index')->with('success', 'Sector berhasil dibuat!');
+            return redirect()->route('admin.about.sectors.index', ['locale'=>$locale])->with('success', 'Sector berhasil dibuat!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function sectorEdit(Sector $sector)
+    public function sectorEdit(string $locale, Sector $sector)
     {
         $sector->load('items');
         return view('admin.about.sectors.edit', compact('sector'));
     }
 
-    public function sectorUpdate(Request $request, Sector $sector)
+    public function sectorUpdate(Request $request, string $locale, Sector $sector)
     {
         $validated = $request->validate([
             'heading_en' => 'required|string|max:255',
@@ -451,18 +451,18 @@ class AboutController extends Controller
                 }
             }
 
-            return redirect()->route('admin.about.sectors.index')->with('success', 'Sector berhasil diupdate!');
+            return redirect()->route('admin.about.sectors.index', ['locale'=>$locale])->with('success', 'Sector berhasil diupdate!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
 
-    public function sectorDestroy(Sector $sector)
+    public function sectorDestroy(string $locale, Sector $sector)
     {
         try {
             $sector->items()->delete();
             $sector->delete();
-            return redirect()->route('admin.about.sectors.index')->with('success', 'Sector berhasil dihapus!');
+            return redirect()->route('admin.about.sectors.index', ['locale'=>$locale])->with('success', 'Sector berhasil dihapus!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }

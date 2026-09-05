@@ -9,20 +9,20 @@ use Illuminate\Support\Facades\DB;
 
 class PortfolioController extends Controller
 {
-    public function index()
+    public function index(string $locale)
     {
         $sampleProjects = Project::where('is_active', true)->orderBy('sort_order')->take(2)->get();
         return view('admin.portfolio.index', compact('sampleProjects'));
     }
 
-    public function viewAll()
+    public function viewAll(string $locale)
     {
         $projects = Project::orderBy('sort_order')->get();
         $selectedProjectIds = Project::where('is_active', true)->orderBy('sort_order')->pluck('id')->toArray();
         return view('admin.portfolio.view-all-project.index', compact('projects', 'selectedProjectIds'));
     }
 
-    public function updateViewAll(Request $request)
+    public function updateViewAll(Request $request, string $locale)
     {
         try {
             DB::transaction(function () use ($request) {

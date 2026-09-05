@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class WorkSettingsController extends Controller
 {
-    public function edit(Request $request)
+    public function edit(Request $request, string $locale)
     {
         $locale = $request->route('locale') ?? 'en';
         $settings = [
@@ -22,7 +22,7 @@ class WorkSettingsController extends Controller
         return view('admin.work-settings.edit', compact('settings', 'locale'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, string $locale)
     {
         $locale = $request->route('locale') ?? 'en';
         $isEn = $locale === 'en';
