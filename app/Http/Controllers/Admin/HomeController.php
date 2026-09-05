@@ -20,41 +20,43 @@ class HomeController extends Controller
     }
 
     // ==================== HERO SETTINGS ====================
-    public function heroEdit()
+    public function heroEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
             'tagline_en' => Setting::get('home_hero_tagline_en', Setting::get('home_hero_tagline', '65+ brands trusted us')),
             'tagline_id' => Setting::get('home_hero_tagline_id', Setting::get('home_hero_tagline_en', '65+ brands trusted us')),
             'description_en' => Setting::get('home_hero_description_en', Setting::get('home_hero_description', 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.')),
             'description_id' => Setting::get('home_hero_description_id', 'Desain · Production House · Event · Merch. Grup kreatif Indonesia sejak 2016.'),
-            // legacy
             'tagline' => Setting::get('home_hero_tagline', '65+ brands trusted us'),
             'description' => Setting::get('home_hero_description', 'Design · Production House · Events · Merch. An Indonesian creative group since 2016.'),
         ];
-        return view('admin.home.hero.edit', compact('settings'));
+        return view('admin.home.hero.edit', compact('settings', 'locale'));
     }
 
     public function heroUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'tagline_en' => 'required|string|max:255',
-            'tagline_id' => 'required|string|max:255',
-            'description_en' => 'required|string',
-            'description_id' => 'required|string',
+            'tagline_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'tagline_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
+            'description_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'description_id' => ($isEn ? 'nullable' : 'required').'|string',
         ]);
-        Setting::set('home_hero_tagline_en', $request->tagline_en);
-        Setting::set('home_hero_tagline_id', $request->tagline_id);
-        Setting::set('home_hero_description_en', $request->description_en);
-        Setting::set('home_hero_description_id', $request->description_id);
-        // keep legacy for fallback
-        Setting::set('home_hero_tagline', $request->tagline_en);
-        Setting::set('home_hero_description', $request->description_en);
-        return redirect()->route('admin.home.hero.edit')->with('success', 'Hero EN/ID berhasil diupdate!');
+        if ($request->has('tagline_en')) Setting::set('home_hero_tagline_en', $request->tagline_en ?? '');
+        if ($request->has('tagline_id')) Setting::set('home_hero_tagline_id', $request->tagline_id ?? '');
+        if ($request->has('description_en')) Setting::set('home_hero_description_en', $request->description_en ?? '');
+        if ($request->has('description_id')) Setting::set('home_hero_description_id', $request->description_id ?? '');
+        if ($request->filled('tagline_en')) Setting::set('home_hero_tagline', $request->tagline_en);
+        if ($request->filled('description_en')) Setting::set('home_hero_description', $request->description_en);
+        return redirect()->route('admin.home.hero.edit', ['locale' => $locale])->with('success', 'Hero '.strtoupper($locale).' berhasil diupdate!');
     }
 
     // ==================== CAPABILITIES HEADER ====================
-    public function capabilitiesHeaderEdit()
+    public function capabilitiesHeaderEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
             'title_en' => Setting::get('home_capabilities_title_en', Setting::get('home_capabilities_title', "Five studios,<br>one standard")),
             'title_id' => Setting::get('home_capabilities_title_id', "Lima studio,<br>satu standar"),
@@ -63,29 +65,32 @@ class HomeController extends Controller
             'title' => Setting::get('home_capabilities_title', "Five studios,<br>one standard"),
             'description' => Setting::get('home_capabilities_description', 'Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax.'),
         ];
-        return view('admin.home.capabilities.header-edit', compact('settings'));
+        return view('admin.home.capabilities.header-edit', compact('settings', 'locale'));
     }
 
     public function capabilitiesHeaderUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'title_en' => 'required|string|max:255',
-            'title_id' => 'required|string|max:255',
-            'description_en' => 'required|string',
-            'description_id' => 'required|string',
+            'title_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'title_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
+            'description_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'description_id' => ($isEn ? 'nullable' : 'required').'|string',
         ]);
-        Setting::set('home_capabilities_title_en', $request->title_en);
-        Setting::set('home_capabilities_title_id', $request->title_id);
-        Setting::set('home_capabilities_description_en', $request->description_en);
-        Setting::set('home_capabilities_description_id', $request->description_id);
-        Setting::set('home_capabilities_title', $request->title_en);
-        Setting::set('home_capabilities_description', $request->description_en);
-        return redirect()->route('admin.home.capabilities-header.edit')->with('success', 'Capabilities header EN/ID berhasil diupdate!');
+        if ($request->has('title_en')) Setting::set('home_capabilities_title_en', $request->title_en ?? '');
+        if ($request->has('title_id')) Setting::set('home_capabilities_title_id', $request->title_id ?? '');
+        if ($request->has('description_en')) Setting::set('home_capabilities_description_en', $request->description_en ?? '');
+        if ($request->has('description_id')) Setting::set('home_capabilities_description_id', $request->description_id ?? '');
+        if ($request->filled('title_en')) Setting::set('home_capabilities_title', $request->title_en);
+        if ($request->filled('description_en')) Setting::set('home_capabilities_description', $request->description_en);
+        return redirect()->route('admin.home.capabilities-header.edit', ['locale'=>$locale])->with('success', 'Capabilities header '.strtoupper($locale).' berhasil diupdate!');
     }
 
     // ==================== MANIFESTO ====================
-    public function manifestoEdit()
+    public function manifestoEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
             'subtitle_en' => Setting::get('home_manifesto_subtitle_en', Setting::get('home_manifesto_subtitle', 'MANIFESTO')),
             'subtitle_id' => Setting::get('home_manifesto_subtitle_id', 'MANIFESTO'),
@@ -94,24 +99,26 @@ class HomeController extends Controller
             'subtitle' => Setting::get('home_manifesto_subtitle', 'MANIFESTO'),
             'title' => Setting::get('home_manifesto_title', 'Every brief can be solved with *creativity, an *innovative route, and execution that actually lands.'),
         ];
-        return view('admin.home.manifesto.edit', compact('settings'));
+        return view('admin.home.manifesto.edit', compact('settings', 'locale'));
     }
 
     public function manifestoUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'subtitle_en' => 'required|string|max:255',
-            'subtitle_id' => 'required|string|max:255',
-            'title_en' => 'required|string',
-            'title_id' => 'required|string',
+            'subtitle_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'subtitle_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
+            'title_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'title_id' => ($isEn ? 'nullable' : 'required').'|string',
         ]);
-        Setting::set('home_manifesto_subtitle_en', $request->subtitle_en);
-        Setting::set('home_manifesto_subtitle_id', $request->subtitle_id);
-        Setting::set('home_manifesto_title_en', $request->title_en);
-        Setting::set('home_manifesto_title_id', $request->title_id);
-        Setting::set('home_manifesto_subtitle', $request->subtitle_en);
-        Setting::set('home_manifesto_title', $request->title_en);
-        return redirect()->route('admin.home.manifesto.edit')->with('success', 'Manifesto EN/ID berhasil diupdate!');
+        if ($request->has('subtitle_en')) Setting::set('home_manifesto_subtitle_en', $request->subtitle_en ?? '');
+        if ($request->has('subtitle_id')) Setting::set('home_manifesto_subtitle_id', $request->subtitle_id ?? '');
+        if ($request->has('title_en')) Setting::set('home_manifesto_title_en', $request->title_en ?? '');
+        if ($request->has('title_id')) Setting::set('home_manifesto_title_id', $request->title_id ?? '');
+        if ($request->filled('subtitle_en')) Setting::set('home_manifesto_subtitle', $request->subtitle_en);
+        if ($request->filled('title_en')) Setting::set('home_manifesto_title', $request->title_en);
+        return redirect()->route('admin.home.manifesto.edit', ['locale'=>$locale])->with('success', 'Manifesto '.strtoupper($locale).' berhasil diupdate!');
     }
 
     // ==================== STATS ====================
@@ -266,30 +273,33 @@ class HomeController extends Controller
     }
 
     // ==================== PROCESS HEADER ====================
-    public function processHeaderEdit()
+    public function processHeaderEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
             'eyebrow_en' => Setting::get('home_process_eyebrow_en', '05 — How we work'),
             'eyebrow_id' => Setting::get('home_process_eyebrow_id', '05 — Cara kami bekerja'),
             'title_en' => Setting::get('home_process_title_en', 'A short line<br>to remarkable'),
             'title_id' => Setting::get('home_process_title_id', 'Garis pendek<br>menuju luar biasa'),
         ];
-        return view('admin.home.process.header-edit', compact('settings'));
+        return view('admin.home.process.header-edit', compact('settings', 'locale'));
     }
 
     public function processHeaderUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'eyebrow_en' => 'required|string|max:255',
-            'eyebrow_id' => 'nullable|string|max:255',
-            'title_en' => 'required|string',
-            'title_id' => 'nullable|string',
+            'eyebrow_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'eyebrow_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
+            'title_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'title_id' => ($isEn ? 'nullable' : 'required').'|string',
         ]);
-        Setting::set('home_process_eyebrow_en', $request->eyebrow_en);
-        Setting::set('home_process_eyebrow_id', $request->eyebrow_id);
-        Setting::set('home_process_title_en', $request->title_en);
-        Setting::set('home_process_title_id', $request->title_id);
-        return redirect()->route('admin.home.process-header.edit')->with('success', 'Process header berhasil diupdate!');
+        if ($request->has('eyebrow_en')) Setting::set('home_process_eyebrow_en', $request->eyebrow_en ?? '');
+        if ($request->has('eyebrow_id')) Setting::set('home_process_eyebrow_id', $request->eyebrow_id ?? '');
+        if ($request->has('title_en')) Setting::set('home_process_title_en', $request->title_en ?? '');
+        if ($request->has('title_id')) Setting::set('home_process_title_id', $request->title_id ?? '');
+        return redirect()->route('admin.home.process-header.edit', ['locale'=>$locale])->with('success', 'Process header '.strtoupper($locale).' berhasil diupdate!');
     }
 
     // ==================== PROCESS STEPS ====================
@@ -373,29 +383,42 @@ class HomeController extends Controller
     }
 
     // ==================== FOUNDER QUOTE ====================
-    public function founderEdit()
+    public function founderEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
-            'quote' => Setting::get('home_founder_quote', 'Creativity without execution is just a hallucination.'),
+            'quote_en' => Setting::get('home_founder_quote_en', Setting::get('home_founder_quote', 'Creativity without execution is just a hallucination.')),
+            'quote_id' => Setting::get('home_founder_quote_id', 'Kreativitas tanpa eksekusi hanyalah halusinasi.'),
             'name' => Setting::get('home_founder_name', 'Sona Lesmana'),
+            'title_en' => Setting::get('home_founder_title_en', Setting::get('home_founder_title', 'Founder & CEO')),
+            'title_id' => Setting::get('home_founder_title_id', 'Pendiri & CEO'),
+            'quote' => Setting::get('home_founder_quote', 'Creativity without execution is just a hallucination.'),
             'title' => Setting::get('home_founder_title', 'Founder & CEO'),
             'image' => Setting::get('home_founder_image', ''),
         ];
-        return view('admin.home.founder.edit', compact('settings'));
+        return view('admin.home.founder.edit', compact('settings', 'locale'));
     }
 
     public function founderUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'quote' => 'required|string',
+            'quote_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'quote_id' => ($isEn ? 'nullable' : 'required').'|string',
             'name' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
+            'title_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'title_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        Setting::set('home_founder_quote', $request->quote);
+        if ($request->has('quote_en')) Setting::set('home_founder_quote_en', $request->quote_en ?? '');
+        if ($request->has('quote_id')) Setting::set('home_founder_quote_id', $request->quote_id ?? '');
+        if ($request->has('title_en')) Setting::set('home_founder_title_en', $request->title_en ?? '');
+        if ($request->has('title_id')) Setting::set('home_founder_title_id', $request->title_id ?? '');
+        if ($request->filled('quote_en')) Setting::set('home_founder_quote', $request->quote_en);
+        if ($request->filled('title_en')) Setting::set('home_founder_title', $request->title_en);
         Setting::set('home_founder_name', $request->name);
-        Setting::set('home_founder_title', $request->title);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -408,8 +431,9 @@ class HomeController extends Controller
     }
 
     // ==================== CTA ====================
-    public function ctaEdit()
+    public function ctaEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
             'eyebrow_en' => Setting::get('home_cta_eyebrow_en', Setting::get('home_cta_eyebrow', 'Available for Q4 2026 projects')),
             'eyebrow_id' => Setting::get('home_cta_eyebrow_id', 'Tersedia untuk proyek Q4 2026'),
@@ -418,29 +442,32 @@ class HomeController extends Controller
             'eyebrow' => Setting::get('home_cta_eyebrow', 'Available for Q4 2026 projects'),
             'title' => Setting::get('home_cta_title', "Let's build<br>something"),
         ];
-        return view('admin.home.cta.edit', compact('settings'));
+        return view('admin.home.cta.edit', compact('settings', 'locale'));
     }
 
     public function ctaUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'eyebrow_en' => 'required|string|max:255',
-            'eyebrow_id' => 'required|string|max:255',
-            'title_en' => 'required|string',
-            'title_id' => 'required|string',
+            'eyebrow_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'eyebrow_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
+            'title_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'title_id' => ($isEn ? 'nullable' : 'required').'|string',
         ]);
-        Setting::set('home_cta_eyebrow_en', $request->eyebrow_en);
-        Setting::set('home_cta_eyebrow_id', $request->eyebrow_id);
-        Setting::set('home_cta_title_en', $request->title_en);
-        Setting::set('home_cta_title_id', $request->title_id);
-        Setting::set('home_cta_eyebrow', $request->eyebrow_en);
-        Setting::set('home_cta_title', $request->title_en);
-        return redirect()->route('admin.home.cta.edit')->with('success', 'CTA EN/ID berhasil diupdate!');
+        if ($request->has('eyebrow_en')) Setting::set('home_cta_eyebrow_en', $request->eyebrow_en ?? '');
+        if ($request->has('eyebrow_id')) Setting::set('home_cta_eyebrow_id', $request->eyebrow_id ?? '');
+        if ($request->has('title_en')) Setting::set('home_cta_title_en', $request->title_en ?? '');
+        if ($request->has('title_id')) Setting::set('home_cta_title_id', $request->title_id ?? '');
+        if ($request->filled('eyebrow_en')) Setting::set('home_cta_eyebrow', $request->eyebrow_en);
+        if ($request->filled('title_en')) Setting::set('home_cta_title', $request->title_en);
+        return redirect()->route('admin.home.cta.edit', ['locale'=>$locale])->with('success', 'CTA '.strtoupper($locale).' berhasil diupdate!');
     }
 
     // ==================== SERVICES PAGE ====================
-    public function servicesPageEdit()
+    public function servicesPageEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
             'headline_en' => Setting::get('services_page_headline_en', Setting::get('services_page_headline', 'Five studios, one invoice')),
             'headline_id' => Setting::get('services_page_headline_id', 'Lima studio, satu tagihan'),
@@ -449,30 +476,37 @@ class HomeController extends Controller
             'headline' => Setting::get('services_page_headline', 'Five studios, one invoice'),
             'subtitle' => Setting::get('services_page_subtitle', 'From brand identity to mass production — all delivered under one roof.'),
         ];
-        return view('admin.home.services-page.edit', compact('settings'));
+        return view('admin.home.services-page.edit', compact('settings', 'locale'));
     }
 
     public function servicesPageUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'headline_en' => 'required|string|max:255',
-            'headline_id' => 'required|string|max:255',
-            'subtitle_en' => 'required|string',
-            'subtitle_id' => 'required|string',
+            'headline_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'headline_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
+            'subtitle_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'subtitle_id' => ($isEn ? 'nullable' : 'required').'|string',
         ]);
-        Setting::set('services_page_headline_en', $request->headline_en);
-        Setting::set('services_page_headline_id', $request->headline_id);
-        Setting::set('services_page_subtitle_en', $request->subtitle_en);
-        Setting::set('services_page_subtitle_id', $request->subtitle_id);
-        Setting::set('services_page_headline', $request->headline_en);
-        Setting::set('services_page_subtitle', $request->subtitle_en);
-        return redirect()->route('admin.home.services-page.edit')->with('success', 'Services page EN/ID berhasil diupdate!');
+        if ($request->has('headline_en')) Setting::set('services_page_headline_en', $request->headline_en ?? '');
+        if ($request->has('headline_id')) Setting::set('services_page_headline_id', $request->headline_id ?? '');
+        if ($request->has('subtitle_en')) Setting::set('services_page_subtitle_en', $request->subtitle_en ?? '');
+        if ($request->has('subtitle_id')) Setting::set('services_page_subtitle_id', $request->subtitle_id ?? '');
+        if ($request->filled('headline_en')) Setting::set('services_page_headline', $request->headline_en);
+        if ($request->filled('subtitle_en')) Setting::set('services_page_subtitle', $request->subtitle_en);
+        return redirect()->route('admin.home.services-page.edit', ['locale'=>$locale])->with('success', 'Services page '.strtoupper($locale).' berhasil diupdate!');
     }
 
     // ==================== CONTACT PAGE ====================
-    public function contactPageEdit()
+    public function contactPageEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
+            'headline_en' => Setting::get('contact_page_headline_en', Setting::get('contact_page_headline', 'Tell us what you need to land')),
+            'headline_id' => Setting::get('contact_page_headline_id', 'Ceritakan kebutuhan Anda'),
+            'subtitle_en' => Setting::get('contact_page_subtitle_en', Setting::get('contact_page_subtitle', 'Fill out the form and we will get back to you within 1 working day.')),
+            'subtitle_id' => Setting::get('contact_page_subtitle_id', 'Isi formulir, kami balas dalam 1 hari kerja.'),
             'headline' => Setting::get('contact_page_headline', 'Tell us what you need to land'),
             'subtitle' => Setting::get('contact_page_subtitle', 'Fill out the form and we will get back to you within 1 working day.'),
             'phone' => Setting::get('contact_phone', '+62 821 2100 0680'),
@@ -481,34 +515,45 @@ class HomeController extends Controller
             'address_jkt' => Setting::get('contact_address_jkt', 'Jl. Srengseng Sawah No.16, Jagakarsa, Jakarta Selatan'),
             'address_bali' => Setting::get('contact_address_bali', 'Jl. Tukad Melangit, Samplangan, Gianyar, Bali'),
         ];
-        return view('admin.contact.settings.edit', compact('settings'));
+        return view('admin.contact.settings.edit', compact('settings', 'locale'));
     }
 
     public function contactPageUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'headline' => 'required|string|max:255',
-            'subtitle' => 'required|string',
+            'headline_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'headline_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
+            'subtitle_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'subtitle_id' => ($isEn ? 'nullable' : 'required').'|string',
             'phone' => 'required|string|max:255',
             'email' => 'required|email',
             'address_bdg' => 'required|string',
             'address_jkt' => 'required|string',
             'address_bali' => 'required|string',
         ]);
-        Setting::set('contact_page_headline', $request->headline);
-        Setting::set('contact_page_subtitle', $request->subtitle);
+        if ($request->has('headline_en')) Setting::set('contact_page_headline_en', $request->headline_en ?? '');
+        if ($request->has('headline_id')) Setting::set('contact_page_headline_id', $request->headline_id ?? '');
+        if ($request->has('subtitle_en')) Setting::set('contact_page_subtitle_en', $request->subtitle_en ?? '');
+        if ($request->has('subtitle_id')) Setting::set('contact_page_subtitle_id', $request->subtitle_id ?? '');
+        if ($request->filled('headline_en')) Setting::set('contact_page_headline', $request->headline_en);
+        if ($request->filled('subtitle_en')) Setting::set('contact_page_subtitle', $request->subtitle_en);
         Setting::set('contact_phone', $request->phone);
         Setting::set('contact_email', $request->email);
         Setting::set('contact_address_bdg', $request->address_bdg);
         Setting::set('contact_address_jkt', $request->address_jkt);
         Setting::set('contact_address_bali', $request->address_bali);
-        return redirect()->route('admin.contact.settings.edit')->with('success', 'Contact page settings berhasil diupdate!');
+        return redirect()->route('admin.contact.settings.edit', ['locale'=>$locale])->with('success', 'Contact page '.strtoupper($locale).' berhasil diupdate!');
     }
 
     // ==================== FOOTER ====================
-    public function footerEdit()
+    public function footerEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
+            'description_en' => Setting::get('footer_description_en', Setting::get('footer_description', 'PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016.')),
+            'description_id' => Setting::get('footer_description_id', 'PT Fugo Creative Group — perusahaan kreatif dengan solusi berdampak sejak 2016.'),
             'description' => Setting::get('footer_description', 'PT Fugo Creative Group — a creative company delivering innovative, high-impact solutions since 2016.'),
             'phone' => Setting::get('footer_phone', '+62 821 2100 0680'),
             'email' => Setting::get('footer_email', 'hello@fugocreativegroup.com'),
@@ -520,13 +565,16 @@ class HomeController extends Controller
             'tiktok' => Setting::get('footer_tiktok', 'https://tiktok.com/@fugo.creative'),
             'youtube' => Setting::get('footer_youtube', 'https://youtube.com/@fugocreative'),
         ];
-        return view('admin.home.footer.edit', compact('settings'));
+        return view('admin.home.footer.edit', compact('settings', 'locale'));
     }
 
     public function footerUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'description' => 'required|string',
+            'description_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'description_id' => ($isEn ? 'nullable' : 'required').'|string',
             'phone' => 'nullable|string',
             'email' => 'nullable|email',
             'address_bandung' => 'nullable|string',
@@ -537,7 +585,9 @@ class HomeController extends Controller
             'tiktok' => 'nullable|url',
             'youtube' => 'nullable|url',
         ]);
-        Setting::set('footer_description', $request->description);
+        if ($request->has('description_en')) Setting::set('footer_description_en', $request->description_en ?? '');
+        if ($request->has('description_id')) Setting::set('footer_description_id', $request->description_id ?? '');
+        if ($request->filled('description_en')) Setting::set('footer_description', $request->description_en);
         Setting::set('footer_phone', $request->phone);
         Setting::set('footer_email', $request->email);
         Setting::set('footer_address_bandung', $request->address_bandung);
@@ -547,6 +597,6 @@ class HomeController extends Controller
         Setting::set('footer_linkedin', $request->linkedin);
         Setting::set('footer_tiktok', $request->tiktok);
         Setting::set('footer_youtube', $request->youtube);
-        return redirect()->route('admin.home.footer.edit')->with('success', 'Footer berhasil diupdate!');
+        return redirect()->route('admin.home.footer.edit', ['locale'=>$locale])->with('success', 'Footer '.strtoupper($locale).' berhasil diupdate!');
     }
 }

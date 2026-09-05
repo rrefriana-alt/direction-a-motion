@@ -211,6 +211,21 @@
         .opacity-100{opacity:1}
         .transition{transition:all .2s ease}
 
+        /* ── SaaS Modern — global form polish (no manual resize, auto-grow, char count) ── */
+        textarea.form-control{resize:none !important;overflow:hidden;min-height:88px;line-height:1.6;field-sizing:content}
+        .char-meta{font-size:.62rem;font-weight:500;color:var(--gray-400);text-align:right;margin-top:.28rem;transition:color .2s}
+        .char-meta.over{color:var(--danger)}
+        .form-control,.form-select{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;transition:all .18s}
+        .form-control::placeholder{color:#94a3b8}
+        .form-control:hover{background:#fff;border-color:#cbd5e1}
+        .form-control:focus,.form-select:focus{background:#fff;border-color:var(--green-500);box-shadow:0 0 0 4px rgba(16,185,129,.12);outline:none}
+        .locale-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.22rem .55rem;border-radius:999px;font-size:.62rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+        .locale-badge.en{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+        .locale-badge.id{background:#fffbeb;color:#92400e;border:1px solid #fde68a}
+        .saas-card{background:#fff;border:1px solid #eef2f7;border-radius:16px;box-shadow:0 2px 12px rgba(15,23,42,.04)}
+        .saas-head{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid #f1f5f9}
+        .saas-head i{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--green-500),#06b6d4);color:#fff;display:grid;place-items:center;font-size:.9rem;box-shadow:0 4px 10px rgba(16,185,129,.25)}
+
     </style>
     @stack('styles')
 </head>

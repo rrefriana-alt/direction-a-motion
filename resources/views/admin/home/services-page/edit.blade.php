@@ -1,67 +1,37 @@
 @extends('admin.layouts.app')
-@section('title', 'Services Page Header')
-@section('page-title', 'Services Page Settings')
+@section('title', 'Services Page')
+@section('page-title', 'Services Page')
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Home</a></li>
-    <li class="breadcrumb-item active">Services Page</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard', ['locale'=>$locale]) }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.home', ['locale'=>$locale]) }}">Home</a></li>
+    <li class="breadcrumb-item active">Services Page — {{ strtoupper($locale) }}</li>
 @endsection
-
 @section('content')
-<div class="page-header d-flex justify-content-between align-items-center">
-    <div>
-        <h2>Services Page Header</h2>
-        <p>Edit the services page headline and subtitle</p>
-    </div>
-    <a href="{{ route('admin.home') }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+@php $isEn = ($locale ?? 'en') === 'en'; @endphp
+<div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div><h2 style="display:flex;align-items:center;gap:.5rem">Services Page <span class="locale-badge {{ $locale }}">{{ strtoupper($locale) }}</span></h2><p>Hanya {{ $isEn ? 'EN' : 'ID' }} tampil</p></div>
+    <a href="{{ route('admin.home', ['locale'=>$locale]) }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
 </div>
-
-<div style="display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start">
-    <div class="card-white" style="max-width:640px">
-        <form action="{{ route('admin.home.services-page.update') }}" method="POST">
-            @csrf
-            @method('PUT')
-
-            <div class="form-group">
-                <label class="form-label">Headline <span style="color:var(--red-600)">*</span></label>
-                <input type="text" name="headline" class="form-control @error('headline') is-invalid @enderror" id="headlineInput" value="{{ old('headline', $settings['headline']) }}" required placeholder="e.g. Five studios, one invoice">
-                @error('headline') <div class="invalid-feedback">{{ $message }}</div> @enderror
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Subtitle <span style="color:var(--red-600)">*</span></label>
-                <textarea name="subtitle" class="form-control @error('subtitle') is-invalid @enderror" id="subtitleInput" rows="2" required>{{ old('subtitle', $settings['subtitle']) }}</textarea>
-                @error('subtitle') <div class="invalid-feedback">{{ $message }}</div> @enderror
-            </div>
-
-            <div class="form-actions">
-                <a href="{{ route('admin.home') }}" class="btn btn-secondary btn-sm">Cancel</a>
-                <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save Changes</button>
-            </div>
-        </form>
-    </div>
-
-    <div>
-        <div style="font-size:.75rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">Live Preview</div>
-        <div class="card-white" style="padding:1.5rem">
-            <div style="font-size:1.1rem;font-weight:700;color:var(--gray-900);line-height:1.3;margin-bottom:.5rem" id="previewHeadline">{!! $settings['headline'] !!}</div>
-            <div style="font-size:.78rem;color:var(--gray-500);line-height:1.5" id="previewSubtitle">{{ $settings['subtitle'] }}</div>
+<div class="card-white saas-card" style="max-width:640px">
+    <form action="{{ route('admin.home.services-page.update', ['locale'=>$locale]) }}" method="POST">
+        @csrf @method('PUT')
+        <div class="form-group">
+            <label class="form-label">Headline — {{ $isEn ? 'EN' : 'ID' }} <span class="required">*</span></label>
+            <input type="text" name="{{ $isEn ? 'headline_en' : 'headline_id' }}" class="form-control @error($isEn ? 'headline_en' : 'headline_id') is-invalid @enderror" value="{{ old($isEn ? 'headline_en' : 'headline_id', $isEn ? $settings['headline_en'] : $settings['headline_id']) }}" maxlength="80" data-max="80" required>
+            @error($isEn ? 'headline_en' : 'headline_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
-        <div style="font-size:.72rem;color:var(--gray-400);margin-top:.5rem;text-align:center">Services page header section</div>
-    </div>
+        <div class="form-group">
+            <label class="form-label">Subtitle — {{ $isEn ? 'EN' : 'ID' }} <span class="required">*</span></label>
+            <textarea name="{{ $isEn ? 'subtitle_en' : 'subtitle_id' }}" class="form-control @error($isEn ? 'subtitle_en' : 'subtitle_id') is-invalid @enderror" rows="3" maxlength="260" data-max="260" required>{{ old($isEn ? 'subtitle_en' : 'subtitle_id', $isEn ? $settings['subtitle_en'] : $settings['subtitle_id']) }}</textarea>
+            @error($isEn ? 'subtitle_en' : 'subtitle_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+        </div>
+        <div class="form-actions"><a href="{{ route('admin.home', ['locale'=>$locale]) }}" class="btn btn-secondary btn-sm">Cancel</a><button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save {{ strtoupper($locale) }}</button></div>
+    </form>
 </div>
-@endsection
-
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const headlineInput = document.getElementById('headlineInput');
-    const subtitleInput = document.getElementById('subtitleInput');
-    const previewHeadline = document.getElementById('previewHeadline');
-    const previewSubtitle = document.getElementById('previewSubtitle');
-
-    headlineInput.addEventListener('input', () => { previewHeadline.textContent = headlineInput.value || 'Headline'; });
-    subtitleInput.addEventListener('input', () => { previewSubtitle.textContent = subtitleInput.value || 'Subtitle...'; });
-});
+document.querySelectorAll('textarea.form-control').forEach(ta=>{const g=()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'};ta.addEventListener('input',g);g();});
+document.querySelectorAll('[data-max]').forEach(el=>{let m=el.nextElementSibling;if(!m||!m.classList.contains('char-meta')){m=document.createElement('div');m.className='char-meta';el.insertAdjacentElement('afterend',m);}const u=()=>{const l=el.value.length, max=parseInt(el.dataset.max);m.textContent=l+' / '+max;m.classList.toggle('over',l>max*0.9)};el.addEventListener('input',u);u();});
 </script>
 @endpush
+@endsection

@@ -2,51 +2,31 @@
 @section('title', 'Create Timeline Entry')
 @section('page-title', 'Create Timeline')
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.about.index') }}">About</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.about.timeline.index') }}">Timeline</a></li>
-    <li class="breadcrumb-item active">Create</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard', ['locale'=>request()->route('locale') ?? 'en']) }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.about.index', ['locale'=>request()->route('locale') ?? 'en']) }}">About</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.about.timeline.index', ['locale'=>request()->route('locale') ?? 'en']) }}">Timeline</a></li>
+    <li class="breadcrumb-item active">Create — {{ strtoupper(request()->route('locale') ?? 'en') }}</li>
 @endsection
-
 @section('content')
-<div class="page-header d-flex justify-content-between align-items-center">
-    <div>
-        <h2>Create Timeline Entry</h2>
-        <p>Add a new company history milestone</p>
-    </div>
-    <a href="{{ route('admin.about.timeline.index') }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+@php $locale = request()->route('locale') ?? 'en'; $isEn = $locale === 'en'; @endphp
+<div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div><h2 style="display:flex;align-items:center;gap:.5rem">Create Timeline <span class="locale-badge {{ $locale }}">{{ strtoupper($locale) }}</span></h2><p>Hanya {{ $isEn ? 'EN' : 'ID' }} description tampil. Year & sort shared.</p></div>
+    <a href="{{ route('admin.about.timeline.index', ['locale'=>$locale]) }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
 </div>
-
-<div class="card-white" style="max-width:560px">
-    <form action="{{ route('admin.about.timeline.store') }}" method="POST">
+<div class="card-white saas-card" style="max-width:560px">
+    <form action="{{ route('admin.about.timeline.store', ['locale'=>$locale]) }}" method="POST">
         @csrf
-
-        <div class="form-group">
-            <label class="form-label">Year <span style="color:var(--red-600)">*</span></label>
-            <input type="text" class="form-control @error('year') is-invalid @enderror" name="year" value="{{ old('year') }}" placeholder="e.g. 2024" maxlength="4" required>
-            @error('year') <div class="invalid-feedback">{{ $message }}</div> @enderror
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">Description <span style="color:var(--red-600)">*</span></label>
-            <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="4" placeholder="Describe the milestone..." required>{{ old('description') }}</textarea>
-            @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">Icon</label>
-            <input type="text" class="form-control" name="icon" value="{{ old('icon') }}" placeholder="e.g. bi-trophy">
-        </div>
-
-        <div class="form-group">
-            <label class="form-label">Sort Order</label>
-            <input type="number" class="form-control" name="sort_order" value="{{ old('sort_order', 0) }}" min="0">
-        </div>
-
-        <div class="form-actions">
-            <a href="{{ route('admin.about.timeline.index') }}" class="btn btn-secondary btn-sm">Cancel</a>
-            <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save Entry</button>
-        </div>
+        <div class="form-group"><label class="form-label">Year <span class="required">*</span> <span style="font-weight:400;color:var(--gray-400)">shared</span></label><input type="text" class="form-control @error('year') is-invalid @enderror" name="year" value="{{ old('year') }}" placeholder="e.g. 2024" maxlength="4" required>@error('year')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
+        <div class="form-group"><label class="form-label">Description — {{ $isEn ? 'EN' : 'ID' }} <span class="required">*</span></label><textarea class="form-control @error($isEn ? 'description_en' : 'description_id') is-invalid @enderror" name="{{ $isEn ? 'description_en' : 'description_id' }}" rows="4" maxlength="400" data-max="400" placeholder="Describe the milestone..." required>{{ old($isEn ? 'description_en' : 'description_id') }}</textarea>@error($isEn ? 'description_en' : 'description_id')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
+        <div class="form-group"><label class="form-label">Icon <span style="font-weight:400;color:var(--gray-400)">shared</span></label><input type="text" class="form-control" name="icon" value="{{ old('icon') }}" placeholder="e.g. bi-trophy"></div>
+        <div class="form-group"><label class="form-label">Sort Order <span style="font-weight:400;color:var(--gray-400)">shared</span></label><input type="number" class="form-control" name="sort_order" value="{{ old('sort_order', 0) }}" min="0"></div>
+        <div class="form-actions"><a href="{{ route('admin.about.timeline.index', ['locale'=>$locale]) }}" class="btn btn-secondary btn-sm">Cancel</a><button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save {{ strtoupper($locale) }}</button></div>
     </form>
 </div>
+@push('scripts')
+<script>
+document.querySelectorAll('textarea.form-control').forEach(ta=>{const g=()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'};ta.addEventListener('input',g);g();});
+document.querySelectorAll('[data-max]').forEach(el=>{let m=el.nextElementSibling;if(!m||!m.classList.contains('char-meta')){m=document.createElement('div');m.className='char-meta';el.insertAdjacentElement('afterend',m);}const u=()=>{const l=el.value.length, max=parseInt(el.dataset.max);m.textContent=l+' / '+max;m.classList.toggle('over',l>max*0.9)};el.addEventListener('input',u);u();});
+</script>
+@endpush
 @endsection

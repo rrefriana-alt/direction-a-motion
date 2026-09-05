@@ -18,33 +18,58 @@ class AboutController extends Controller
         return view('admin.about.index');
     }
 
-    public function aboutHeaderEdit()
+    public function aboutHeaderEdit(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
         $settings = [
+            'headline_en' => Setting::get('about_page_headline_en', Setting::get('about_page_headline', 'A creative group, not a vendor list')),
+            'headline_id' => Setting::get('about_page_headline_id', 'Grup kreatif, bukan daftar vendor'),
+            'subtitle_en' => Setting::get('about_page_subtitle_en', Setting::get('about_page_subtitle', 'We are a Bandung-born creative group with studios in Jakarta and Bali.')),
+            'subtitle_id' => Setting::get('about_page_subtitle_id', 'Kami grup kreatif lahir di Bandung dengan studio di Jakarta dan Bali.'),
+            'belief_title_en' => Setting::get('about_belief_title_en', Setting::get('about_belief_title', 'Our belief')),
+            'belief_title_id' => Setting::get('about_belief_title_id', 'Kepercayaan kami'),
+            'belief_text_en' => Setting::get('about_belief_text_en', Setting::get('about_belief_text', 'We believe every brief can be solved with creativity, an innovative route, and execution that actually lands.')),
+            'belief_text_id' => Setting::get('about_belief_text_id', 'Kami percaya setiap brief bisa diselesaikan dengan kreativitas, rute inovatif, dan eksekusi yang mengena.'),
+            'belief_elaboration_en' => Setting::get('about_belief_elaboration_en', Setting::get('about_belief_elaboration', 'That belief drives everything we do — from the smallest social post to the largest national campaign.')),
+            'belief_elaboration_id' => Setting::get('about_belief_elaboration_id', 'Kepercayaan itu mendorong semua yang kami lakukan — dari post terkecil hingga kampanye nasional terbesar.'),
             'headline' => Setting::get('about_page_headline', 'A creative group, not a vendor list'),
             'subtitle' => Setting::get('about_page_subtitle', 'We are a Bandung-born creative group with studios in Jakarta and Bali.'),
             'belief_title' => Setting::get('about_belief_title', 'Our belief'),
             'belief_text' => Setting::get('about_belief_text', 'We believe every brief can be solved with creativity, an innovative route, and execution that actually lands.'),
             'belief_elaboration' => Setting::get('about_belief_elaboration', 'That belief drives everything we do — from the smallest social post to the largest national campaign.'),
         ];
-        return view('admin.about.settings.edit', compact('settings'));
+        return view('admin.about.settings.edit', compact('settings', 'locale'));
     }
 
     public function aboutHeaderUpdate(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $request->validate([
-            'headline' => 'required|string|max:255',
-            'subtitle' => 'required|string',
-            'belief_title' => 'required|string|max:255',
-            'belief_text' => 'required|string',
-            'belief_elaboration' => 'required|string',
+            'headline_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'headline_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
+            'subtitle_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'subtitle_id' => ($isEn ? 'nullable' : 'required').'|string',
+            'belief_title_en' => ($isEn ? 'required' : 'nullable').'|string|max:255',
+            'belief_title_id' => ($isEn ? 'nullable' : 'required').'|string|max:255',
+            'belief_text_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'belief_text_id' => ($isEn ? 'nullable' : 'required').'|string',
+            'belief_elaboration_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'belief_elaboration_id' => ($isEn ? 'nullable' : 'required').'|string',
         ]);
-        Setting::set('about_page_headline', $request->headline);
-        Setting::set('about_page_subtitle', $request->subtitle);
-        Setting::set('about_belief_title', $request->belief_title);
-        Setting::set('about_belief_text', $request->belief_text);
-        Setting::set('about_belief_elaboration', $request->belief_elaboration);
-        return redirect()->route('admin.about.settings.edit')->with('success', 'About page settings berhasil diupdate!');
+        if ($request->has('headline_en')) Setting::set('about_page_headline_en', $request->headline_en ?? '');
+        if ($request->has('headline_id')) Setting::set('about_page_headline_id', $request->headline_id ?? '');
+        if ($request->has('subtitle_en')) Setting::set('about_page_subtitle_en', $request->subtitle_en ?? '');
+        if ($request->has('subtitle_id')) Setting::set('about_page_subtitle_id', $request->subtitle_id ?? '');
+        if ($request->has('belief_title_en')) Setting::set('about_belief_title_en', $request->belief_title_en ?? '');
+        if ($request->has('belief_title_id')) Setting::set('about_belief_title_id', $request->belief_title_id ?? '');
+        if ($request->has('belief_text_en')) Setting::set('about_belief_text_en', $request->belief_text_en ?? '');
+        if ($request->has('belief_text_id')) Setting::set('about_belief_text_id', $request->belief_text_id ?? '');
+        if ($request->has('belief_elaboration_en')) Setting::set('about_belief_elaboration_en', $request->belief_elaboration_en ?? '');
+        if ($request->has('belief_elaboration_id')) Setting::set('about_belief_elaboration_id', $request->belief_elaboration_id ?? '');
+        if ($request->filled('headline_en')) Setting::set('about_page_headline', $request->headline_en);
+        if ($request->filled('subtitle_en')) Setting::set('about_page_subtitle', $request->subtitle_en);
+        return redirect()->route('admin.about.settings.edit', ['locale'=>$locale])->with('success', 'About page '.strtoupper($locale).' berhasil diupdate!');
     }
 
     public function ceoProfile()
@@ -129,20 +154,43 @@ class AboutController extends Controller
 
     public function timelineStore(Request $request)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $validated = $request->validate([
             'year' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'description_id' => ($isEn ? 'nullable' : 'required').'|string',
             'icon' => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer',
         ]);
-
         try {
             if (empty($validated['sort_order'])) {
                 $maxOrder = Timeline::max('sort_order');
                 $validated['sort_order'] = $maxOrder ? $maxOrder + 1 : 1;
             }
-            Timeline::create($validated);
-            return redirect()->route('admin.about.timeline.index')->with('success', 'Timeline berhasil dibuat!');
+            $data = [
+                'year' => $validated['year'],
+                'description' => $validated['description_en'] ?? $validated['description_id'] ?? '',
+                'description_id' => $validated['description_id'] ?? null,
+                'icon' => $validated['icon'] ?? null,
+                'sort_order' => $validated['sort_order'],
+            ];
+            // store EN in description, ID in description_id ; keep backward compat
+            if ($isEn) {
+                $data['description'] = $validated['description_en'] ?? '';
+                $data['description_id'] = null;
+            } else {
+                $existingEn = Timeline::where('year', $validated['year'])->value('description') ?? '';
+                $data['description'] = $existingEn;
+                $data['description_id'] = $validated['description_id'] ?? '';
+                // for new entry in ID locale, user supplies ID only, keep EN empty or fallback
+                if (empty($data['description'])) $data['description'] = $validated['description_id'] ?? '';
+            }
+            // when storing via locale, keep EN/ID correctly
+            if (isset($validated['description_en'])) $data['description'] = $validated['description_en'];
+            if (isset($validated['description_id'])) $data['description_id'] = $validated['description_id'];
+            Timeline::create($data);
+            return redirect()->route('admin.about.timeline.index', ['locale'=>$locale])->with('success', 'Timeline berhasil dibuat!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
@@ -155,16 +203,30 @@ class AboutController extends Controller
 
     public function timelineUpdate(Request $request, Timeline $timeline)
     {
+        $locale = $request->route('locale') ?? 'en';
+        $isEn = $locale === 'en';
         $validated = $request->validate([
             'year' => 'required|string|max:255',
-            'description' => 'required|string',
+            'description_en' => ($isEn ? 'required' : 'nullable').'|string',
+            'description_id' => ($isEn ? 'nullable' : 'required').'|string',
             'icon' => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer',
         ]);
-
         try {
-            $timeline->update($validated);
-            return redirect()->route('admin.about.timeline.index')->with('success', 'Timeline berhasil diupdate!');
+            $data = [
+                'year' => $validated['year'],
+                'icon' => $validated['icon'] ?? $timeline->icon,
+                'sort_order' => $validated['sort_order'] ?? $timeline->sort_order,
+            ];
+            if ($isEn) {
+                $data['description'] = $validated['description_en'] ?? $timeline->description;
+                $data['description_id'] = $timeline->description_id;
+            } else {
+                $data['description'] = $timeline->description;
+                $data['description_id'] = $validated['description_id'] ?? $timeline->description_id;
+            }
+            $timeline->update($data);
+            return redirect()->route('admin.about.timeline.index', ['locale'=>$locale])->with('success', 'Timeline berhasil diupdate!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }

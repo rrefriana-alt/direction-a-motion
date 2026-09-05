@@ -1,85 +1,37 @@
 @extends('admin.layouts.app')
-@section('title', 'Edit CTA')
-@section('page-title', 'Call to Action')
+@section('title', 'CTA Settings')
+@section('page-title', 'CTA Settings')
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Home</a></li>
-    <li class="breadcrumb-item active">CTA</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard', ['locale'=>$locale]) }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.home', ['locale'=>$locale]) }}">Home</a></li>
+    <li class="breadcrumb-item active">CTA — {{ strtoupper($locale) }}</li>
 @endsection
-
 @section('content')
-<div class="page-header d-flex justify-content-between align-items-center">
-    <div>
-        <h2>Call to Action</h2>
-        <p>Edit the CTA eyebrow and title text on the homepage</p>
-    </div>
-    <a href="{{ route('admin.home') }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+@php $isEn = ($locale ?? 'en') === 'en'; @endphp
+<div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div><h2 style="display:flex;align-items:center;gap:.5rem">CTA <span class="locale-badge {{ $locale }}">{{ strtoupper($locale) }}</span></h2><p>Hanya {{ $isEn ? 'EN' : 'ID' }} tampil</p></div>
+    <a href="{{ route('admin.home', ['locale'=>$locale]) }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
 </div>
-
-<div style="display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start">
-    <div class="card-white" style="max-width:640px">
-        <form action="{{ route('admin.home.cta.update') }}" method="POST">
-            @csrf
-            @method('PUT')
-
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-                <div class="form-group">
-                    <label class="form-label">Eyebrow — EN <span style="color:var(--red-600)">*</span></label>
-                    <input type="text" name="eyebrow_en" class="form-control @error('eyebrow_en') is-invalid @enderror" value="{{ old('eyebrow_en', $settings['eyebrow_en']) }}" required>
-                    @error('eyebrow_en') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Eyebrow — ID <span style="color:var(--red-600)">*</span></label>
-                    <input type="text" name="eyebrow_id" class="form-control @error('eyebrow_id') is-invalid @enderror" value="{{ old('eyebrow_id', $settings['eyebrow_id']) }}" required>
-                    @error('eyebrow_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-                <div class="form-group">
-                    <label class="form-label">Title — EN <span style="color:var(--red-600)">*</span></label>
-                    <textarea name="title_en" class="form-control @error('title_en') is-invalid @enderror" rows="2" required>{{ old('title_en', $settings['title_en']) }}</textarea>
-                    @error('title_en') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Title — ID <span style="color:var(--red-600)">*</span></label>
-                    <textarea name="title_id" class="form-control @error('title_id') is-invalid @enderror" rows="2" required>{{ old('title_id', $settings['title_id']) }}</textarea>
-                    @error('title_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                </div>
-            </div>
-            <div style="font-size:.72rem;color:var(--gray-400);margin-top:.25rem">Use &lt;br&gt; for line breaks</div>
-
-            <div class="form-actions">
-                <a href="{{ route('admin.home') }}" class="btn btn-secondary btn-sm">Cancel</a>
-                <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save Changes</button>
-            </div>
-        </form>
-    </div>
-
-    <div>
-        <div style="font-size:.75rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">Live Preview</div>
-        <div class="card-white" style="padding:2rem;text-align:center;background:linear-gradient(135deg,var(--green-50),white)">
-            <div style="font-size:.72rem;font-weight:600;color:var(--green-600);letter-spacing:.05em;margin-bottom:.5rem;text-transform:uppercase" id="previewEyebrow">{{ $settings['eyebrow'] }}</div>
-            <div style="font-size:1.2rem;font-weight:700;color:var(--gray-900);line-height:1.3;margin-bottom:1rem" id="previewTitle">{!! $settings['title'] !!}</div>
-            <div style="display:flex;gap:.5rem;justify-content:center">
-                <span style="background:var(--green-500);color:white;padding:.5rem 1rem;border-radius:6px;font-size:.75rem;font-weight:600">Start a project ↗</span>
-                <span style="border:1px solid var(--gray-200);color:var(--gray-600);padding:.5rem 1rem;border-radius:6px;font-size:.75rem">hello@fugocreativegroup.com</span>
-            </div>
+<div class="card-white saas-card" style="max-width:640px">
+    <form action="{{ route('admin.home.cta.update', ['locale'=>$locale]) }}" method="POST">
+        @csrf @method('PUT')
+        <div class="form-group">
+            <label class="form-label">Eyebrow — {{ $isEn ? 'EN' : 'ID' }} <span class="required">*</span></label>
+            <input type="text" name="{{ $isEn ? 'eyebrow_en' : 'eyebrow_id' }}" class="form-control @error($isEn ? 'eyebrow_en' : 'eyebrow_id') is-invalid @enderror" value="{{ old($isEn ? 'eyebrow_en' : 'eyebrow_id', $isEn ? $settings['eyebrow_en'] : $settings['eyebrow_id']) }}" maxlength="60" data-max="60" required>
+            @error($isEn ? 'eyebrow_en' : 'eyebrow_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
-        <div style="font-size:.72rem;color:var(--gray-400);margin-top:.5rem;text-align:center">CTA section on the homepage</div>
-    </div>
+        <div class="form-group">
+            <label class="form-label">Title — {{ $isEn ? 'EN' : 'ID' }} <span class="required">*</span></label>
+            <textarea name="{{ $isEn ? 'title_en' : 'title_id' }}" class="form-control @error($isEn ? 'title_en' : 'title_id') is-invalid @enderror" rows="3" maxlength="80" data-max="80" required>{{ old($isEn ? 'title_en' : 'title_id', $isEn ? $settings['title_en'] : $settings['title_id']) }}</textarea>
+            @error($isEn ? 'title_en' : 'title_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+        </div>
+        <div class="form-actions"><a href="{{ route('admin.home', ['locale'=>$locale]) }}" class="btn btn-secondary btn-sm">Cancel</a><button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save {{ strtoupper($locale) }}</button></div>
+    </form>
 </div>
-@endsection
-
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const eyebrowInput = document.getElementById('eyebrowInput');
-    const titleInput = document.getElementById('titleInput');
-    const previewEyebrow = document.getElementById('previewEyebrow');
-    const previewTitle = document.getElementById('previewTitle');
-
-    eyebrowInput.addEventListener('input', () => { previewEyebrow.textContent = eyebrowInput.value || 'Eyebrow'; });
-    titleInput.addEventListener('input', () => { previewTitle.innerHTML = titleInput.value || 'Title'; });
-});
+document.querySelectorAll('textarea.form-control').forEach(ta=>{const g=()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'};ta.addEventListener('input',g);g();});
+document.querySelectorAll('[data-max]').forEach(el=>{let m=el.nextElementSibling;if(!m||!m.classList.contains('char-meta')){m=document.createElement('div');m.className='char-meta';el.insertAdjacentElement('afterend',m);}const u=()=>{const l=el.value.length, max=parseInt(el.dataset.max);m.textContent=l+' / '+max;m.classList.toggle('over',l>max*0.9)};el.addEventListener('input',u);u();});
 </script>
 @endpush
+@endsection
