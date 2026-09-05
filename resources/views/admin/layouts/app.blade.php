@@ -225,6 +225,13 @@
         .saas-card{background:#fff;border:1px solid #eef2f7;border-radius:16px;box-shadow:0 2px 12px rgba(15,23,42,.04)}
         .saas-head{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid #f1f5f9}
         .saas-head i{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--green-500),#06b6d4);color:#fff;display:grid;place-items:center;font-size:.9rem;box-shadow:0 4px 10px rgba(16,185,129,.25)}
+        /* ── Gradient star — *word* like Create to Elevate ── */
+        .required{background:linear-gradient(90deg,var(--green-500) 0%,#06b6d4 100%);-webkit-background-clip:text;background-clip:text;color:transparent !important;font-weight:800}
+        .star-grad,.tint{background:linear-gradient(90deg,var(--green-500) 0%,#06b6d4 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+        .hero-grad{background:linear-gradient(90deg,var(--green-500) 0%,#06b6d4 35%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+        /* ── Gradient for *word* — like Create to Elevate ── */
+        .required{background:linear-gradient(90deg,var(--green-500) 0%,#06b6d4 100%);-webkit-background-clip:text;background-clip:text;color:transparent !important;font-weight:800}
+        .star-grad,.hl,.tint{background:linear-gradient(90deg,var(--green-500) 0%,#06b6d4 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
 
     </style>
     @stack('styles')
