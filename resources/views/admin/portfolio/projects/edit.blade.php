@@ -38,15 +38,15 @@
         <p style="font-size:.8rem;color:var(--gray-500)">Manage all project content and modal data</p>
     </div>
     <div class="d-flex gap-2">
-        <form action="{{ route('admin.portfolio.projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Delete this project permanently?')">
+        <form action="{{ route('admin.portfolio.projects.destroy', ['locale' => $locale ?? request()->route('locale') ?? 'en', 'project' => $project->id]) }}" method="POST" onsubmit="return confirm('Delete this project permanently?')">
             @csrf @method('DELETE')
             <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Delete</button>
         </form>
-        <a href="{{ route('admin.portfolio.projects.index') }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
+        <a href="{{ route('admin.portfolio.projects.index', ['locale' => $locale ?? request()->route('locale') ?? 'en']) }}" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Back</a>
     </div>
 </div>
 
-<form action="{{ route('admin.portfolio.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data" id="projectForm">
+<form action="{{ route('admin.portfolio.projects.update', ['locale' => $locale ?? request()->route('locale') ?? 'en', 'project' => $project->id]) }}" method="POST" enctype="multipart/form-data" id="projectForm">
     @csrf
     @method('PUT')
 
@@ -189,20 +189,20 @@
                 </div>
             </div>
             <div class="field-group">
-                <label class="field-label">About — What it is (multiple paragraphs)</label>
+                    <label class="field-label">About — What it is (multiple paragraphs, EN / ID)</label>
                 <div id="aboutList">
                     @foreach(old('about', $project->about ?? []) as $i => $para)
+                    @php $enP = is_array($para) ? ($para['en'] ?? $para[0] ?? '') : \Illuminate\Support\Str::before($para ?? '', '||'); $idP = is_array($para) ? ($para['id'] ?? '') : (str_contains($para ?? '', '||') ? \Illuminate\Support\Str::after($para, '||') : ''); @endphp
                     <div class="list-item">
                         <button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button>
                         <div class="bilingual">
                             <div class="bilingual-col" data-lang="EN">
-                                <textarea name="about[]" class="form-control" rows="2" placeholder="English paragraph">{{ is_array($para) ? ($para['en'] ?? $para[0] ?? '') : $para }}</textarea>
+                                <textarea name="about_en[]" class="form-control" rows="2" placeholder="English paragraph">{{ $enP }}</textarea>
                             </div>
                             <div class="bilingual-col" data-lang="ID">
-                                <textarea name="about_id[]" class="form-control" rows="2" placeholder="Paragraf Bahasa"></textarea>
+                                <textarea name="about_id[]" class="form-control" rows="2" placeholder="Paragraf Bahasa">{{ $idP }}</textarea>
                             </div>
                         </div>
-                        <div class="field-hint">Store as single string with EN||ID format</div>
                     </div>
                     @endforeach
                 </div>
@@ -449,7 +449,7 @@
     </div>
 
     <div style="display:flex;justify-content:flex-end;gap:.5rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--gray-200)">
-        <a href="{{ route('admin.portfolio.projects.index') }}" class="btn btn-secondary btn-sm">Cancel</a>
+        <a href="{{ route('admin.portfolio.projects.index', ['locale' => $locale ?? request()->route('locale') ?? 'en']) }}" class="btn btn-secondary btn-sm">Cancel</a>
         <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check2"></i> Save Changes</button>
     </div>
 </form>
@@ -509,7 +509,7 @@ function addAbout() {
         <button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button>
         <div class="bilingual">
             <div class="bilingual-col" data-lang="EN">
-                <textarea name="about[]" class="form-control" rows="2" placeholder="English paragraph"></textarea>
+                <textarea name="about_en[]" class="form-control" rows="2" placeholder="English paragraph"></textarea>
             </div>
             <div class="bilingual-col" data-lang="ID">
                 <textarea name="about_id[]" class="form-control" rows="2" placeholder="Paragraf Bahasa"></textarea>
