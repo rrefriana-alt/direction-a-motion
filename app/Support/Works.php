@@ -43,6 +43,11 @@ class Works
         if (! str_contains($s, '||')) {
             return ['en' => $s, 'id' => null];
         }
+        // handle "||ID" (ID-only) where en is empty
+        if (str_starts_with(trim($s), '||')) {
+            $id = trim(substr(trim($s), 2));
+            return ['en' => '', 'id' => $id !== '' ? $id : null];
+        }
         [$en, $id] = array_map('trim', explode('||', $s, 2));
 
         return ['en' => $en, 'id' => $id !== '' ? $id : null];
@@ -51,13 +56,18 @@ class Works
     public static function text($s): string
     {
         if ($s === null) return '';
-        return self::pair($s)['en'];
+        $p = self::pair($s);
+        // locale-aware fallback: if EN empty but ID exists (ID-only create), show ID
+        if ($p['en'] === '' && $p['id'] !== null) return $p['id'];
+        return $p['en'];
     }
 
     public static function attrs($s): string
     {
         if ($s === null || $s === '') return '';
         $p = self::pair($s);
+        // fallback: ID-only stored as ||ID should show ID in EN as well until translated
+        if ($p['en'] === '' && $p['id'] !== null) $p['en'] = $p['id'];
         if ($p['id'] === null) {
             // auto-translate EN -> ID, cached forever
             $p['id'] = TranslationService::translate($p['en'], 'id');

@@ -2,8 +2,8 @@
 @section('title', 'Projects')
 @section('page-title', 'Projects')
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.portfolio.index') }}">Portfolio</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard', ['locale'=>request()->route('locale') ?? 'en']) }}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.portfolio.index', ['locale'=>request()->route('locale') ?? 'en']) }}">Portfolio</a></li>
     <li class="breadcrumb-item active">Projects</li>
 @endsection
 
@@ -13,7 +13,7 @@
         <h2>Projects</h2>
         <p>Manage all work portfolio projects and their modal content</p>
     </div>
-    <a href="{{ route('admin.portfolio.projects.create') }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Project</a>
+    <a href="{{ route('admin.portfolio.projects.create', ['locale'=>request()->route('locale') ?? 'en']) }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Project</a>
 </div>
 
 <div class="card-white" style="padding:.75rem 1rem;margin-bottom:1.5rem">
@@ -26,7 +26,7 @@
         </select>
         <button type="submit" class="btn btn-secondary btn-sm"><i class="bi bi-search"></i> Filter</button>
         @if($search || $category !== 'all')
-            <a href="{{ route('admin.portfolio.projects.index') }}" class="btn btn-secondary btn-sm"><i class="bi bi-x"></i> Clear</a>
+            <a href="{{ route('admin.portfolio.projects.index', ['locale'=>request()->route('locale') ?? 'en']) }}" class="btn btn-secondary btn-sm"><i class="bi bi-x"></i> Clear</a>
         @endif
     </form>
 </div>
@@ -79,7 +79,7 @@
 <div class="card-white" style="padding:3rem;text-align:center">
     <i class="bi bi-folder2-open" style="font-size:2.5rem;color:var(--gray-300)"></i>
     <p style="color:var(--gray-500);margin-top:.5rem">No projects found</p>
-    <a href="{{ route('admin.portfolio.projects.create') }}" class="btn btn-primary btn-sm" style="margin-top:.5rem"><i class="bi bi-plus-lg"></i> Create First Project</a>
+    <a href="{{ route('admin.portfolio.projects.create', ['locale'=>request()->route('locale') ?? 'en']) }}" class="btn btn-primary btn-sm" style="margin-top:.5rem"><i class="bi bi-plus-lg"></i> Create First Project</a>
 </div>
 @endif
 @endsection
