@@ -56,11 +56,11 @@ class AboutController extends Controller
     public function updateCeoProfile(Request $request)
     {
         $validated = $request->validate([
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:25600',
             'quote' => 'required|string|max:500',
             'description1' => 'required|string',
             'description2' => 'required|string',
-            'signature' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
+            'signature' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:25600',
             'greeting' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
@@ -69,26 +69,40 @@ class AboutController extends Controller
         $ceoProfile = CeoProfile::firstOrNew([]);
 
         try {
-            if ($request->hasFile('photo')) {
-                if ($ceoProfile->photo && file_exists(public_path('img/' . $ceoProfile->photo))) {
-                    unlink(public_path('img/' . $ceoProfile->photo));
+            $imgDir = public_path('img');
+            if (!is_dir($imgDir)) { @mkdir($imgDir, 0775, true); @chmod($imgDir, 0775); }
+
+            $saveImg = function(string $field, string $prefix) use ($request, $ceoProfile, $imgDir) {
+                if (!$request->hasFile($field)) return null;
+                $file = $request->file($field);
+                if (!$file->isValid()) return null;
+                $old = $ceoProfile->$field ?? null;
+                if ($old && file_exists($imgDir . '/' . $old)) @unlink($imgDir . '/' . $old);
+                $ext = strtolower($file->getClientOriginalExtension() ?: $file->extension() ?: 'webp');
+                $name = $prefix . '_' . time() . '.' . $ext;
+                try { $file->move($imgDir, $name); } catch (\Throwable $e) {
+                    $file->storeAs('', $name, 'public_img_fallback');
+                    @copy(storage_path('app/public/'.$name), $imgDir.'/'.$name);
+                    // fallback disk public not configured for img, try direct public disk
+                    if (!file_exists($imgDir.'/'.$name)) {
+                        $file->storeAs('ceo', $name, 'public');
+                        @copy(storage_path('app/public/ceo/'.$name), $imgDir.'/'.$name);
+                    }
                 }
-                $photo = $request->file('photo');
-                $photoName = 'ceo_' . time() . '.' . $photo->getClientOriginalExtension();
-                $photo->move(public_path('img'), $photoName);
-                $validated['photo'] = $photoName;
+                @chmod($imgDir.'/'.$name, 0664);
+                return $name;
+            };
+
+            if ($request->hasFile('photo')) {
+                $n = $saveImg('photo', 'ceo');
+                if ($n) $validated['photo'] = $n; else unset($validated['photo']);
             } else {
                 unset($validated['photo']);
             }
 
             if ($request->hasFile('signature')) {
-                if ($ceoProfile->signature && file_exists(public_path('img/' . $ceoProfile->signature))) {
-                    unlink(public_path('img/' . $ceoProfile->signature));
-                }
-                $signature = $request->file('signature');
-                $signatureName = 'signature_' . time() . '.' . $signature->getClientOriginalExtension();
-                $signature->move(public_path('img'), $signatureName);
-                $validated['signature'] = $signatureName;
+                $n = $saveImg('signature', 'signature');
+                if ($n) $validated['signature'] = $n; else unset($validated['signature']);
             } else {
                 unset($validated['signature']);
             }
