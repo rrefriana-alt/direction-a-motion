@@ -308,6 +308,9 @@
                     </div>
                 </div>
             </div>
+            <div style="margin-top:.75rem;padding:.75rem;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);font-size:.73rem;color:var(--gray-500)">
+                <i class="bi bi-translate"></i> <strong>Admin:</strong> You are editing <span style="color:var(--green-600);font-weight:700">{{ strtoupper(request()->route('locale') ?? 'EN') }}</span> — fields <code>scope_en/scope_id, lede_en/lede_id, steps, gallery, docs, usecases, credits</code> auto-merge to <code>EN||ID</code> storage. Website adapts per locale automatically. No manual <code>||</code> needed.
+            </div>
         </div>
     </div>
 

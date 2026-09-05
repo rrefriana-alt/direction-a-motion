@@ -81,17 +81,17 @@ class ProjectController extends Controller
 
         $this->handleUploads($request, $project);
 
-        return redirect()->route('admin.portfolio.projects.index')->with('success', 'Project berhasil dibuat!');
+        return redirect()->route('admin.portfolio.projects.index', ['locale' => $request->route('locale') ?? 'en'])->with('success', 'Project berhasil dibuat!');
     }
 
-    public function edit(Project $project)
+    public function edit(string $locale, Project $project)
     {
         $categories = ['design' => 'Design', 'production' => 'Production', 'event' => 'Events', 'merch' => 'Merch'];
 
-        return view('admin.portfolio.projects.edit', compact('project', 'categories'));
+        return view('admin.portfolio.projects.edit', compact('project', 'categories', 'locale'));
     }
 
-    public function update(Request $request, Project $project)
+    public function update(Request $request, string $locale, Project $project)
     {
         $validated = $request->validate([
             'title'           => 'required|string|max:255',
@@ -141,11 +141,11 @@ class ProjectController extends Controller
         return redirect()->route('admin.portfolio.projects.index')->with('success', 'Project berhasil diupdate!');
     }
 
-    public function destroy(Project $project)
+    public function destroy(string $locale, Project $project)
     {
         $project->delete();
 
-        return redirect()->route('admin.portfolio.projects.index')->with('success', 'Project berhasil dihapus!');
+        return redirect()->route('admin.portfolio.projects.index', ['locale' => $locale])->with('success', 'Project berhasil dihapus!');
     }
 
     public function updateSortOrder(Request $request)

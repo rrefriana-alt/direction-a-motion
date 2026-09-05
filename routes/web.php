@@ -165,9 +165,8 @@ Route::post('/login', [AdminAuthController::class, 'login'])->name('login.post')
 Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
 // ==================== ADMIN ====================
-// Legacy /admin without locale -> redirect to /admin/en
+// Legacy /admin without locale -> redirect to /admin/en (exact only to avoid loop)
 Route::get('/admin', fn() => redirect('/admin/en'))->name('admin.legacy.redirect');
-Route::get('/admin/{path}', fn(string $path) => redirect('/admin/en/' . $path))->where('path', '.*')->name('admin.legacy.wildcard');
 
 Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth:admin', 'setlocale'])->name('admin.')->group(function () {
 
