@@ -2,6 +2,16 @@
     RewriteEngine On
     RewriteBase /
 
+    # Fix 405: allow all admin save methods (Hostinger Nginx/LiteSpeed blocks PUT/DELETE)
+    <Limit GET POST PUT DELETE PATCH OPTIONS HEAD>
+        Require all granted
+    </Limit>
+    <LimitExcept GET POST PUT DELETE PATCH OPTIONS HEAD>
+        Require all granted
+    </LimitExcept>
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^ - [R=204,L]
+
     # Biarkan file statis (gambar, css, js) dibaca dari folder public/
     RewriteRule ^(assets|img|vendor|_build\.js|_inline-gl\.js|hero-preview\.png|sitemap\.xml)(.*)$ public/$1$2 [L]
 
@@ -11,4 +21,8 @@
 
     # Kirim SEMUA request halaman ke file index.php proxy kita
     RewriteRule ^ index.php [L]
+</IfModule>
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    Header always set Access-Control-Allow-Headers "X-CSRF-TOKEN, X-Requested-With, Content-Type, Accept"
 </IfModule>

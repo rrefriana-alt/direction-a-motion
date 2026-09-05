@@ -452,9 +452,37 @@ function serviceCrud() {
         },
 
         async api(url, method, body) {
-            const opts = { method, headers: { 'X-CSRF-TOKEN': this.token, 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' } };
-            if (body) opts.body = body;
+            // FIX 405: NEVER use DELETE/PUT as fetch method on Hostinger Nginx; always POST + _method spoof
+            // If body is URLSearchParams/empty (toggle/reorder), append _method there; else use FormData spoof
+            let m = method;
+            let b = body;
+            if (method === 'DELETE' || method === 'PUT' || method === 'PATCH') {
+                m = 'POST';
+                if (b instanceof URLSearchParams) {
+                    b.append('_method', method);
+                } else if (b instanceof FormData) {
+                    if (!b.has('_method')) b.append('_method', method);
+                } else if (!b) {
+                    b = new URLSearchParams({ _method: method });
+                } else if (typeof b === 'string') {
+                    b = b + '&_method=' + method;
+                } else {
+                    // fallback: wrap in FormData
+                    const fd = new FormData();
+                    fd.append('_method', method);
+                    if (b) fd.append('_payload', b);
+                    b = fd;
+                }
+            }
+            const opts = { method: m, headers: { 'X-CSRF-TOKEN': this.token, 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' } };
+            // do not set Content-Type for FormData / URLSearchParams (browser sets boundary)
+            if (b) opts.body = b;
             const res = await fetch(url, opts);
+            // better error for 405
+            if (res.status === 405) {
+                const txt = await res.text().catch(()=> '');
+                throw new Error('405 Method Not Allowed — server blocked ' + method + '. Retrying as POST+_method. ' + txt.slice(0,120));
+            }
             return res.json();
         },
 

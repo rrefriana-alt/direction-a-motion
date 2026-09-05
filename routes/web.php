@@ -233,7 +233,7 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
     // Journal (homepage section 07)
     Route::get('/home/journal', [JournalHomeController::class, 'index'])->name('home.journal.index');
     Route::get('/home/journal/header', [JournalHomeController::class, 'headerEdit'])->name('home.journal.header.edit');
-    Route::put('/home/journal/header', [JournalHomeController::class, 'headerUpdate'])->name('home.journal.header.update');
+    Route::match(['PUT','POST'], '/home/journal/header', [JournalHomeController::class, 'headerUpdate'])->name('home.journal.header.update');
     Route::get('/home/journal/curation', [JournalHomeController::class, 'curationEdit'])->name('home.journal.curation.edit');
     Route::post('/home/journal/curation', [JournalHomeController::class, 'curationUpdate'])->name('home.journal.curation.update');
 
