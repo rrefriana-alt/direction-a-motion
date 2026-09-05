@@ -273,6 +273,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::post('/portfolio/projects', [ProjectController::class, 'store'])->name('portfolio.projects.store');
     Route::get('/portfolio/projects/{project}/edit', [ProjectController::class, 'edit'])->name('portfolio.projects.edit');
     Route::put('/portfolio/projects/{project}', [ProjectController::class, 'update'])->name('portfolio.projects.update');
+    Route::post('/portfolio/projects/{project}', [ProjectController::class, 'update'])->name('portfolio.projects.update.post');
     Route::delete('/portfolio/projects/{project}', [ProjectController::class, 'destroy'])->name('portfolio.projects.destroy');
     Route::post('/portfolio/projects/update-sort', [ProjectController::class, 'updateSortOrder'])->name('portfolio.projects.update-sort');
 
