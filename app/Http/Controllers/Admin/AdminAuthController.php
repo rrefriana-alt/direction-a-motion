@@ -11,7 +11,7 @@ class AdminAuthController extends Controller
     public function showLoginForm()
     {
         if (Auth::guard('admin')->check()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard', ['locale' => app()->getLocale() ?: 'en']);
         }
         return view('admin.auth.login');
     }
@@ -25,7 +25,7 @@ class AdminAuthController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended(route('admin.dashboard', ['locale' => app()->getLocale() ?: 'en']));
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
