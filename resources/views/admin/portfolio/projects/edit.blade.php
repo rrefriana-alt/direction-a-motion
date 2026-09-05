@@ -263,10 +263,11 @@
                         @foreach(old('stats', $project->stats ?? []) as $stat)
                         <div class="list-item">
                             <button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button>
-                            <div style="display:grid;grid-template-columns:80px 60px 1fr;gap:.5rem">
+                            <div style="display:grid;grid-template-columns:80px 60px 1fr 1fr;gap:.5rem">
                                 <input type="text" name="stats[n][]" class="form-control form-control-sm" value="{{ is_array($stat) ? ($stat['n'] ?? '') : '' }}" placeholder="Number">
                                 <input type="text" name="stats[suffix][]" class="form-control form-control-sm" value="{{ is_array($stat) ? ($stat['suffix'] ?? '') : '' }}" placeholder="Suffix">
-                                <input type="text" name="stats[l][]" class="form-control form-control-sm" value="{{ is_array($stat) ? ($stat['l'] ?? '') : '' }}" placeholder="Label (EN||ID)">
+                                <input type="text" name="stats[l_en][]" class="form-control form-control-sm" value="{{ is_array($stat) ? \Illuminate\Support\Str::before($stat['l'] ?? '', '||') : '' }}" placeholder="Label EN">
+                                <input type="text" name="stats[l_id][]" class="form-control form-control-sm" value="{{ is_array($stat) ? (str_contains($stat['l'] ?? '', '||') ? \Illuminate\Support\Str::after($stat['l'], '||') : '') : '' }}" placeholder="Label ID">
                             </div>
                         </div>
                         @endforeach
@@ -289,17 +290,27 @@
             <div class="field-group">
                 <label class="field-label">Gallery Items</label>
                 <div id="galleryList">
-                    @foreach(old('gallery', $project->gallery ?? []) as $item)
+                    @foreach(old('gallery', $project->gallery ?? []) as $idx => $item)
                     <div class="list-item">
                         <button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button>
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem">
                             <div>
-                                <label class="field-label" style="font-size:.65rem">Kind (EN||ID)</label>
-                                <input type="text" name="gallery[kind][]" class="form-control form-control-sm" value="{{ is_array($item) ? ($item['kind'] ?? '') : '' }}" placeholder="Film||Film">
+                                <label class="field-label" style="font-size:.65rem">Kind — EN</label>
+                                <input type="text" name="gallery[kind_en][]" class="form-control form-control-sm" value="{{ is_array($item) ? \Illuminate\Support\Str::before($item['kind'] ?? '', '||') : '' }}" placeholder="Film">
                             </div>
                             <div>
-                                <label class="field-label" style="font-size:.65rem">Caption (EN||ID)</label>
-                                <input type="text" name="gallery[cap][]" class="form-control form-control-sm" value="{{ is_array($item) ? ($item['cap'] ?? '') : '' }}" placeholder="Opening frame||Frame pembuka">
+                                <label class="field-label" style="font-size:.65rem">Kind — ID</label>
+                                <input type="text" name="gallery[kind_id][]" class="form-control form-control-sm" value="{{ is_array($item) ? (str_contains($item['kind'] ?? '', '||') ? \Illuminate\Support\Str::after($item['kind'], '||') : '') : '' }}" placeholder="Film">
+                            </div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem">
+                            <div>
+                                <label class="field-label" style="font-size:.65rem">Caption — EN</label>
+                                <input type="text" name="gallery[cap_en][]" class="form-control form-control-sm" value="{{ is_array($item) ? \Illuminate\Support\Str::before($item['cap'] ?? '', '||') : '' }}" placeholder="Opening frame">
+                            </div>
+                            <div>
+                                <label class="field-label" style="font-size:.65rem">Caption — ID</label>
+                                <input type="text" name="gallery[cap_id][]" class="form-control form-control-sm" value="{{ is_array($item) ? (str_contains($item['cap'] ?? '', '||') ? \Illuminate\Support\Str::after($item['cap'], '||') : '') : '' }}" placeholder="Frame pembuka">
                             </div>
                         </div>
                         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
@@ -314,7 +325,9 @@
                             </div>
                             <div class="gallery-media-input" style="display:{{ !empty($item['src']) ? 'block' : 'none' }}">
                                 <label class="field-label" style="font-size:.65rem">Image File</label>
-                                <input type="file" name="gallery_file[]" class="form-control form-control-sm" accept="image/*">
+                                @if(!empty($item['src']))<div style="margin-bottom:.35rem"><img src="{{ \App\Support\Works::img($item['src']) }}" style="width:100%;max-height:90px;object-fit:cover;border-radius:6px;border:1px solid var(--gray-200)"></div>@endif
+                                <input type="file" name="gallery_file[{{ $idx }}]" class="form-control form-control-sm" accept="image/*">
+                                <input type="hidden" name="gallery_existing_src[{{ $idx }}]" value="{{ $item['src'] ?? '' }}">
                             </div>
                             <div class="gallery-media-input" style="display:{{ !empty($item['video']) && is_string($item['video']) ? 'block' : 'none' }}">
                                 <label class="field-label" style="font-size:.65rem">Video URL</label>
@@ -340,12 +353,20 @@
                         <button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button>
                         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
                             <div>
-                                <label class="field-label" style="font-size:.65rem">Label (EN||ID)</label>
-                                <input type="text" name="docs[label][]" class="form-control form-control-sm" value="{{ is_array($doc) ? ($doc['label'] ?? '') : '' }}">
+                                <label class="field-label" style="font-size:.65rem">Label — EN</label>
+                                <input type="text" name="docs[label_en][]" class="form-control form-control-sm" value="{{ is_array($doc) ? \Illuminate\Support\Str::before($doc['label'] ?? '', '||') : '' }}" placeholder="Label EN">
                             </div>
                             <div>
-                                <label class="field-label" style="font-size:.65rem">Meta (EN||ID)</label>
-                                <input type="text" name="docs[meta][]" class="form-control form-control-sm" value="{{ is_array($doc) ? ($doc['meta'] ?? '') : '' }}" placeholder="PDF — 24 pages">
+                                <label class="field-label" style="font-size:.65rem">Label — ID</label>
+                                <input type="text" name="docs[label_id][]" class="form-control form-control-sm" value="{{ is_array($doc) ? (str_contains($doc['label'] ?? '', '||') ? \Illuminate\Support\Str::after($doc['label'], '||') : '') : '' }}" placeholder="Label ID">
+                            </div>
+                            <div>
+                                <label class="field-label" style="font-size:.65rem">Meta — EN</label>
+                                <input type="text" name="docs[meta_en][]" class="form-control form-control-sm" value="{{ is_array($doc) ? \Illuminate\Support\Str::before($doc['meta'] ?? '', '||') : '' }}" placeholder="PDF — 24 pages">
+                            </div>
+                            <div>
+                                <label class="field-label" style="font-size:.65rem">Meta — ID</label>
+                                <input type="text" name="docs[meta_id][]" class="form-control form-control-sm" value="{{ is_array($doc) ? (str_contains($doc['meta'] ?? '', '||') ? \Illuminate\Support\Str::after($doc['meta'], '||') : '') : '' }}" placeholder="PDF — 24 halaman">
                             </div>
                             <div>
                                 <label class="field-label" style="font-size:.65rem">URL (optional)</label>
@@ -369,14 +390,7 @@
                     @foreach(old('usecases', $project->usecases ?? []) as $use)
                     <div class="list-item">
                         <button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button>
-                        <div class="bilingual">
-                            <div class="bilingual-col" data-lang="HEADING (EN||ID)">
-                                <input type="text" name="usecases[h][]" class="form-control" value="{{ is_array($use) ? ($use['h'] ?? '') : '' }}" placeholder="Use case heading">
-                            </div>
-                            <div class="bilingual-col" data-lang="PARAGRAPH (EN||ID)">
-                                <textarea name="usecases[p][]" class="form-control" rows="2" placeholder="Use case description">{{ is_array($use) ? ($use['p'] ?? '') : '' }}</textarea>
-                            </div>
-                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem"><div><label class="field-label" style="font-size:.65rem">Heading — EN</label><input type="text" name="usecases[h_en][]" class="form-control" value="{{ is_array($use) ? \Illuminate\Support\Str::before($use['h'] ?? '', '||') : '' }}" placeholder="Heading EN"></div><div><label class="field-label" style="font-size:.65rem">Heading — ID</label><input type="text" name="usecases[h_id][]" class="form-control" value="{{ is_array($use) ? (str_contains($use['h'] ?? '', '||') ? \Illuminate\Support\Str::after($use['h'], '||') : '') : '' }}" placeholder="Judul ID"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem"><div><label class="field-label" style="font-size:.65rem">Paragraph — EN</label><textarea name="usecases[p_en][]" class="form-control" rows="2" placeholder="Description EN">{{ is_array($use) ? \Illuminate\Support\Str::before($use['p'] ?? '', '||') : '' }}</textarea></div><div><label class="field-label" style="font-size:.65rem">Paragraf — ID</label><textarea name="usecases[p_id][]" class="form-control" rows="2" placeholder="Deskripsi ID">{{ is_array($use) ? (str_contains($use['p'] ?? '', '||') ? \Illuminate\Support\Str::after($use['p'], '||') : '') : '' }}</textarea></div></div>
                     </div>
                     @endforeach
                 </div>
@@ -394,10 +408,14 @@
                     @foreach(old('credits', $project->credits ?? []) as $credit)
                     <div class="list-item">
                         <button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
                             <div>
-                                <label class="field-label" style="font-size:.65rem">Role (EN||ID)</label>
-                                <input type="text" name="credits[role][]" class="form-control form-control-sm" value="{{ is_array($credit) ? ($credit['role'] ?? '') : '' }}" placeholder="Concept & script||Konsep & naskah">
+                                <label class="field-label" style="font-size:.65rem">Role — EN</label>
+                                <input type="text" name="credits[role_en][]" class="form-control form-control-sm" value="{{ is_array($credit) ? \Illuminate\Support\Str::before($credit['role'] ?? '', '||') : '' }}" placeholder="Concept & script">
+                            </div>
+                            <div>
+                                <label class="field-label" style="font-size:.65rem">Role — ID</label>
+                                <input type="text" name="credits[role_id][]" class="form-control form-control-sm" value="{{ is_array($credit) ? (str_contains($credit['role'] ?? '', '||') ? \Illuminate\Support\Str::after($credit['role'], '||') : '') : '' }}" placeholder="Konsep & naskah">
                             </div>
                             <div>
                                 <label class="field-label" style="font-size:.65rem">Name</label>
@@ -479,9 +497,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('projectForm').addEventListener('submit', function(e) {
         const hidden = document.getElementById('tagsHidden');
         const tags = [...document.querySelectorAll('#tagsDisplay .tag-chip')].map(el => el.textContent.replace(/\s*\×\s*$/, '').trim()).filter(Boolean);
-        hidden.remove();
+        if (hidden) hidden.remove();
         tags.forEach(t => { const inp=document.createElement('input'); inp.type='hidden'; inp.name='tags[]'; inp.value=t; e.target.appendChild(inp); });
         if (tags.length===0) { const inp=document.createElement('input'); inp.type='hidden'; inp.name='tags'; inp.value=''; e.target.appendChild(inp); }
+
+        // Reindex gallery file inputs so upload maps to correct card after deletions/adds
+        const items = document.querySelectorAll('#galleryList .list-item');
+        items.forEach((el, i) => {
+            const fileInput = el.querySelector('input[type="file"][name^="gallery_file"]');
+            if (fileInput) fileInput.name = 'gallery_file[' + i + ']';
+            const hiddenSrc = el.querySelector('input[name^="gallery_existing_src"]');
+            if (hiddenSrc) hiddenSrc.name = 'gallery_existing_src[' + i + ']';
+        });
 
         // Convert about textarea array to pipe-delimited strings
         document.querySelectorAll('#aboutList textarea[name="about[]"]').forEach(ta => {
@@ -547,16 +574,27 @@ function addStat() {
 }
 
 function addGalleryItem() {
+    const idx = document.querySelectorAll('#galleryList .list-item').length;
     const html = `<div class="list-item">
         <button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem">
             <div>
-                <label class="field-label" style="font-size:.65rem">Kind (EN||ID)</label>
-                <input type="text" name="gallery[kind][]" class="form-control form-control-sm" placeholder="Film||Film">
+                <label class="field-label" style="font-size:.65rem">Kind — EN</label>
+                <input type="text" name="gallery[kind_en][]" class="form-control form-control-sm" placeholder="Film">
             </div>
             <div>
-                <label class="field-label" style="font-size:.65rem">Caption (EN||ID)</label>
-                <input type="text" name="gallery[cap][]" class="form-control form-control-sm" placeholder="Opening frame||Frame pembuka">
+                <label class="field-label" style="font-size:.65rem">Kind — ID</label>
+                <input type="text" name="gallery[kind_id][]" class="form-control form-control-sm" placeholder="Film">
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem">
+            <div>
+                <label class="field-label" style="font-size:.65rem">Caption — EN</label>
+                <input type="text" name="gallery[cap_en][]" class="form-control form-control-sm" placeholder="Opening frame">
+            </div>
+            <div>
+                <label class="field-label" style="font-size:.65rem">Caption — ID</label>
+                <input type="text" name="gallery[cap_id][]" class="form-control form-control-sm" placeholder="Frame pembuka">
             </div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem">
@@ -564,14 +602,15 @@ function addGalleryItem() {
                 <label class="field-label" style="font-size:.65rem">Media Type</label>
                 <select name="gallery[type][]" class="form-select form-select-sm" onchange="toggleGalleryMedia(this)">
                     <option value="art">Generated Art</option>
-                    <option value="image">Image</option>
+                    <option value="image" selected>Image</option>
                     <option value="video_url">Video URL</option>
                     <option value="video_upload">Video Upload</option>
                 </select>
             </div>
-            <div class="gallery-media-input" style="display:none">
+            <div class="gallery-media-input" style="display:block">
                 <label class="field-label" style="font-size:.65rem">Image File</label>
-                <input type="file" name="gallery_file[]" class="form-control form-control-sm" accept="image/*">
+                <input type="file" name="gallery_file[${idx}]" class="form-control form-control-sm" accept="image/*">
+                <input type="hidden" name="gallery_existing_src[${idx}]" value="">
             </div>
             <div class="gallery-media-input" style="display:none">
                 <label class="field-label" style="font-size:.65rem">Video URL</label>

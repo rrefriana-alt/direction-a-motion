@@ -55,15 +55,23 @@ class ProjectController extends Controller
             'logo'            => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:25600',
             'gallery_file'    => 'nullable|array',
             'gallery_file.*'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:25600',
+            'gallery_existing_src' => 'nullable|array',
             'sort_order'      => 'nullable|integer',
             'homepage_order'  => 'nullable|integer',
             'is_featured'     => 'sometimes|boolean',
             'is_active'       => 'sometimes|boolean',
+            'case_study'      => 'nullable|string|max:500',
         ]);
+        // ponytail: file objects must not be mass-assigned to DB string columns
+        unset($validated['image'], $validated['hero_image'], $validated['logo'], $validated['gallery_file'], $validated['gallery_existing_src']);
 
         $complex = $this->parseComplexFields($request);
+        // ponytail: unique slug to avoid 500 on duplicate title
+        $baseSlug = $validated['title'] ? Str::slug($validated['title']) : Str::random(8);
+        $slug = $baseSlug ?: Str::random(8);
+        $n = 1; while (Project::where('slug', $slug)->exists()) { $slug = $baseSlug . '-' . (++$n); if ($n > 100) { $slug = $baseSlug . '-' . Str::random(4); break; } }
         $project = Project::create(array_merge($validated, $complex, [
-            'slug'            => $validated['title'] ? Str::slug($validated['title']) : Str::random(8),
+            'slug'            => $slug,
             'sort_order'      => $validated['sort_order'] ?? (Project::max('sort_order') + 1),
             'homepage_order'  => $validated['homepage_order'] ?? 0,
             'is_featured'     => $request->has('is_featured'),
@@ -77,6 +85,7 @@ class ProjectController extends Controller
             'usecases'        => $complex['usecases'] ?? null,
             'credits'         => $complex['credits'] ?? null,
             'result'          => $complex['result'] ?? $validated['result'] ?? ($request->input('result_text') ?: ($validated['lede'] ?? null)),
+            'case_study'      => $validated['case_study'] ?? $request->input('case_study'),
         ]));
 
         $this->handleUploads($request, $project);
@@ -113,11 +122,14 @@ class ProjectController extends Controller
             'logo'            => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:25600',
             'gallery_file'    => 'nullable|array',
             'gallery_file.*'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:25600',
+            'gallery_existing_src' => 'nullable|array',
             'sort_order'      => 'nullable|integer',
             'homepage_order'  => 'nullable|integer',
             'is_featured'     => 'sometimes|boolean',
             'is_active'       => 'sometimes|boolean',
+            'case_study'      => 'nullable|string|max:500',
         ]);
+        unset($validated['image'], $validated['hero_image'], $validated['logo'], $validated['gallery_file'], $validated['gallery_existing_src']);
 
         $complex = $this->parseComplexFields($request);
         $project->update(array_merge($validated, $complex, [
@@ -138,7 +150,7 @@ class ProjectController extends Controller
 
         $this->handleUploads($request, $project);
 
-        return redirect()->route('admin.portfolio.projects.index')->with('success', 'Project berhasil diupdate!');
+        return redirect()->route('admin.portfolio.projects.index', ['locale' => $locale])->with('success', 'Project berhasil diupdate!');
     }
 
     public function destroy(string $locale, Project $project)
@@ -218,11 +230,22 @@ class ProjectController extends Controller
         $gkEn=(array)($request->input('gallery.kind_en') ?? $request->input('gallery.kind') ?? []); $gkId=(array)($request->input('gallery.kind_id') ?? []);
         $gcEn=(array)($request->input('gallery.cap_en') ?? $request->input('gallery.cap') ?? []); $gcId=(array)($request->input('gallery.cap_id') ?? []);
         $gt=(array)$request->input('gallery.type',[]); $gv=(array)$request->input('gallery.video_url',[]);
+        $gsrc=(array)$request->input('gallery_existing_src',[]);
         if(empty($gkEn)&&empty($gkId)) $gkEn=(array)$request->input('gallery.kind',[]); if(empty($gcEn)&&empty($gcId)) $gcEn=(array)$request->input('gallery.cap',[]);
-        $gallery=[]; for($i=0;$i<max(count($gkEn),count($gkId),count($gcEn),count($gcId),count($gt));$i++){
+        $gallery=[]; for($i=0;$i<max(count($gkEn),count($gkId),count($gcEn),count($gcId),count($gt),count($gsrc));$i++){
             $k=$combine(trim($gkEn[$i]??''), trim($gkId[$i]??'')) ?? trim($gkEn[$i]??$gkId[$i]??'');
             $c=$combine(trim($gcEn[$i]??''), trim($gcId[$i]??'')) ?? trim($gcEn[$i]??$gcId[$i]??'');
-            $t=$gt[$i]??'art'; if($k!==''||$c!==''||$t!=='art') $gallery[]=['kind'=>$k,'cap'=>$c,'type'=>$t,'video'=>$t==='video_url'?trim($gv[$i]??''):null];
+            $t=$gt[$i]??'art';
+            $exSrc=trim($gsrc[$i] ?? '');
+            // keep existing src only when type is image, otherwise drop it
+            $src = ($t==='image' && $exSrc!=='') ? $exSrc : null;
+            $video = $t==='video_url' ? trim($gv[$i]??'') : null;
+            // use non-strict empty check: item kept if any meaningful data or image src present
+            if($k!==''||$c!==''||$t!=='art'||$src!==null||$video){
+                $item=['kind'=>$k,'cap'=>$c,'type'=>$t,'video'=>$video];
+                if($src) $item['src']=$src;
+                $gallery[]=$item;
+            }
         }
         if(!empty($gallery)) $out['gallery']=$gallery; else if($request->has('gallery')) $out['gallery']=[] ;
 
@@ -284,27 +307,48 @@ class ProjectController extends Controller
         $save('hero_image','hero');
         $save('logo','logo');
 
-        // gallery uploads: name gallery_file[] in form
-        $files = $request->file('gallery_file') ?? $request->file('gallery_files') ?? [];
-        if (!empty($files)) {
-            $files = is_array($files) ? $files : [$files];
-            $files = array_filter($files, fn($f)=> $f && $f->isValid());
-            if (!empty($files)) {
+        // gallery uploads: indexed by gallery position - replaces src on same card, not append
+        $rawFiles = $request->file('gallery_file') ?? $request->file('gallery_files') ?? [];
+        if (!empty($rawFiles)) {
+            $rawFiles = is_array($rawFiles) ? $rawFiles : [$rawFiles];
+            $filesAssoc = [];
+            foreach ($rawFiles as $k => $f) { if ($f && $f->isValid()) $filesAssoc[$k] = $f; }
+            if (!empty($filesAssoc)) {
                 $galDir = $imgDir.'/gallery';
                 if (! is_dir($galDir)) { @mkdir($galDir, 0775, true); @chmod($galDir,0775); }
+                $project->refresh();
                 $gallery = $project->gallery ?? [];
-                foreach ($files as $idx=>$file) {
-                    $ext=strtolower($file->getClientOriginalExtension() ?: $file->extension() ?: 'webp');
-                    $filename='gal-'.time().'-'.$idx.'.'.$ext;
-                    try { $file->move($galDir,$filename); } catch (\Throwable $e) {
-                        $file->storeAs('projects/'.$project->id.'/gallery',$filename,'public');
-                        @copy(storage_path('app/public/projects/'.$project->id.'/gallery/'.$filename), $galDir.'/'.$filename);
+                if (empty($gallery) && !empty($filesAssoc)) {
+                    foreach (array_values($filesAssoc) as $idx => $file) {
+                        $ext=strtolower($file->getClientOriginalExtension() ?: $file->extension() ?: 'webp');
+                        $filename='gal-'.time().'-'.$idx.'-'.Str::random(4).'.'.$ext;
+                        try { $file->move($galDir,$filename); } catch (\Throwable $e) {
+                            $file->storeAs('projects/'.$project->id.'/gallery',$filename,'public');
+                            @copy(storage_path('app/public/projects/'.$project->id.'/gallery/'.$filename), $galDir.'/'.$filename);
+                        }
+                        @chmod($galDir.'/'.$filename,0664);
+                        $gallery[]=['kind'=>'','cap'=>'','type'=>'image','src'=>'projects/'.$project->id.'/gallery/'.$filename];
                     }
-                    @chmod($galDir.'/'.$filename,0664);
-                    // append new gallery item with src
-                    $gallery[]=['kind'=>'','cap'=>'','src'=>'projects/'.$project->id.'/gallery/'.$filename];
+                    $project->update(['gallery'=>$gallery]);
+                } else {
+                    $updated = false;
+                    foreach ($gallery as $idx => &$item) {
+                        if (($item['type'] ?? 'art') !== 'image') continue;
+                        $file = $filesAssoc[$idx] ?? null;
+                        if (!$file) continue;
+                        $ext=strtolower($file->getClientOriginalExtension() ?: $file->extension() ?: 'webp');
+                        $filename='gal-'.time().'-'.$idx.'-'.Str::random(4).'.'.$ext;
+                        try { $file->move($galDir,$filename); } catch (\Throwable $e) {
+                            $file->storeAs('projects/'.$project->id.'/gallery',$filename,'public');
+                            @copy(storage_path('app/public/projects/'.$project->id.'/gallery/'.$filename), $galDir.'/'.$filename);
+                        }
+                        @chmod($galDir.'/'.$filename,0664);
+                        $item['src']='projects/'.$project->id.'/gallery/'.$filename;
+                        $updated = true;
+                    }
+                    unset($item);
+                    if ($updated) $project->update(['gallery'=>$gallery]);
                 }
-                $project->update(['gallery'=>$gallery]);
             }
         }
     }
