@@ -170,45 +170,6 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   </div>
 </section>
 
-<!-- — JOURNAL — -->
-@if(($latestPosts ?? collect())->count())
-<section class="section">
-  <div class="shell">
-    <div class="row between end gap-m">
-      <div>
-        <p class="eyebrow"><span>Journal</span></p>
-        <h2 class="display h-xxl mt-s fade-up" data-delay="1">Notes from<br>the studio</h2>
-      </div>
-      <a class="tlink fade-up" data-delay="2" href="{{ route('journal.index', ['locale'=>$locale]) }}">All articles →</a>
-    </div>
-    @php $feat = $latestPosts->first(); @endphp
-    <div class="bfeat mt-l">
-      <article class="bfeat__card fade-up" data-cursor="Read">
-        <a class="bfeat__art" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}" aria-label="{{ $feat->title }}">
-          @if(!empty($feat->featured_image) && file_exists(public_path('img/' . $feat->featured_image)))
-            <img src="{{ asset('img/' . $feat->featured_image) }}" alt="{{ $feat->title }}" loading="lazy">
-          @else
-            @include('partials.jart', ['seed' => crc32($feat->id)])
-          @endif
-          <span class="tag">{{ $feat->category_display }}</span>
-        </a>
-        <div class="bfeat__body">
-          <p class="card__num">{{ $feat->published_date?->format('d M Y') }}</p>
-          <h3><a href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}">{{ $feat->title }}</a></h3>
-          <p class="bfeat__ex">{{ $feat->excerpt }}</p>
-          <div class="bcard__foot">
-            <a class="btn btn--sm" href="{{ route('journal.show', ['locale'=>$locale, 'slug'=>$feat->slug]) }}">
-              <span>Read article</span>
-              <span class="ico" aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-@endif
-
 <section class="section cta">
   <div class="cta__glow" aria-hidden="true"></div>
   <div class="shell">
