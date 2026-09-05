@@ -288,6 +288,10 @@ Route::prefix('admin/{locale}')->where(['locale' => 'en|id'])->middleware(['auth
 
     // Portfolio Projects
     Route::get('/portfolio/projects', [ProjectController::class, 'index'])->name('portfolio.projects.index');
+    Route::get('/portfolio/projects/categories', [ProjectController::class, 'categoriesIndex'])->name('portfolio.projects.categories');
+    Route::post('/portfolio/projects/categories', [ProjectController::class, 'categoriesStore'])->name('portfolio.projects.categories.store');
+    Route::match(['PUT','POST'], '/portfolio/projects/categories/{key}', [ProjectController::class, 'categoriesUpdate'])->name('portfolio.projects.categories.update');
+    Route::match(['DELETE','POST'], '/portfolio/projects/categories/{key}', [ProjectController::class, 'categoriesDestroy'])->name('portfolio.projects.categories.destroy');
     Route::get('/portfolio/projects/create', [ProjectController::class, 'create'])->name('portfolio.projects.create');
     Route::post('/portfolio/projects', [ProjectController::class, 'store'])->name('portfolio.projects.store');
     Route::get('/portfolio/projects/{project}/edit', [ProjectController::class, 'edit'])->name('portfolio.projects.edit');

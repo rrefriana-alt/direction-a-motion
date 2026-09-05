@@ -9,6 +9,25 @@ use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
+    public static function categories(): array
+    {
+        $raw = \App\Models\Setting::get('work_categories', null);
+        if ($raw) {
+            $dec = json_decode($raw, true);
+            if (json_last_error() === 0 && is_array($dec) && !empty($dec)) {
+                // support ["Design","Events"] or {"design":"Design"} or [{"key":"design","label":"Design"}]
+                $out = [];
+                foreach ($dec as $k => $v) {
+                    if (is_array($v) && isset($v['key'])) { $out[$v['key']] = $v['label'] ?? $v['key']; }
+                    elseif (is_string($v) && is_string($k) && !is_numeric($k)) { $out[$k] = $v; }
+                    elseif (is_string($v)) { $slug = \Illuminate\Support\Str::slug($v); $out[$slug] = $v; }
+                }
+                if (!empty($out)) return $out;
+            }
+        }
+        return ['design' => 'Design', 'production' => 'Production', 'event' => 'Events', 'merch' => 'Merch'];
+    }
+
     public function index(Request $request)
     {
         $search = $request->get('search');
@@ -21,24 +40,93 @@ class ProjectController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
-        $categories = ['all' => 'All Categories', 'design' => 'Design', 'production' => 'Production', 'event' => 'Events', 'merch' => 'Merch'];
+        $base = self::categories();
+        $categories = ['all' => 'All Categories'] + $base;
 
         return view('admin.portfolio.projects.index', compact('projects', 'categories', 'search', 'category'));
     }
 
     public function create(string $locale)
     {
-        $categories = ['design' => 'Design', 'production' => 'Production', 'event' => 'Events', 'merch' => 'Merch'];
+        $categories = self::categories();
 
         return view('admin.portfolio.projects.create', compact('categories', 'locale'));
     }
 
+    // Categories CRUD (via Setting work_categories JSON, no new table)
+    public function categoriesIndex(string $locale)
+    {
+        $categories = self::categories();
+        $counts = \App\Models\Project::selectRaw('category, count(*) as c')->groupBy('category')->pluck('c','category')->all();
+        return view('admin.portfolio.projects.categories', compact('categories','counts','locale'));
+    }
+
+    public function categoriesStore(Request $request, string $locale)
+    {
+        $request->validate(['label' => 'required|string|max:60']);
+        $label = trim($request->input('label'));
+        $slug = \Illuminate\Support\Str::slug($label);
+        if ($slug === '') {
+            if ($request->expectsJson()) return response()->json(['message'=>'Label tidak valid'],422);
+            return back()->withErrors(['label' => 'Label tidak valid'])->withInput();
+        }
+        if ($slug === 'all') {
+            if ($request->expectsJson()) return response()->json(['message'=>'Slug "all" reserved'],422);
+            return back()->withErrors(['label' => 'Slug "all" reserved'])->withInput();
+        }
+        $cats = self::categories();
+        if (isset($cats[$slug])) {
+            if ($request->expectsJson()) return response()->json(['message'=>'Category sudah ada'],422);
+            return back()->withErrors(['label' => 'Category sudah ada'])->withInput();
+        }
+        $cats[$slug] = $label;
+        \App\Models\Setting::set('work_categories', json_encode($cats, JSON_UNESCAPED_UNICODE));
+        if ($request->expectsJson()) return response()->json(['key'=>$slug,'label'=>$label,'message'=>'Category ditambahkan']);
+        return redirect()->route('admin.portfolio.projects.categories', ['locale'=>$locale])->with('success', 'Category ditambahkan');
+    }
+
+    public function categoriesUpdate(Request $request, string $locale, string $key)
+    {
+        $request->validate(['label' => 'required|string|max:60']);
+        $label = trim($request->input('label'));
+        $cats = self::categories();
+        if (!isset($cats[$key])) return back()->withErrors(['label' => 'Category tidak ditemukan']);
+        $newSlug = \Illuminate\Support\Str::slug($label);
+        if ($newSlug === '' || $newSlug === 'all') return back()->withErrors(['label' => 'Slug tidak valid'])->withInput();
+        // if slug changed, rekey
+        if ($newSlug !== $key) {
+            if (isset($cats[$newSlug])) return back()->withErrors(['label' => 'Slug sudah dipakai'])->withInput();
+            $ordered = [];
+            foreach ($cats as $k=>$v) { if ($k===$key) $ordered[$newSlug]=$label; else $ordered[$k]=$v; }
+            $cats = $ordered;
+            // migrate projects using old key
+            \App\Models\Project::where('category',$key)->update(['category'=>$newSlug]);
+        } else {
+            $cats[$key] = $label;
+        }
+        \App\Models\Setting::set('work_categories', json_encode($cats, JSON_UNESCAPED_UNICODE));
+        return redirect()->route('admin.portfolio.projects.categories', ['locale'=>$locale])->with('success', 'Category diupdate');
+    }
+
+    public function categoriesDestroy(string $locale, string $key)
+    {
+        $cats = self::categories();
+        if (!isset($cats[$key])) return back()->withErrors(['label' => 'Category tidak ditemukan']);
+        if (count($cats) <= 1) return back()->withErrors(['label' => 'Minimal 1 category']);
+        $inUse = \App\Models\Project::where('category',$key)->exists();
+        if ($inUse) return back()->withErrors(['label' => 'Category masih dipakai project — pindahkan dulu']);
+        unset($cats[$key]);
+        \App\Models\Setting::set('work_categories', json_encode($cats, JSON_UNESCAPED_UNICODE));
+        return redirect()->route('admin.portfolio.projects.categories', ['locale'=>$locale])->with('success', 'Category dihapus');
+    }
+
     public function store(Request $request, string $locale)
     {
+        $catKeys = implode('|', array_map(fn($k)=>preg_quote($k,'/'), array_keys(self::categories())));
         $validated = $request->validate([
             'title'           => 'required|string|max:255',
             'client_name'     => 'nullable|string|max:255',
-            'category'        => 'required|in:design,production,event,merch',
+            'category'        => 'required|regex:/^('.$catKeys.')$/',
             'description'     => 'nullable|string',
             'lede'            => 'nullable|string',
             'year'            => 'nullable|string|max:10',
@@ -96,17 +184,18 @@ class ProjectController extends Controller
 
     public function edit(string $locale, Project $project)
     {
-        $categories = ['design' => 'Design', 'production' => 'Production', 'event' => 'Events', 'merch' => 'Merch'];
+        $categories = self::categories();
 
         return view('admin.portfolio.projects.edit', compact('project', 'categories', 'locale'));
     }
 
     public function update(Request $request, string $locale, Project $project)
     {
+        $catKeys = implode('|', array_map(fn($k)=>preg_quote($k,'/'), array_keys(self::categories())));
         $validated = $request->validate([
             'title'           => 'required|string|max:255',
             'client_name'     => 'nullable|string|max:255',
-            'category'        => 'required|in:design,production,event,merch',
+            'category'        => 'required|regex:/^('.$catKeys.')$/',
             'description'     => 'nullable|string',
             'lede'            => 'nullable|string',
             'year'            => 'nullable|string|max:10',

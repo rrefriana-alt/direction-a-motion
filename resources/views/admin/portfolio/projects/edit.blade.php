@@ -100,12 +100,28 @@ textarea.form-control{resize:none !important;overflow:hidden;min-height:88px;lin
                             <input type="text" name="client_name" class="form-control" value="{{ old('client_name', $project->client_name) }}" placeholder="Bank Rakyat Indonesia">
                         </div>
                         <div class="field-group">
-                            <label class="field-label">Category <span style="color:var(--danger)">*</span></label>
-                            <select name="category" class="form-select" required>
-                                @foreach($categories as $key => $label)
-                                    <option value="{{ $key }}" {{ old('category', $project->category) === $key ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
+                            <label class="field-label">Category <span style="color:var(--danger)">*</span> <a href="{{ route('admin.portfolio.projects.categories', ['locale'=>$locale]) }}" style="margin-left:.4rem;font-size:.6rem;font-weight:600;color:var(--green-600);text-transform:none;letter-spacing:0">Manage</a></label>
+                            <div style="display:flex;gap:.4rem">
+                                <select name="category" id="categorySelect" class="form-select" required style="flex:1">
+                                    @foreach($categories as $key => $label)
+                                        <option value="{{ $key }}" {{ old('category', $project->category) === $key ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="openCatModal()" title="Add new category" style="white-space:nowrap"><i class="bi bi-plus-lg"></i></button>
+                            </div>
+                            <div id="catInlineMsg" style="font-size:.68rem;color:var(--danger);margin-top:.2rem;display:none"></div>
+                        </div>
+                    </div>
+                    <div id="catModal" style="display:none;position:fixed;inset:0;z-index:1055;background:rgba(15,23,42,.45);align-items:center;justify-content:center;padding:1rem">
+                        <div style="background:#fff;border-radius:16px;padding:1.2rem;width:100%;max-width:380px;box-shadow:0 20px 50px rgba(0,0,0,.18)">
+                            <h3 style="font-size:.9rem;font-weight:700;margin:0 0 .4rem">Add Category</h3>
+                            <p style="font-size:.72rem;color:var(--gray-500);margin:0 0 .8rem">Slug otomatis dari label. Contoh: “Motion Design” → motion-design</p>
+                            <input type="text" id="catNewLabel" class="form-control" placeholder="e.g. Motion" maxlength="60">
+                            <div id="catModalErr" style="font-size:.7rem;color:var(--danger);margin-top:.4rem;display:none"></div>
+                            <div style="display:flex;justify-content:flex-end;gap:.5rem;margin-top:1rem">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="closeCatModal()">Cancel</button>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="submitCatModal()">Add</button>
+                            </div>
                         </div>
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem">
@@ -488,6 +504,29 @@ function addCredit(){
     const html=`<div class="list-item"><button type="button" class="remove-btn" onclick="this.closest('.list-item').remove()"><i class="bi bi-x"></i></button><div style="display:grid;grid-template-columns:1fr 1fr;gap:.45rem"><div><label class="field-label" style="font-size:.66rem">Role — ${IS_EN?'EN':'ID'}</label><input type="text" name="${rName}" maxlength="40" data-max="40" class="form-control form-control-sm" placeholder="Role"></div><div><label class="field-label" style="font-size:.66rem">Name (shared)</label><input type="text" name="credits[name][]" class="form-control form-control-sm" placeholder="Fugo Creative"></div></div></div>`;
     document.getElementById('creditsList').insertAdjacentHTML('beforeend', html);
 }
+function openCatModal(){document.getElementById('catModal').style.display='flex';document.getElementById('catNewLabel').value='';document.getElementById('catModalErr').style.display='none';document.getElementById('catInlineMsg').style.display='none';setTimeout(()=>document.getElementById('catNewLabel').focus(),50);}
+function closeCatModal(){document.getElementById('catModal').style.display='none';}
+async function submitCatModal(){
+    const label=document.getElementById('catNewLabel').value.trim();
+    const err=document.getElementById('catModalErr');
+    if(!label){err.textContent='Label required';err.style.display='block';return;}
+    err.style.display='none';
+    const btn=document.querySelector('#catModal .btn-primary'); const old=btn.textContent; btn.textContent='Adding...'; btn.disabled=true;
+    try{
+        const res=await fetch("{{ route('admin.portfolio.projects.categories.store', ['locale'=>$locale]) }}",{
+            method:'POST',headers:{'Content-Type':'application/json','X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').content,'Accept':'application/json'},
+            body:JSON.stringify({label})
+        });
+        const j=await res.json();
+        if(!res.ok) throw new Error(j.message||'Failed');
+        const sel=document.getElementById('categorySelect'); const opt=document.createElement('option'); opt.value=j.key; opt.textContent=j.label; sel.appendChild(opt); sel.value=j.key;
+        const msg=document.getElementById('catInlineMsg'); msg.textContent='Category "'+j.label+'" added'; msg.style.display='block'; msg.style.color='var(--green-600)';
+        closeCatModal();
+    }catch(e){err.textContent=e.message;err.style.display='block';}
+    finally{btn.textContent=old;btn.disabled=false;}
+}
+document.getElementById('catModal')?.addEventListener('click',e=>{if(e.target.id==='catModal') closeCatModal();});
+document.getElementById('catNewLabel')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submitCatModal();} if(e.key==='Escape') closeCatModal();});
 function toggleOutcome(type){
     document.getElementById('outcomeStats').style.display=type==='stats'?'block':'none';
     document.getElementById('outcomeResult').style.display=type==='result'?'block':'none';

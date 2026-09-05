@@ -8,12 +8,15 @@
 @endsection
 
 @section('content')
-<div class="page-header d-flex justify-content-between align-items-center">
+<div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-2">
     <div>
         <h2>Projects</h2>
         <p>Manage all work portfolio projects and their modal content</p>
     </div>
-    <a href="{{ route('admin.portfolio.projects.create', ['locale'=>request()->route('locale') ?? 'en']) }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Project</a>
+    <div class="d-flex gap-2">
+        <a href="{{ route('admin.portfolio.projects.categories', ['locale'=>request()->route('locale') ?? 'en']) }}" class="btn btn-secondary btn-sm"><i class="bi bi-tags"></i> Manage Categories</a>
+        <a href="{{ route('admin.portfolio.projects.create', ['locale'=>request()->route('locale') ?? 'en']) }}" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Project</a>
+    </div>
 </div>
 
 <div class="card-white" style="padding:.75rem 1rem;margin-bottom:1.5rem">
