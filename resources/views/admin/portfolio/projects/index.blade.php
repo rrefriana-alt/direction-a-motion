@@ -61,8 +61,8 @@
                 <span style="font-size:.65rem;font-weight:600;color:var(--green-600);background:var(--green-50);padding:.15rem .4rem;border-radius:4px">{{ ucfirst($project->category) }}</span>
             </div>
             <div style="display:flex;gap:.5rem;margin-top:.75rem">
-                <a href="{{ route('admin.portfolio.projects.edit', $project->id) }}" class="btn btn-secondary btn-sm" style="flex:1"><i class="bi bi-pencil"></i> Edit</a>
-                <form action="{{ route('admin.portfolio.projects.destroy', $project->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this project?')">
+                <a href="{{ route('admin.portfolio.projects.edit', ['locale' => request()->route('locale') ?? 'en', 'project' => $project->id]) }}" class="btn btn-secondary btn-sm" style="flex:1"><i class="bi bi-pencil"></i> Edit</a>
+                <form action="{{ route('admin.portfolio.projects.destroy', ['locale' => request()->route('locale') ?? 'en', 'project' => $project->id]) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this project?')">
                     @csrf @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
                 </form>
