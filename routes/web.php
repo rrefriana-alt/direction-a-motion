@@ -288,6 +288,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
         Route::put('/settings', [AboutController::class, 'aboutHeaderUpdate'])->name('settings.update');
         Route::get('/ceo-profile', [AboutController::class, 'ceoProfile'])->name('ceo-profile');
         Route::put('/ceo-profile', [AboutController::class, 'updateCeoProfile'])->name('ceo-profile.update');
+        Route::post('/ceo-profile', [AboutController::class, 'updateCeoProfile'])->name('ceo-profile.update.post');
         Route::get('/timeline', [AboutController::class, 'timelineIndex'])->name('timeline.index');
         Route::get('/timeline/create', [AboutController::class, 'timelineCreate'])->name('timeline.create');
         Route::post('/timeline', [AboutController::class, 'timelineStore'])->name('timeline.store');
