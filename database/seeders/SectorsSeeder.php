@@ -50,13 +50,12 @@ class SectorsSeeder extends Seeder
         ];
 
         foreach ($sectors as $index => $data) {
-            $sector = Sector::create([
-                'heading_en' => $data['heading_en'],
-                'heading_id' => $data['heading_id'],
-                'sort_order' => $data['sort_order'],
-                'is_active' => true,
-            ]);
-
+            $sector = Sector::updateOrCreate(
+                ['heading_en' => $data['heading_en']],
+                ['heading_id' => $data['heading_id'], 'sort_order' => $data['sort_order'], 'is_active' => true]
+            );
+            // idempotent items
+            $sector->items()->delete();
             foreach ($data['items'] as $itemIndex => $itemName) {
                 $sector->items()->create([
                     'name' => $itemName,

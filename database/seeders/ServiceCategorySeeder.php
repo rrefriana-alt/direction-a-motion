@@ -92,7 +92,7 @@ class ServiceCategorySeeder extends Seeder
             unset($catData['details']);
 
             $catData['is_active'] = true;
-            $category = ServiceCategory::create($catData);
+            $category = ServiceCategory::updateOrCreate(['slug' => $catData['slug']], $catData);
 
             foreach ($details as $detailData) {
                 $content = $detailData['content'];
