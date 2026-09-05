@@ -399,7 +399,8 @@
 <div x-show="categories.length === 0" class="svc-card" style="text-align:center;padding:3rem">
     <i class="bi bi-layers" style="font-size:2rem;color:var(--gray-300)"></i>
     <div style="font-size:.9rem;font-weight:500;color:var(--gray-500);margin-top:.5rem">No categories found</div>
-    <div style="font-size:.8rem;color:var(--gray-400);margin-top:.25rem">Click <strong>"Add Category"</strong> to create your first service.</div>
+    <div style="font-size:.8rem;color:var(--gray-400);margin-top:.25rem">Click <strong>"Add Category"</strong> to create your first service. If you just deployed, run seeder on server.</div>
+    <div x-show="categories.length === 0" style="margin-top:1rem;font-size:.75rem;color:var(--gray-400)">Local count: {{ \App\Models\ServiceCategory::count() }} | <a href="{{ route('admin.services.crud') }}" style="color:var(--green-600)">Hard refresh (Ctrl+Shift+R)</a></div>
 </div>
 
 </div>
