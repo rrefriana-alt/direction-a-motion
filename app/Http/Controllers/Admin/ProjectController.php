@@ -72,6 +72,7 @@ class ProjectController extends Controller
         $n = 1; while (Project::where('slug', $slug)->exists()) { $slug = $baseSlug . '-' . (++$n); if ($n > 100) { $slug = $baseSlug . '-' . Str::random(4); break; } }
         $project = Project::create(array_merge($validated, $complex, [
             'slug'            => $slug,
+            'description'     => $validated['description'] ?? $request->input('description') ?? '',
             'sort_order'      => $validated['sort_order'] ?? (Project::max('sort_order') + 1),
             'homepage_order'  => $validated['homepage_order'] ?? 0,
             'is_featured'     => $request->has('is_featured'),
