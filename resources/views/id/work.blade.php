@@ -68,7 +68,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <a class="nav__link" href="{{ url($locale) }}">Beranda</a>
       <a class="nav__link is-active" href="{{ url($locale.'/work') }}">Karya</a>
       <a class="nav__link" href="{{ url($locale.'/services') }}">Layanan</a>
-      <a class="nav__link" href="{{ url($locale.'/about') }}">Studio</a>
+      <a class="nav__link" href="{{ url($locale.'/about') }}">Tentang</a>
       <a class="nav__link" href="{{ url($locale.'/contact') }}">Kontak</a>
     </nav>
     <div class="nav__side">
@@ -88,8 +88,8 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="{{ url($locale) }}">Beranda</a></li>
     <li class="menu__item"><a href="{{ url($locale.'/work') }}">Karya</a></li>
     <li class="menu__item"><a href="{{ url($locale.'/services') }}">Layanan</a></li>
-    <li class="menu__item"><a href="{{ url($locale.'/about') }}">Studio</a></li>
-    <li class="menu__item"><a href="{{ url($locale.'/contact') }}">Kontak</a></li>
+    <li class="menu__item"><a href="{{ url($locale.'/about') }}">Tentang</a></li>
+      <li class="menu__item"><a href="{{ url($locale.'/contact') }}">Kontak</a></li>
   </ul>
   <div class="menu__foot">
     <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
@@ -173,7 +173,7 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
       </div>
       <div>
         <h5>Navigasi</h5>
-        <ul><li><a href="{{ url($locale.'/work') }}">Karya</a></li><li><a href="{{ url($locale.'/services') }}">Layanan</a></li><li><a href="{{ url($locale.'/about') }}">Studio</a></li><li><a href="{{ url($locale.'/contact') }}">Kontak</a></li><li><a href="{{ url($locale.'/contact') }}">Karier</a></li></ul>
+        <ul><li><a href="{{ url($locale.'/work') }}">Karya</a></li><li><a href="{{ url($locale.'/services') }}">Layanan</a></li><li><a href="{{ url($locale.'/about') }}">Tentang</a></li><li><a href="{{ url($locale.'/contact') }}">Kontak</a></li><li><a href="{{ url($locale.'/contact') }}">Karier</a></li></ul>
       </div>
       <div>
         <h5>Ikuti</h5>

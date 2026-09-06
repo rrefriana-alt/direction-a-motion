@@ -68,7 +68,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <a class="nav__link" href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a>
       <a class="nav__link is-active" href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a>
       <a class="nav__link" href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a>
-      <a class="nav__link" href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a>
+      <a class="nav__link" href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a>
       <a class="nav__link" href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a>
     </nav>
     <div class="nav__side">
@@ -87,7 +87,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="{{ url('') }}" data-en="Home" data-id="Beranda">Home</a></li>
     <li class="menu__item"><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li>
     <li class="menu__item"><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li>
-    <li class="menu__item"><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li>
+    <li class="menu__item"><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li>
     <li class="menu__item"><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
   <div class="menu__foot">
@@ -172,7 +172,7 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
       </div>
       <div>
         <h5 data-en="Navigate" data-id="Navigasi">Navigate</h5>
-        <ul><li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li><li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li><li><a href="{{ url('about') }}" data-en="Studio" data-id="Studio">Studio</a></li><li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li></ul>
+        <ul><li><a href="{{ url('work') }}" data-en="Work" data-id="Karya">Work</a></li><li><a href="{{ url('services') }}" data-en="Services" data-id="Layanan">Services</a></li><li><a href="{{ url('about') }}" data-en="About" data-id="Tentang">About</a></li><li><a href="{{ url('contact') }}" data-en="Contact" data-id="Kontak">Contact</a></li><li><a href="{{ url('contact') }}" data-en="Careers" data-id="Karier">Careers</a></li></ul>
       </div>
       <div>
         <h5 data-en="Follow" data-id="Ikuti">Follow</h5>

@@ -172,6 +172,31 @@ const I18N = {
 function boot() {
   I18N.init();
   forms();                       // works with or without GSAP
+  // ponytail: :has() fallback — engagement swipe uses :has() in CSS, add class for older browsers. Scoped to 640px by CSS.
+  try { document.querySelectorAll('.grid.g-12.mt-l').forEach(function(g){ if(g.querySelector('.col-4.card')) g.classList.add('is-swipe'); }); } catch(e){}
+  // ponytail: mobile swipe cards — smooth center on tap + live highlights, scoped to 640px by CSS.
+  try {
+    if (matchMedia('(max-width:640px)').matches) {
+      var swipes = document.querySelectorAll('.svc__panels, .hscroll__track, .bgrid, .grid.g-12.mt-l.is-swipe, .grid.g-12.mt-l:has(> .col-4.card)');
+      swipes.forEach(function(sc){
+        var isSvc = sc.classList.contains('svc__panels');
+        var cards = sc.querySelectorAll(isSvc ? '.card' : '.wcard, .bcard, .col-4.card');
+        if (!cards.length) return;
+        sc.addEventListener('scroll', function(){ try{ ST && ST.update(); }catch(e){} }, {passive:true});
+        cards.forEach(function(c){
+          c.style.cursor = 'pointer';
+          c.addEventListener('click', function(){
+            try{ c.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }catch(e){}
+            if (isSvc) {
+              sc.querySelectorAll('.card.is-active').forEach(function(x){ x.classList.remove('is-active'); });
+              c.classList.add('is-active');
+              setTimeout(function(){ c.classList.remove('is-active'); }, 900);
+            }
+          }, {passive:true});
+        });
+      });
+    }
+  } catch(e){}
   navBehaviour();
 
   if (!window.gsap) return degrade('gsap missing');
@@ -387,11 +412,11 @@ function reveals({ gsap, ST }) {
 
   if (RM) { els.forEach(e => e.classList.add('is-in')); heads.forEach(h => h.classList.add('is-in')); }
   else if (els.length) {
-    // batch() groups what would otherwise be ~40 separate scroll listeners.
+    const isSm = matchMedia('(max-width:640px)').matches;
     ST.batch(els, {
-      start: 'top 88%',
+      start: isSm ? 'top 94%' : 'top 88%',
       onEnter: batch => batch.forEach((el, i) =>
-        gsap.delayedCall(i * 0.07, () => el.classList.add('is-in'))),
+        gsap.delayedCall(i * (isSm ? 0.04 : 0.07), () => el.classList.add('is-in'))),
     });
     // Anything already on screen at load should not wait for a scroll event.
     requestAnimationFrame(() => els.forEach(el => {
@@ -461,10 +486,11 @@ function manifesto({ gsap, ST }) {
 
   if (RM) { $$('.w', box).forEach(w => w.classList.add('on')); return; }
 
+  const isSmManifesto = matchMedia('(max-width:640px)').matches;
   ST.create({
     trigger: section,
-    start: 'top 72%',
-    end: 'bottom 62%',
+    start: isSmManifesto ? 'top 84%' : 'top 72%',
+    end: isSmManifesto ? 'bottom 48%' : 'bottom 62%',
     scrub: 0.5,
     onUpdate: self => {
       const ws = $$('.w', box);
@@ -491,6 +517,8 @@ function counters({ gsap, ST }) {
 
 /* ================================================== services sticky idx == */
 function servicesIndex({ gsap, ST }) {
+  // ponytail: sticky index hidden on ≤940px (CSS) and panels become horizontal swipe on ≤640px — disable ST there
+  if (matchMedia('(max-width:640px)').matches || matchMedia('(pointer:coarse)').matches) return;
   const idx = $$('.svc__idx'), panels = $$('.svc__panels .card');
   if (!idx.length || !panels.length) return;
   panels.forEach((p, i) => {
@@ -517,10 +545,12 @@ function horizontalWork({ gsap, ST }) {
   const track = $('.hscroll__track', wrap || document);
   if (!wrap || !track) return;
 
-  // Scroll-driven at every width. Leaving phones on native swipe means most
-  // visitors only ever see the first card, which defeats the section.
-  if (RM) {
+  const isMobileSwipe = matchMedia('(max-width:640px)').matches;
+  // ponytail: mobile swipe is native horizontal scroll (core.css 640px overrides pin). Avoid 320vh dead-space + lag.
+  if (RM || isMobileSwipe) {
     wrap.classList.add('is-native');
+    // keep ST in sync even though pin is disabled — vertical scroll still drives reveals/counters
+    addEventListener('scroll', function(){ try{ ST.update(); }catch(e){} }, { passive: true });
     return;
   }
 

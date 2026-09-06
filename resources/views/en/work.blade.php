@@ -68,7 +68,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <a class="nav__link" href="{{ url($locale) }}">Home</a>
       <a class="nav__link is-active" href="{{ url($locale.'/work') }}">Work</a>
       <a class="nav__link" href="{{ url($locale.'/services') }}">Services</a>
-      <a class="nav__link" href="{{ url($locale.'/about') }}">Studio</a>
+      <a class="nav__link" href="{{ url($locale.'/about') }}">About</a>
       <a class="nav__link" href="{{ url($locale.'/contact') }}">Contact</a>
     </nav>
     <div class="nav__side">
@@ -88,13 +88,13 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <li class="menu__item"><a href="{{ url($locale) }}">Home</a></li>
     <li class="menu__item"><a href="{{ url($locale.'/work') }}">Work</a></li>
     <li class="menu__item"><a href="{{ url($locale.'/services') }}">Services</a></li>
-    <li class="menu__item"><a href="{{ url($locale.'/about') }}">Studio</a></li>
-    <li class="menu__item"><a href="{{ url($locale.'/contact') }}">Contact</a></li>
-  </ul>
-  <div class="menu__foot">
-    <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
+     <li class="menu__item"><a href="{{ url($locale.'/about') }}">About</a></li>
+      <li class="menu__item"><a href="{{ url($locale.'/contact') }}">Contact</a></li>
+    </ul>
+    <div class="menu__foot">
+      <span>hello@fugocreativegroup.com</span><span>+62 821 2100 0680</span><span>Bandung — Jakarta — Bali</span>
+    </div>
   </div>
-</div>
 <main>
 
 <section class="phead">
@@ -173,7 +173,7 @@ apply('all');document.addEventListener('langchange',()=>apply(document.querySele
       </div>
       <div>
         <h5>Navigate</h5>
-        <ul><li><a href="{{ url($locale.'/work') }}">Work</a></li><li><a href="{{ url($locale.'/services') }}">Services</a></li><li><a href="{{ url($locale.'/about') }}">Studio</a></li><li><a href="{{ url($locale.'/contact') }}">Contact</a></li><li><a href="{{ url($locale.'/contact') }}">Careers</a></li></ul>
+        <ul><li><a href="{{ url($locale.'/work') }}">Work</a></li><li><a href="{{ url($locale.'/services') }}">Services</a></li><li><a href="{{ url($locale.'/about') }}">About</a></li><li><a href="{{ url($locale.'/contact') }}">Contact</a></li><li><a href="{{ url($locale.'/contact') }}">Careers</a></li></ul>
       </div>
       <div>
         <h5>Follow</h5>

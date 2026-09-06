@@ -96,7 +96,9 @@ html.no-motion .marquee__row { will-change: auto; }
 /* ---- velocity skew ----------------------------------------------------- */
 /* Applied to leaf cards only: skewing a .section would create a containing
    block around the sticky service index and the sticky hscroll viewport. */
-.wcard, .svc__panels .card { will-change: transform; }
+html:not([data-tier="off"]) .wcard, html:not([data-tier="off"]) .svc__panels .card { will-change: transform; }
+html[data-tier="off"] .wcard, html[data-tier="off"] .svc__panels .card { will-change: auto; }
+@media (max-width:640px){ .wcard, .svc__panels .card { will-change: auto; } }
 
 /* ---- degraded mode: everything visible, nothing animated --------------- */
 html.no-motion .fade-up,
@@ -150,24 +152,22 @@ html:not(.no-motion) .is-split-head .line { will-change: transform; }
    width; both need different rules once there is no width to spread into.
    ========================================================================== */
 @media (max-width: 640px) {
-  /* Two columns for the short link lists, full width for prose and addresses,
-     so the footer is about half as tall and reads as a block rather than a
-     column of loose fragments. */
-  .foot__top { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+  /* Compact 2-col: same structure but ~30% shorter. Keep 2-col — 1-col would be 4 rows and even longer. */
+  .foot__top { grid-template-columns: 1fr 1fr; gap: 1rem .9rem; }
   .foot__top > *:first-child { grid-column: 1 / -1; }
   .foot__top > *:last-child  { grid-column: 1 / -1; }
 
-  /* Stacked and left-aligned beats space-between once the row has to wrap. */
+  /* Shorter divider, tighter bot row */
   .foot__bot {
     flex-direction: column;
     align-items: flex-start;
-    gap: .5rem;
-    padding-block: 1.4rem;
+    gap: .35rem;
+    padding-block: .85rem;
+    margin-top: .85rem;
   }
 
-  /* The outlined wordmark is meant to span the full width. At 15.5vw it
-     shrinks to its clamp floor on a phone and reads as an orphan. */
-  .foot__word { font-size: clamp(4.5rem, 27vw, 16rem); margin-top: 2.5rem; }
+  /* Wordmark smaller — was 27vw + 40px margin = 119px tall */
+  .foot__word { font-size: clamp(2.6rem, 19vw, 5rem); margin-top: .9rem; line-height: .82; }
 }
 
 @media (max-width: 340px) {
