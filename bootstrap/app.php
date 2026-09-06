@@ -12,12 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias(['setlocale' => \App\Http\Middleware\SetLocale::class]);
-        $middleware->trustProxies(at: [
-            '0.0.0.0/0',
-            '10.0.0.0/8',
-            '172.16.0.0/12',
-            '192.168.0.0/16',
-        ])->usingHeaders(\Illuminate\Http\Request::HEADER_X_FORWARDED_FOR | \Illuminate\Http\Request::HEADER_X_FORWARDED_PROTO | \Illuminate\Http\Request::HEADER_X_FORWARDED_HOST);
+        $middleware->trustProxies(at: ['*']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
