@@ -914,12 +914,12 @@ body.menu-open .menu__item a{transform:translateY(0)}
     --sec: clamp(1.95rem, 5.2vw, 2.6rem);
     --gut: clamp(1rem, 4.2vw, 1.18rem);
     --nav-h: 56px;
-    --t-mega: clamp(2.45rem, 10.2vw, 3.6rem);
+    --t-mega: clamp(3rem, 14.2vw, 4.5rem);
     --t-xxl: clamp(1.78rem, 6.4vw, 2.35rem);
     --t-xl: clamp(1.42rem, 5.2vw, 1.9rem);
     --t-lg: clamp(1.15rem, 3.8vw, 1.45rem);
   }
-  html[lang="id"] .hero__title{ font-size: clamp(2.15rem, 10.2vw, 3.2rem); }
+  html[lang="id"] .hero__title{ font-size: clamp(2.7rem, 13vw, 4rem); }
   .brand__mark{ height: 24px; }
   .nav__in{ gap: .6rem; }
   .burger{ width: 40px; height: 40px; }
@@ -938,9 +938,9 @@ body.menu-open .menu__item a{transform:translateY(0)}
   .phead__glow{ display: none; }
   .crumb{ font-size: 9px; gap: 5px; flex-wrap: wrap; }
   /* HERO — meta separated by gap line like desktop, not fused/card */
-  .hero{ min-height: auto; padding-top: calc(var(--nav-h) + 10px); padding-bottom: 14px; justify-content: flex-start; }
+  .hero{ min-height: auto; padding-top: calc(var(--nav-h) + 8px); padding-bottom: 12px; justify-content: flex-start; }
   .hero__in{ padding-top: 0; }
-  .hero__title{ margin-block: .12em .28em; line-height: .88; }
+  .hero__title{ margin-block: .08em .22em; line-height: .84; letter-spacing: -.045em; }
   .hero__glow{ width: 88vw; height: 88vw; right: -24vw; top: -6vw; opacity: .5; }
   .hero__meta{
     margin-top: 16px; padding-top: 14px; padding-bottom: 0; gap: 12px;
