@@ -46,7 +46,7 @@
 
   /* space */
   --gut:  clamp(1.25rem, 4vw, 4.5rem);
-  --sec:  clamp(5.5rem, 12vh, 11rem);
+  --sec:  clamp(3rem, 6vh, 5rem);
   --r:    14px;
   --r-lg: 26px;
 
@@ -320,10 +320,11 @@ body.menu-open .menu__item a{transform:translateY(0)}
 
 /* ---------- 9. HERO ------------------------------------------------------ */
 .hero{
-  position:relative; min-height:100svh; display:flex; flex-direction:column;
-  justify-content:flex-end; padding-block:calc(var(--nav-h) + 2rem) 2rem;
+  position:relative; min-height:88svh; display:grid; place-items:center;
+  padding-block:calc(var(--nav-h) + 4vh) 2.2rem;
   overflow:hidden;
 }
+@media(max-width:640px){.hero{min-height:78svh;padding-block:calc(var(--nav-h) + 2rem) 1.6rem}}
 .hero__canvas{position:absolute;inset:0;z-index:0;opacity:.85}
 .hero__glow{
   position:absolute; z-index:0; width:75vw; height:75vw; max-width:1100px; max-height:1100px;
@@ -332,15 +333,17 @@ body.menu-open .menu__item a{transform:translateY(0)}
   filter:blur(24px); animation:breathe 11s ease-in-out infinite;
 }
 @keyframes breathe{0%,100%{transform:scale(1) translate(0,0)}50%{transform:scale(1.12) translate(-3%,3%)}}
-.hero__in{position:relative;z-index:2;width:100%}
-.hero__title{margin-block:.28em .5em}
+.hero__in{position:relative;z-index:2;width:100%;display:grid;gap:0}
+.hero__title{margin-block:.2em .15em;line-height:.9}
+.hero__bottom{margin-top:1.4rem;font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;color:var(--ink-faint);text-transform:uppercase}
 .hero__row{display:flex;align-items:baseline;gap:.22em;flex-wrap:wrap}
 .hero__meta{
-  display:flex; flex-wrap:wrap; gap:clamp(1.5rem,5vw,5rem);
-  align-items:flex-end; justify-content:space-between;
-  padding-top:2rem; border-top:1px solid var(--line);
+  display:flex; flex-wrap:wrap; gap:1rem 3rem;
+  align-items:center; justify-content:space-between;
+  padding-top:1.25rem; margin-top:.9rem; border-top:1px solid var(--line);
 }
-.hero__cta{display:flex;gap:.75rem;flex-wrap:wrap}
+.hero__meta .lede{max-width:44ch;font-size:.92rem;color:var(--ink-mute);line-height:1.55}
+.hero__cta{display:flex;gap:.6rem;flex-wrap:wrap}
 .scroll-cue{
   display:flex; align-items:center; gap:.6rem; color:var(--ink-faint);
 }

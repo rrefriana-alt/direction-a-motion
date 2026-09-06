@@ -141,18 +141,12 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       </div>
     </div>
 
-    <div class="row between center mt-m" data-delay="3">
-      <div class="scroll-cue">
-        <span class="scroll-cue__line" aria-hidden="true"></span>
-        <span class="mono" data-en="Scroll" data-id="Gulir">Scroll</span>
-      </div>
-      <p class="mono faint" data-en="{{ $heroTagline }}" data-id="{{ \App\Support\TranslationService::translate($heroTagline) }}">{{ $heroTagline }}</p>
-    </div>
+    <p class="hero__bottom mono faint" data-delay="3" data-en="{{ $heroTagline }}" data-id="{{ \App\Support\TranslationService::translate($heroTagline) }}">{{ $heroTagline }}</p>
   </div>
 </section>
 
 <!-- — CLIENT TICKER — -->
-<section aria-label="Clients" style="padding-block:clamp(1.6rem,3vw,2.4rem);border-block:1px solid var(--line)">
+<section aria-label="Clients" style="padding-block:1.1rem;border-block:1px solid var(--line)">
   <div class="marquee marquee--logos marquee--slim" style="--spd:52s" aria-label="Clients">
     <div class="marquee__track">
       @foreach($clientLogos as $logo)
