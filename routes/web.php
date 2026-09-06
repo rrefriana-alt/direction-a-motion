@@ -29,6 +29,25 @@ function localeView(string $base, string $locale): string
 
 Route::get('/', fn() => redirect('/en'))->name('home.redirect');
 
+// TEMPORARY diagnostic for production 419 (hapus setelah beres)
+Route::get('/diag', function () {
+    $out = ['php' => PHP_VERSION, 'app_key_set' => !empty(config('app.key'))];
+    $out['session_driver'] = config('session.driver');
+    try {
+        $out['db_ok'] = true;
+        $out['sessions_table'] = \Illuminate\Support\Facades\Schema::hasTable(config('session.table', 'sessions'));
+        $out['sessions_rows'] = $out['sessions_table'] ? \App\Models\Setting::count() >= 0 : false;
+    } catch (\Throwable $e) {
+        $out['db_ok'] = false;
+        $out['db_error'] = substr($e->getMessage(), 0, 160);
+    }
+    $out['storage_writable'] = is_writable(storage_path('framework/sessions'));
+    $out['config_cached'] = file_exists(base_path('bootstrap/cache/config.php'));
+    $out['app_url'] = config('app.url');
+    $out['app_env'] = config('app.env');
+    return response()->json($out);
+})->name('diag');
+
 Route::prefix('{locale}')->where(['locale' => 'en|id'])->middleware('setlocale')->group(function () {
 
     Route::get('/', function (string $locale) {
