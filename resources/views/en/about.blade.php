@@ -101,7 +101,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <span>About</span></p>
     @php $aboutHeadline = \App\Models\Setting::get('about_page_headline', 'A creative group,<br>not a vendor list'); @endphp
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! $aboutHeadline !!}</h1>
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! \App\Support\Works::tint($aboutHeadline) !!}</h1>
     @php $aboutSubtitle = \App\Models\Setting::get('about_page_subtitle', 'We started in 2016 printing merchandise. Nine years later we run five divisions across three cities — and we still answer the phone ourselves.'); @endphp
     <p class="lede mt-m fade-up" data-delay="2">{{ $aboutSubtitle }}</p>
   </div>

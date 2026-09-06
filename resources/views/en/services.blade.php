@@ -101,7 +101,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <span>Services</span></p>
     @php $svcHeadline = \App\Models\Setting::get('services_page_headline', 'Five studios,<br>one invoice'); @endphp
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! $svcHeadline !!}</h1>
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! \App\Support\Works::tint($svcHeadline) !!}</h1>
     @php $svcSubtitle = \App\Models\Setting::get('services_page_subtitle', 'Most agencies subcontract at least half of this. We do not — which is why the schedule holds and the brand stays consistent across every touchpoint.'); @endphp
     <p class="lede mt-m fade-up" data-delay="2">{{ $svcSubtitle }}</p>
   </div>

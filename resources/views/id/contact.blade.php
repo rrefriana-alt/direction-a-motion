@@ -100,7 +100,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="phead__glow" aria-hidden="true"></div>
   <div class="shell">
     <p class="crumb fade-up"><a href="{{ url($locale) }}">Fugo</a> <span>/</span> <span>Kontak</span></p>
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! $contactHeadline !!}</h1>
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1">{!! \App\Support\Works::tint($contactHeadline) !!}</h1>
     <p class="lede mt-m fade-up" data-delay="2">{{ $contactSubtitle }}</p>
   </div>
 </section>

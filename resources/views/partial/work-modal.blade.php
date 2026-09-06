@@ -32,9 +32,9 @@
             <span{!! W::attrs($w['category']) !!}>{{ W::text($w['category']) }}</span>
             <span>/</span> <span>{{ $w['year'] }}</span>
           </p>
-          <h2 class="wm__title" id="wm-{{ $w['slug'] }}-title"{!! W::attrs($w['title']) !!}>{{ W::text($w['title']) }}</h2>
+          <h2 class="wm__title" id="wm-{{ $w['slug'] }}-title"{!! W::attrsTint($w['title']) !!}>{!! W::tint($w['title']) !!}</h2>
           @if (! empty($w['lede']))
-            <p class="wm__lede"{!! W::attrs($w['lede']) !!}>{{ W::text($w['lede']) }}</p>
+            <p class="wm__lede"{!! W::attrsTint($w['lede']) !!}>{!! W::tint($w['lede']) !!}</p>
           @endif
         </div>
       </header>

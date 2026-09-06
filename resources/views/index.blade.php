@@ -205,7 +205,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
             $capDesc = \App\Models\Setting::get('home_capabilities_description', 'Brief one team and get the whole chain — strategy, design, film, stage and physical product — without the agency handoff tax.');
         @endphp
         <h2 class="display h-xxl mt-s fade-up" data-delay="1"
-            data-en="{!! $capTitle !!}" data-id="{{ \App\Support\TranslationService::translate($capTitle) }}">{!! $capTitle !!}</h2>
+            data-en="{{ preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', $capTitle) }}" data-id="{{ \App\Support\TranslationService::translate(preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', $capTitle)) }}">{!! \App\Support\Works::tint($capTitle) !!}</h2>
         <p class="lede mt-s fade-up" data-delay="2"
            data-en="{{ $capDesc }}"
            data-id="{{ \App\Support\TranslationService::translate($capDesc) }}">
@@ -381,10 +381,10 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
 <section class="section" style="padding-top:0">
   <div class="shell grid g-12">
     <div class="col-4">
-      <p class="eyebrow" data-en="{{ strip_tags($processEyebrow) }}" data-id="{{ \App\Support\TranslationService::translate(strip_tags($processEyebrow)) }}">{!! $processEyebrow !!}</p>
-      <h2 class="display h-xl mt-s fade-up" data-delay="1"
-          data-en="{{ strip_tags($processTitleEn) }}"
-          data-id="{{ \App\Support\TranslationService::translate(strip_tags($processTitleEn)) }}">{!! $processTitleEn !!}</h2>
+      <p class="eyebrow" data-en="{{ preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', strip_tags($processEyebrow)) }}" data-id="{{ \App\Support\TranslationService::translate(preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', strip_tags($processEyebrow))) }}">{!! \App\Support\Works::tint($processEyebrow) !!}</p>
+       <h2 class="display h-xl mt-s fade-up" data-delay="1"
+           data-en="{{ preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', strip_tags($processTitleEn)) }}"
+           data-id="{{ \App\Support\TranslationService::translate(preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', strip_tags($processTitleEn))) }}">{!! \App\Support\Works::tint($processTitleEn) !!}</h2>
     </div>
     <div class="col-8">
       <div class="steps">
@@ -564,7 +564,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
     <p class="eyebrow is-plain fade-up" style="justify-content:center"
        data-en="{{ $ctaEyebrow }}" data-id="{{ \App\Support\TranslationService::translate($ctaEyebrow) }}">{{ $ctaEyebrow }}</p>
     <h2 class="display cta__big mt-s fade-up" data-delay="1"
-        data-en="{{ $ctaTitle }}" data-id="{{ \App\Support\TranslationService::translate($ctaTitle) }}">{!! $ctaTitle !!}</h2>
+        data-en="{{ preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', $ctaTitle) }}" data-id="{{ \App\Support\TranslationService::translate(preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', $ctaTitle)) }}">{!! \App\Support\Works::tint($ctaTitle) !!}</h2>
     <div class="row gap-s mt-l fade-up" data-delay="2" style="justify-content:center">
       <a class="btn btn--green" href="{{ url('contact') }}" data-magnet=".34" data-cursor="Go">
         <span data-en="Start a project" data-id="Mulai proyek">Start a project</span>

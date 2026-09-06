@@ -62,6 +62,14 @@ class Works
         return $p['en'];
     }
 
+    public static function tint($s): string
+    {
+        $plain = self::text($s);
+        if ($plain === '') return '';
+        $safe = e($plain);
+        return preg_replace('/\*\*(.+?)\*\*/', '<span class="tint">$1</span>', $safe);
+    }
+
     public static function attrs($s): string
     {
         if ($s === null || $s === '') return '';
@@ -74,6 +82,18 @@ class Works
         }
 
         return ' data-en="'.e($p['en']).'" data-id="'.e($p['id']).'"';
+    }
+
+    public static function attrsTint($s): string
+    {
+        if ($s === null || $s === '') return '';
+        $p = self::pair($s);
+        if ($p['en'] === '' && $p['id'] !== null) $p['en'] = $p['id'];
+        if ($p['id'] === null) {
+            $p['id'] = TranslationService::translate($p['en'], 'id');
+        }
+        $grad = fn($t) => preg_replace('/\*\*(.+?)\*\*/', '<span class="tint">$1</span>', $t);
+        return ' data-en="'.e($grad($p['en'])).'" data-id="'.e($grad($p['id'])).'"';
     }
 
     public static function all(): array

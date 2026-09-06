@@ -100,7 +100,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
   <div class="shell">
     <p class="crumb fade-up"><a href="{{ url('') }}">Fugo</a> <span>/</span> <span data-en="About" data-id="Tentang">About</span></p>
     @php $aboutHeadline = \App\Models\Setting::get('about_page_headline', 'A creative group,<br>not a vendor list'); @endphp
-    <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="{!! $aboutHeadline !!}" data-id="{!! \App\Support\TranslationService::translate($aboutHeadline) !!}">{!! $aboutHeadline !!}</h1>
+    <h1 class="display h-xxl mt-s fade-up" data-delay="1" data-en="{{ preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', $aboutHeadline) }}" data-id="{{ \App\Support\TranslationService::translate(preg_replace('/\*\*(.+?)\*\*/', '<span class=\"tint\">$1</span>', $aboutHeadline)) }}">{!! \App\Support\Works::tint($aboutHeadline) !!}</h1>
     @php $aboutSubtitle = \App\Models\Setting::get('about_page_subtitle', 'We started in 2016 printing merchandise. Nine years later we run five divisions across three cities — and we still answer the phone ourselves.'); @endphp
     <p class="lede mt-m fade-up" data-delay="2" data-en="{{ $aboutSubtitle }}" data-id="{{ \App\Support\TranslationService::translate($aboutSubtitle) }}">{{ $aboutSubtitle }}</p>
   </div>
