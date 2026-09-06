@@ -166,7 +166,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <p class="eyebrow">01 — <span>{{ $manifestoSubtitle }}</span></p>
     </div>
     <div class="col-7">
-      <p>{{ $manifestoTitle }}</p>
+      <p>{!! \App\Support\Works::tint($manifestoTitle) !!}</p>
       <div class="row gap-m mt-l fade-up" data-delay="1">
         <a class="tlink green" href="{{ url($locale.'/about') }}">Baca cerita kami</a>
         <span class="faint">·</span>

@@ -169,7 +169,7 @@ try{if(sessionStorage.getItem('fugo-nav')){document.documentElement.classList.ad
       <p class="eyebrow">01 — <span data-en="{{ $manifestoSubtitle }}" data-id="{{ \App\Support\TranslationService::translate($manifestoSubtitle) }}">{{ $manifestoSubtitle }}</span></p>
     </div>
     <div class="col-7">
-      <p data-en="{{ $manifestoTitle }}" data-id="{{ \App\Support\TranslationService::translate($manifestoTitle) }}">{{ $manifestoTitle }}</p>
+      <p data-en="{{ strip_tags($manifestoTitle) }}" data-id="{{ \App\Support\TranslationService::translate(strip_tags($manifestoTitle)) }}">{!! \App\Support\Works::tint($manifestoTitle) !!}</p>
       <div class="row gap-m mt-l fade-up" data-delay="1">
         <a class="tlink green" href="{{ url('about') }}" data-en="Read our story" data-id="Baca cerita kami">Read our story</a>
         <span class="faint">·</span>

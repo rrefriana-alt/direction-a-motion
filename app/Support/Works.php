@@ -67,6 +67,7 @@ class Works
         $plain = self::text($s);
         if ($plain === '') return '';
         $safe = e($plain);
+        $safe = preg_replace('/&lt;br\s*\/?&gt;/i', '<br>', $safe);
         return preg_replace('/\*\*(.+?)\*\*/', '<span class="tint">$1</span>', $safe);
     }
 
