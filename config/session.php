@@ -156,7 +156,13 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN'),
+    'domain' => env('SESSION_DOMAIN', (function () {
+        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : parse_url(env('APP_URL', ''), PHP_URL_HOST);
+        if ($host && str_contains($host, 'fugocreativegroup.com')) {
+            return '.fugocreativegroup.com';
+        }
+        return null;
+    })()),
 
     /*
     |--------------------------------------------------------------------------
