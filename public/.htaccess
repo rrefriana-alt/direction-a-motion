@@ -2,6 +2,9 @@
     RewriteEngine On
     RewriteBase /
 
+    # Disable LiteSpeed / Proxy Cache for login and admin routes
+    RewriteRule ^(login|admin) - [E=Cache-Control:no-cache]
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]

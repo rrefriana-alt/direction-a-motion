@@ -13,6 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias(['setlocale' => \App\Http\Middleware\SetLocale::class]);
         $middleware->trustProxies(at: ['*']);
+        $middleware->validateCsrfTokens(except: [
+            'login',
+            'login/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (\Illuminate\Session\TokenMismatchException $e, $request) {
