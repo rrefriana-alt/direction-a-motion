@@ -13,7 +13,12 @@ class AdminAuthController extends Controller
         if (Auth::guard('admin')->check()) {
             return redirect()->route('admin.dashboard', ['locale' => app()->getLocale() ?: 'en']);
         }
-        return view('admin.auth.login');
+
+        return response()
+            ->view('admin.auth.login')
+            ->header('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', 'Sun, 02 Jan 1990 00:00:00 GMT');
     }
 
     public function login(Request $request)
@@ -25,7 +30,13 @@ class AdminAuthController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard', ['locale' => app()->getLocale() ?: 'en']));
+
+            $intended = $request->session()->pull('url.intended');
+            if ($intended && !str_contains($intended, '/login')) {
+                return redirect()->to($intended);
+            }
+
+            return redirect()->route('admin.dashboard', ['locale' => app()->getLocale() ?: 'en']);
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
